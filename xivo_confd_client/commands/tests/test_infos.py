@@ -30,14 +30,17 @@ class TestInfos(unittest.TestCase):
         self.host = 'example.com'
         self.port = 9487
         self.version = '1.1'
-        self.base_url = 'http://example.com:9487/1.1'
+        self.base_url = 'https://example.com:9487/1.1'
+
+    def _make_cmd(self):
+        return InfosCommand(self.host, self.port, self.version, True)
 
     def test_get(self):
         session = Mock()
         session.get.return_value = Mock(content='''{"uuid": "test"}''',
                                         status_code=200)
 
-        cmd = InfosCommand('example.com', 9487, '1.1')
+        cmd = self._make_cmd()
         result = cmd.get(session)
 
         session.get.assert_called_once_with('{base_url}/infos'.format(base_url=self.base_url))
@@ -48,7 +51,7 @@ class TestInfos(unittest.TestCase):
         session.get.return_value = Mock(content='''{"uuid": "test"}''',
                                         status_code=200)
 
-        cmd = InfosCommand('example.com', 9487, '1.1')
+        cmd = self._make_cmd()
         result = cmd(session)
 
         session.get.assert_called_once_with('{base_url}/infos'.format(base_url=self.base_url))
@@ -58,6 +61,6 @@ class TestInfos(unittest.TestCase):
         session = Mock()
         session.get.return_value = Mock(status_code=404)
 
-        cmd = InfosCommand('example.com', 9487, '1.1')
+        cmd = self._make_cmd()
 
         self.assertRaises(UnexpectedResultError, cmd, session)

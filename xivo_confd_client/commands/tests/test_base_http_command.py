@@ -28,12 +28,21 @@ class TestBaseHTTPCommand(unittest.TestCase):
         class NoResource(BaseHTTPCommand):
             pass
 
-        self.assertRaises(NotImplementedError, NoResource, host='host', port=1234, version='42')
+        self.assertRaises(NotImplementedError,
+                          NoResource, host='host', port=1234, version='42', use_https=False)
 
-    def test_resource_url(self):
+    def test_resource_url_with_https(self):
         class TestCommand(BaseHTTPCommand):
             resource = 'test'
 
-        c = TestCommand('example.com', 9000, '42')
+        c = TestCommand('example.com', 9000, '42', use_https=True)
+
+        assert_that(c.resource_url, equal_to('https://example.com:9000/42/test'))
+
+    def test_resource_url_with_http(self):
+        class TestCommand(BaseHTTPCommand):
+            resource = 'test'
+
+        c = TestCommand('example.com', 9000, '42', use_https=False)
 
         assert_that(c.resource_url, equal_to('http://example.com:9000/42/test'))

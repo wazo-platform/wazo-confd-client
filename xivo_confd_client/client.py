@@ -15,14 +15,19 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+import requests
+
 from requests import Session
 from stevedore import extension
 
 
 class _HTTPCommandProxy(object):
 
-    def __init__(self, host, port, version, Command):
-        self.command = Command(host, port, version)
+    def __init__(self, host, port, version, username, password, Command):
+        use_https = username is not None and password is not None
+        self.command = Command(host, port, version, use_https)
+        self.username = username
+        self.password = password
 
     def __call__(self, *args, **kwargs):
         return self._query_url(self.command)(*args, **kwargs)
@@ -33,27 +38,25 @@ class _HTTPCommandProxy(object):
     def _query_url(self, callable_):
         def decorated(*args, **kwargs):
             session = Session()
-            # auth
+            if self.username and self.password:
+                session.verify = False
+                session.auth = requests.auth.HTTPDigestAuth(self.username, self.password)
             # headers
             # ...
             return callable_(session, *args, **kwargs)
         return decorated
-
-    def _build_url(self, url_end):
-        return 'http://{host}:{port}/{version}/{url_end}'.format(host=self.host,
-                                                                 port=self.port,
-                                                                 version=self.version,
-                                                                 url_end=url_end)
 
 
 class Client(object):
 
     _command_namespace = 'confd_client.commands'
 
-    def __init__(self, host='localhost', port=9487, version='1.1'):
+    def __init__(self, host='localhost', port=9487, version='1.1', username=None, password=None):
         self._host = host
         self._port = port
         self._version = version
+        self._username = username
+        self._password = password
         self._load_plugins()
 
     def _load_plugins(self):
@@ -64,4 +67,6 @@ class Client(object):
         self.__setattr__(extension.name, _HTTPCommandProxy(self._host,
                                                            self._port,
                                                            self._version,
+                                                           self._username,
+                                                           self._password,
                                                            extension.plugin))

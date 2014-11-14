@@ -31,7 +31,10 @@ class TestUsers(unittest.TestCase):
         self.host = 'host'
         self.port = 666
         self.version = '42'
-        self.base_url = 'http://host:666/42'
+        self.base_url = 'https://host:666/42'
+
+    def _make_cmd(self):
+        return UsersCommand(self.host, self.port, self.version, True)
 
     def test_list(self):
         expected_content = {
@@ -75,7 +78,7 @@ class TestUsers(unittest.TestCase):
 
         session = self.make_mocked_session_with_get(json.dumps(expected_content))
 
-        c = UsersCommand(self.host, self.port, self.version)
+        c = self._make_cmd()
         result = c.list(session)
 
         session.get.assert_called_once_with('{base_url}/users'.format(base_url=self.base_url))
@@ -84,7 +87,7 @@ class TestUsers(unittest.TestCase):
     def test_list_not_200(self):
         session = self.make_mocked_session_with_get(None, 500)
 
-        c = UsersCommand(self.host, self.port, self.version)
+        c = self._make_cmd()
 
         self.assertRaises(UnexpectedResultError, c.list, session)
 
@@ -115,7 +118,7 @@ class TestUsers(unittest.TestCase):
         }
         session = self.make_mocked_session_with_get(json.dumps(expected_content))
 
-        c = UsersCommand(self.host, self.port, self.version)
+        c = self._make_cmd()
         result = c.list(session, view='directory')
 
         assert_that(result, equal_to(expected_content))
