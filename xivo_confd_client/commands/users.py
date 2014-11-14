@@ -18,8 +18,8 @@
 import json
 
 from .exceptions import UnexpectedResultError
-from xivo_rest_client import BaseHTTPCommand
 from collections import defaultdict
+from xivo_lib_rest_client import BaseHTTPCommand
 
 
 class UsersCommand(BaseHTTPCommand):

@@ -18,7 +18,7 @@
 import json
 
 from .exceptions import UnexpectedResultError
-from xivo_rest_client import BaseHTTPCommand
+from xivo_lib_rest_client import BaseHTTPCommand
 
 
 class InfosCommand(BaseHTTPCommand):
