@@ -9,7 +9,7 @@ Usage:
 ```python
 from xivo_confd_client import Client
 
-c = Client('confd.example.com', port=9487, version='1.1')
+c = Client('confd.example.com', port=9487, version='1.1', username='alice', password='s3cre7')
 
 users = c.users.list()
 ```
@@ -38,7 +38,3 @@ c = Client(...)
 
 c.foo.bar()  # bar is a method of the FooCommand class
 ```
-
-Each method of a command will receive a *requests* session and the *args and
-**kwargs. The method is responsible of doing the HTTP request on the session
-unserialize the response and handle error cases.
