@@ -1,0 +1,5 @@
+xivo-confd-client (0.1) xivo-dev; urgency=low
+
+  * Initial release.
+
+ -- Pascal Cadotte Michaud <pcadottemichaud@avencall.com>  Fri, 14 Nov 2014 14:41:00 -0500
