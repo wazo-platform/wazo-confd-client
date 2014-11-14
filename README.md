@@ -14,7 +14,7 @@ users = c.users.list()
 ```
 
 
-* How to implement a new command
+## How to implement a new command
 
 Someone trying to implement a new command to the client would have to implement
 a new class sub-classing the BaseHTTPCommand. The new class must be in the
