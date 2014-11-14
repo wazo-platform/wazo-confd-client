@@ -1,5 +1,6 @@
 XiVO confd client
 =================
+[![Build Status](https://travis-ci.org/xivo-pbx/xivo-confd-client.svg?branch=master)](https://travis-ci.org/xivo-pbx/xivo-confd-client)
 
 A python library to connect to xivo-confd
 
