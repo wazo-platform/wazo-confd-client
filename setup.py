@@ -35,6 +35,7 @@ setup(
     entry_points={
         'confd_client.commands': [
             'infos = xivo_confd_client.commands.infos:InfosCommand',
+            'users = xivo_confd_client.commands.users:UsersComamnd',
         ],
     }
 )
