@@ -31,6 +31,6 @@ class InfosCommand(BaseHTTPCommand):
     def get(self, session):
         r = session.get(self.resource_url)
         if r.status_code != 200:
-            raise UnexpectedResultError
+            raise UnexpectedResultError()
 
         return json.loads(r.content)
