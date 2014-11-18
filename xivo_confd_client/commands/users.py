@@ -18,7 +18,6 @@
 import json
 
 from .exceptions import UnexpectedResultError
-from collections import defaultdict
 from xivo_lib_rest_client import BaseHTTPCommand
 
 
@@ -26,12 +25,8 @@ class UsersCommand(BaseHTTPCommand):
 
     resource = 'users'
 
-    def list(self, session, *args, **kwargs):
-        params = defaultdict(dict)
-        if 'view' in kwargs:
-            params['params']['view'] = kwargs['view']
-
-        r = session.get(self.resource_url, **params)
+    def list(self, session, **kwargs):
+        r = session.get(self.resource_url, params=kwargs)
 
         if r.status_code != 200:
             raise UnexpectedResultError()

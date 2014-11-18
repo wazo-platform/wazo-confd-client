@@ -81,7 +81,8 @@ class TestUsers(unittest.TestCase):
         c = self._make_cmd()
         result = c.list(session)
 
-        session.get.assert_called_once_with('{base_url}/users'.format(base_url=self.base_url))
+        session.get.assert_called_once_with('{base_url}/users'.format(base_url=self.base_url),
+                                            params={})
         assert_that(result, equal_to(expected_content))
 
     def test_list_not_200(self):
