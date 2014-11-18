@@ -28,9 +28,9 @@ class TestInfos(unittest.TestCase):
 
     def setUp(self):
         self.host = 'example.com'
-        self.port = 9487
+        self.port = 9486
         self.version = '1.1'
-        self.base_url = 'https://example.com:9487/1.1'
+        self.base_url = 'https://example.com:9486/1.1'
 
     def _make_cmd(self):
         return InfosCommand(self.host, self.port, self.version, True)
