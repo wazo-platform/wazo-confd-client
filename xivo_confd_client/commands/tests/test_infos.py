@@ -27,40 +27,33 @@ from mock import Mock
 class TestInfos(unittest.TestCase):
 
     def setUp(self):
+        self.scheme = 'https'
         self.host = 'example.com'
         self.port = 9486
         self.version = '1.1'
         self.base_url = 'https://example.com:9486/1.1'
-
-    def _make_cmd(self):
-        return InfosCommand(self.host, self.port, self.version, True)
+        self.session = Mock()
+        self.command = InfosCommand(self.scheme, self.host, self.port, self.version, self.session)
 
     def test_get(self):
-        session = Mock()
-        session.get.return_value = Mock(content='''{"uuid": "test"}''',
-                                        status_code=200)
+        self.session.get.return_value = Mock(content='''{"uuid": "test"}''',
+                                             status_code=200)
 
-        cmd = self._make_cmd()
-        result = cmd.get(session)
+        result = self.command.get()
 
-        session.get.assert_called_once_with('{base_url}/infos'.format(base_url=self.base_url))
+        self.session.get.assert_called_once_with('{base_url}/infos'.format(base_url=self.base_url))
         assert_that(result, equal_to({'uuid': 'test'}))
 
     def test_calling_infos_with_no_method(self):
-        session = Mock()
-        session.get.return_value = Mock(content='''{"uuid": "test"}''',
-                                        status_code=200)
+        self.session.get.return_value = Mock(content='''{"uuid": "test"}''',
+                                             status_code=200)
 
-        cmd = self._make_cmd()
-        result = cmd(session)
+        result = self.command()
 
-        session.get.assert_called_once_with('{base_url}/infos'.format(base_url=self.base_url))
+        self.session.get.assert_called_once_with('{base_url}/infos'.format(base_url=self.base_url))
         assert_that(result, equal_to({'uuid': 'test'}))
 
     def test_when_not_200(self):
-        session = Mock()
-        session.get.return_value = Mock(status_code=404)
+        self.session.get.return_value = Mock(status_code=404)
 
-        cmd = self._make_cmd()
-
-        self.assertRaises(UnexpectedResultError, cmd, session)
+        self.assertRaises(UnexpectedResultError, self.command)

@@ -25,8 +25,8 @@ class UsersCommand(BaseHTTPCommand):
 
     resource = 'users'
 
-    def list(self, session, **kwargs):
-        r = session.get(self.resource_url, params=kwargs)
+    def list(self, **kwargs):
+        r = self.session.get(self.resource_url, params=kwargs)
 
         if r.status_code != 200:
             raise UnexpectedResultError()

@@ -25,11 +25,11 @@ class InfosCommand(BaseHTTPCommand):
 
     resource = 'infos'
 
-    def __call__(self, session):
-        return self.get(session)
+    def __call__(self):
+        return self.get()
 
-    def get(self, session):
-        r = session.get(self.resource_url)
+    def get(self):
+        r = self.session.get(self.resource_url)
         if r.status_code != 200:
             raise UnexpectedResultError()
 

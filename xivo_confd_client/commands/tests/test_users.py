@@ -28,13 +28,13 @@ from mock import Mock
 class TestUsers(unittest.TestCase):
 
     def setUp(self):
+        self.scheme = 'https'
         self.host = 'host'
         self.port = 666
         self.version = '42'
         self.base_url = 'https://host:666/42'
-
-    def _make_cmd(self):
-        return UsersCommand(self.host, self.port, self.version, True)
+        self.session = Mock()
+        self.command = UsersCommand(self.scheme, self.host, self.port, self.version, self.session)
 
     def test_list(self):
         expected_content = {
@@ -76,21 +76,18 @@ class TestUsers(unittest.TestCase):
             ]
         }
 
-        session = self.make_mocked_session_with_get(json.dumps(expected_content))
+        self.mock_session_with_get(json.dumps(expected_content))
 
-        c = self._make_cmd()
-        result = c.list(session)
+        result = self.command.list()
 
-        session.get.assert_called_once_with('{base_url}/users'.format(base_url=self.base_url),
-                                            params={})
+        self.session.get.assert_called_once_with('{base_url}/users'.format(base_url=self.base_url),
+                                                 params={})
         assert_that(result, equal_to(expected_content))
 
     def test_list_not_200(self):
-        session = self.make_mocked_session_with_get(None, 500)
+        self.mock_session_with_get(None, 500)
 
-        c = self._make_cmd()
-
-        self.assertRaises(UnexpectedResultError, c.list, session)
+        self.assertRaises(UnexpectedResultError, self.command.list)
 
     def test_list_with_view(self):
         expected_content = {
@@ -117,17 +114,14 @@ class TestUsers(unittest.TestCase):
                 }
             ]
         }
-        session = self.make_mocked_session_with_get(json.dumps(expected_content))
+        self.mock_session_with_get(json.dumps(expected_content))
 
-        c = self._make_cmd()
-        result = c.list(session, view='directory')
+        result = self.command.list(view='directory')
 
         assert_that(result, equal_to(expected_content))
-        session.get.assert_called_once_with('{base_url}/users'.format(base_url=self.base_url),
-                                            params={'view': 'directory'})
+        self.session.get.assert_called_once_with('{base_url}/users'.format(base_url=self.base_url),
+                                                 params={'view': 'directory'})
 
-    def make_mocked_session_with_get(self, content, status_code=200):
-        session = Mock()
-        session.get.return_value = Mock(content=content,
-                                        status_code=status_code)
-        return session
+    def mock_session_with_get(self, content, status_code=200):
+        self.session.get.return_value = Mock(content=content,
+                                             status_code=status_code)
