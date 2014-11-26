@@ -30,6 +30,6 @@ class InfosCommand(BaseHTTPCommand):
     def get(self):
         r = self.session.get(self.resource_url)
         if r.status_code != 200:
-            r.raise_for_status()
+            self.raise_from_response(r)
 
         return json.loads(r.content)
