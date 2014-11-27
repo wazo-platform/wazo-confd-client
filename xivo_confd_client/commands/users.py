@@ -17,7 +17,6 @@
 
 import json
 
-from .exceptions import UnexpectedResultError
 from xivo_lib_rest_client import BaseHTTPCommand
 
 
@@ -29,6 +28,6 @@ class UsersCommand(BaseHTTPCommand):
         r = self.session.get(self.resource_url, params=kwargs)
 
         if r.status_code != 200:
-            raise UnexpectedResultError()
+            self.raise_from_response(r)
 
         return json.loads(r.content)

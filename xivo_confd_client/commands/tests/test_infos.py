@@ -18,7 +18,6 @@
 import unittest
 
 from ..infos import InfosCommand
-from ..exceptions import UnexpectedResultError
 from hamcrest import assert_that
 from hamcrest import equal_to
 from mock import Mock
@@ -56,4 +55,4 @@ class TestInfos(unittest.TestCase):
     def test_when_not_200(self):
         self.session.get.return_value = Mock(status_code=404)
 
-        self.assertRaises(UnexpectedResultError, self.command)
+        self.assertRaises(Exception, self.command)

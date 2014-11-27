@@ -18,7 +18,6 @@
 import json
 import unittest
 
-from ..exceptions import UnexpectedResultError
 from ..users import UsersCommand
 from hamcrest import assert_that
 from hamcrest import equal_to
@@ -87,7 +86,7 @@ class TestUsers(unittest.TestCase):
     def test_list_not_200(self):
         self.mock_session_with_get(None, 500)
 
-        self.assertRaises(UnexpectedResultError, self.command.list)
+        self.assertRaises(Exception, self.command.list)
 
     def test_list_with_view(self):
         expected_content = {
