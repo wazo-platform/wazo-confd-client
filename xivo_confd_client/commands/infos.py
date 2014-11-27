@@ -26,7 +26,7 @@ class InfosCommand(BaseHTTPCommand):
         return self.get()
 
     def get(self):
-        r = self.session.get(self.resource_url)
+        r = self.session.get(self.base_url)
 
         if r.status_code != 200:
             self.raise_from_response(r)
