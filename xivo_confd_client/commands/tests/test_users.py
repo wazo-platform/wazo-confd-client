@@ -15,25 +15,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-import unittest
-
 from ..users import UsersCommand
 from hamcrest import assert_that
 from hamcrest import equal_to
-from mock import Mock
-from requests.exceptions import HTTPError
+from xivo_lib_rest_client.tests.command import HTTPCommandTestCase
 
 
-class TestUsers(unittest.TestCase):
+class TestUsers(HTTPCommandTestCase):
 
-    def setUp(self):
-        self.scheme = 'https'
-        self.host = 'host'
-        self.port = 666
-        self.version = '42'
-        self.base_url = 'https://host:666/42'
-        self.session = Mock()
-        self.command = UsersCommand(self.scheme, self.host, self.port, self.version, self.session)
+    Command = UsersCommand
 
     def test_list(self):
         expected_content = {
@@ -74,18 +64,17 @@ class TestUsers(unittest.TestCase):
                 }
             ]
         }
-        self.session.get.return_value = self._new_response(200, json=expected_content)
+        self.session.get.return_value = self.new_response(200, json=expected_content)
 
         result = self.command.list()
 
+        self.session.get.assert_called_once_with(self.base_url, params={})
         assert_that(result, equal_to(expected_content))
-        self.session.get.assert_called_once_with('{base_url}/users'.format(base_url=self.base_url),
-                                                 params={})
 
     def test_list_when_not_200(self):
-        self.session.get.return_value = self._new_response(404)
+        self.session.get.return_value = self.new_response(404)
 
-        self.assertRaises(HTTPError, self.command.list)
+        self.assertRaisesHTTPError(self.command.list)
 
     def test_list_with_view(self):
         expected_content = {
@@ -112,19 +101,9 @@ class TestUsers(unittest.TestCase):
                 }
             ]
         }
-        self.session.get.return_value = self._new_response(200, json=expected_content)
+        self.session.get.return_value = self.new_response(200, json=expected_content)
 
         result = self.command.list(view='directory')
 
+        self.session.get.assert_called_once_with(self.base_url, params={'view': 'directory'})
         assert_that(result, equal_to(expected_content))
-        self.session.get.assert_called_once_with('{base_url}/users'.format(base_url=self.base_url),
-                                                 params={'view': 'directory'})
-
-    @staticmethod
-    def _new_response(status_code, json=None):
-        response = Mock()
-        response.status_code = status_code
-        response.raise_for_status.side_effect = HTTPError()
-        if json is not None:
-            response.json.return_value = json
-        return response
