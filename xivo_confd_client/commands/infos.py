@@ -15,8 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-import json
-
 from xivo_lib_rest_client import BaseHTTPCommand
 
 
@@ -29,7 +27,8 @@ class InfosCommand(BaseHTTPCommand):
 
     def get(self):
         r = self.session.get(self.resource_url)
+
         if r.status_code != 200:
             self.raise_from_response(r)
 
-        return json.loads(r.content)
+        return r.json()

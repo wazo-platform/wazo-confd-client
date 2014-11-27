@@ -21,6 +21,7 @@ from ..infos import InfosCommand
 from hamcrest import assert_that
 from hamcrest import equal_to
 from mock import Mock
+from requests.exceptions import HTTPError
 
 
 class TestInfos(unittest.TestCase):
@@ -35,8 +36,7 @@ class TestInfos(unittest.TestCase):
         self.command = InfosCommand(self.scheme, self.host, self.port, self.version, self.session)
 
     def test_get(self):
-        self.session.get.return_value = Mock(content='''{"uuid": "test"}''',
-                                             status_code=200)
+        self.session.get.return_value = self._new_response(200, json={'uuid': 'test'})
 
         result = self.command.get()
 
@@ -44,8 +44,7 @@ class TestInfos(unittest.TestCase):
         assert_that(result, equal_to({'uuid': 'test'}))
 
     def test_calling_infos_with_no_method(self):
-        self.session.get.return_value = Mock(content='''{"uuid": "test"}''',
-                                             status_code=200)
+        self.session.get.return_value = self._new_response(200, json={'uuid': 'test'})
 
         result = self.command()
 
@@ -53,6 +52,15 @@ class TestInfos(unittest.TestCase):
         assert_that(result, equal_to({'uuid': 'test'}))
 
     def test_when_not_200(self):
-        self.session.get.return_value = Mock(status_code=404)
+        self.session.get.return_value = self._new_response(404)
 
-        self.assertRaises(Exception, self.command)
+        self.assertRaises(HTTPError, self.command)
+
+    @staticmethod
+    def _new_response(status_code, json=None):
+        response = Mock()
+        response.status_code = status_code
+        response.raise_for_status.side_effect = HTTPError()
+        if json is not None:
+            response.json.return_value = json
+        return response
