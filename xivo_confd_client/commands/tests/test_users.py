@@ -15,25 +15,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-import json
-import unittest
-
 from ..users import UsersCommand
 from hamcrest import assert_that
 from hamcrest import equal_to
-from mock import Mock
+from xivo_lib_rest_client.tests.command import HTTPCommandTestCase
 
 
-class TestUsers(unittest.TestCase):
+class TestUsers(HTTPCommandTestCase):
 
-    def setUp(self):
-        self.scheme = 'https'
-        self.host = 'host'
-        self.port = 666
-        self.version = '42'
-        self.base_url = 'https://host:666/42'
-        self.session = Mock()
-        self.command = UsersCommand(self.scheme, self.host, self.port, self.version, self.session)
+    Command = UsersCommand
 
     def test_list(self):
         expected_content = {
@@ -74,19 +64,17 @@ class TestUsers(unittest.TestCase):
                 }
             ]
         }
-
-        self.mock_session_with_get(json.dumps(expected_content))
+        self.session.get.return_value = self.new_response(200, json=expected_content)
 
         result = self.command.list()
 
-        self.session.get.assert_called_once_with('{base_url}/users'.format(base_url=self.base_url),
-                                                 params={})
+        self.session.get.assert_called_once_with(self.base_url, params={})
         assert_that(result, equal_to(expected_content))
 
-    def test_list_not_200(self):
-        self.mock_session_with_get(None, 500)
+    def test_list_when_not_200(self):
+        self.session.get.return_value = self.new_response(404)
 
-        self.assertRaises(Exception, self.command.list)
+        self.assertRaisesHTTPError(self.command.list)
 
     def test_list_with_view(self):
         expected_content = {
@@ -113,14 +101,9 @@ class TestUsers(unittest.TestCase):
                 }
             ]
         }
-        self.mock_session_with_get(json.dumps(expected_content))
+        self.session.get.return_value = self.new_response(200, json=expected_content)
 
         result = self.command.list(view='directory')
 
+        self.session.get.assert_called_once_with(self.base_url, params={'view': 'directory'})
         assert_that(result, equal_to(expected_content))
-        self.session.get.assert_called_once_with('{base_url}/users'.format(base_url=self.base_url),
-                                                 params={'view': 'directory'})
-
-    def mock_session_with_get(self, content, status_code=200):
-        self.session.get.return_value = Mock(content=content,
-                                             status_code=status_code)
