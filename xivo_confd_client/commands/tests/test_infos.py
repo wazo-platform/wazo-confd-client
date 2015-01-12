@@ -30,7 +30,7 @@ class TestInfos(HTTPCommandTestCase):
 
         result = self.command.get()
 
-        self.session.get.assert_called_once_with(self.base_url)
+        self.session.get.assert_called_once_with(self.base_url, headers={'Accept': 'application/json'})
         assert_that(result, equal_to({'uuid': 'test'}))
 
     def test_calling_infos_with_no_method(self):
@@ -38,7 +38,7 @@ class TestInfos(HTTPCommandTestCase):
 
         result = self.command()
 
-        self.session.get.assert_called_once_with(self.base_url)
+        self.session.get.assert_called_once_with(self.base_url, headers={'Accept': 'application/json'})
         assert_that(result, equal_to({'uuid': 'test'}))
 
     def test_when_not_200(self):

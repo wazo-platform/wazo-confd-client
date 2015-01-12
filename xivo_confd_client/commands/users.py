@@ -23,7 +23,7 @@ class UsersCommand(BaseHTTPCommand):
     resource = 'users'
 
     def list(self, **kwargs):
-        r = self.session.get(self.base_url, params=kwargs)
+        r = self.session.get(self.base_url, params=kwargs, headers={'Accept': 'application/json'})
 
         if r.status_code != 200:
             self.raise_from_response(r)

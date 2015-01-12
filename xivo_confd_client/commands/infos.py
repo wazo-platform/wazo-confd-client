@@ -26,7 +26,7 @@ class InfosCommand(BaseHTTPCommand):
         return self.get()
 
     def get(self):
-        r = self.session.get(self.base_url)
+        r = self.session.get(self.base_url, headers={'Accept': 'application/json'})
 
         if r.status_code != 200:
             self.raise_from_response(r)

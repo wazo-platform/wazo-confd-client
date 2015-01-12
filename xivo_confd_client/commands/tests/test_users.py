@@ -68,7 +68,9 @@ class TestUsers(HTTPCommandTestCase):
 
         result = self.command.list()
 
-        self.session.get.assert_called_once_with(self.base_url, params={})
+        self.session.get.assert_called_once_with(self.base_url,
+                                                 params={},
+                                                 headers={'Accept': 'application/json'})
         assert_that(result, equal_to(expected_content))
 
     def test_list_when_not_200(self):
@@ -105,5 +107,7 @@ class TestUsers(HTTPCommandTestCase):
 
         result = self.command.list(view='directory')
 
-        self.session.get.assert_called_once_with(self.base_url, params={'view': 'directory'})
+        self.session.get.assert_called_once_with(self.base_url,
+                                                 params={'view': 'directory'},
+                                                 headers={'Accept': 'application/json'})
         assert_that(result, equal_to(expected_content))
