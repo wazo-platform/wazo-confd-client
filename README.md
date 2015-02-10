@@ -9,7 +9,7 @@ Usage:
 ```python
 from xivo_confd_client import Client
 
-c = Client('confd.example.com', port=9486, version='1.1', username='alice', password='s3cre7')
+c = Client('confd.example.com', port=9486, version='1.1', username='alice', password='s3cre7', timeout=3)
 
 users = c.users.list()
 ```
