@@ -17,4 +17,4 @@
 
 from xivo_lib_rest_client import new_client_factory
 
-Client = new_client_factory('confd_client.commands', 9487, '1.1')
+Client = new_client_factory('confd_client.commands', 9487, '1.1', auth_method='digest')
