@@ -21,21 +21,68 @@ from xivo_lib_rest_client import BaseHTTPCommand
 class FuncKeysCommand(BaseHTTPCommand):
 
     resource = 'funckeys'
+    headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
 
     def list_templates(self):
         url = '{base_url}/templates'.format(base_url=self.base_url)
-        r = self.session.get(url)
+        r = self.session.get(url, headers=self.headers)
 
         if r.status_code != 200:
             self.raise_from_response(r)
 
         return r.json()
+
+    def create_template(self, **kwargs):
+        url = '{base_url}/templates'.format(base_url=self.base_url)
+        r = self.session.post(self.base_url,
+                              headers=self.headers,
+                              data=json.dumps(kwargs))
+
+        if r.status_code != 200:
+            self.raise_from_response(r)
+
+        return r.json()['data']
 
     def get_template(self, template_id):
-        url = '{base_url}/templates/{template_id}'.format(base_url=self.base_url, template_id=template_id)
-        r = self.session.get(url)
+        url = '{base_url}/templates/{template_id}'.format(base_url=self.base_url,
+                                                                   template_id=template_id)
+        r = self.session.get(url, self.headers)
 
         if r.status_code != 200:
             self.raise_from_response(r)
 
         return r.json()
+
+    def delete_template(self, template_id):
+        url = '{base_url}/templates/{template_id}'.format(base_url=self.base_url,
+                                                          template_id=template_id)
+
+        self.session.delete(url, self.headers)
+
+    def get_funckey_template(self, template_id, position):
+        url = '{base_url}/templates/{template_id}/{position}'.format(base_url=self.base_url,
+                                                                     template_id=template_id,
+                                                                     position=position)
+        r = self.session.get(url, self.headers)
+
+        if r.status_code != 200:
+            self.raise_from_response(r)
+
+        return r.json()
+
+    def delete_funckey_template(self, template_id, position):
+        url = '{base_url}/templates/{template_id}/{position}'.format(base_url=self.base_url,
+                                                                     template_id=template_id,
+                                                                     position=position)
+
+        self.session.delete(url, self.headers)
+
+    def update_funckey_template(self, template_id, position, **kwargs):
+        url = '{base_url}/templates/{template_id}/{position}'.format(base_url=self.base_url,
+                                                                     template_id=template_id,
+                                                                     position=position)
+
+        r = self.session.put(url, params=kwargs, self.headers)
+
+        if r.status_code != 204:
+            self.raise_from_response(r)
