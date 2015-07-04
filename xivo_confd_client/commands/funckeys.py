@@ -16,6 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 from xivo_lib_rest_client import BaseHTTPCommand
+import json
 
 
 class FuncKeysCommand(BaseHTTPCommand):
@@ -32,16 +33,14 @@ class FuncKeysCommand(BaseHTTPCommand):
 
         return r.json()
 
-    def create_template(self, **kwargs):
+    def create_template(self, data):
         url = '{base_url}/templates'.format(base_url=self.base_url)
-        r = self.session.post(self.base_url,
+        r = self.session.post(url,
                               headers=self.headers,
-                              data=json.dumps(kwargs))
+                              data=json.dumps(data))
 
-        if r.status_code != 200:
+        if r.status_code != 201:
             self.raise_from_response(r)
-
-        return r.json()['data']
 
     def get_template(self, template_id):
         url = '{base_url}/templates/{template_id}'.format(base_url=self.base_url,
