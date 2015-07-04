@@ -56,7 +56,10 @@ class FuncKeysCommand(BaseHTTPCommand):
         url = '{base_url}/templates/{template_id}'.format(base_url=self.base_url,
                                                           template_id=template_id)
 
-        self.session.delete(url, headers=self.headers)
+        r = self.session.delete(url, headers=self.headers)
+
+        if r.status_code != 204:
+            self.raise_from_response(r)
 
     def get_funckey_template(self, template_id, position):
         url = '{base_url}/templates/{template_id}/{position}'.format(base_url=self.base_url,
