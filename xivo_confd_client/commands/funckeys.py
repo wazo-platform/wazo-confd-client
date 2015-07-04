@@ -77,14 +77,19 @@ class FuncKeysCommand(BaseHTTPCommand):
                                                                      template_id=template_id,
                                                                      position=position)
 
-        self.session.delete(url, headers=self.headers)
+        r = self.session.delete(url, headers=self.headers)
 
-    def update_funckey_template(self, template_id, position, **kwargs):
+        if r.status_code != 204:
+            self.raise_from_response(r)
+
+    def update_funckey_template(self, template_id, position, data):
         url = '{base_url}/templates/{template_id}/{position}'.format(base_url=self.base_url,
                                                                      template_id=template_id,
                                                                      position=position)
 
-        r = self.session.put(url, params=kwargs, headers=self.headers)
+        r = self.session.put(url,
+                             data=json.dumps(data),
+                             headers=self.headers)
 
         if r.status_code != 204:
             self.raise_from_response(r)
