@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-from ..users import UsersCommand
+from ..funckeys import FuncKeysCommand
 from hamcrest import assert_that
 from hamcrest import equal_to
 from xivo_lib_rest_client.tests.command import HTTPCommandTestCase
@@ -26,88 +26,23 @@ class TestFuncKeys(HTTPCommandTestCase):
     Command = FuncKeysCommand
 
     def test_list_templates(self):
-        expected_content = {
-            "total": 2,
-            "items":
-            [
-                {
-                    "id": 1,
-                    "firstname": "John",
-                    "lastname": "Doe",
-                    "timezone": "",
-                    "language": "en_US",
-                    "description": "",
-                    "caller_id": '"John Doe"',
-                    "outgoing_caller_id": "default",
-                    "mobile_phone_number": "",
-                    "username": "",
-                    "password": "",
-                    "music_on_hold": "default",
-                    "preprocess_subroutine": "",
-                    "userfield": ""
-                },
-                {
-                    "id": 2,
-                    "firstname": "Mary",
-                    "lastname": "Sue",
-                    "timezone": "",
-                    "language": "fr_FR",
-                    "description": "",
-                    "caller_id": '"Mary Sue"',
-                    "outgoing_caller_id": "default",
-                    "mobile_phone_number": "",
-                    "username": "",
-                    "password": "",
-                    "music_on_hold": "default",
-                    "preprocess_subroutine": "",
-                    "userfield": ""
-                }
-            ]
-        }
+        expected_content = {u'items': [{u'id': 2,
+                                        u'keys': {},
+                                        u'links': [{u'href': u'https://192.168.1.124:9486/1.1/funckeys/templates/2',
+                                                    u'rel': u'func_key_templates'}],
+                                        u'name': u'fun'}],
+                            u'total': 1}
+
         self.session.get.return_value = self.new_response(200, json=expected_content)
 
-        result = self.command.list()
+        result = self.command.list_templates()
 
-        self.session.get.assert_called_once_with(self.base_url,
-                                                 params={},
-                                                 headers={'Accept': 'application/json'})
+        self.session.get.assert_called_once_with('{base_url}/templates'.format(base_url=self.base_url),
+                                                 headers={'Accept': 'application/json',
+                                                          'Content-Type': 'application/json'})
         assert_that(result, equal_to(expected_content))
 
-    def test_list_when_not_200(self):
+    def test_list_templates_when_not_200(self):
         self.session.get.return_value = self.new_response(404)
 
-        self.assertRaisesHTTPError(self.command.list)
-
-    def test_list_with_view(self):
-        expected_content = {
-            "total": 2,
-            "items":
-            [
-                {
-                    "id": 1,
-                    "line_id": 1,
-                    "agent_id": 1,
-                    "firstname": "John",
-                    "lastname": "Doe",
-                    "exten": "1234",
-                    "mobile_phone_number": "+14184765458"
-                },
-                {
-                    "id": 2,
-                    "line_id": None,
-                    "agent_id": None,
-                    "firstname": "Mary",
-                    "lastname": "Sue",
-                    "exten": "",
-                    "mobile_phone_number": ""
-                }
-            ]
-        }
-        self.session.get.return_value = self.new_response(200, json=expected_content)
-
-        result = self.command.list(view='directory')
-
-        self.session.get.assert_called_once_with(self.base_url,
-                                                 params={'view': 'directory'},
-                                                 headers={'Accept': 'application/json'})
-        assert_that(result, equal_to(expected_content))
+        self.assertRaisesHTTPError(self.command.list_templates)
