@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # Copyright (C) 2014 Avencall
@@ -16,27 +15,27 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-from setuptools import setup
-from setuptools import find_packages
+from xivo_lib_rest_client import BaseHTTPCommand
 
-setup(
-    name='xivo_confd_client',
-    version='0.1',
 
-    description='a simple client library for the xivo-confd HTTP interface',
+class FuncKeysCommand(BaseHTTPCommand):
 
-    author='Avencall',
-    author_email='dev@avencall.com',
+    resource = 'funckeys'
 
-    url='https://github.com/xivo-pbx/xivo-confd-client',
+    def list_templates(self):
+        url = '{base_url}/templates'.format(base_url=self.base_url)
+        r = self.session.get(url)
 
-    packages=find_packages(),
+        if r.status_code != 200:
+            self.raise_from_response(r)
 
-    entry_points={
-        'confd_client.commands': [
-            'infos = xivo_confd_client.commands.infos:InfosCommand',
-            'users = xivo_confd_client.commands.users:UsersCommand',
-            'funckeys = xivo_confd_client.commands.users:FuncKeysCommand',
-        ],
-    }
-)
+        return r.json()
+
+    def get_template(self, template_id):
+        url = '{base_url}/templates/{template_id}'.format(base_url=self.base_url, template_id=template_id)
+        r = self.session.get(url)
+
+        if r.status_code != 200:
+            self.raise_from_response(r)
+
+        return r.json()
