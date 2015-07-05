@@ -111,3 +111,60 @@ class TestUsers(HTTPCommandTestCase):
                                                  params={'view': 'directory'},
                                                  headers={'Accept': 'application/json'})
         assert_that(result, equal_to(expected_content))
+
+
+    def test_list_funckeys(self):
+        pass
+
+    def test_list_funckeys_when_not_200(self):
+        self.session.get.return_value = self.new_response(404)
+
+        self.assertRaisesHTTPError(self.command.list_funckeys, 1)
+
+    def test_delete_funckeys(self):
+        pass
+
+    def test_delete_funckeys_when_not_204(self):
+        self.session.delete.return_value = self.new_response(404)
+
+        self.assertRaisesHTTPError(self.command.delete_funckeys, 1)
+
+    def test_get_funckey(self):
+        pass
+
+    def test_get_funckey_when_not_200(self):
+        self.session.get.return_value = self.new_response(404)
+
+        self.assertRaisesHTTPError(self.command.get_funckey, 1, 1)
+
+    def test_delete_funckey(self):
+        pass
+
+    def test_delete_funckey_when_not_204(self):
+        self.session.delete.return_value = self.new_response(404)
+
+        self.assertRaisesHTTPError(self.command.delete_funckey, 1, 1)
+
+    def test_update_funckey(self):
+        pass
+
+    def test_update_funckey_when_not_204(self):
+        self.session.put.return_value = self.new_response(404)
+
+        self.assertRaisesHTTPError(self.command.update_funckey, 1, 1, dict())
+
+    def test_dissociate_funckey_template(self):
+        pass
+
+    def test_dissociate_funckey_template_when_not_204(self):
+        self.session.delete.return_value = self.new_response(404)
+
+        self.assertRaisesHTTPError(self.command.dissociate_funckey_template, 1, 1)
+
+    def test_associate_funckey_template(self):
+        pass
+
+    def test_associate_funckey_template_when_not_204(self):
+        self.session.put.return_value = self.new_response(404)
+
+        self.assertRaisesHTTPError(self.command.associate_funckey_template, 1, 1, dict())
