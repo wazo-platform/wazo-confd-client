@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2014 Avencall
+# Copyright (C) 2014-2015 Avencall
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -61,7 +61,7 @@ class FuncKeysCommand(BaseHTTPCommand):
         if r.status_code != 204:
             self.raise_from_response(r)
 
-    def get_funckey_template(self, template_id, position):
+    def get_template_funckey(self, template_id, position):
         url = '{base_url}/templates/{template_id}/{position}'.format(base_url=self.base_url,
                                                                      template_id=template_id,
                                                                      position=position)
@@ -72,7 +72,7 @@ class FuncKeysCommand(BaseHTTPCommand):
 
         return r.json()
 
-    def delete_funckey_template(self, template_id, position):
+    def delete_template_funckey(self, template_id, position):
         url = '{base_url}/templates/{template_id}/{position}'.format(base_url=self.base_url,
                                                                      template_id=template_id,
                                                                      position=position)
@@ -82,7 +82,7 @@ class FuncKeysCommand(BaseHTTPCommand):
         if r.status_code != 204:
             self.raise_from_response(r)
 
-    def update_funckey_template(self, template_id, position, data):
+    def update_template_funckey(self, template_id, position, data):
         url = '{base_url}/templates/{template_id}/{position}'.format(base_url=self.base_url,
                                                                      template_id=template_id,
                                                                      position=position)
