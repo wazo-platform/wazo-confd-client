@@ -12,6 +12,15 @@ from xivo_confd_client import Client
 c = Client('confd.example.com', port=9486, version='1.1', username='alice', password='s3cre7', timeout=3)
 
 users = c.users.list()
+
+templates = c.funckeys.list_templates()
+template = c.funckeys.get_template(id)
+c.funckeys.create_template(data)
+c.funckeys.delete_template(id)
+
+fk = c.funckeys.get_template_funckey(template_id, position)
+c.funckeys.delete_template_funckey(template_id, position)
+c.funckeys.update_template_funckey(template_id, position, data)
 ```
 
 

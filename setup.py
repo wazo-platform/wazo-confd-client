@@ -36,6 +36,7 @@ setup(
         'confd_client.commands': [
             'infos = xivo_confd_client.commands.infos:InfosCommand',
             'users = xivo_confd_client.commands.users:UsersCommand',
+            'funckeys = xivo_confd_client.commands.funckeys:FuncKeysCommand',
         ],
     }
 )
