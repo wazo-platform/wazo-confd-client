@@ -137,23 +137,6 @@ class TestUsers(HTTPCommandTestCase):
 
         self.assertRaisesHTTPError(self.command.list_funckeys, 1)
 
-    def test_delete_funckeys(self):
-        user_id = 12
-        self.session.delete.return_value = self.new_response(204)
-
-        result = self.command.delete_funckeys(user_id)
-
-        expected_url = '{base_url}/{user_id}/funckeys'.format(base_url=self.base_url, user_id=user_id)
-        self.session.delete.assert_called_once_with(expected_url,
-                                                    headers={'Accept': 'application/json'},
-                                                    params={})
-        assert_that(result, none())
-
-    def test_delete_funckeys_when_not_204(self):
-        self.session.delete.return_value = self.new_response(404)
-
-        self.assertRaisesHTTPError(self.command.delete_funckeys, 1)
-
     def test_get_funckey(self):
         user_id = 12
         position = 3
