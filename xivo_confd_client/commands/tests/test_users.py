@@ -218,7 +218,8 @@ class TestUsers(HTTPCommandTestCase):
                                                                                       user_id=user_id,
                                                                                       template_id=template_id)
         self.session.delete.assert_called_once_with(expected_url,
-                                                    headers={'Accept': 'application/json'},
+                                                    headers={'Accept': 'application/json',
+                                                             'Content-Type': 'application/json'},
                                                     params={})
         assert_that(result, none())
 
@@ -238,7 +239,8 @@ class TestUsers(HTTPCommandTestCase):
                                                                                       user_id=user_id,
                                                                                       template_id=template_id)
         self.session.put.assert_called_once_with(expected_url,
-                                                 headers={'Accept': 'application/json'},
+                                                 headers={'Accept': 'application/json',
+                                                          'Content-Type': 'application/json'},
                                                  params={})
         assert_that(result, none())
 
