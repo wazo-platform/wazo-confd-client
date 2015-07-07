@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2014 Avencall
+# Copyright (C) 2014-2015 Avencall
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,7 +18,11 @@
 from ..users import UsersCommand
 from hamcrest import assert_that
 from hamcrest import equal_to
+from hamcrest import none
 from xivo_lib_rest_client.tests.command import HTTPCommandTestCase
+
+headers = {'Accept': 'application/json',
+           'Content-Type': 'application/json'}
 
 
 class TestUsers(HTTPCommandTestCase):
@@ -112,9 +116,21 @@ class TestUsers(HTTPCommandTestCase):
                                                  headers={'Accept': 'application/json'})
         assert_that(result, equal_to(expected_content))
 
-
     def test_list_funckeys(self):
-        pass
+        user_id = 12
+        expected_result = {
+            "total": 0,
+            "items": []
+        }
+        self.session.get.return_value = self.new_response(200, json=expected_result)
+
+        result = self.command.list_funckeys(user_id)
+
+        expected_url = '{base_url}/{user_id}/funckeys'.format(base_url=self.base_url, user_id=user_id)
+        self.session.get.assert_called_once_with(expected_url,
+                                                 headers={'Accept': 'application/json'},
+                                                 params={})
+        assert_that(result, expected_result)
 
     def test_list_funckeys_when_not_200(self):
         self.session.get.return_value = self.new_response(404)
@@ -122,7 +138,16 @@ class TestUsers(HTTPCommandTestCase):
         self.assertRaisesHTTPError(self.command.list_funckeys, 1)
 
     def test_delete_funckeys(self):
-        pass
+        user_id = 12
+        self.session.delete.return_value = self.new_response(204)
+
+        result = self.command.delete_funckeys(user_id)
+
+        expected_url = '{base_url}/{user_id}/funckeys'.format(base_url=self.base_url, user_id=user_id)
+        self.session.delete.assert_called_once_with(expected_url,
+                                                    headers={'Accept': 'application/json'},
+                                                    params={})
+        assert_that(result, none())
 
     def test_delete_funckeys_when_not_204(self):
         self.session.delete.return_value = self.new_response(404)
@@ -130,7 +155,27 @@ class TestUsers(HTTPCommandTestCase):
         self.assertRaisesHTTPError(self.command.delete_funckeys, 1)
 
     def test_get_funckey(self):
-        pass
+        user_id = 12
+        position = 3
+        expected_result = {
+            "blf": True,
+            "label": "Call john",
+            "destination": {
+                "type": "user",
+                "user_id": 34
+            }
+        }
+        self.session.get.return_value = self.new_response(200, json=expected_result)
+
+        result = self.command.get_funckey(user_id, position)
+
+        expected_url = '{base_url}/{user_id}/funckeys/{position}'.format(base_url=self.base_url,
+                                                                         user_id=user_id,
+                                                                         position=position)
+        self.session.get.assert_called_once_with(expected_url,
+                                                 headers={'Accept': 'application/json'},
+                                                 params={})
+        assert_that(result, expected_result)
 
     def test_get_funckey_when_not_200(self):
         self.session.get.return_value = self.new_response(404)
@@ -138,7 +183,19 @@ class TestUsers(HTTPCommandTestCase):
         self.assertRaisesHTTPError(self.command.get_funckey, 1, 1)
 
     def test_delete_funckey(self):
-        pass
+        user_id = 12
+        position = 5
+        self.session.delete.return_value = self.new_response(204)
+
+        result = self.command.delete_funckey(user_id, position)
+
+        expected_url = '{base_url}/{user_id}/funckeys/{position}'.format(base_url=self.base_url,
+                                                                         user_id=user_id,
+                                                                         position=position)
+        self.session.delete.assert_called_once_with(expected_url,
+                                                    headers={'Accept': 'application/json'},
+                                                    params={})
+        assert_that(result, none())
 
     def test_delete_funckey_when_not_204(self):
         self.session.delete.return_value = self.new_response(404)
@@ -146,7 +203,21 @@ class TestUsers(HTTPCommandTestCase):
         self.assertRaisesHTTPError(self.command.delete_funckey, 1, 1)
 
     def test_update_funckey(self):
-        pass
+        user_id = 12
+        position = 5
+        self.session.put.return_value = self.new_response(204)
+
+        result = self.command.update_funckey(user_id, position, {})
+
+        expected_url = '{base_url}/{user_id}/funckeys/{position}'.format(base_url=self.base_url,
+                                                                         user_id=user_id,
+                                                                         position=position)
+        self.session.put.assert_called_once_with(expected_url,
+                                                 headers={'Accept': 'application/json',
+                                                          'Content-Type': 'application/json'},
+                                                 data='{}',
+                                                 params={})
+        assert_that(result, none())
 
     def test_update_funckey_when_not_204(self):
         self.session.put.return_value = self.new_response(404)
@@ -154,7 +225,19 @@ class TestUsers(HTTPCommandTestCase):
         self.assertRaisesHTTPError(self.command.update_funckey, 1, 1, dict())
 
     def test_dissociate_funckey_template(self):
-        pass
+        user_id = 12
+        template_id = 25
+        self.session.delete.return_value = self.new_response(204)
+
+        result = self.command.dissociate_funckey_template(user_id, template_id)
+
+        expected_url = '{base_url}/{user_id}/funckeys/templates/{template_id}'.format(base_url=self.base_url,
+                                                                                      user_id=user_id,
+                                                                                      template_id=template_id)
+        self.session.delete.assert_called_once_with(expected_url,
+                                                    headers={'Accept': 'application/json'},
+                                                    params={})
+        assert_that(result, none())
 
     def test_dissociate_funckey_template_when_not_204(self):
         self.session.delete.return_value = self.new_response(404)
@@ -162,9 +245,21 @@ class TestUsers(HTTPCommandTestCase):
         self.assertRaisesHTTPError(self.command.dissociate_funckey_template, 1, 1)
 
     def test_associate_funckey_template(self):
-        pass
+        user_id = 12
+        template_id = 25
+        self.session.put.return_value = self.new_response(204)
+
+        result = self.command.associate_funckey_template(user_id, template_id)
+
+        expected_url = '{base_url}/{user_id}/funckeys/templates/{template_id}'.format(base_url=self.base_url,
+                                                                                      user_id=user_id,
+                                                                                      template_id=template_id)
+        self.session.put.assert_called_once_with(expected_url,
+                                                 headers={'Accept': 'application/json'},
+                                                 params={})
+        assert_that(result, none())
 
     def test_associate_funckey_template_when_not_204(self):
         self.session.put.return_value = self.new_response(404)
 
-        self.assertRaisesHTTPError(self.command.associate_funckey_template, 1, 1, dict())
+        self.assertRaisesHTTPError(self.command.associate_funckey_template, 1, 1)
