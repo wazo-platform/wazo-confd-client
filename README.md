@@ -13,6 +13,14 @@ c = Client('confd.example.com', port=9486, version='1.1', username='alice', pass
 
 users = c.users.list()
 
+fk = c.users.list_funckeys()
+c.users.delete_funckeys()
+fk = c.users.get_funckey()
+c.users.delete_funckey()
+c.users.update_funckey()
+c.users.dissociate_funckey_template()
+c.users.associate_funckey_template()
+
 templates = c.funckeys.list_templates()
 template = c.funckeys.get_template(id)
 c.funckeys.create_template(data)
