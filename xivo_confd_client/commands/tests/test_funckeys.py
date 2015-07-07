@@ -96,7 +96,7 @@ class TestFuncKeys(HTTPCommandTestCase):
                                                                    template_id=template_id)
         self.session.delete.assert_called_once_with(expected_url, headers=headers)
         assert_that(result, none())
-        
+
     def test_delete_template_when_not_204(self):
         self.session.delete.return_value = self.new_response(404)
 
