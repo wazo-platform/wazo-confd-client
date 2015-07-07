@@ -12,6 +12,14 @@ from xivo_confd_client import Client
 c = Client('confd.example.com', port=9486, version='1.1', username='alice', password='s3cre7', timeout=3)
 
 users = c.users.list()
+
+fk = c.users.list_funckeys()
+c.users.delete_funckeys()
+fk = c.users.get_funckey()
+c.users.delete_funckey()
+c.users.update_funckey()
+c.users.dissociate_funckey_template()
+c.users.associate_funckey_template()
 ```
 
 
