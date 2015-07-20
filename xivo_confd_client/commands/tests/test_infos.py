@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2014 Avencall
+# Copyright (C) 2014-2015 Avencall
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,10 +18,10 @@
 from ..infos import InfosCommand
 from hamcrest import assert_that
 from hamcrest import equal_to
-from xivo_lib_rest_client.tests.command import HTTPCommandTestCase
+from xivo_lib_rest_client.tests.command import RESTCommandTestCase
 
 
-class TestInfos(HTTPCommandTestCase):
+class TestInfos(RESTCommandTestCase):
 
     Command = InfosCommand
 
