@@ -35,18 +35,18 @@ class TemplateRelation(object):
 
 class FuncKeysCommand(CRUDCommand):
 
-    resource = 'funckeys'
+    resource = 'funckeys/templates'
     relation_cmd = TemplateRelation
 
     def get_template_funckey(self, template_id, position):
-        url = url_join('funckeys', 'templates', template_id, position)
+        url = url_join(self.resource, template_id, position)
         response = self.session.get(url)
         return response.json()
 
     def delete_template_funckey(self, template_id, position):
-        url = url_join('funckeys', 'templates', template_id, position)
+        url = url_join(self.resource, template_id, position)
         self.session.delete(url)
 
     def update_template_funckey(self, template_id, position, funckey):
-        url = url_join('funckeys', 'templates', template_id, position)
+        url = url_join(self.resource, template_id, position)
         self.session.put(url, funckey)
