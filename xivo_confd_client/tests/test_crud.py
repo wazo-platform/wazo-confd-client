@@ -52,7 +52,7 @@ class TestCRUD(TestCommand):
         result = self.command.list(search='term')
 
         assert_that(result, equal_to(expected_response))
-        self.session.get.assert_called_once_with('/test', {'search': 'term'})
+        self.session.get.assert_called_once_with('/test', params={'search': 'term'})
 
     def test_get(self):
         resource_id = 1

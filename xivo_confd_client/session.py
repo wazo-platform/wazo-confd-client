@@ -55,29 +55,32 @@ class ConfdSession(object):
     def clean_url(self, part):
         return "{}/{}".format(self.base_url.rstrip('/'), part.lstrip('/'))
 
-    def get(self, url, params=None):
-        params = params or {}
+    def get(self, url, **kwargs):
+        kwargs.setdefault('headers', self.READ_HEADERS)
         url = self.clean_url(url)
-        response = self.session.get(url, params=params, headers=self.READ_HEADERS)
+        response = self.session.get(url, **kwargs)
         self.check_response(response)
         return response
 
-    def post(self, url, body):
+    def post(self, url, body, **kwargs):
+        kwargs.setdefault('headers', self.WRITE_HEADERS)
         url = self.clean_url(url)
         encoded_body = json.dumps(body)
-        response = self.session.post(url, data=encoded_body, headers=self.WRITE_HEADERS)
+        response = self.session.post(url, data=encoded_body, **kwargs)
         self.check_response(response)
         return response
 
-    def put(self, url, body):
+    def put(self, url, body, **kwargs):
+        kwargs.setdefault('headers', self.WRITE_HEADERS)
         url = self.clean_url(url)
         encoded_body = json.dumps(body)
-        response = self.session.put(url, data=encoded_body, headers=self.WRITE_HEADERS)
+        response = self.session.put(url, data=encoded_body, **kwargs)
         self.check_response(response)
         return response
 
-    def delete(self, url):
+    def delete(self, url, **kwargs):
+        kwargs.setdefault('headers', self.READ_HEADERS)
         url = self.clean_url(url)
-        response = self.session.delete(url)
+        response = self.session.delete(url, **kwargs)
         self.check_response(response)
         return response

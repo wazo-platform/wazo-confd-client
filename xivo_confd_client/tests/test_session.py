@@ -45,7 +45,7 @@ class TestConfdSession(unittest.TestCase):
         expected_url = "{}/users".format(self.base_url)
         expected_response = self.set_response('get', 200)
 
-        result = self.confd_session.get("/users", {'search': 'term'})
+        result = self.confd_session.get("/users", params={'search': 'term'})
 
         assert_that(result, equal_to(expected_response))
         self.session.get.assert_called_once_with(expected_url,
@@ -86,7 +86,7 @@ class TestConfdSession(unittest.TestCase):
 
         self.confd_session.delete("/users/1")
 
-        self.session.delete.assert_called_once_with(expected_url)
+        self.session.delete.assert_called_once_with(expected_url, headers={'Accept': 'application/json'})
 
     def test_given_status_ok_then_no_error_raised(self):
         response = Mock()

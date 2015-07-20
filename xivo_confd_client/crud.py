@@ -36,7 +36,7 @@ class CRUDCommand(HTTPCommand):
 
     def list(self, **kwargs):
         url = url_join(self.resource)
-        response = self.session.get(url, kwargs)
+        response = self.session.get(url, params=kwargs)
         return response.json()
 
     @extract_id
