@@ -15,92 +15,57 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-from xivo_lib_rest_client import BaseHTTPCommand
-import json
+from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.relations import UserLineRelation, UserVoicemailRelation, UserFuncKeyRelation
+from xivo_confd_client.util import extract_id
 
 
-class UsersCommand(BaseHTTPCommand):
+class UserRelation(object):
+
+    def __init__(self, builder, user_id):
+        self.user_id = user_id
+        self.user_line = UserLineRelation(builder)
+        self.user_voicemail = UserVoicemailRelation(builder)
+        self.user_funckey = UserFuncKeyRelation(builder)
+
+    @extract_id
+    def add_line(self, line_id):
+        return self.user_line.associate(self.user_id, line_id)
+
+    @extract_id
+    def remove_line(self, line_id):
+        self.user_line.dissociate(self.user_id, line_id)
+
+    @extract_id
+    def add_voicemail(self, voicemail_id):
+        self.user_voicemail.associate(self.user_id, voicemail_id)
+
+    @extract_id
+    def remove_voicemail(self, voicemail_id):
+        self.user_voicemail.associate(self.user_id, voicemail_id)
+
+    def add_funckey(self, position, funckey):
+        self.user_funckey.add_funckey(self.user_id, position, funckey)
+
+    def remove_funckey(self, position):
+        self.user_funckey.remove_funckey(self.user_id, position)
+
+    def get_funckey(self, position):
+        return self.user_funckey.get_funckey(self.user_id)
+
+    def list_funckeys(self):
+        return self.user_funckey.list_funckeys(self.user_id)
+
+    @extract_id
+    def add_funckey_template(self, template_id):
+        self.user_funckey.associate_funckey_template(self.user_id, template_id)
+
+    @extract_id
+    def remove_funckey_template(self, template_id):
+        self.user_funckey.dissociate_funckey_template(self.user_id, template_id)
+
+
+class UsersCommand(CRUDCommand):
 
     resource = 'users'
-    read_only_headers = {'Accept': 'application/json'}
-    read_write_headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
-
-    def list(self, **kwargs):
-        r = self.session.get(self.base_url, params=kwargs, headers=self.read_only_headers)
-
-        if r.status_code != 200:
-            self.raise_from_response(r)
-
-        return r.json()
-
-    def list_funckeys(self, user_id, **kwargs):
-        url = '{base_url}/{user_id}/funckeys'.format(base_url=self.base_url,
-                                                     user_id=user_id)
-
-        r = self.session.get(url, params=kwargs, headers=self.read_only_headers)
-
-        if r.status_code != 200:
-            self.raise_from_response(r)
-
-        return r.json()
-
-    def delete_funckeys(self, user_id, **kwargs):
-        url = '{base_url}/{user_id}/funckeys'.format(base_url=self.base_url,
-                                                     user_id=user_id)
-
-        r = self.session.delete(url, params=kwargs, headers=self.read_only_headers)
-
-        if r.status_code != 204:
-            self.raise_from_response(r)
-
-    def get_funckey(self, user_id, position, **kwargs):
-        url = '{base_url}/{user_id}/funckeys/{position}'.format(base_url=self.base_url,
-                                                                user_id=user_id,
-                                                                position=position)
-
-        r = self.session.get(url, params=kwargs, headers=self.read_only_headers)
-
-        if r.status_code != 200:
-            self.raise_from_response(r)
-
-        return r.json()
-
-    def delete_funckey(self, user_id, position, **kwargs):
-        url = '{base_url}/{user_id}/funckeys/{position}'.format(base_url=self.base_url,
-                                                                user_id=user_id,
-                                                                position=position)
-
-        r = self.session.delete(url, params=kwargs, headers=self.read_only_headers)
-
-        if r.status_code != 204:
-            self.raise_from_response(r)
-
-    def update_funckey(self, user_id, position, data, **kwargs):
-        url = '{base_url}/{user_id}/funckeys/{position}'.format(base_url=self.base_url,
-                                                                user_id=user_id,
-                                                                position=position)
-
-        r = self.session.put(url, params=kwargs, data=json.dumps(data), headers=self.read_write_headers)
-
-        if r.status_code != 204:
-            self.raise_from_response(r)
-
-    def dissociate_funckey_template(self, user_id, template_id, **kwargs):
-        url = '{base_url}/{user_id}/funckeys/templates/{template_id}'.format(base_url=self.base_url,
-                                                                             user_id=user_id,
-                                                                             template_id=template_id)
-
-        r = self.session.delete(url, params=kwargs, headers=self.read_write_headers)
-
-        if r.status_code != 204:
-            self.raise_from_response(r)
-
-    def associate_funckey_template(self, user_id, template_id, **kwargs):
-        url = '{base_url}/{user_id}/funckeys/templates/{template_id}'.format(base_url=self.base_url,
-                                                                             user_id=user_id,
-                                                                             template_id=template_id)
-
-        r = self.session.put(url, params=kwargs, headers=self.read_write_headers)
-
-        if r.status_code != 204:
-            self.raise_from_response(r)
+    relation_cmd = UserRelation

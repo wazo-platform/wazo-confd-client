@@ -19,92 +19,18 @@ from ..funckeys import FuncKeysCommand
 from hamcrest import assert_that
 from hamcrest import equal_to
 from hamcrest import none
-from xivo_lib_rest_client.tests.command import HTTPCommandTestCase
 
-headers = {'Accept': 'application/json',
-           'Content-Type': 'application/json'}
+from xivo_confd_client.tests import TestCommand
 
-class TestFuncKeys(HTTPCommandTestCase):
+
+class TestFuncKeys(TestCommand):
 
     Command = FuncKeysCommand
-
-    def test_list_templates(self):
-        expected_content = {'items': [{'id': 2,
-                                       'keys': {},
-                                       'links': [{'href': 'https://192.168.1.124:9486/1.1/funckeys/templates/2',
-                                                  'rel': 'func_key_templates'}],
-                                       'name': 'fun'}],
-                            'total': 1}
-
-        self.session.get.return_value = self.new_response(200, json=expected_content)
-
-        result = self.command.list_templates()
-
-        expected_url = '{base_url}/templates'.format(base_url=self.base_url)
-        self.session.get.assert_called_once_with(expected_url, headers=headers)
-        assert_that(result, equal_to(expected_content))
-
-    def test_list_templates_when_not_200(self):
-        self.session.get.return_value = self.new_response(404)
-
-        self.assertRaisesHTTPError(self.command.list_templates)
-
-    def test_create_template(self):
-        self.session.post.return_value = self.new_response(201)
-
-        result = self.command.create_template(dict())
-
-        expected_url = '{base_url}/templates'.format(base_url=self.base_url)
-        self.session.post.assert_called_once_with(expected_url, headers=headers, data='{}')
-        assert_that(result, none())
-
-    def test_create_template_when_not_201(self):
-        data = {'name': 'fun'}
-        self.session.post.return_value = self.new_response(404)
-
-        self.assertRaisesHTTPError(self.command.create_template, data)
-
-    def test_get_template(self):
-        template_id = 2
-        expected_content = {'blf': True,
-                            'destination': {'exten': '1234', 'href': None, 'type': 'custom'},
-                            'id': 32,
-                            'inherited': True,
-                            'label': 'pouet',
-                            'links': []}
-
-        self.session.get.return_value = self.new_response(200, json=expected_content)
-
-        result = self.command.get_template(template_id)
-
-        expected_url = '{base_url}/templates/{template_id}'.format(base_url=self.base_url, template_id=template_id)
-        self.session.get.assert_called_once_with(expected_url, headers=headers)
-        assert_that(result, equal_to(expected_content))
-
-    def test_get_template_when_not_200(self):
-        self.session.get.return_value = self.new_response(404)
-
-        self.assertRaisesHTTPError(self.command.get_template, 2)
-
-    def test_delete_template(self):
-        template_id = 2
-
-        self.session.delete.return_value = self.new_response(204)
-        result = self.command.delete_template(template_id)
-
-        expected_url = '{base_url}/templates/{template_id}'.format(base_url=self.base_url,
-                                                                   template_id=template_id)
-        self.session.delete.assert_called_once_with(expected_url, headers=headers)
-        assert_that(result, none())
-
-    def test_delete_template_when_not_204(self):
-        self.session.delete.return_value = self.new_response(404)
-
-        self.assertRaisesHTTPError(self.command.delete_template, 2)
 
     def test_get_template_funckey(self):
         template_id = 2
         position = 1
+        expected_url = "/funckeys/templates/{}/{}".format(template_id, position)
         expected_content = {'blf': True,
                             'destination': {'exten': '1234', 'href': None, 'type': 'custom'},
                             'id': 32,
@@ -112,53 +38,34 @@ class TestFuncKeys(HTTPCommandTestCase):
                             'label': 'pouet',
                             'links': []}
 
-        self.session.get.return_value = self.new_response(200, json=expected_content)
+        self.set_response('get', 200, expected_content)
 
         result = self.command.get_template_funckey(template_id, position)
 
-        expected_url = '{base_url}/templates/{template_id}/{position}'.format(base_url=self.base_url,
-                                                                              template_id=template_id,
-                                                                              position=position)
-        self.session.get.assert_called_once_with(expected_url, headers=headers)
+        self.session.get.assert_called_once_with(expected_url)
         assert_that(result, equal_to(expected_content))
-
-    def test_get_template_funckey_when_not_200(self):
-        self.session.get.return_value = self.new_response(404)
-
-        self.assertRaisesHTTPError(self.command.get_template_funckey, 1, 1)
 
     def test_delete_template_funckey(self):
         template_id = 2
         position = 1
+        expected_url = "/funckeys/templates/{}/{}".format(template_id, position)
 
-        self.session.delete.return_value = self.new_response(204)
+        self.set_response('delete', 204)
+
         result = self.command.delete_template_funckey(template_id, position)
 
-        expected_url = '{base_url}/templates/{template_id}/{position}'.format(base_url=self.base_url,
-                                                                              template_id=template_id,
-                                                                              position=position)
-        self.session.delete.assert_called_once_with(expected_url, headers=headers)
+        self.session.delete.assert_called_once_with(expected_url)
         assert_that(result, none())
-
-    def test_delete_template_funckey_when_not_204(self):
-        self.session.delete.return_value = self.new_response(404)
-
-        self.assertRaisesHTTPError(self.command.delete_template_funckey, 1, 1)
 
     def test_update_template_funckey(self):
         template_id = 2
         position = 1
+        expected_url = "/funckeys/templates/{}/{}".format(template_id, position)
+        funckey = {'blf': False}
 
-        self.session.put.return_value = self.new_response(204)
-        result = self.command.update_template_funckey(template_id, position, dict())
+        self.set_response('put', 204)
 
-        expected_url = '{base_url}/templates/{template_id}/{position}'.format(base_url=self.base_url,
-                                                                              template_id=template_id,
-                                                                              position=position)
-        self.session.put.assert_called_once_with(expected_url, headers=headers, data='{}')
+        result = self.command.update_template_funckey(template_id, position, funckey)
+
+        self.session.put.assert_called_once_with(expected_url, funckey)
         assert_that(result, none())
-
-    def test_update_template_funckey_when_not_204(self):
-        self.session.put.return_value = self.new_response(404)
-
-        self.assertRaisesHTTPError(self.command.update_template_funckey, 1, 1, dict())

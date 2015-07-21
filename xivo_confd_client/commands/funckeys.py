@@ -15,81 +15,38 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-from xivo_lib_rest_client import BaseHTTPCommand
-import json
+from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.relations import UserFuncKeyRelation
+from xivo_confd_client.util import url_join
 
 
-class FuncKeysCommand(BaseHTTPCommand):
+class TemplateRelation(object):
 
-    resource = 'funckeys'
-    headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
+    def __init__(self, builder, template_id):
+        self.template_id = template_id
+        self.user_funckey = UserFuncKeyRelation(builder)
 
-    def list_templates(self):
-        url = '{base_url}/templates'.format(base_url=self.base_url)
-        r = self.session.get(url, headers=self.headers)
+    def add_user(self, user_id):
+        self.user_funckey.associate_template(user_id, self.template_id)
 
-        if r.status_code != 200:
-            self.raise_from_response(r)
+    def remove_user(self, user_id):
+        self.user_funckey.dissociate_template(user_id, self.template_id)
 
-        return r.json()
 
-    def create_template(self, data):
-        url = '{base_url}/templates'.format(base_url=self.base_url)
-        r = self.session.post(url,
-                              headers=self.headers,
-                              data=json.dumps(data))
+class FuncKeysCommand(CRUDCommand):
 
-        if r.status_code != 201:
-            self.raise_from_response(r)
-
-    def get_template(self, template_id):
-        url = '{base_url}/templates/{template_id}'.format(base_url=self.base_url,
-                                                                   template_id=template_id)
-        r = self.session.get(url, headers=self.headers)
-
-        if r.status_code != 200:
-            self.raise_from_response(r)
-
-        return r.json()
-
-    def delete_template(self, template_id):
-        url = '{base_url}/templates/{template_id}'.format(base_url=self.base_url,
-                                                          template_id=template_id)
-
-        r = self.session.delete(url, headers=self.headers)
-
-        if r.status_code != 204:
-            self.raise_from_response(r)
+    resource = 'funckeys/templates'
+    relation_cmd = TemplateRelation
 
     def get_template_funckey(self, template_id, position):
-        url = '{base_url}/templates/{template_id}/{position}'.format(base_url=self.base_url,
-                                                                     template_id=template_id,
-                                                                     position=position)
-        r = self.session.get(url, headers=self.headers)
-
-        if r.status_code != 200:
-            self.raise_from_response(r)
-
-        return r.json()
+        url = url_join(self.resource, template_id, position)
+        response = self.session.get(url)
+        return response.json()
 
     def delete_template_funckey(self, template_id, position):
-        url = '{base_url}/templates/{template_id}/{position}'.format(base_url=self.base_url,
-                                                                     template_id=template_id,
-                                                                     position=position)
+        url = url_join(self.resource, template_id, position)
+        self.session.delete(url)
 
-        r = self.session.delete(url, headers=self.headers)
-
-        if r.status_code != 204:
-            self.raise_from_response(r)
-
-    def update_template_funckey(self, template_id, position, data):
-        url = '{base_url}/templates/{template_id}/{position}'.format(base_url=self.base_url,
-                                                                     template_id=template_id,
-                                                                     position=position)
-
-        r = self.session.put(url,
-                             data=json.dumps(data),
-                             headers=self.headers)
-
-        if r.status_code != 204:
-            self.raise_from_response(r)
+    def update_template_funckey(self, template_id, position, funckey):
+        url = url_join(self.resource, template_id, position)
+        self.session.put(url, funckey)

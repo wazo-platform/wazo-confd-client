@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2014 Avencall
+# Copyright (C) 2014-2015 Avencall
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -34,9 +34,14 @@ setup(
 
     entry_points={
         'confd_client.commands': [
+            'devices = xivo_confd_client.commands.devices:DevicesCommand',
+            'extensions = xivo_confd_client.commands.extensions:ExtensionsCommand',
             'infos = xivo_confd_client.commands.infos:InfosCommand',
+            'lines_sip = xivo_confd_client.commands.lines_sip:LinesSIPCommand',
             'users = xivo_confd_client.commands.users:UsersCommand',
             'funckeys = xivo_confd_client.commands.funckeys:FuncKeysCommand',
+            'voicemails = xivo_confd_client.commands.voicemails:VoicemailsCommand',
+            'call_logs = xivo_confd_client.commands.call_logs:CallLogsCommand',
         ],
     }
 )
