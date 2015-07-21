@@ -30,7 +30,7 @@ class TestInfos(TestCommand):
 
         result = self.command.get()
 
-        self.session.get.assert_called_once_with('/info')
+        self.session.get.assert_called_once_with('/infos')
         assert_that(result, equal_to({'uuid': 'test'}))
 
     def test_calling_infos_with_no_method(self):
@@ -38,5 +38,5 @@ class TestInfos(TestCommand):
 
         result = self.command()
 
-        self.session.get.assert_called_once_with('/info')
+        self.session.get.assert_called_once_with('/infos')
         assert_that(result, equal_to({'uuid': 'test'}))

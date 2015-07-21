@@ -24,6 +24,6 @@ class InfosCommand(HTTPCommand):
         return self.get()
 
     def get(self):
-        r = self.session.get('/info')
+        r = self.session.get('/infos')
 
         return r.json()
