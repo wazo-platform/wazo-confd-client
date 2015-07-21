@@ -18,30 +18,25 @@
 from ..infos import InfosCommand
 from hamcrest import assert_that
 from hamcrest import equal_to
-from xivo_lib_rest_client.tests.command import RESTCommandTestCase
+from xivo_confd_client.tests import TestCommand
 
 
-class TestInfos(RESTCommandTestCase):
+class TestInfos(TestCommand):
 
     Command = InfosCommand
 
     def test_get(self):
-        self.session.get.return_value = self.new_response(200, json={'uuid': 'test'})
+        self.set_response('get', 200, {'uuid': 'test'})
 
         result = self.command.get()
 
-        self.session.get.assert_called_once_with(self.base_url, headers={'Accept': 'application/json'})
+        self.session.get.assert_called_once_with('/info')
         assert_that(result, equal_to({'uuid': 'test'}))
 
     def test_calling_infos_with_no_method(self):
-        self.session.get.return_value = self.new_response(200, json={'uuid': 'test'})
+        self.set_response('get', 200, {'uuid': 'test'})
 
         result = self.command()
 
-        self.session.get.assert_called_once_with(self.base_url, headers={'Accept': 'application/json'})
+        self.session.get.assert_called_once_with('/info')
         assert_that(result, equal_to({'uuid': 'test'}))
-
-    def test_when_not_200(self):
-        self.session.get.return_value = self.new_response(404)
-
-        self.assertRaisesHTTPError(self.command)

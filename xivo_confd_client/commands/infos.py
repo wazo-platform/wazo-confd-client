@@ -15,20 +15,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-from xivo_lib_rest_client import RESTCommand
+from xivo_lib_rest_client import HTTPCommand
 
 
-class InfosCommand(RESTCommand):
-
-    resource = 'infos'
+class InfosCommand(HTTPCommand):
 
     def __call__(self):
         return self.get()
 
     def get(self):
-        r = self.session.get(self.base_url, headers={'Accept': 'application/json'})
-
-        if r.status_code != 200:
-            self.raise_from_response(r)
+        r = self.session.get('/info')
 
         return r.json()
