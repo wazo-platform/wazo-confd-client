@@ -20,7 +20,10 @@
 from hamcrest import assert_that
 
 from xivo_confd_client.tests import TestCommand
-from xivo_confd_client.relations import UserLineRelation, LineExtensionRelation, UserVoicemailRelation, UserFuncKeyRelation
+from xivo_confd_client.relations import LineExtensionRelation
+from xivo_confd_client.relations import UserFuncKeyRelation
+from xivo_confd_client.relations import UserLineRelation
+from xivo_confd_client.relations import UserVoicemailRelation
 
 
 class TestUserLineRelation(TestCommand):
@@ -40,6 +43,21 @@ class TestUserLineRelation(TestCommand):
 
         self.command.dissociate(user_id, line_id)
         self.session.delete.assert_called_once_with("/users/1/lines/2")
+
+    def test_user_line_list(self):
+        user_id = 1234
+        expected_url = "/users/{}/lines".format(user_id)
+        expected_result = {
+            "total": 0,
+            "items": []
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.list(user_id)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
 
 
 class TestLineExtensionRelation(TestCommand):
