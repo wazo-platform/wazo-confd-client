@@ -142,6 +142,7 @@ User relation
 
  * add_line(line)
  * remove_line(line)
+ * list_lines()
  * add_voicemail(voicemail)
  * remove_voicemail(voicemail)
  * add_funckey(position, funckey)
