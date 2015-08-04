@@ -37,6 +37,7 @@ setup(
             'devices = xivo_confd_client.commands.devices:DevicesCommand',
             'extensions = xivo_confd_client.commands.extensions:ExtensionsCommand',
             'infos = xivo_confd_client.commands.infos:InfosCommand',
+            'lines = xivo_confd_client.commands.lines:LinesCommand',
             'lines_sip = xivo_confd_client.commands.lines_sip:LinesSIPCommand',
             'users = xivo_confd_client.commands.users:UsersCommand',
             'funckeys = xivo_confd_client.commands.funckeys:FuncKeysCommand',

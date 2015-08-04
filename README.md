@@ -18,7 +18,7 @@ resource.
 ```python
 from xivo_confd_client import Client
 
-c = Client('confd.example.com', https=True, port=9486, 
+c = Client('confd.example.com', https=True, port=9486,
            username='alice', password='s3cre7', auth_method='digest')
 
 users = c.users.list()
@@ -39,7 +39,7 @@ users = c.users.list(search='John')
 
 get
 ---
-    
+
 Return a resource item for a given ID.
 
 ```python
@@ -97,7 +97,7 @@ Resource relations
 
 Certain resources can be associated together in order to offer additional functionality.
 These associations are known as "relations" in the client. Each resource exposes a subset
-of commands for manipulating relations through the ```relations``` method. Consult the 
+of commands for manipulating relations through the ```relations``` method. Consult the
 [documentaton](http://api.xivo.io) for a complete list of associations.
 
 ```python
@@ -142,6 +142,7 @@ User relation
 
  * add_line(line)
  * remove_line(line)
+ * list_lines()
  * add_voicemail(voicemail)
  * remove_voicemail(voicemail)
  * add_funckey(position, funckey)
