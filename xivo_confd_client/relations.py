@@ -61,6 +61,14 @@ class LineExtensionRelation(HTTPCommand):
         self.session.delete(url)
 
 
+class ExtensionLineRelation(HTTPCommand):
+
+    def get_line(self, extension_id):
+        url = url_join('extensions', extension_id, 'line')
+        response = self.session.get(url)
+        return response.json()
+
+
 class UserFuncKeyRelation(HTTPCommand):
 
     def add_funckey(self, user_id, position, funckey):

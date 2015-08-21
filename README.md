@@ -122,6 +122,7 @@ Extension relation
 
  * add_line(line)
  * remove_line(line)
+ * get_line()
 
 Funckey template relation
 ----------------
