@@ -35,8 +35,23 @@ class TestUserLineRelation(TestCommand):
         user_id = 1
         line_id = 2
 
-        self.command.associate(user_id, line_id)
+        expected_result = {
+            'user_id': user_id,
+            'line_id': line_id,
+            'links': [
+                {'rel': 'users',
+                 'href': 'http://localhost:9486/1.1/users/1'},
+                {'rel': 'lines',
+                 'href': 'http://localhost:9486/1.1/lines/2'},
+            ]
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.associate(user_id, line_id)
+
         self.session.post.assert_called_once_with("/users/1/lines", {'line_id': line_id})
+        assert_that(response, expected_result)
 
     def test_user_line_dissociation(self):
         user_id = 1
@@ -69,8 +84,23 @@ class TestLineExtensionRelation(TestCommand):
         line_id = 1
         extension_id = 2
 
-        self.command.associate(line_id, extension_id)
+        expected_result = {
+            'line_id': line_id,
+            'extension_id': extension_id,
+            'links': [
+                {'rel': 'lines',
+                 'href': 'http://localhost:9486/1.1/lines/1'},
+                {'rel': 'extensions',
+                 'href': 'http://localhost:9486/1.1/extensions/1'},
+            ]
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.associate(line_id, extension_id)
         self.session.post.assert_called_once_with("/lines/1/extensions", {'extension_id': extension_id})
+
+        assert_that(response, expected_result)
 
     def test_line_extension_dissociation(self):
         line_id = 1
@@ -108,8 +138,23 @@ class TestUserVoicemailRelation(TestCommand):
         user_id = 1
         voicemail_id = 2
 
-        self.command.associate(user_id, voicemail_id)
+        expected_result = {
+            'user_id': user_id,
+            'voicemail_id': voicemail_id,
+            'links': [
+                {'rel': 'users',
+                 'href': 'http://localhost:9486/1.1/users/2'},
+                {'rel': 'voicemails',
+                 'href': 'http://localhost:9486/1.1/voicemails/1'},
+            ]
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.associate(user_id, voicemail_id)
+
         self.session.post.assert_called_once_with("/users/1/voicemail", {'voicemail_id': voicemail_id})
+        assert_that(response, expected_result)
 
     def test_user_voicemail_dissociation(self):
         user_id = 1
