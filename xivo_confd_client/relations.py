@@ -48,6 +48,16 @@ class UserVoicemailRelation(HTTPCommand):
         url = url_join('users', user_id, 'voicemail')
         self.session.delete(url)
 
+    def get_by_user(self, user_id):
+        url = url_join('users', user_id, 'voicemail')
+        response = self.session.get(url)
+        return response.json()
+
+    def list_by_voicemail(self, voicemail_id):
+        url = url_join('voicemails', voicemail_id, 'users')
+        response = self.session.get(url)
+        return response.json()
+
 
 class LineExtensionRelation(HTTPCommand):
 

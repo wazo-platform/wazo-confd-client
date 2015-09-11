@@ -47,6 +47,9 @@ class UserRelation(object):
     def remove_voicemail(self):
         self.user_voicemail.dissociate(self.user_id)
 
+    def get_voicemail(self):
+        return self.user_voicemail.get_by_user(self.user_id)
+
     def add_funckey(self, position, funckey):
         self.user_funckey.add_funckey(self.user_id, position, funckey)
 

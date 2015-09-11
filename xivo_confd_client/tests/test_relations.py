@@ -117,6 +117,40 @@ class TestUserVoicemailRelation(TestCommand):
         self.command.dissociate(user_id)
         self.session.delete.assert_called_once_with("/users/1/voicemail")
 
+    def test_get_by_user(self):
+        user_id = 1
+        expected_result = {
+            'user_id': user_id,
+            'voicemail_id': 2,
+            'links': [
+                {'rel': 'users',
+                 'href': 'http://localhost:9486/1.1/users/1'},
+                {'rel': 'voicemails',
+                 'href': 'http://localhost:9486/1.1/voicemails/2'},
+            ]
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.get_by_user(user_id)
+
+        self.session.get.assert_called_once_with("/users/1/voicemail")
+        assert_that(response, expected_result)
+
+    def test_list_by_voicemail(self):
+        voicemail_id = 1
+        expected_result = {
+            'items': [],
+            'total': 0
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.list_by_voicemail(voicemail_id)
+
+        self.session.get.assert_called_once_with("/voicemails/1/users")
+        assert_that(response, expected_result)
+
 
 class TestUserFuncKeyRelation(TestCommand):
 

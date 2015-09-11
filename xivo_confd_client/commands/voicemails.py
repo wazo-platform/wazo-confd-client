@@ -34,6 +34,14 @@ class VoicemailRelation(object):
     def remove_user(self, user_id):
         self.user_voicemail_relation.dissociate(user_id)
 
+    def remove_users(self):
+        response = self.list_users()
+        for association in response['items']:
+            self.remove_user(association['user_id'])
+
+    def list_users(self):
+        return self.user_voicemail_relation.list_by_voicemail(self.voicemail_id)
+
 
 class VoicemailsCommand(CRUDCommand):
 
