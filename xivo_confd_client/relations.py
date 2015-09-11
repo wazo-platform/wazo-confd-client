@@ -31,7 +31,7 @@ class UserLineRelation(HTTPCommand):
         url = url_join('users', user_id, 'lines', line_id)
         self.session.delete(url)
 
-    def list(self, user_id):
+    def list_by_user(self, user_id):
         url = url_join('users', user_id, 'lines')
         response = self.session.get(url)
         return response.json()

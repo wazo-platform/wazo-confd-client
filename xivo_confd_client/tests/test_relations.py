@@ -45,7 +45,7 @@ class TestUserLineRelation(TestCommand):
         self.command.dissociate(user_id, line_id)
         self.session.delete.assert_called_once_with("/users/1/lines/2")
 
-    def test_user_line_list(self):
+    def test_user_line_list_by_user(self):
         user_id = 1234
         expected_url = "/users/{}/lines".format(user_id)
         expected_result = {
@@ -55,7 +55,7 @@ class TestUserLineRelation(TestCommand):
 
         self.set_response('get', 200, expected_result)
 
-        result = self.command.list(user_id)
+        result = self.command.list_by_user(user_id)
 
         self.session.get.assert_called_once_with(expected_url)
         assert_that(result, expected_result)

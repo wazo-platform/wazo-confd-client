@@ -37,7 +37,7 @@ class UserRelation(object):
         self.user_line.dissociate(self.user_id, line_id)
 
     def list_lines(self):
-        return self.user_line.list(self.user_id)
+        return self.user_line.list_by_user(self.user_id)
 
     @extract_id
     def add_voicemail(self, voicemail_id):
