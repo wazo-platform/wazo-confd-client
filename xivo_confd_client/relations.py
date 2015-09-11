@@ -44,7 +44,7 @@ class UserVoicemailRelation(HTTPCommand):
         body = {'voicemail_id': voicemail_id}
         return self.session.post(url, body)
 
-    def dissociate(self, user_id, voicemail_id):
+    def dissociate(self, user_id):
         url = url_join('users', user_id, 'voicemail')
         self.session.delete(url)
 

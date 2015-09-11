@@ -113,9 +113,8 @@ class TestUserVoicemailRelation(TestCommand):
 
     def test_user_voicemail_dissociation(self):
         user_id = 1
-        voicemail_id = 2
 
-        self.command.dissociate(user_id, voicemail_id)
+        self.command.dissociate(user_id)
         self.session.delete.assert_called_once_with("/users/1/voicemail")
 
 

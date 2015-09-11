@@ -32,7 +32,7 @@ class VoicemailRelation(object):
 
     @extract_id
     def remove_user(self, user_id):
-        self.user_voicemail_relation.dissociate(user_id, self.voicemail_id)
+        self.user_voicemail_relation.dissociate(user_id)
 
 
 class VoicemailsCommand(CRUDCommand):
