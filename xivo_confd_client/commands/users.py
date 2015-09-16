@@ -37,15 +37,18 @@ class UserRelation(object):
         self.user_line.dissociate(self.user_id, line_id)
 
     def list_lines(self):
-        return self.user_line.list(self.user_id)
+        return self.user_line.list_by_user(self.user_id)
 
     @extract_id
     def add_voicemail(self, voicemail_id):
         self.user_voicemail.associate(self.user_id, voicemail_id)
 
     @extract_id
-    def remove_voicemail(self, voicemail_id):
-        self.user_voicemail.associate(self.user_id, voicemail_id)
+    def remove_voicemail(self):
+        self.user_voicemail.dissociate(self.user_id)
+
+    def get_voicemail(self):
+        return self.user_voicemail.get_by_user(self.user_id)
 
     def add_funckey(self, position, funckey):
         self.user_funckey.add_funckey(self.user_id, position, funckey)

@@ -25,13 +25,14 @@ class UserLineRelation(HTTPCommand):
     def associate(self, user_id, line_id):
         url = url_join('users', user_id, 'lines')
         body = {'line_id': line_id}
-        return self.session.post(url, body)
+        response = self.session.post(url, body)
+        return response.json()
 
     def dissociate(self, user_id, line_id):
         url = url_join('users', user_id, 'lines', line_id)
         self.session.delete(url)
 
-    def list(self, user_id):
+    def list_by_user(self, user_id):
         url = url_join('users', user_id, 'lines')
         response = self.session.get(url)
         return response.json()
@@ -42,11 +43,22 @@ class UserVoicemailRelation(HTTPCommand):
     def associate(self, user_id, voicemail_id):
         url = url_join('users', user_id, 'voicemail')
         body = {'voicemail_id': voicemail_id}
-        return self.session.post(url, body)
+        response = self.session.post(url, body)
+        return response.json()
 
-    def dissociate(self, user_id, voicemail_id):
+    def dissociate(self, user_id):
         url = url_join('users', user_id, 'voicemail')
         self.session.delete(url)
+
+    def get_by_user(self, user_id):
+        url = url_join('users', user_id, 'voicemail')
+        response = self.session.get(url)
+        return response.json()
+
+    def list_by_voicemail(self, voicemail_id):
+        url = url_join('voicemails', voicemail_id, 'users')
+        response = self.session.get(url)
+        return response.json()
 
 
 class LineExtensionRelation(HTTPCommand):
@@ -54,7 +66,8 @@ class LineExtensionRelation(HTTPCommand):
     def associate(self, line_id, extension_id):
         url = url_join('lines', line_id, 'extensions')
         body = {'extension_id': extension_id}
-        return self.session.post(url, body)
+        response = self.session.post(url, body)
+        return response.json()
 
     def dissociate(self, line_id, extension_id):
         url = url_join('lines', line_id, 'extensions', extension_id)

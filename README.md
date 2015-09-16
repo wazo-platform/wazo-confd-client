@@ -146,6 +146,7 @@ User relation
  * list_lines()
  * add_voicemail(voicemail)
  * remove_voicemail(voicemail)
+ * get_voicemail()
  * add_funckey(position, funckey)
  * remove_funckey(position, funckey)
  * get_funckey(position)
@@ -158,6 +159,8 @@ Voicemail relation
 
  * add_user(user)
  * remove_user(user)
+ * remove_users()
+ * list_users()
 
 
 Adding new commands
