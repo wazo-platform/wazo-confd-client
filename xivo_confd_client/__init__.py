@@ -15,7 +15,4 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-from xivo_lib_rest_client import new_client_factory
-from xivo_confd_client.session import ConfdSessionBuilder
-
-Client = new_client_factory('confd_client.commands', 9487, '1.1', session_builder=ConfdSessionBuilder)
+from xivo_confd_client.client import ConfdClient as Client

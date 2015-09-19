@@ -19,14 +19,14 @@
 import unittest
 from mock import Mock
 
-from ..session import ConfdSessionBuilder, ConfdSession
+from ..session import ConfdSession
 
 
 class TestCommand(unittest.TestCase):
 
     def setUp(self):
-        self.session_builder = Mock(ConfdSessionBuilder)
         self.session = Mock(ConfdSession)
+        self.session_builder = Mock()
         self.session_builder.session.return_value = self.session
         self.command = self.Command(self.session_builder)
 

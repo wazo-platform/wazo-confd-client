@@ -19,15 +19,6 @@
 import requests
 import json
 
-from xivo_lib_rest_client.client import _SessionBuilder
-
-
-class ConfdSessionBuilder(_SessionBuilder):
-
-    def session(self):
-        s = super(ConfdSessionBuilder, self).session()
-        return ConfdSession(s, self.url())
-
 
 class ConfdSession(object):
 
