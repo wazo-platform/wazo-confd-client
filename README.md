@@ -30,7 +30,7 @@ list
 ----
 
 Return a list of items for a resource. You can also pass optional paramters for searching
-and sorting such as ```search```, ```sort```, ```order```, ```skip```, ```limit```, etc.
+and sorting such as ```search```, ```sort```, ```order```, ```offset```, ```limit```, etc.
 Returns a dict structured as ```{'total': total, 'items': [item1, item2, item3]}```.
 
 ```python
