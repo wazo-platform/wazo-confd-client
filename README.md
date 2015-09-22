@@ -44,7 +44,9 @@ Return a resource item for a given ID.
 
 ```python
 user_id = 42
-user = c.users.get(user_d)
+user = c.users.get(user_id)
+user_uuid = '2e752722-0864-4665-887d-a78a024cf7c7'
+user = c.users.get(user_uuid)  // users only
 ```
 
 create
