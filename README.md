@@ -22,8 +22,7 @@ c = Client('confd.example.com',
            https=True,
            port=9486,
            username='alice',
-           password='s3cre7',
-           auth_method='digest')
+           password='s3cre7')
 c = Client('confd.example.com', port=9486, https=True, token='the-one-ring')
 
 users = c.users.list()
