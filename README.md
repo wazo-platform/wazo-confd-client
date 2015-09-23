@@ -210,3 +210,13 @@ c = Client(...)
 
 c.foo.bar()
 ```
+
+
+Changelog
+=========
+
+1.1.1
+-----
+
+* Remove argument auth_method from xivo_confd_client.Client. Auth method is
+always digest.
