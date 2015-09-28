@@ -30,13 +30,11 @@ class ConfdClient(BaseClient):
                  version='1.1',
                  username=None,
                  password=None,
-                 verify_certificate=False,
                  **kwargs):
         super(ConfdClient, self).__init__(
             host=host,
             port=port,
             version=version,
-            verify_certificate=verify_certificate,
             **kwargs)
         self.username = username
         self.password = password
