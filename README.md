@@ -169,6 +169,26 @@ Voicemail relation
  * list_users()
 
 
+Non-CRUD operations
+===================
+
+Some operations do not have the whole CRUD methods:
+
+infos
+-----
+
+```python
+result = c.infos.get()
+```
+
+configuration
+-------------
+
+```python
+result = c.configuration.live_reload.get()
+c.configuration.live_reload.put(enabled=True)
+```
+
 Adding new commands
 ===================
 

@@ -34,15 +34,16 @@ setup(
 
     entry_points={
         'confd_client.commands': [
+            'call_logs = xivo_confd_client.commands.call_logs:CallLogsCommand',
+            'configuration = xivo_confd_client.commands.configuration:ConfigurationCommand',
             'devices = xivo_confd_client.commands.devices:DevicesCommand',
             'extensions = xivo_confd_client.commands.extensions:ExtensionsCommand',
+            'funckeys = xivo_confd_client.commands.funckeys:FuncKeysCommand',
             'infos = xivo_confd_client.commands.infos:InfosCommand',
             'lines = xivo_confd_client.commands.lines:LinesCommand',
             'lines_sip = xivo_confd_client.commands.lines_sip:LinesSIPCommand',
             'users = xivo_confd_client.commands.users:UsersCommand',
-            'funckeys = xivo_confd_client.commands.funckeys:FuncKeysCommand',
             'voicemails = xivo_confd_client.commands.voicemails:VoicemailsCommand',
-            'call_logs = xivo_confd_client.commands.call_logs:CallLogsCommand',
         ],
     }
 )
