@@ -27,7 +27,7 @@ class LiveReloadCommand(HTTPCommand):
 
         return r.json()
 
-    def put(self, enabled):
+    def update(self, enabled):
         url = url_join('configuration', 'live_reload')
         body = {'enabled': enabled}
         self.session.put(url, body)
