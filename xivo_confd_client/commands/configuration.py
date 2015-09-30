@@ -16,17 +16,21 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 from xivo_lib_rest_client import HTTPCommand
+from xivo_confd_client.util import url_join
 
 
 class LiveReloadCommand(HTTPCommand):
 
     def get(self):
-        r = self.session.get('/configuration/live_reload')
+        url = url_join('configuration', 'live_reload')
+        r = self.session.get(url)
 
         return r.json()
 
     def put(self, enabled):
-        self.session.put('/configuration/live_reload', {'enabled': enabled})
+        url = url_join('configuration', 'live_reload')
+        body = {'enabled': enabled}
+        self.session.put(url, body)
 
 
 class ConfigurationCommand(object):
