@@ -37,6 +37,6 @@ class TestInfos(TestCommand):
     def test_calling_infos_with_no_method(self):
         self.set_response('put', 204)
 
-        self.command.live_reload.put(True)
+        self.command.live_reload.update({'enabled': True})
 
         self.session.put.assert_called_once_with('/configuration/live_reload', {'enabled': True})
