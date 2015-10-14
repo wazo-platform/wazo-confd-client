@@ -21,7 +21,7 @@ from setuptools import find_packages
 
 setup(
     name='xivo_confd_client',
-    version='1.1.1',  # <confd-api-version>.<confd-client-version>
+    version='1.1.2',  # <confd-api-version>.<confd-client-version>
 
     description='a simple client library for the xivo-confd HTTP interface',
 
