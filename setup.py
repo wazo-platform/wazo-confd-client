@@ -21,7 +21,7 @@ from setuptools import find_packages
 
 setup(
     name='xivo_confd_client',
-    version='1.1.1',  # <confd-api-version>.<confd-client-version>
+    version='1.1.2',  # <confd-api-version>.<confd-client-version>
 
     description='a simple client library for the xivo-confd HTTP interface',
 
@@ -44,6 +44,7 @@ setup(
             'lines_sip = xivo_confd_client.commands.lines_sip:LinesSIPCommand',
             'users = xivo_confd_client.commands.users:UsersCommand',
             'voicemails = xivo_confd_client.commands.voicemails:VoicemailsCommand',
+            'endpoints_sip = xivo_confd_client.commands.endpoints_sip:EndpointsSipCommand',
         ],
     }
 )

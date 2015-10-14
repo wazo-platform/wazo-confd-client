@@ -73,11 +73,34 @@ class LineExtensionRelation(HTTPCommand):
         url = url_join('lines', line_id, 'extensions', extension_id)
         self.session.delete(url)
 
+    def list_by_line(self, line_id):
+        url = url_join('lines', line_id, 'extensions')
+        response = self.session.get(url)
+        return response.json()
 
-class ExtensionLineRelation(HTTPCommand):
-
-    def get_line(self, extension_id):
+    def get_by_extension(self, extension_id):
         url = url_join('extensions', extension_id, 'line')
+        response = self.session.get(url)
+        return response.json()
+
+
+class LineEndpointSipRelation(HTTPCommand):
+
+    def associate(self, line_id, sip_id):
+        url = url_join('lines', line_id, 'endpoints', 'sip', sip_id)
+        self.session.put(url)
+
+    def dissociate(self, line_id, sip_id):
+        url = url_join('lines', line_id, 'endpoints', 'sip', sip_id)
+        self.session.delete(url)
+
+    def get_by_line(self, line_id):
+        url = url_join('lines', line_id, 'endpoints', 'sip')
+        response = self.session.get(url)
+        return response.json()
+
+    def get_by_endpoint_sip(self, sip_id):
+        url = url_join('endpoints', 'sip', sip_id, 'lines')
         response = self.session.get(url)
         return response.json()
 
