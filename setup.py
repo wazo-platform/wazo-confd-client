@@ -44,6 +44,7 @@ setup(
             'lines_sip = xivo_confd_client.commands.lines_sip:LinesSIPCommand',
             'users = xivo_confd_client.commands.users:UsersCommand',
             'voicemails = xivo_confd_client.commands.voicemails:VoicemailsCommand',
+            'endpoints_sip = xivo_confd_client.commands.endpoints_sip:EndpointsSipCommand',
         ],
     }
 )

@@ -21,6 +21,7 @@ from hamcrest import assert_that
 
 from xivo_confd_client.tests import TestCommand
 from xivo_confd_client.relations import LineExtensionRelation
+from xivo_confd_client.relations import LineEndpointSipRelation
 from xivo_confd_client.relations import UserFuncKeyRelation
 from xivo_confd_client.relations import UserLineRelation
 from xivo_confd_client.relations import UserVoicemailRelation
@@ -153,6 +154,74 @@ class TestLineExtensionRelation(TestCommand):
         response = self.command.get_by_extension(extension_id)
         self.session.get.assert_called_once_with("/extensions/2/line")
 
+        assert_that(response, expected_result)
+
+
+class TestLineEndpointSipRelation(TestCommand):
+
+    Command = LineEndpointSipRelation
+
+    def test_line_endpoint_sip_association(self):
+        line_id = 1
+        sip_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(line_id, sip_id)
+        self.session.put.assert_called_once_with("/lines/1/endpoints/sip/2")
+
+    def test_line_endpoint_sip_dissociation(self):
+        line_id = 1
+        sip_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(line_id, sip_id)
+        self.session.delete.assert_called_once_with("/lines/1/endpoints/sip/2")
+
+    def test_get_by_line(self):
+        line_id = 1
+        sip_id = 2
+
+        expected_result = {
+            'line_id': line_id,
+            'sip_id': sip_id,
+            'links': [
+                {'rel': 'lines',
+                 'href': 'http://localhost:9486/1.1/lines/1'},
+                {'rel': 'endpoints_sip',
+                 'href': 'http://localhost:9486/1.1/endpoints/sip/1'},
+            ]
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.get_by_line(line_id)
+        self.session.get.assert_called_once_with("/lines/1/endpoints/sip")
+
+        assert_that(response, expected_result)
+
+    def test_get_by_endpoint_sip(self):
+        line_id = 1
+        sip_id = 2
+
+        expected_result = {
+            'line_id': line_id,
+            'sip_id': sip_id,
+            'links': [
+                {'rel': 'lines',
+                 'href': 'http://localhost:9486/1.1/lines/1'},
+                {'rel': 'endpoints_sip',
+                 'href': 'http://localhost:9486/1.1/endpoints/sip/1'},
+            ]
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.get_by_endpoint_sip(sip_id)
+        self.session.get.assert_called_once_with("/endpoints/sip/2/lines")
+
+        assert_that(response, expected_result)
 
 
 class TestUserVoicemailRelation(TestCommand):
