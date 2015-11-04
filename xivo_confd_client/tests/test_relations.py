@@ -25,6 +25,7 @@ from xivo_confd_client.relations import LineEndpointSipRelation
 from xivo_confd_client.relations import UserFuncKeyRelation
 from xivo_confd_client.relations import UserLineRelation
 from xivo_confd_client.relations import UserVoicemailRelation
+from xivo_confd_client.relations import UserCtiProfileRelation
 
 
 class TestUserLineRelation(TestCommand):
@@ -385,3 +386,54 @@ class TestUserFuncKeyRelation(TestCommand):
         self.command.associate_funckey_template(user_id, template_id)
 
         self.session.put.assert_called_once_with(expected_url)
+
+
+class TestUserCtiProfileRelation(TestCommand):
+
+    Command = UserCtiProfileRelation
+
+    def test_get_by_user(self):
+        user_id = 1234
+        expected_url = "/users/{}/cti".format(user_id)
+        expected_result = {
+            'cti_profile_id': 2345,
+            'enabled': True,
+            'user_id': user_id
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.get_by_user(user_id)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
+
+    def test_associate(self):
+        user_id = 1234
+        cti_profile_id = 2345
+
+        expected_url = "/users/{}/cti".format(user_id)
+        expected_body = {
+            'cti_profile_id': 2345,
+            'enabled': True,
+        }
+
+        self.set_response('put', 204)
+
+        self.command.associate(user_id, cti_profile_id)
+
+        self.session.put.assert_called_once_with(expected_url, expected_body)
+
+    def test_disable(self):
+        user_id = 1234
+
+        expected_url = "/users/{}/cti".format(user_id)
+        expected_body = {
+            'enabled': False,
+        }
+
+        self.set_response('put', 204)
+
+        self.command.disable(user_id)
+
+        self.session.put.assert_called_once_with(expected_url, expected_body)

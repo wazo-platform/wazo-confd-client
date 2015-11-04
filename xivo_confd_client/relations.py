@@ -137,3 +137,22 @@ class UserFuncKeyRelation(HTTPCommand):
     def dissociate_funckey_template(self, user_id, template_id):
         url = url_join('users', user_id, 'funckeys', 'templates', template_id)
         self.session.delete(url)
+
+
+class UserCtiProfileRelation(HTTPCommand):
+
+    def get_by_user(self, user_id):
+        url = url_join('users', user_id, 'cti')
+        response = self.session.get(url)
+        return response.json()
+
+    def associate(self, user_id, cti_profile_id, enabled=True):
+        url = url_join('users', user_id, 'cti')
+        body = {'cti_profile_id': cti_profile_id,
+                'enabled': enabled}
+        self.session.put(url, body)
+
+    def disable(self, user_id):
+        url = url_join('users', user_id, 'cti')
+        body = {'enabled': False}
+        self.session.put(url, body)

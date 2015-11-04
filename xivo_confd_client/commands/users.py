@@ -16,7 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import UserLineRelation, UserVoicemailRelation, UserFuncKeyRelation
+from xivo_confd_client.relations import UserLineRelation, UserVoicemailRelation, UserFuncKeyRelation, UserCtiProfileRelation
 from xivo_confd_client.util import extract_id
 
 
@@ -27,6 +27,7 @@ class UserRelation(object):
         self.user_line = UserLineRelation(builder)
         self.user_voicemail = UserVoicemailRelation(builder)
         self.user_funckey = UserFuncKeyRelation(builder)
+        self.user_cti_profile = UserCtiProfileRelation(builder)
 
     @extract_id
     def add_line(self, line_id):
@@ -69,6 +70,16 @@ class UserRelation(object):
     @extract_id
     def remove_funckey_template(self, template_id):
         self.user_funckey.dissociate_funckey_template(self.user_id, template_id)
+
+    def get_cti_profile(self):
+        return self.user_cti_profile.get_by_user(self.user_id)
+
+    @extract_id
+    def add_cti_profile(self, profile_id):
+        self.user_cti_profile.associate(self.user_id, profile_id)
+
+    def disable_cti_profile(self):
+        self.user_cti_profile.disable(self.user_id)
 
 
 class UsersCommand(CRUDCommand):
