@@ -47,6 +47,9 @@ class LineRelation(object):
     def remove_user(self, user_id):
         return self.user_line.dissociate(self.line_id, user_id)
 
+    def list_users(self):
+        return self.user_line.list_by_line(self.line_id)
+
     @extract_id
     def add_endpoint_sip(self, endpoint_sip_id):
         return self.line_endpoint_sip.associate(self.line_id, endpoint_sip_id)

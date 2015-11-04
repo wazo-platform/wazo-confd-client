@@ -37,6 +37,11 @@ class UserLineRelation(HTTPCommand):
         response = self.session.get(url)
         return response.json()
 
+    def list_by_line(self, line_id):
+        url = url_join('lines', line_id, 'users')
+        response = self.session.get(url)
+        return response.json()
+
 
 class UserVoicemailRelation(HTTPCommand):
 

@@ -75,6 +75,21 @@ class TestUserLineRelation(TestCommand):
         self.session.get.assert_called_once_with(expected_url)
         assert_that(result, expected_result)
 
+    def test_user_line_list_by_line(self):
+        line_id = 1234
+        expected_url = "/lines/{}/users".format(line_id)
+        expected_result = {
+            "total": 0,
+            "items": []
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.list_by_line(line_id)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
+
 
 class TestLineExtensionRelation(TestCommand):
 
