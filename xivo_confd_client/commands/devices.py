@@ -16,8 +16,20 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.util import extract_id
+from xivo_confd_client.util import url_join
 
 
 class DevicesCommand(CRUDCommand):
 
     resource = 'devices'
+
+    @extract_id
+    def autoprov(self, device_id):
+        url = url_join(self.resource, device_id, 'autoprov')
+        self.session.get(url)
+
+    @extract_id
+    def synchronize(self, device_id):
+        url = url_join(self.resource, device_id, 'synchronize')
+        self.session.get(url)
