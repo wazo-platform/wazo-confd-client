@@ -22,6 +22,7 @@ from hamcrest import assert_that
 from xivo_confd_client.tests import TestCommand
 from xivo_confd_client.relations import LineExtensionRelation
 from xivo_confd_client.relations import LineEndpointSipRelation
+from xivo_confd_client.relations import LineEndpointSccpRelation
 from xivo_confd_client.relations import UserFuncKeyRelation
 from xivo_confd_client.relations import UserLineRelation
 from xivo_confd_client.relations import UserVoicemailRelation
@@ -236,6 +237,73 @@ class TestLineEndpointSipRelation(TestCommand):
 
         response = self.command.get_by_endpoint_sip(sip_id)
         self.session.get.assert_called_once_with("/endpoints/sip/2/lines")
+
+        assert_that(response, expected_result)
+
+
+class TestLineEndpointSccpRelation(TestCommand):
+
+    Command = LineEndpointSccpRelation
+
+    def test_line_endpoint_sccp_association(self):
+        line_id = 1
+        sccp_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(line_id, sccp_id)
+        self.session.put.assert_called_once_with("/lines/1/endpoints/sccp/2")
+
+    def test_line_endpoint_sccp_dissociation(self):
+        line_id = 1
+        sccp_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(line_id, sccp_id)
+        self.session.delete.assert_called_once_with("/lines/1/endpoints/sccp/2")
+
+    def test_get_by_line(self):
+        line_id = 1
+        sccp_id = 2
+
+        expected_result = {
+            'line_id': line_id,
+            'sccp_id': sccp_id,
+            'links': [
+                {'rel': 'lines',
+                 'href': 'http://localhost:9486/1.1/lines/1'},
+                {'rel': 'endpoints_sccp',
+                 'href': 'http://localhost:9486/1.1/endpoints/sccp/1'},
+            ]
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.get_by_line(line_id)
+        self.session.get.assert_called_once_with("/lines/1/endpoints/sccp")
+
+        assert_that(response, expected_result)
+
+    def test_get_by_endpoint_sccp(self):
+        line_id = 1
+        sccp_id = 2
+
+        expected_result = {
+            'line_id': line_id,
+            'sccp_id': sccp_id,
+            'links': [
+                {'rel': 'lines',
+                 'href': 'http://localhost:9486/1.1/lines/1'},
+                {'rel': 'endpoints_sccp',
+                 'href': 'http://localhost:9486/1.1/endpoints/sccp/1'},
+            ]
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.get_by_endpoint_sccp(sccp_id)
+        self.session.get.assert_called_once_with("/endpoints/sccp/2/lines")
 
         assert_that(response, expected_result)
 

@@ -45,6 +45,7 @@ setup(
             'users = xivo_confd_client.commands.users:UsersCommand',
             'voicemails = xivo_confd_client.commands.voicemails:VoicemailsCommand',
             'endpoints_sip = xivo_confd_client.commands.endpoints_sip:EndpointsSipCommand',
+            'endpoints_sccp = xivo_confd_client.commands.endpoints_sccp:EndpointsSccpCommand',
             'cti_profiles = xivo_confd_client.commands.cti_profiles:CtiProfilesCommand',
             'queues = xivo_confd_client.commands.queues:QueuesCommand'
         ],

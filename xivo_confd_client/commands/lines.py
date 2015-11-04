@@ -17,7 +17,7 @@
 
 from xivo_confd_client.util import extract_id
 from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import UserLineRelation, LineExtensionRelation, LineEndpointSipRelation
+from xivo_confd_client.relations import UserLineRelation, LineExtensionRelation, LineEndpointSipRelation, LineEndpointSccpRelation
 
 
 class LineRelation(object):
@@ -27,6 +27,7 @@ class LineRelation(object):
         self.user_line = UserLineRelation(builder)
         self.line_extension = LineExtensionRelation(builder)
         self.line_endpoint_sip = LineEndpointSipRelation(builder)
+        self.line_endpoint_sccp = LineEndpointSccpRelation(builder)
 
     @extract_id
     def add_extension(self, extension_id):
@@ -60,6 +61,17 @@ class LineRelation(object):
 
     def get_endpoint_sip(self):
         return self.line_endpoint_sip.get_by_line(self.line_id)
+
+    @extract_id
+    def add_endpoint_sccp(self, endpoint_sccp_id):
+        return self.line_endpoint_sccp.associate(self.line_id, endpoint_sccp_id)
+
+    @extract_id
+    def remove_endpoint_sccp(self, endpoint_sccp_id):
+        return self.line_endpoint_sccp.dissociate(self.line_id, endpoint_sccp_id)
+
+    def get_endpoint_sccp(self):
+        return self.line_endpoint_sccp.get_by_line(self.line_id)
 
 
 class LinesCommand(CRUDCommand):

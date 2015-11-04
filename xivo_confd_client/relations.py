@@ -110,6 +110,27 @@ class LineEndpointSipRelation(HTTPCommand):
         return response.json()
 
 
+class LineEndpointSccpRelation(HTTPCommand):
+
+    def associate(self, line_id, sccp_id):
+        url = url_join('lines', line_id, 'endpoints', 'sccp', sccp_id)
+        self.session.put(url)
+
+    def dissociate(self, line_id, sccp_id):
+        url = url_join('lines', line_id, 'endpoints', 'sccp', sccp_id)
+        self.session.delete(url)
+
+    def get_by_line(self, line_id):
+        url = url_join('lines', line_id, 'endpoints', 'sccp')
+        response = self.session.get(url)
+        return response.json()
+
+    def get_by_endpoint_sccp(self, sccp_id):
+        url = url_join('endpoints', 'sccp', sccp_id, 'lines')
+        response = self.session.get(url)
+        return response.json()
+
+
 class UserFuncKeyRelation(HTTPCommand):
 
     def add_funckey(self, user_id, position, funckey):
