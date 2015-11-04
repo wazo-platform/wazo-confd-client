@@ -43,6 +43,10 @@ class LineRelation(object):
     def remove_user(self, user_id):
         return self.user_line_relation.dissociate(user_id, self.line_id)
 
+    @extract_id
+    def list_users(self):
+        return self.user_line_relation.list_by_line(self.line_id)
+
 
 class LinesSIPCommand(CRUDCommand):
 
