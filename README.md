@@ -159,6 +159,7 @@ Exposed via ```c.lines.relations(line_id)```
 
  * add_user(user)
  * remove_user(user)
+ * list_users()
  * add_extension(extension)
  * remove_extension(extension)
 
