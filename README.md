@@ -245,7 +245,7 @@ queues
 ------
 
 ```python
-# Add agent to a queue
+#Add agent to a queue
 c.queues.add_agent(queue_id, agent_id, penalty=0)
 
 #Remove agent from a queue
@@ -255,7 +255,7 @@ c.queues.remove_agent(queue_id, agent_id)
 c.queues.get_membership(queue_id, agent_id)
 
 #Update penalty for an agent in a queue
-c.queues.edit_membership(penalty)
+c.queues.edit_membership(queue_id, agent_id, penalty)
 ```
 
 
