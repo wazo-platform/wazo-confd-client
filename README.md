@@ -92,6 +92,20 @@ Additional operations
 
 Some resources also offer additional operations:
 
+devices
+-------
+
+Resource for managing devices, such as SIP or SCCP phones
+
+```python
+
+#Reset a device in autoprov mode
+c.devices.autoprov(device_id)
+
+#Synchronize the configuratuon of a device
+c.devices.synchronize(device_id)
+```
+
 funckeys
 --------
 
@@ -134,6 +148,13 @@ c.users(user).add_line(line)
 ```
 
 Here is a list of relations and their methods:
+
+CtiProfile relation
+-------------------
+
+Exposed via ```c.cti_profiles.relations(cti_profile_id)```
+
+ * add_user(user)
 
 Extension relation
 ------------------
@@ -180,6 +201,9 @@ Exposed via ```c.users.relations(user_id)```
  * list_funckeys()
  * add_funckey_template(funckey_template)
  * remove_funckey_template(funckey_template)
+ * add_cti_profile(cti_profile)
+ * disable_cti_profile()
+ * get_cti_profile()
 
 Voicemail relation
 ------------------
@@ -211,11 +235,29 @@ configuration
 
 ```python
 #Get status of live reload
-live_reloat_status = c.configuration.live_reload.get()
+live_reload_status = c.configuration.live_reload.get()
 
 #Update live reload configuration
 c.configuration.live_reload.update({'enabled': True})
 ```
+
+queues
+------
+
+```python
+#Add agent to a queue
+c.queues.add_agent(queue_id, agent_id, penalty=0)
+
+#Remove agent from a queue
+c.queues.remove_agent(queue_id, agent_id)
+
+#Get membership info for an agent in a queue
+c.queues.get_membership(queue_id, agent_id)
+
+#Update penalty for an agent in a queue
+c.queues.edit_membership(queue_id, agent_id, penalty)
+```
+
 
 Adding new commands
 ===================

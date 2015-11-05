@@ -20,7 +20,7 @@ from xivo_confd_client.util import extract_id
 from xivo_confd_client.relations import UserLineRelation, LineExtensionRelation
 
 
-class LineRelation(object):
+class LineSIPRelation(object):
 
     def __init__(self, builder, line_id):
         self.line_id = line_id
@@ -34,6 +34,9 @@ class LineRelation(object):
     @extract_id
     def remove_extension(self, extension_id):
         return self.line_extension_relation.dissociate(self.line_id, extension_id)
+
+    def list_extensions(self):
+        return self.line_extension_relation.list_by_line(self.line_id)
 
     @extract_id
     def add_user(self, user_id):
@@ -52,4 +55,4 @@ class LinesSIPCommand(CRUDCommand):
 
     resource = 'lines_sip'
 
-    relation_cmd = LineRelation
+    relation_cmd = LineSIPRelation
