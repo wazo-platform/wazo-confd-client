@@ -34,5 +34,5 @@ class LiveReloadCommand(HTTPCommand):
 
 class ConfigurationCommand(object):
 
-    def __init__(self, session_builder):
-        self.live_reload = LiveReloadCommand(session_builder)
+    def __init__(self, client):
+        self.live_reload = LiveReloadCommand(client)
