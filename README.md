@@ -122,6 +122,21 @@ c.funckeys.update_template_funckey(template_id, position, funckey)
 c.funckeys.delete_template_funckey(template_id, position)
 ```
 
+users
+-----
+
+Resource for managing user accounts
+
+```
+#Mass import users using CSV data
+csvdata = """firstname,lastname
+John,Smith
+"""
+
+c.users.import_csv(csvdata, encoding='utf-8', timeout=300)
+```
+
+
 Resource relations
 ==================
 
