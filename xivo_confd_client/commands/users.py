@@ -17,7 +17,7 @@
 
 from xivo_confd_client.crud import CRUDCommand
 from xivo_confd_client.relations import UserLineRelation, UserVoicemailRelation, UserFuncKeyRelation, UserCtiProfileRelation
-from xivo_confd_client.util import extract_id
+from xivo_confd_client.util import extract_id, url_join
 
 
 class UserRelation(object):
@@ -86,3 +86,13 @@ class UsersCommand(CRUDCommand):
 
     resource = 'users'
     relation_cmd = UserRelation
+
+    def import_csv(self, csvdata, encoding='utf-8', timeout=300):
+        url = url_join(self.resource, "import")
+        headers = {'Content-Type': 'text/csv; charset={}'.format(encoding)}
+        response = self.session.post(url,
+                                     raw=csvdata,
+                                     check_response=False,
+                                     timeout=timeout,
+                                     headers=headers)
+        return response.json()
