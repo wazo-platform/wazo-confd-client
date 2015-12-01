@@ -26,9 +26,9 @@ class TestCommand(unittest.TestCase):
 
     def setUp(self):
         self.session = Mock(ConfdSession)
-        self.session_builder = Mock()
-        self.session_builder.session.return_value = self.session
-        self.command = self.Command(self.session_builder)
+        self.client = Mock()
+        self.client.session.return_value = self.session
+        self.command = self.Command(self.client)
 
     def set_response(self, action, status_code, json=None):
         response = Mock()

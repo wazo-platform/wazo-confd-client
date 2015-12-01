@@ -62,7 +62,7 @@ class CRUDCommand(HTTPCommand):
 
     @extract_id
     def relations(self, resource_id):
-        return self.relation_cmd(self._session_builder, resource_id)
+        return self.relation_cmd(self._client, resource_id)
 
     def __call__(self, resource):
         return self.relations(resource)
