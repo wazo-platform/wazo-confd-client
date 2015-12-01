@@ -11,7 +11,11 @@ Homepage: http://xivo.io/
 Package: xivo-confd-client
 Architecture: all
 Section: python
-Depends: ${python:Depends}, ${misc:Depends}, xivo-lib-rest-client, python-requests, python-stevedore
+Depends: ${python:Depends},
+         ${misc:Depends},
+         python-requests,
+         python-stevedore,
+         xivo-lib-rest-client (>= 15.19~20151201.154438.625c429-1)
 Description: xivo-confd client library in python
  XiVO is a system based on a powerful IPBX, to bring an easy to
  install solution for telephony and related services.
