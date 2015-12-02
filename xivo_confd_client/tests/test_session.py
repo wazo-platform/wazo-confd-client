@@ -113,6 +113,16 @@ class TestConfdSession(unittest.TestCase):
         response.raise_for_status.assert_called_once_with()
         assert_that(response.reason, equal_to("error message"))
 
+    def test_given_status_not_ok_when_response_not_checked_then_no_error_raised(self):
+        response = Mock()
+        response.status_code = 400
+        response.json.return_value = ["error message"]
+
+        self.confd_session.check_response(response, False)
+
+        call_count = response.raise_for_status.call_count
+        assert_that(call_count, equal_to(0))
+
     def test_clean_url_strips_extra_slashes(self):
         self.confd_session.base_url = "http://localhost//"
         part = "///users/1"

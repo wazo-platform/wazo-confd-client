@@ -35,7 +35,10 @@ class ConfdSession(object):
         self.session = session
         self.base_url = base_url
 
-    def check_response(self, response):
+    def check_response(self, response, check=True):
+        if not check:
+            return
+
         if response.status_code not in self.OK_STATUSES:
             try:
                 messages = response.json()
@@ -48,30 +51,50 @@ class ConfdSession(object):
 
     def get(self, url, **kwargs):
         kwargs.setdefault('headers', self.READ_HEADERS)
+        check_response = kwargs.pop('check_response', True)
+
         url = self.clean_url(url)
         response = self.session.get(url, **kwargs)
-        self.check_response(response)
+
+        self.check_response(response, check_response)
         return response
 
-    def post(self, url, body, **kwargs):
+    def post(self, url, body=None, **kwargs):
         kwargs.setdefault('headers', self.WRITE_HEADERS)
+        check_response = kwargs.pop('check_response', True)
+
         url = self.clean_url(url)
-        encoded_body = json.dumps(body)
+        encoded_body = self.encode_body(body, kwargs)
         response = self.session.post(url, data=encoded_body, **kwargs)
-        self.check_response(response)
+
+        self.check_response(response, check_response)
         return response
 
-    def put(self, url, body, **kwargs):
+    def put(self, url, body=None, **kwargs):
         kwargs.setdefault('headers', self.WRITE_HEADERS)
+        check_response = kwargs.pop('check_response', True)
+
         url = self.clean_url(url)
-        encoded_body = json.dumps(body)
+        encoded_body = self.encode_body(body, kwargs)
         response = self.session.put(url, data=encoded_body, **kwargs)
-        self.check_response(response)
+
+        self.check_response(response, check_response)
         return response
+
+    def encode_body(self, body, kwargs):
+        raw = kwargs.pop('raw', None)
+        if raw:
+            return raw
+        if body is not None:
+            return json.dumps(body)
+        return None
 
     def delete(self, url, **kwargs):
         kwargs.setdefault('headers', self.READ_HEADERS)
+        check_response = kwargs.pop('check_response', True)
+
         url = self.clean_url(url)
         response = self.session.delete(url, **kwargs)
-        self.check_response(response)
+
+        self.check_response(response, check_response)
         return response
