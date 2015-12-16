@@ -41,3 +41,19 @@ class TestUsers(TestCommand):
                                                   check_response=False,
                                                   timeout=300,
                                                   headers=expected_headers)
+
+    def test_update_csv(self):
+        csvdata = "firstname\nToto\n"
+        expected_content = {'updated': [{'user_id': 1}]}
+        expected_url = "/users/import"
+        expected_headers = {'Content-Type': 'text/csv; charset=utf-8'}
+
+        self.set_response('put', 204, expected_content)
+
+        self.command.update_csv(csvdata)
+
+        self.session.put.assert_called_once_with(expected_url,
+                                                 raw=csvdata,
+                                                 check_response=False,
+                                                 timeout=300,
+                                                 headers=expected_headers)

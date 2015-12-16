@@ -134,6 +134,13 @@ John,Smith
 """
 
 c.users.import_csv(csvdata, encoding='utf-8', timeout=300)
+
+#Mass update users using CSV data
+csvdata = """uuid,firstname,lastname
+52d99c78-4f67-47da-90dd-aeba32afd251,John,Smith
+"""
+
+c.users.update_csv(csvdata, encoding='utf-8', timeout=300)
 ```
 
 
