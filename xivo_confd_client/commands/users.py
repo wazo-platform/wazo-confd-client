@@ -106,3 +106,8 @@ class UsersCommand(CRUDCommand):
                                     timeout=timeout,
                                     headers=headers)
         return response.json()
+
+    def export_csv(self):
+        url = url_join(self.resource, "export")
+        response = self.session.get(url)
+        return response.content

@@ -141,6 +141,9 @@ csvdata = """uuid,firstname,lastname
 """
 
 c.users.update_csv(csvdata, encoding='utf-8', timeout=300)
+
+#Mass export users in CSV format
+csvdata = c.users.export_csv()
 ```
 
 

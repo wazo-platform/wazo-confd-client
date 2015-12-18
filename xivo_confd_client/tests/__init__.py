@@ -30,10 +30,11 @@ class TestCommand(unittest.TestCase):
         self.client.session.return_value = self.session
         self.command = self.Command(self.client)
 
-    def set_response(self, action, status_code, json=None):
+    def set_response(self, action, status_code, json=None, content=None):
         response = Mock()
         response.status_code = status_code
         response.json.return_value = json
+        response.content = content
 
         mock_action = getattr(self.session, action)
         mock_action.return_value = response
