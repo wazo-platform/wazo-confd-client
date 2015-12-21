@@ -96,3 +96,13 @@ class UsersCommand(CRUDCommand):
                                      timeout=timeout,
                                      headers=headers)
         return response.json()
+
+    def update_csv(self, csvdata, encoding='utf-8', timeout=300):
+        url = url_join(self.resource, "import")
+        headers = {'Content-Type': 'text/csv; charset={}'.format(encoding)}
+        response = self.session.put(url,
+                                    raw=csvdata,
+                                    check_response=False,
+                                    timeout=timeout,
+                                    headers=headers)
+        return response.json()
