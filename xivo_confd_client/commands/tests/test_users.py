@@ -16,6 +16,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+from hamcrest import assert_that, equal_to
 
 from ..users import UsersCommand
 
@@ -57,3 +58,14 @@ class TestUsers(TestCommand):
                                                  check_response=False,
                                                  timeout=300,
                                                  headers=expected_headers)
+
+    def test_export_csv(self):
+        expected_url = "/users/export"
+        expected_content = "firstname\nToto\n"
+
+        self.set_response('get', 200, content=expected_content)
+
+        result = self.command.export_csv()
+
+        assert_that(result, equal_to(expected_content))
+        self.session.get.assert_called_once_with(expected_url)
