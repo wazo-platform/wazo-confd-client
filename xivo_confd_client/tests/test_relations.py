@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (C) 2015 Avencall
+# Copyright (C) 2015-2016 Avencall
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@ from xivo_confd_client.tests import TestCommand
 from xivo_confd_client.relations import LineExtensionRelation
 from xivo_confd_client.relations import LineEndpointSipRelation
 from xivo_confd_client.relations import LineEndpointSccpRelation
+from xivo_confd_client.relations import LineEndpointCustomRelation
 from xivo_confd_client.relations import UserFuncKeyRelation
 from xivo_confd_client.relations import UserLineRelation
 from xivo_confd_client.relations import UserVoicemailRelation
@@ -304,6 +305,73 @@ class TestLineEndpointSccpRelation(TestCommand):
 
         response = self.command.get_by_endpoint_sccp(sccp_id)
         self.session.get.assert_called_once_with("/endpoints/sccp/2/lines")
+
+        assert_that(response, expected_result)
+
+
+class TestLineEndpointCustomRelation(TestCommand):
+
+    Command = LineEndpointCustomRelation
+
+    def test_line_endpoint_custom_association(self):
+        line_id = 1
+        custom_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(line_id, custom_id)
+        self.session.put.assert_called_once_with("/lines/1/endpoints/custom/2")
+
+    def test_line_endpoint_custom_dissociation(self):
+        line_id = 1
+        custom_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(line_id, custom_id)
+        self.session.delete.assert_called_once_with("/lines/1/endpoints/custom/2")
+
+    def test_get_by_line(self):
+        line_id = 1
+        custom_id = 2
+
+        expected_result = {
+            'line_id': line_id,
+            'custom_id': custom_id,
+            'links': [
+                {'rel': 'lines',
+                 'href': 'http://localhost:9486/1.1/lines/1'},
+                {'rel': 'endpoints_custom',
+                 'href': 'http://localhost:9486/1.1/endpoints/custom/1'},
+            ]
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.get_by_line(line_id)
+        self.session.get.assert_called_once_with("/lines/1/endpoints/custom")
+
+        assert_that(response, expected_result)
+
+    def test_get_by_endpoint_custom(self):
+        line_id = 1
+        custom_id = 2
+
+        expected_result = {
+            'line_id': line_id,
+            'custom_id': custom_id,
+            'links': [
+                {'rel': 'lines',
+                 'href': 'http://localhost:9486/1.1/lines/1'},
+                {'rel': 'endpoints_custom',
+                 'href': 'http://localhost:9486/1.1/endpoints/custom/1'},
+            ]
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.get_by_endpoint_custom(custom_id)
+        self.session.get.assert_called_once_with("/endpoints/custom/2/lines")
 
         assert_that(response, expected_result)
 

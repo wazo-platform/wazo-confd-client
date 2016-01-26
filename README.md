@@ -181,6 +181,33 @@ Exposed via ```c.cti_profiles.relations(cti_profile_id)```
 
  * add_user(user)
 
+Endpoint SIP relation
+---------------------
+
+Exposed via ```c.endpoints_sip.relations(endpoint_id)```
+
+ * associate_line(line)
+ * dissociate_line(line)
+ * get_line()
+
+Endpoint SCCP relation
+---------------------
+
+Exposed via ```c.endpoints_sccp.relations(endpoint_id)```
+
+ * associate_line(line)
+ * dissociate_line(line)
+ * get_line()
+
+Endpoint Custom relation
+---------------------
+
+Exposed via ```c.endpoints_custom.relations(endpoint_id)```
+
+ * associate_line(line)
+ * dissociate_line(line)
+ * get_line()
+
 Extension relation
 ------------------
 
@@ -208,6 +235,15 @@ Exposed via ```c.lines.relations(line_id)```
  * list_users()
  * add_extension(extension)
  * remove_extension(extension)
+ * add_endpoint_sip(endpoint_sip)
+ * remove_endpoint_sip(endpoint_sip)
+ * get_endpoint_sip()
+ * add_endpoint_sccp(endpoint_sccp)
+ * remove_endpoint_sccp(endpoint_sccp)
+ * get_endpoint_sccp()
+ * add_endpoint_custom(endpoint_custom)
+ * remove_endpoint_custom(endpoint_custom)
+ * get_endpoint_custom()
 
 User relation
 -------------

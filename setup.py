@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2014-2015 Avencall
+# Copyright (C) 2014-2016 Avencall
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -46,6 +46,7 @@ setup(
             'voicemails = xivo_confd_client.commands.voicemails:VoicemailsCommand',
             'endpoints_sip = xivo_confd_client.commands.endpoints_sip:EndpointsSipCommand',
             'endpoints_sccp = xivo_confd_client.commands.endpoints_sccp:EndpointsSccpCommand',
+            'endpoints_custom = xivo_confd_client.commands.endpoints_custom:EndpointsCustomCommand',
             'cti_profiles = xivo_confd_client.commands.cti_profiles:CtiProfilesCommand',
             'queues = xivo_confd_client.commands.queues:QueuesCommand'
         ],

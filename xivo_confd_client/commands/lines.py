@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2015 Avencall
+# Copyright (C) 2015-2016 Avencall
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 
 from xivo_confd_client.util import extract_id
 from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import UserLineRelation, LineExtensionRelation, LineEndpointSipRelation, LineEndpointSccpRelation
+from xivo_confd_client.relations import UserLineRelation, LineExtensionRelation, LineEndpointSipRelation, LineEndpointSccpRelation, LineEndpointCustomRelation
 
 
 class LineRelation(object):
@@ -28,6 +28,7 @@ class LineRelation(object):
         self.line_extension = LineExtensionRelation(builder)
         self.line_endpoint_sip = LineEndpointSipRelation(builder)
         self.line_endpoint_sccp = LineEndpointSccpRelation(builder)
+        self.line_endpoint_custom = LineEndpointCustomRelation(builder)
 
     @extract_id
     def add_extension(self, extension_id):
@@ -72,6 +73,17 @@ class LineRelation(object):
 
     def get_endpoint_sccp(self):
         return self.line_endpoint_sccp.get_by_line(self.line_id)
+
+    @extract_id
+    def add_endpoint_custom(self, endpoint_custom_id):
+        return self.line_endpoint_custom.associate(self.line_id, endpoint_custom_id)
+
+    @extract_id
+    def remove_endpoint_custom(self, endpoint_custom_id):
+        return self.line_endpoint_custom.dissociate(self.line_id, endpoint_custom_id)
+
+    def get_endpoint_custom(self):
+        return self.line_endpoint_custom.get_by_line(self.line_id)
 
 
 class LinesCommand(CRUDCommand):
