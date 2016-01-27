@@ -43,11 +43,11 @@ class LineRelation(object):
 
     @extract_id
     def add_user(self, user_id):
-        return self.user_line.associate(self.line_id, user_id)
+        return self.user_line.associate(user_id, self.line_id)
 
     @extract_id
     def remove_user(self, user_id):
-        return self.user_line.dissociate(self.line_id, user_id)
+        return self.user_line.dissociate(user_id, self.line_id)
 
     def list_users(self):
         return self.user_line.list_by_line(self.line_id)
