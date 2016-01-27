@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (C) 2015 Avencall
+# Copyright (C) 2015-2016 Avencall
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -127,6 +127,27 @@ class LineEndpointSccpRelation(HTTPCommand):
 
     def get_by_endpoint_sccp(self, sccp_id):
         url = url_join('endpoints', 'sccp', sccp_id, 'lines')
+        response = self.session.get(url)
+        return response.json()
+
+
+class LineEndpointCustomRelation(HTTPCommand):
+
+    def associate(self, line_id, custom_id):
+        url = url_join('lines', line_id, 'endpoints', 'custom', custom_id)
+        self.session.put(url)
+
+    def dissociate(self, line_id, custom_id):
+        url = url_join('lines', line_id, 'endpoints', 'custom', custom_id)
+        self.session.delete(url)
+
+    def get_by_line(self, line_id):
+        url = url_join('lines', line_id, 'endpoints', 'custom')
+        response = self.session.get(url)
+        return response.json()
+
+    def get_by_endpoint_custom(self, custom_id):
+        url = url_join('endpoints', 'custom', custom_id, 'lines')
         response = self.session.get(url)
         return response.json()
 
