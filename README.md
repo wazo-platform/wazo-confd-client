@@ -372,3 +372,16 @@ Changelog
 
 * Remove argument auth_method from xivo_confd_client.Client. Auth method is
 always digest.
+
+
+Unit-tests
+==========
+
+Running unit tests
+------------------
+
+```
+apt-get install libpq-dev python-dev libffi-dev libyaml-dev
+pip install tox
+tox --recreate -e py27
+```
