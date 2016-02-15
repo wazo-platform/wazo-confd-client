@@ -144,6 +144,10 @@ c.users.update_csv(csvdata, encoding='utf-8', timeout=300)
 
 #Mass export users in CSV format
 csvdata = c.users.export_csv()
+
+#Get SIP endpoint of main line for a user
+user_uuid = '52d99c78-4f67-47da-90dd-aeba32afd251'
+endpoint_sip = users.get_main_endpoint_sip(user_uuid)
 ```
 
 
