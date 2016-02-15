@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (C) 2015 Avencall
+# Copyright (C) 2015-2016 Avencall
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,6 +21,8 @@ from hamcrest import assert_that, equal_to
 from ..users import UsersCommand
 
 from xivo_confd_client.tests import TestCommand
+
+FAKE_UUID = '00000000-aaaa-1111-bbbb-222222222222'
 
 
 class TestUsers(TestCommand):
@@ -66,6 +68,17 @@ class TestUsers(TestCommand):
         self.set_response('get', 200, content=expected_content)
 
         result = self.command.export_csv()
+
+        assert_that(result, equal_to(expected_content))
+        self.session.get.assert_called_once_with(expected_url)
+
+    def test_main_endpoint_sip(self):
+        expected_url = "/users/{}/lines/main/associated/endpoints/sip".format(FAKE_UUID)
+        expected_content = {"username": 'tata'}
+
+        self.set_response('get', 200, content=expected_content)
+
+        result = self.command.get_main_endpoint_sip(FAKE_UUID)
 
         assert_that(result, equal_to(expected_content))
         self.session.get.assert_called_once_with(expected_url)
