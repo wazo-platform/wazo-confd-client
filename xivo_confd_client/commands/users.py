@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2014-2015 Avencall
+# Copyright (C) 2014-2016 Avencall
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,7 +16,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import UserLineRelation, UserVoicemailRelation, UserFuncKeyRelation, UserCtiProfileRelation
+from xivo_confd_client.relations import (UserLineRelation,
+                                         UserVoicemailRelation,
+                                         UserFuncKeyRelation,
+                                         UserCtiProfileRelation)
 from xivo_confd_client.util import extract_id, url_join
 
 
@@ -109,5 +112,10 @@ class UsersCommand(CRUDCommand):
 
     def export_csv(self):
         url = url_join(self.resource, "export")
+        response = self.session.get(url)
+        return response.content
+
+    def get_main_endpoint_sip(self, user_uuid):
+        url = url_join(self.resource, user_uuid, "lines/main/associated/endpoints/sip")
         response = self.session.get(url)
         return response.content
