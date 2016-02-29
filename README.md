@@ -185,6 +185,15 @@ Exposed via ```c.cti_profiles.relations(cti_profile_id)```
 
  * add_user(user)
 
+Device Relation
+---------------
+
+Exposed via ```c.devices.relations(device_id)```
+
+ * add_line(line_id)
+ * remove_line(line_id)
+ * list_lines(line_id)
+
 Endpoint SIP relation
 ---------------------
 
@@ -248,6 +257,9 @@ Exposed via ```c.lines.relations(line_id)```
  * add_endpoint_custom(endpoint_custom)
  * remove_endpoint_custom(endpoint_custom)
  * get_endpoint_custom()
+ * add_device(device_id)
+ * remove_device(device_id)
+ * get_device()
 
 User relation
 -------------

@@ -66,6 +66,27 @@ class UserVoicemailRelation(HTTPCommand):
         return response.json()
 
 
+class LineDeviceRelation(HTTPCommand):
+
+    def associate(self, line_id, device_id):
+        url = url_join('lines', line_id, 'devices', device_id)
+        self.session.put(url)
+
+    def dissociate(self, line_id, device_id):
+        url = url_join('lines', line_id, 'devices', device_id)
+        self.session.delete(url)
+
+    def get_by_line(self, line_id):
+        url = url_join('lines', line_id, 'devices')
+        response = self.session.get(url)
+        return response.json()
+
+    def list_by_device(self, device_id):
+        url = url_join('devices', device_id, 'lines')
+        response = self.session.get(url)
+        return response.json()
+
+
 class LineExtensionRelation(HTTPCommand):
 
     def associate(self, line_id, extension_id):

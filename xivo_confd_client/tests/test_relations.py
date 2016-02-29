@@ -21,6 +21,7 @@ from hamcrest import assert_that
 
 from xivo_confd_client.tests import TestCommand
 from xivo_confd_client.relations import LineExtensionRelation
+from xivo_confd_client.relations import LineDeviceRelation
 from xivo_confd_client.relations import LineEndpointSipRelation
 from xivo_confd_client.relations import LineEndpointSccpRelation
 from xivo_confd_client.relations import LineEndpointCustomRelation
@@ -171,6 +172,73 @@ class TestLineExtensionRelation(TestCommand):
 
         response = self.command.get_by_extension(extension_id)
         self.session.get.assert_called_once_with("/extensions/2/line")
+
+        assert_that(response, expected_result)
+
+
+class TestLineDeviceRelation(TestCommand):
+
+    Command = LineDeviceRelation
+
+    def test_line_device_association(self):
+        line_id = 1
+        device_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(line_id, device_id)
+        self.session.put.assert_called_once_with("/lines/1/devices/2")
+
+    def test_line_device_dissociation(self):
+        line_id = 1
+        device_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(line_id, device_id)
+        self.session.delete.assert_called_once_with("/lines/1/devices/2")
+
+    def test_get_by_line(self):
+        line_id = 1
+        device_id = 2
+
+        expected_result = {
+            'line_id': line_id,
+            'device_id': device_id,
+            'links': [
+                {'rel': 'lines',
+                 'href': 'http://localhost:9486/1.1/lines/1'},
+                {'rel': 'devices',
+                 'href': 'http://localhost:9486/1.1/devices/1'},
+            ]
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.get_by_line(line_id)
+        self.session.get.assert_called_once_with("/lines/1/devices")
+
+        assert_that(response, expected_result)
+
+    def test_list_by_device(self):
+        line_id = 1
+        device_id = 2
+
+        expected_result = {'total': 1,
+                           'items': [
+                               {'line_id': line_id,
+                                'device_id': device_id,
+                                'links': [
+                                    {'rel': 'lines',
+                                     'href': 'http://localhost:9486/1.1/lines/1'},
+                                    {'rel': 'devices',
+                                     'href': 'http://localhost:9486/1.1/devices/1'},
+                                ]}]}
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.list_by_device(device_id)
+        self.session.get.assert_called_once_with("/devices/2/lines")
 
         assert_that(response, expected_result)
 
