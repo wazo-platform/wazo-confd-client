@@ -4,6 +4,45 @@ XiVO confd client
 
 A python library for using [xivo-confd](https://github.com/xivo-pbx/xivo-confd)
 
+
+Installation
+============
+
+This library requires python version 2.7. Other versions of python have not been
+tested.
+
+Installing in a virtualenv
+--------------------------
+
+It is recommended to install the library in a
+[virtualenv](https://virtualenv.readthedocs.org).  A virtualenv isolates python
+packages from the rest of the system, hence avoiding conflicts with your OS
+package manager. On debian based systems, virtualenv can be install with
+apt-get:
+
+    sudo apt-get install python-virtualenv
+
+Afterwards create a virtual environment for the library:
+
+    virtualenv -p /usr/bin/python2 confd-client
+
+When opening a new terminal **do not forget to activate your virtualenv**, otherwise
+the library will not be available.
+
+    source confd-client/bin/activate
+
+Dependencies
+------------
+
+We recommend installing dependencies via ```pip```. It will already be available
+if you are using a virutalenv. Otherwise, it can be installed via apt-get:
+
+    sudo apt-get install python-pip
+
+Afterwards use the ```requirements.txt``` file for installing dependencies:
+
+    pip install -r requirements.txt
+
 Usage
 =====
 
