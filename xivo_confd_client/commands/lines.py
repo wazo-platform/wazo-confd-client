@@ -17,7 +17,12 @@
 
 from xivo_confd_client.util import extract_id
 from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import UserLineRelation, LineExtensionRelation, LineEndpointSipRelation, LineEndpointSccpRelation, LineEndpointCustomRelation
+from xivo_confd_client.relations import (UserLineRelation,
+                                         LineExtensionRelation,
+                                         LineEndpointSipRelation,
+                                         LineEndpointSccpRelation,
+                                         LineEndpointCustomRelation,
+                                         LineDeviceRelation)
 
 
 class LineRelation(object):
@@ -29,6 +34,7 @@ class LineRelation(object):
         self.line_endpoint_sip = LineEndpointSipRelation(builder)
         self.line_endpoint_sccp = LineEndpointSccpRelation(builder)
         self.line_endpoint_custom = LineEndpointCustomRelation(builder)
+        self.line_device = LineDeviceRelation(builder)
 
     @extract_id
     def add_extension(self, extension_id):
@@ -84,6 +90,17 @@ class LineRelation(object):
 
     def get_endpoint_custom(self):
         return self.line_endpoint_custom.get_by_line(self.line_id)
+
+    @extract_id
+    def add_device(self, device_id):
+        return self.line_device.associate(self.line_id, device_id)
+
+    @extract_id
+    def remove_device(self, device_id):
+        return self.line_device.dissociate(self.line_id, device_id)
+
+    def get_device(self):
+        return self.line_device.get_by_line(self.line_id)
 
 
 class LinesCommand(CRUDCommand):
