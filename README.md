@@ -320,6 +320,12 @@ Exposed via ```c.users.relations(user_id)```
  * add_cti_profile(cti_profile)
  * disable_cti_profile()
  * get_cti_profile()
+ * update_service(service_name, service)
+ * get_service(service_name)
+ * list_services()
+ * update_forward(forward_name, forward)
+ * get_forward(forward_name)
+ * list_forwards()
 
 Voicemail relation
 ------------------

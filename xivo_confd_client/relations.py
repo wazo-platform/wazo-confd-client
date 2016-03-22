@@ -219,3 +219,37 @@ class UserCtiProfileRelation(HTTPCommand):
         url = url_join('users', user_id, 'cti')
         body = {'enabled': False}
         self.session.put(url, body)
+
+
+class UserServiceRelation(HTTPCommand):
+
+    def update_service(self, user_id, service_name, service):
+        url = url_join('users', user_id, 'services', service_name)
+        self.session.put(url, service)
+
+    def get_service(self, user_id, service_name):
+        url = url_join('users', user_id, 'services', service_name)
+        response = self.session.get(url)
+        return response.json()
+
+    def list_services(self, user_id):
+        url = url_join('users', user_id, 'services')
+        response = self.session.get(url)
+        return response.json()
+
+
+class UserForwardRelation(HTTPCommand):
+
+    def update_forward(self, user_id, forward_name, forward):
+        url = url_join('users', user_id, 'forwards', forward_name)
+        self.session.put(url, forward)
+
+    def get_forward(self, user_id, forward_name):
+        url = url_join('users', user_id, 'forwards', forward_name)
+        response = self.session.get(url)
+        return response.json()
+
+    def list_forwards(self, user_id):
+        url = url_join('users', user_id, 'forwards')
+        response = self.session.get(url)
+        return response.json()
