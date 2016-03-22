@@ -20,15 +20,17 @@
 from hamcrest import assert_that
 
 from xivo_confd_client.tests import TestCommand
-from xivo_confd_client.relations import LineExtensionRelation
-from xivo_confd_client.relations import LineDeviceRelation
-from xivo_confd_client.relations import LineEndpointSipRelation
-from xivo_confd_client.relations import LineEndpointSccpRelation
-from xivo_confd_client.relations import LineEndpointCustomRelation
-from xivo_confd_client.relations import UserFuncKeyRelation
-from xivo_confd_client.relations import UserLineRelation
-from xivo_confd_client.relations import UserVoicemailRelation
-from xivo_confd_client.relations import UserCtiProfileRelation
+from xivo_confd_client.relations import (LineDeviceRelation,
+                                         LineEndpointCustomRelation,
+                                         LineEndpointSccpRelation,
+                                         LineEndpointSipRelation,
+                                         LineExtensionRelation,
+                                         UserCtiProfileRelation,
+                                         UserForwardRelation,
+                                         UserFuncKeyRelation,
+                                         UserLineRelation,
+                                         UserServiceRelation,
+                                         UserVoicemailRelation)
 
 
 class TestUserLineRelation(TestCommand):
@@ -641,3 +643,89 @@ class TestUserCtiProfileRelation(TestCommand):
         self.command.disable(user_id)
 
         self.session.put.assert_called_once_with(expected_url, expected_body)
+
+
+class TestUserServiceRelation(TestCommand):
+
+    Command = UserServiceRelation
+
+    def test_update_service(self):
+        user_id = 1234
+        service_name = 'dnd'
+        service = {'enabled': True}
+
+        self.command.update_service(user_id, service_name, service)
+
+        expected_url = "/users/{}/services/{}".format(user_id, service_name)
+        self.session.put.assert_called_with(expected_url, service)
+
+    def test_get_service(self):
+        user_id = 1234
+        service_name = 'dnd'
+        expected_url = "/users/{}/services/{}".format(user_id, service_name)
+        expected_result = {'enabled': True}
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.get_service(user_id, service_name)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
+
+    def test_list_services(self):
+        user_id = 1234
+        expected_url = "/users/{}/services".format(user_id)
+        expected_result = {
+            "total": 0,
+            "items": []
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.list_services(user_id)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
+
+
+class TestUserForwardRelation(TestCommand):
+
+    Command = UserForwardRelation
+
+    def test_update_forward(self):
+        user_id = 1234
+        forward_name = 'dnd'
+        forward = {'enabled': True}
+
+        self.command.update_forward(user_id, forward_name, forward)
+
+        expected_url = "/users/{}/forwards/{}".format(user_id, forward_name)
+        self.session.put.assert_called_with(expected_url, forward)
+
+    def test_get_forward(self):
+        user_id = 1234
+        forward_name = 'dnd'
+        expected_url = "/users/{}/forwards/{}".format(user_id, forward_name)
+        expected_result = {'enabled': True}
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.get_forward(user_id, forward_name)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
+
+    def test_list_forwards(self):
+        user_id = 1234
+        expected_url = "/users/{}/forwards".format(user_id)
+        expected_result = {
+            "total": 0,
+            "items": []
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.list_forwards(user_id)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
