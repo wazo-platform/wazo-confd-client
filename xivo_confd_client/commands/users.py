@@ -19,7 +19,9 @@ from xivo_confd_client.crud import CRUDCommand
 from xivo_confd_client.relations import (UserLineRelation,
                                          UserVoicemailRelation,
                                          UserFuncKeyRelation,
-                                         UserCtiProfileRelation)
+                                         UserCtiProfileRelation,
+                                         UserServiceRelation,
+                                         UserForwardRelation)
 from xivo_confd_client.util import extract_id, url_join
 
 
@@ -31,6 +33,8 @@ class UserRelation(object):
         self.user_voicemail = UserVoicemailRelation(builder)
         self.user_funckey = UserFuncKeyRelation(builder)
         self.user_cti_profile = UserCtiProfileRelation(builder)
+        self.user_service = UserServiceRelation(builder)
+        self.user_forward = UserForwardRelation(builder)
 
     @extract_id
     def add_line(self, line_id):
@@ -55,7 +59,10 @@ class UserRelation(object):
         return self.user_voicemail.get_by_user(self.user_id)
 
     def add_funckey(self, position, funckey):
-        self.user_funckey.add_funckey(self.user_id, position, funckey)
+        self.update_funckey(position, funckey)
+
+    def update_funckey(self, position, funckey):
+        self.user_funckey.update_funckey(self.user_id, position, funckey)
 
     def remove_funckey(self, position):
         self.user_funckey.remove_funckey(self.user_id, position)
@@ -83,6 +90,24 @@ class UserRelation(object):
 
     def disable_cti_profile(self):
         self.user_cti_profile.disable(self.user_id)
+
+    def update_service(self, service_name, service):
+        self.user_service.update_service(self.user_id, service_name, service)
+
+    def get_service(self, service_name):
+        return self.user_service.get_service(self.user_id, service_name)
+
+    def list_services(self):
+        return self.user_service.list_services(self.user_id)
+
+    def update_forward(self, forward_name, forward):
+        self.user_forward.update_forward(self.user_id, forward_name, forward)
+
+    def get_forward(self, forward_name):
+        return self.user_forward.get_forward(self.user_id, forward_name)
+
+    def list_forwards(self):
+        return self.user_forward.list_forwards(self.user_id)
 
 
 class UsersCommand(CRUDCommand):
