@@ -308,21 +308,26 @@ Exposed via ```c.users.relations(user_id)```
  * add_line(line)
  * remove_line(line)
  * list_lines()
+
  * add_voicemail(voicemail)
  * remove_voicemail(voicemail)
  * get_voicemail()
+
  * add_funckey(position, funckey)
  * remove_funckey(position, funckey)
  * get_funckey(position)
  * list_funckeys()
  * add_funckey_template(funckey_template)
  * remove_funckey_template(funckey_template)
+
  * add_cti_profile(cti_profile)
  * disable_cti_profile()
  * get_cti_profile()
+
  * update_service(service_name, service)
  * get_service(service_name)
  * list_services()
+
  * update_forward(forward_name, forward)
  * get_forward(forward_name)
  * list_forwards()
