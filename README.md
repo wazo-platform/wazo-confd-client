@@ -314,6 +314,7 @@ Exposed via ```c.users.relations(user_id)```
  * get_voicemail()
 
  * add_funckey(position, funckey)
+ * update_funckey(position, funckey)
  * remove_funckey(position, funckey)
  * get_funckey(position)
  * list_funckeys()
