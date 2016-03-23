@@ -175,7 +175,7 @@ class LineEndpointCustomRelation(HTTPCommand):
 
 class UserFuncKeyRelation(HTTPCommand):
 
-    def add_funckey(self, user_id, position, funckey):
+    def update_funckey(self, user_id, position, funckey):
         url = url_join('users', user_id, 'funckeys', position)
         self.session.put(url, funckey)
 

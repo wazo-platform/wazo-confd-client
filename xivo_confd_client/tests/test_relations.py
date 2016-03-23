@@ -517,12 +517,12 @@ class TestUserFuncKeyRelation(TestCommand):
 
     Command = UserFuncKeyRelation
 
-    def test_add_func_key(self):
+    def test_update_func_key(self):
         user_id = 1234
         position = 1
         funckey = {'destination': {'type': 'service', 'service': 'enablednd'}}
 
-        self.command.add_funckey(user_id, position, funckey)
+        self.command.update_funckey(user_id, position, funckey)
 
         expected_url = "/users/{}/funckeys/{}".format(user_id, position)
         self.session.put.assert_called_with(expected_url, funckey)

@@ -59,10 +59,10 @@ class UserRelation(object):
         return self.user_voicemail.get_by_user(self.user_id)
 
     def add_funckey(self, position, funckey):
-        self.user_funckey.add_funckey(self.user_id, position, funckey)
+        self.update_funckey(position, funckey)
 
     def update_funckey(self, position, funckey):
-        self.add_funckey(position, funckey)
+        self.user_funckey.update_funckey(self.user_id, position, funckey)
 
     def remove_funckey(self, position):
         self.user_funckey.remove_funckey(self.user_id, position)
