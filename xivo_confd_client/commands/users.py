@@ -135,9 +135,10 @@ class UsersCommand(CRUDCommand):
                                     headers=headers)
         return response.json()
 
-    def export_csv(self):
+    def export_csv(self, encoding='utf-8'):
         url = url_join(self.resource, "export")
-        response = self.session.get(url)
+        headers = {'Accept': 'text/csv; charset={}'.format(encoding)}
+        response = self.session.get(url, headers=headers)
         return response.content
 
     def get_main_endpoint_sip(self, user_uuid):
