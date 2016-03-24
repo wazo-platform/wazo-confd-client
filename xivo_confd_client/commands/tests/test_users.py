@@ -70,7 +70,7 @@ class TestUsers(TestCommand):
         result = self.command.export_csv()
 
         assert_that(result, equal_to(expected_content))
-        self.session.get.assert_called_once_with(expected_url)
+        self.session.get.assert_called_once_with(expected_url, headers={'Accept': 'text/csv; charset=utf-8'})
 
     def test_main_endpoint_sip(self):
         expected_url = "/users/{}/lines/main/associated/endpoints/sip".format(FAKE_UUID)
