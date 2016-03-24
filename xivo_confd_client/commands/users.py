@@ -135,9 +135,9 @@ class UsersCommand(CRUDCommand):
                                     headers=headers)
         return response.json()
 
-    def export_csv(self, encoding='utf-8'):
+    def export_csv(self):
         url = url_join(self.resource, "export")
-        headers = {'Accept': 'text/csv; charset={}'.format(encoding)}
+        headers = {'Accept': 'text/csv; charset=utf-8'}
         response = self.session.get(url, headers=headers)
         return response.content
 
