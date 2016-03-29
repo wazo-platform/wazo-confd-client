@@ -48,7 +48,8 @@ setup(
             'endpoints_sccp = xivo_confd_client.commands.endpoints_sccp:EndpointsSccpCommand',
             'endpoints_custom = xivo_confd_client.commands.endpoints_custom:EndpointsCustomCommand',
             'cti_profiles = xivo_confd_client.commands.cti_profiles:CtiProfilesCommand',
-            'queues = xivo_confd_client.commands.queues:QueuesCommand'
+            'queues = xivo_confd_client.commands.queues:QueuesCommand',
+            'permissions = xivo_confd_client.commands.permissions:PermissionsCommand'
         ],
     }
 )
