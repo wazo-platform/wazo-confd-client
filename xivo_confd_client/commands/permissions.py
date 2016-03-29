@@ -18,6 +18,6 @@
 from xivo_confd_client.crud import CRUDCommand
 
 
-class PermissionsCommand(CRUDCommand):
+class CallPermissionsCommand(CRUDCommand):
 
-    resource = 'permissions'
+    resource = 'callpermissions'
