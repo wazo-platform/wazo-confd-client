@@ -240,7 +240,7 @@ Exposed via ```c.devices.relations(device_id)```
 
  * add_line(line_id)
  * remove_line(line_id)
- * list_lines(line_id)
+ * list_lines()
 
 Endpoint SIP relation
 ---------------------
