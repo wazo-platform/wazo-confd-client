@@ -25,6 +25,7 @@ from xivo_confd_client.relations import (LineDeviceRelation,
                                          LineEndpointSccpRelation,
                                          LineEndpointSipRelation,
                                          LineExtensionRelation,
+                                         UserCallPermissionRelation,
                                          UserCtiProfileRelation,
                                          UserForwardRelation,
                                          UserFuncKeyRelation,
@@ -726,6 +727,70 @@ class TestUserForwardRelation(TestCommand):
         self.set_response('get', 200, expected_result)
 
         result = self.command.list_forwards(user_id)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
+
+
+class TestUserCallPermissionRelation(TestCommand):
+
+    Command = UserCallPermissionRelation
+
+    def test_user_call_permission_association(self):
+        user_id = 1
+        call_permission_id = 2
+
+        expected_result = {
+            'user_id': user_id,
+            'call_permission_id': call_permission_id,
+            'links': [
+                {'rel': 'users',
+                 'href': 'http://localhost:9486/1.1/users/1'},
+                {'rel': 'callpermissions',
+                 'href': 'http://localhost:9486/1.1/callpermissions/2'},
+            ]
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.associate(user_id, call_permission_id)
+
+        self.session.put.assert_called_once_with("/users/1/callpermissions/2")
+        assert_that(response, expected_result)
+
+    def test_user_call_permission_dissociation(self):
+        user_id = 1
+        call_permission_id = 2
+
+        self.command.dissociate(user_id, call_permission_id)
+        self.session.delete.assert_called_once_with("/users/1/callpermissions/2")
+
+    def test_user_call_permission_list_by_user(self):
+        user_id = 1234
+        expected_url = "/users/{}/callpermissions".format(user_id)
+        expected_result = {
+            "total": 0,
+            "items": []
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.list_by_user(user_id)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
+
+    def test_user_call_permission_list_by_call_permission(self):
+        call_permission_id = 1234
+        expected_url = "/callpermissions/{}/users".format(call_permission_id)
+        expected_result = {
+            "total": 0,
+            "items": []
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.list_by_call_permission(call_permission_id)
 
         self.session.get.assert_called_once_with(expected_url)
         assert_that(result, expected_result)

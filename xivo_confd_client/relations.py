@@ -253,3 +253,24 @@ class UserForwardRelation(HTTPCommand):
         url = url_join('users', user_id, 'forwards')
         response = self.session.get(url)
         return response.json()
+
+
+class UserCallPermissionRelation(HTTPCommand):
+
+    def associate(self, user_id, call_permission_id):
+        url = url_join('users', user_id, 'callpermissions', call_permission_id)
+        self.session.put(url)
+
+    def dissociate(self, user_id, call_permission_id):
+        url = url_join('users', user_id, 'callpermissions', call_permission_id)
+        self.session.delete(url)
+
+    def get_by_user(self, user_id):
+        url = url_join('users', user_id, 'callpermissions')
+        response = self.session.get(url)
+        return response.json()
+
+    def get_by_call_permission(self, call_permission_id):
+        url = url_join('callpermissions', call_permission_id, 'users')
+        response = self.session.get(url)
+        return response.json()

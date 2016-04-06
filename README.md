@@ -217,6 +217,15 @@ c.users(user).add_line(line)
 
 Here is a list of relations and their methods:
 
+Call Permission Relation
+---------------
+
+Exposed via ```c.call_permissions.relations(call_permission_id)```
+
+ * add_user(user_id)
+ * remove_user(user_id)
+ * list_users()
+
 CtiProfile relation
 -------------------
 
@@ -308,6 +317,10 @@ Exposed via ```c.users.relations(user_id)```
  * add_line(line)
  * remove_line(line)
  * list_lines()
+
+ * add_call_permission(call_permission)
+ * remove_call_permission(call_permission)
+ * list_call_permissions()
 
  * add_voicemail(voicemail)
  * remove_voicemail(voicemail)
