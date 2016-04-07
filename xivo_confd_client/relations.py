@@ -265,12 +265,12 @@ class UserCallPermissionRelation(HTTPCommand):
         url = url_join('users', user_id, 'callpermissions', call_permission_id)
         self.session.delete(url)
 
-    def get_by_user(self, user_id):
+    def list_by_user(self, user_id):
         url = url_join('users', user_id, 'callpermissions')
         response = self.session.get(url)
         return response.json()
 
-    def get_by_call_permission(self, call_permission_id):
+    def list_by_call_permission(self, call_permission_id):
         url = url_join('callpermissions', call_permission_id, 'users')
         response = self.session.get(url)
         return response.json()

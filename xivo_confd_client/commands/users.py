@@ -58,7 +58,7 @@ class UserRelation(object):
         self.user_call_permission.dissociate(self.user_id, call_permission_id)
 
     def list_call_permissions(self):
-        return self.user_call_permission.get_by_user(self.user_id)
+        return self.user_call_permission.list_by_user(self.user_id)
 
     @extract_id
     def add_voicemail(self, voicemail_id):
