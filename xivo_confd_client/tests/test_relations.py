@@ -740,23 +740,8 @@ class TestUserCallPermissionRelation(TestCommand):
         user_id = 1
         call_permission_id = 2
 
-        expected_result = {
-            'user_id': user_id,
-            'call_permission_id': call_permission_id,
-            'links': [
-                {'rel': 'users',
-                 'href': 'http://localhost:9486/1.1/users/1'},
-                {'rel': 'callpermissions',
-                 'href': 'http://localhost:9486/1.1/callpermissions/2'},
-            ]
-        }
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.associate(user_id, call_permission_id)
-
+        self.command.associate(user_id, call_permission_id)
         self.session.put.assert_called_once_with("/users/1/callpermissions/2")
-        assert_that(response, expected_result)
 
     def test_user_call_permission_dissociation(self):
         user_id = 1
