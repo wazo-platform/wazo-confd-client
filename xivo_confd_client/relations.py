@@ -254,6 +254,10 @@ class UserForwardRelation(HTTPCommand):
         response = self.session.get(url)
         return response.json()
 
+    def update_forwards(self, user_id, forwards):
+        url = url_join('users', user_id, 'forwards')
+        self.session.put(url, forwards)
+
 
 class UserCallPermissionRelation(HTTPCommand):
 

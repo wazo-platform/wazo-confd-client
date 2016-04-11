@@ -344,6 +344,7 @@ Exposed via ```c.users.relations(user_id)```
 
  * update_forward(forward_name, forward)
  * get_forward(forward_name)
+ * update_forwards(forwards)
  * list_forwards()
 
 Voicemail relation

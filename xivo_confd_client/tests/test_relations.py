@@ -731,6 +731,17 @@ class TestUserForwardRelation(TestCommand):
         self.session.get.assert_called_once_with(expected_url)
         assert_that(result, expected_result)
 
+    def test_update_forwards(self):
+        user_id = 1234
+        forwards = {'busy': {'enabled': True, 'destination': '123'},
+                    'noanswer': {'enabled': False, 'destination': '456'},
+                    'unconditional': {'enabled': False, 'destination': None}}
+
+        self.command.update_forwards(user_id, forwards)
+
+        expected_url = "/users/{}/forwards".format(user_id)
+        self.session.put.assert_called_with(expected_url, forwards)
+
 
 class TestUserCallPermissionRelation(TestCommand):
 
