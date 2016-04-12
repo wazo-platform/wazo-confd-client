@@ -122,6 +122,9 @@ class UserRelation(object):
     def list_forwards(self):
         return self.user_forward.list_forwards(self.user_id)
 
+    def update_forwards(self, body):
+        return self.user_forward.update_forwards(self.user_id, body)
+
 
 class UsersCommand(CRUDCommand):
 
