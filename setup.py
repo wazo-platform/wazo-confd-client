@@ -49,7 +49,8 @@ setup(
             'endpoints_custom = xivo_confd_client.commands.endpoints_custom:EndpointsCustomCommand',
             'cti_profiles = xivo_confd_client.commands.cti_profiles:CtiProfilesCommand',
             'queues = xivo_confd_client.commands.queues:QueuesCommand',
-            'call_permissions = xivo_confd_client.commands.call_permissions:CallPermissionsCommand'
+            'call_permissions = xivo_confd_client.commands.call_permissions:CallPermissionsCommand',
+            'wizard = xivo_confd_client.commands.wizard:WizardCommand'
         ],
     }
 )

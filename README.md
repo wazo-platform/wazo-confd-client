@@ -400,6 +400,19 @@ c.queues.get_membership(queue_id, agent_id)
 c.queues.edit_membership(queue_id, agent_id, penalty)
 ```
 
+wizard
+------
+
+```python
+#Pass the wizard
+c.wizard.create(wizard)
+
+#Get the XiVO configuration status
+configured = c.wizard.get()
+
+#Get informations about the system on which xivo-confd is installed
+discover = c.wizard.discover()
+
 
 Adding new commands
 ===================
