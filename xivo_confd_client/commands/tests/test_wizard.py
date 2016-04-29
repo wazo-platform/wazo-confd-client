@@ -34,9 +34,9 @@ class TestWizard(TestCommand):
 
         self.set_response('post', 204, expected_content)
 
-        self.command.create(body)
+        self.command.create(body, timeout=600)
 
-        self.session.post.assert_called_once_with(expected_url, body)
+        self.session.post.assert_called_once_with(expected_url, body, timeout=600)
 
     def test_get(self):
         expected_content = {'configured': False}
