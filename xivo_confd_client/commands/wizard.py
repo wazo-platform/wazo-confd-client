@@ -23,9 +23,9 @@ class WizardCommand(HTTPCommand):
 
     resource = 'wizard'
 
-    def create(self, body):
+    def create(self, body, timeout=300):
         url = url_join(self.resource)
-        response = self.session.post(url, body)
+        response = self.session.post(url, body, timeout=timeout)
         return response.json()
 
     def get(self):
