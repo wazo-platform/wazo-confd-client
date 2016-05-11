@@ -22,7 +22,8 @@ from xivo_confd_client.relations import (UserLineRelation,
                                          UserCtiProfileRelation,
                                          UserServiceRelation,
                                          UserForwardRelation,
-                                         UserCallPermissionRelation)
+                                         UserCallPermissionRelation,
+                                         UserEntityRelation)
 from xivo_confd_client.util import extract_id, url_join
 
 
@@ -37,6 +38,7 @@ class UserRelation(object):
         self.user_service = UserServiceRelation(builder)
         self.user_forward = UserForwardRelation(builder)
         self.user_call_permission = UserCallPermissionRelation(builder)
+        self.user_entity = UserEntityRelation(builder)
 
     @extract_id
     def add_line(self, line_id):
@@ -59,6 +61,13 @@ class UserRelation(object):
 
     def list_call_permissions(self):
         return self.user_call_permission.list_by_user(self.user_id)
+
+    @extract_id
+    def add_entity(self, entity_id):
+        return self.user_entity.associate(self.user_id, entity_id)
+
+    def get_entity(self):
+        return self.user_entity.get_by_user(self.user_id)
 
     @extract_id
     def add_voicemail(self, voicemail_id):
