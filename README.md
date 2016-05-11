@@ -338,6 +338,9 @@ Exposed via ```c.users.relations(user_id)```
  * disable_cti_profile()
  * get_cti_profile()
 
+ * add_entity(entity)
+ * get_entity()
+
  * update_service(service_name, service)
  * get_service(service_name)
  * list_services()

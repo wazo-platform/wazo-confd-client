@@ -27,6 +27,7 @@ from xivo_confd_client.relations import (LineDeviceRelation,
                                          LineExtensionRelation,
                                          UserCallPermissionRelation,
                                          UserCtiProfileRelation,
+                                         UserEntityRelation,
                                          UserForwardRelation,
                                          UserFuncKeyRelation,
                                          UserLineRelation,
@@ -787,6 +788,31 @@ class TestUserCallPermissionRelation(TestCommand):
         self.set_response('get', 200, expected_result)
 
         result = self.command.list_by_call_permission(call_permission_id)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
+
+
+class TestEntityRelation(TestCommand):
+
+    Command = UserEntityRelation
+
+    def test_user_entity_association(self):
+        user_id = 1
+        entity_id = 2
+
+        self.command.associate(user_id, entity_id)
+        self.session.put.assert_called_once_with("/users/1/entities/2")
+
+    def test_user_entity_list_by_user(self):
+        user_id = 1234
+        expected_url = "/users/{}/entities".format(user_id)
+        expected_result = {'entity_id': '1',
+                           'user_id': '2'}
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.get_by_user(user_id)
 
         self.session.get.assert_called_once_with(expected_url)
         assert_that(result, expected_result)
