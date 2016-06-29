@@ -17,8 +17,11 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 from hamcrest import assert_that, equal_to
+from unittest import TestCase
+from mock import Mock
 
 from ..users import UsersCommand
+from ..users import UserRelation
 
 from xivo_confd_client.tests import TestCommand
 
@@ -82,3 +85,18 @@ class TestUsers(TestCommand):
 
         assert_that(result, equal_to(expected_content))
         self.session.get.assert_called_once_with(expected_url)
+
+
+class TestUserRelation(TestCase):
+
+    def test_get_funckey(self):
+        user_id = 34
+        position = 1
+
+        relation = UserRelation(Mock(), user_id)
+        relation.user_funckey = Mock()
+
+        relation.get_funckey(position)
+
+        relation.user_funckey.get_funckey.assert_called_once_with(user_id, position)
+
