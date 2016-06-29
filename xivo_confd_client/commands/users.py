@@ -90,7 +90,7 @@ class UserRelation(object):
         self.user_funckey.remove_funckey(self.user_id, position)
 
     def get_funckey(self, position):
-        return self.user_funckey.get_funckey(self.user_id)
+        return self.user_funckey.get_funckey(self.user_id, position)
 
     def list_funckeys(self):
         return self.user_funckey.list_funckeys(self.user_id)
