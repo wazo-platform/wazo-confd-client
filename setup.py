@@ -50,7 +50,8 @@ setup(
             'cti_profiles = xivo_confd_client.commands.cti_profiles:CtiProfilesCommand',
             'queues = xivo_confd_client.commands.queues:QueuesCommand',
             'call_permissions = xivo_confd_client.commands.call_permissions:CallPermissionsCommand',
-            'wizard = xivo_confd_client.commands.wizard:WizardCommand'
+            'wizard = xivo_confd_client.commands.wizard:WizardCommand',
+            'entities = xivo_confd_client.commands.entities:EntitiesCommand'
         ],
     }
 )
