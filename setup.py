@@ -26,7 +26,7 @@ setup(
     description='a simple client library for the xivo-confd HTTP interface',
 
     author='Avencall',
-    author_email='dev@avencall.com',
+    author_email='dev@proformatique.com',
 
     url='https://github.com/xivo-pbx/xivo-confd-client',
 
@@ -35,23 +35,23 @@ setup(
     entry_points={
         'confd_client.commands': [
             'call_logs = xivo_confd_client.commands.call_logs:CallLogsCommand',
+            'call_permissions = xivo_confd_client.commands.call_permissions:CallPermissionsCommand',
             'configuration = xivo_confd_client.commands.configuration:ConfigurationCommand',
+            'cti_profiles = xivo_confd_client.commands.cti_profiles:CtiProfilesCommand',
             'devices = xivo_confd_client.commands.devices:DevicesCommand',
+            'endpoints_custom = xivo_confd_client.commands.endpoints_custom:EndpointsCustomCommand',
+            'endpoints_sccp = xivo_confd_client.commands.endpoints_sccp:EndpointsSccpCommand',
+            'endpoints_sip = xivo_confd_client.commands.endpoints_sip:EndpointsSipCommand',
+            'entities = xivo_confd_client.commands.entities:EntitiesCommand',
             'extensions = xivo_confd_client.commands.extensions:ExtensionsCommand',
             'funckeys = xivo_confd_client.commands.funckeys:FuncKeysCommand',
             'infos = xivo_confd_client.commands.infos:InfosCommand',
             'lines = xivo_confd_client.commands.lines:LinesCommand',
             'lines_sip = xivo_confd_client.commands.lines_sip:LinesSIPCommand',
+            'queues = xivo_confd_client.commands.queues:QueuesCommand',
             'users = xivo_confd_client.commands.users:UsersCommand',
             'voicemails = xivo_confd_client.commands.voicemails:VoicemailsCommand',
-            'endpoints_sip = xivo_confd_client.commands.endpoints_sip:EndpointsSipCommand',
-            'endpoints_sccp = xivo_confd_client.commands.endpoints_sccp:EndpointsSccpCommand',
-            'endpoints_custom = xivo_confd_client.commands.endpoints_custom:EndpointsCustomCommand',
-            'cti_profiles = xivo_confd_client.commands.cti_profiles:CtiProfilesCommand',
-            'queues = xivo_confd_client.commands.queues:QueuesCommand',
-            'call_permissions = xivo_confd_client.commands.call_permissions:CallPermissionsCommand',
             'wizard = xivo_confd_client.commands.wizard:WizardCommand',
-            'entities = xivo_confd_client.commands.entities:EntitiesCommand'
         ],
     }
 )
