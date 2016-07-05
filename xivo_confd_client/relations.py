@@ -193,6 +193,10 @@ class UserFuncKeyRelation(HTTPCommand):
         response = self.session.get(url)
         return response.json()
 
+    def update_funckeys(self, user_id, funckeys):
+        url = url_join('users', user_id, 'funckeys')
+        self.session.put(url, funckeys)
+
     def associate_funckey_template(self, user_id, template_id):
         url = url_join('users', user_id, 'funckeys', 'templates', template_id)
         self.session.put(url)

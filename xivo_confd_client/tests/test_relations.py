@@ -573,6 +573,16 @@ class TestUserFuncKeyRelation(TestCommand):
         self.session.get.assert_called_once_with(expected_url)
         assert_that(result, expected_result)
 
+    def test_update_funckeys(self):
+        user_id = 1234
+        funckeys = {'keys': {'1': {'destination': {'type': 'service', 'service': 'enablednd'}},
+                             '2': {'destination': {'type': 'custom', 'exten': '1234'}}}}
+
+        self.command.update_funckeys(user_id, funckeys)
+
+        expected_url = "/users/{}/funckeys".format(user_id)
+        self.session.put.assert_called_with(expected_url, funckeys)
+
     def test_dissociate_funckey_template(self):
         user_id = 1234
         template_id = 25

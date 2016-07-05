@@ -95,6 +95,9 @@ class UserRelation(object):
     def list_funckeys(self):
         return self.user_funckey.list_funckeys(self.user_id)
 
+    def update_funckeys(self, funckeys):
+        self.user_funckey.update_funckeys(self.user_id, funckeys)
+
     @extract_id
     def add_funckey_template(self, template_id):
         self.user_funckey.associate_funckey_template(self.user_id, template_id)
