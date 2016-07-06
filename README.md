@@ -331,6 +331,7 @@ Exposed via ```c.users.relations(user_id)```
  * remove_funckey(position, funckey)
  * get_funckey(position)
  * list_funckeys()
+ * update_funckeys(funckeys)
  * add_funckey_template(funckey_template)
  * remove_funckey_template(funckey_template)
 
