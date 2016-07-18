@@ -72,7 +72,7 @@ Each resource offers the following CRUD operations:
 list
 ----
 
-Return a list of items. You can also pass optional paramters for searching and
+Return a list of items. You can also pass optional parameters for searching and
 sorting such as ```search```, ```sort```, ```order```, ```offset```,
 ```limit```, etc.  Returns a dict structured as ```{'total': total, 'items':
 [item1, item2, item3]}```.
