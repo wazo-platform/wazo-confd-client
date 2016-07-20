@@ -416,7 +416,7 @@ configured = c.wizard.get()
 
 #Get informations about the system on which xivo-confd is installed
 discover = c.wizard.discover()
-
+```
 
 Adding new commands
 ===================
