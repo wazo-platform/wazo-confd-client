@@ -456,29 +456,14 @@ class TestUserVoicemailRelation(TestCommand):
         user_id = 1
         voicemail_id = 2
 
-        expected_result = {
-            'user_id': user_id,
-            'voicemail_id': voicemail_id,
-            'links': [
-                {'rel': 'users',
-                 'href': 'http://localhost:9486/1.1/users/2'},
-                {'rel': 'voicemails',
-                 'href': 'http://localhost:9486/1.1/voicemails/1'},
-            ]
-        }
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.associate(user_id, voicemail_id)
-
-        self.session.post.assert_called_once_with("/users/1/voicemail", {'voicemail_id': voicemail_id})
-        assert_that(response, expected_result)
+        self.command.associate(user_id, voicemail_id)
+        self.session.put.assert_called_once_with("/users/1/voicemails/2")
 
     def test_user_voicemail_dissociation(self):
         user_id = 1
 
         self.command.dissociate(user_id)
-        self.session.delete.assert_called_once_with("/users/1/voicemail")
+        self.session.delete.assert_called_once_with("/users/1/voicemails")
 
     def test_get_by_user(self):
         user_id = 1
@@ -497,7 +482,7 @@ class TestUserVoicemailRelation(TestCommand):
 
         response = self.command.get_by_user(user_id)
 
-        self.session.get.assert_called_once_with("/users/1/voicemail")
+        self.session.get.assert_called_once_with("/users/1/voicemails")
         assert_that(response, expected_result)
 
     def test_list_by_voicemail(self):

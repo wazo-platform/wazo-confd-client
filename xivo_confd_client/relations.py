@@ -46,17 +46,15 @@ class UserLineRelation(HTTPCommand):
 class UserVoicemailRelation(HTTPCommand):
 
     def associate(self, user_id, voicemail_id):
-        url = url_join('users', user_id, 'voicemail')
-        body = {'voicemail_id': voicemail_id}
-        response = self.session.post(url, body)
-        return response.json()
+        url = url_join('users', user_id, 'voicemails', voicemail_id)
+        self.session.put(url)
 
     def dissociate(self, user_id):
-        url = url_join('users', user_id, 'voicemail')
+        url = url_join('users', user_id, 'voicemails')
         self.session.delete(url)
 
     def get_by_user(self, user_id):
-        url = url_join('users', user_id, 'voicemail')
+        url = url_join('users', user_id, 'voicemails')
         response = self.session.get(url)
         return response.json()
 
