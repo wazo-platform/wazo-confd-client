@@ -107,23 +107,8 @@ class TestLineExtensionRelation(TestCommand):
         line_id = 1
         extension_id = 2
 
-        expected_result = {
-            'line_id': line_id,
-            'extension_id': extension_id,
-            'links': [
-                {'rel': 'lines',
-                 'href': 'http://localhost:9486/1.1/lines/1'},
-                {'rel': 'extensions',
-                 'href': 'http://localhost:9486/1.1/extensions/1'},
-            ]
-        }
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.associate(line_id, extension_id)
-        self.session.post.assert_called_once_with("/lines/1/extensions", {'extension_id': extension_id})
-
-        assert_that(response, expected_result)
+        self.command.associate(line_id, extension_id)
+        self.session.put.assert_called_once_with("/lines/1/extensions/2")
 
     def test_line_extension_dissociation(self):
         line_id = 1
