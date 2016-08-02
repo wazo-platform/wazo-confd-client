@@ -88,10 +88,8 @@ class LineDeviceRelation(HTTPCommand):
 class LineExtensionRelation(HTTPCommand):
 
     def associate(self, line_id, extension_id):
-        url = url_join('lines', line_id, 'extensions')
-        body = {'extension_id': extension_id}
-        response = self.session.post(url, body)
-        return response.json()
+        url = url_join('lines', line_id, 'extensions', extension_id)
+        self.session.put(url)
 
     def dissociate(self, line_id, extension_id):
         url = url_join('lines', line_id, 'extensions', extension_id)
