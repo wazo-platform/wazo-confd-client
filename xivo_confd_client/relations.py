@@ -23,10 +23,8 @@ from xivo_confd_client.util import url_join
 class UserLineRelation(HTTPCommand):
 
     def associate(self, user_id, line_id):
-        url = url_join('users', user_id, 'lines')
-        body = {'line_id': line_id}
-        response = self.session.post(url, body)
-        return response.json()
+        url = url_join('users', user_id, 'lines', line_id)
+        self.session.put(url)
 
     def dissociate(self, user_id, line_id):
         url = url_join('users', user_id, 'lines', line_id)
