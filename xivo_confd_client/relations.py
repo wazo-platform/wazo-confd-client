@@ -98,6 +98,11 @@ class LineExtensionRelation(HTTPCommand):
         response = self.session.get(url)
         return response.json()
 
+    def list_by_extension(self, extension_id):
+        url = url_join('extensions', extension_id, 'lines')
+        response = self.session.get(url)
+        return response.json()
+
     def get_by_extension(self, extension_id):
         url = url_join('extensions', extension_id, 'line')
         response = self.session.get(url)

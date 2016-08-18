@@ -277,6 +277,7 @@ Exposed via ```c.extensions.relations(extension_id)```
  * add_line(line)
  * remove_line(line)
  * get_line()
+ * list_lines()
 
 Funckey template relation
 ----------------

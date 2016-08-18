@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2015 Avencall
+# Copyright (C) 2015-2016 Avencall
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -36,6 +36,9 @@ class ExtensionRelation(object):
 
     def get_line(self):
         return self.line_extension_relation.get_by_extension(self.extension_id)
+
+    def list_lines(self):
+        return self.line_extension_relation.list_by_extension(self.extension_id)
 
 
 class ExtensionsCommand(CRUDCommand):

@@ -127,6 +127,31 @@ class TestLineExtensionRelation(TestCommand):
 
         assert_that(response, expected_result)
 
+    def test_list_by_extension(self):
+        line_id = 1
+        extension_id = 2
+
+        expected_result = {
+            'total': 1,
+            'items': [{
+                'line_id': line_id,
+                'extension_id': extension_id,
+                'links': [
+                    {'rel': 'lines',
+                     'href': 'http://localhost:9486/1.1/lines/1'},
+                    {'rel': 'extensions',
+                     'href': 'http://localhost:9486/1.1/extensions/2'},
+                ]}
+            ]
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.list_by_extension(extension_id)
+        self.session.get.assert_called_once_with("/extensions/2/lines")
+
+        assert_that(response, expected_result)
+
     def test_get_by_extension(self):
         line_id = 1
         extension_id = 2
