@@ -49,6 +49,7 @@ setup(
             'lines = xivo_confd_client.commands.lines:LinesCommand',
             'lines_sip = xivo_confd_client.commands.lines_sip:LinesSIPCommand',
             'queues = xivo_confd_client.commands.queues:QueuesCommand',
+            'sip_general = xivo_confd_client.commands.sip_general:SIPGeneralCommand',
             'users = xivo_confd_client.commands.users:UsersCommand',
             'voicemails = xivo_confd_client.commands.voicemails:VoicemailsCommand',
             'wizard = xivo_confd_client.commands.wizard:WizardCommand',
