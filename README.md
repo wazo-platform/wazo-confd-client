@@ -405,6 +405,17 @@ c.queues.get_membership(queue_id, agent_id)
 c.queues.edit_membership(queue_id, agent_id, penalty)
 ```
 
+sip general
+-----------
+
+```python
+#Get SIP general configuration
+sip_general = c.sip_general.list()
+
+#Update SIP general configuration
+c.sip_general.update(sip_general)
+```
+
 wizard
 ------
 
