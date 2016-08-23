@@ -32,6 +32,7 @@ from xivo_confd_client.relations import (LineDeviceRelation,
                                          UserFuncKeyRelation,
                                          UserLineRelation,
                                          UserServiceRelation,
+                                         UserAgentRelation,
                                          UserVoicemailRelation)
 
 
@@ -492,6 +493,44 @@ class TestUserVoicemailRelation(TestCommand):
         response = self.command.list_by_voicemail(voicemail_id)
 
         self.session.get.assert_called_once_with("/voicemails/1/users")
+        assert_that(response, expected_result)
+
+
+class TestUserAgentRelation(TestCommand):
+
+    Command = UserAgentRelation
+
+    def test_user_agent_association(self):
+        user_id = 1
+        agent_id = 2
+
+        self.command.associate(user_id, agent_id)
+        self.session.put.assert_called_once_with("/users/1/agents/2")
+
+    def test_user_agent_dissociation(self):
+        user_id = 1
+
+        self.command.dissociate(user_id)
+        self.session.delete.assert_called_once_with("/users/1/agents")
+
+    def test_get_by_user(self):
+        user_id = 1
+        expected_result = {
+            'user_id': user_id,
+            'agent_id': 2,
+            'links': [
+                {'rel': 'users',
+                 'href': 'http://localhost:9486/1.1/users/1'},
+                {'rel': 'agents',
+                 'href': 'http://localhost:9486/1.1/agents/2'},
+            ]
+        }
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.get_by_user(user_id)
+
+        self.session.get.assert_called_once_with("/users/1/agents")
         assert_that(response, expected_result)
 
 
