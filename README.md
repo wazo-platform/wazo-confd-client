@@ -324,7 +324,7 @@ Exposed via ```c.users.relations(user_id)```
  * list_call_permissions()
 
  * add_voicemail(voicemail)
- * remove_voicemail(voicemail)
+ * remove_voicemail()
  * get_voicemail()
 
  * add_funckey(position, funckey)
@@ -342,6 +342,10 @@ Exposed via ```c.users.relations(user_id)```
 
  * add_entity(entity)
  * get_entity()
+
+ * add_agent(agent)
+ * remove_agent()
+ * get_agent()
 
  * update_service(service_name, service)
  * get_service(service_name)

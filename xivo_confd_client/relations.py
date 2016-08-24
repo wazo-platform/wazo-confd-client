@@ -62,6 +62,22 @@ class UserVoicemailRelation(HTTPCommand):
         return response.json()
 
 
+class UserAgentRelation(HTTPCommand):
+
+    def associate(self, user_id, agent_id):
+        url = url_join('users', user_id, 'agents', agent_id)
+        self.session.put(url)
+
+    def dissociate(self, user_id):
+        url = url_join('users', user_id, 'agents')
+        self.session.delete(url)
+
+    def get_by_user(self, user_id):
+        url = url_join('users', user_id, 'agents')
+        response = self.session.get(url)
+        return response.json()
+
+
 class LineDeviceRelation(HTTPCommand):
 
     def associate(self, line_id, device_id):
