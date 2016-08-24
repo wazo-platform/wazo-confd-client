@@ -344,7 +344,7 @@ Exposed via ```c.users.relations(user_id)```
  * get_entity()
 
  * add_agent(agent)
- * remove_agent(agent)
+ * remove_agent()
  * get_agent()
 
  * update_service(service_name, service)
