@@ -183,4 +183,4 @@ class UsersCommand(CRUDCommand):
     def get_main_endpoint_sip(self, user_uuid):
         url = url_join(self.resource, user_uuid, "lines/main/associated/endpoints/sip")
         response = self.session.get(url)
-        return response.content
+        return response.json()
