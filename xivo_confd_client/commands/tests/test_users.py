@@ -79,7 +79,7 @@ class TestUsers(TestCommand):
         expected_url = "/users/{}/lines/main/associated/endpoints/sip".format(FAKE_UUID)
         expected_content = {"username": 'tata'}
 
-        self.set_response('get', 200, content=expected_content)
+        self.set_response('get', 200, json=expected_content)
 
         result = self.command.get_main_endpoint_sip(FAKE_UUID)
 
@@ -99,4 +99,3 @@ class TestUserRelation(TestCase):
         relation.get_funckey(position)
 
         relation.user_funckey.get_funckey.assert_called_once_with(user_id, position)
-
