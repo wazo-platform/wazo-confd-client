@@ -25,6 +25,8 @@ from xivo_confd_client.relations import (LineDeviceRelation,
                                          LineEndpointSccpRelation,
                                          LineEndpointSipRelation,
                                          LineExtensionRelation,
+                                         TrunkEndpointCustomRelation,
+                                         TrunkEndpointSipRelation,
                                          UserCallPermissionRelation,
                                          UserCtiProfileRelation,
                                          UserEntityRelation,
@@ -845,3 +847,105 @@ class TestEntityRelation(TestCommand):
 
         self.session.get.assert_called_once_with(expected_url)
         assert_that(result, expected_result)
+
+
+class TestTrunkEndpointSipRelation(TestCommand):
+
+    Command = TrunkEndpointSipRelation
+
+    def test_trunk_endpoint_sip_association(self):
+        trunk_id = 1
+        sip_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(trunk_id, sip_id)
+        self.session.put.assert_called_once_with("/trunks/1/endpoints/sip/2")
+
+    def test_trunk_endpoint_sip_dissociation(self):
+        trunk_id = 1
+        sip_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(trunk_id, sip_id)
+        self.session.delete.assert_called_once_with("/trunks/1/endpoints/sip/2")
+
+    def test_get_by_trunk(self):
+        trunk_id = 1
+        sip_id = 2
+
+        expected_result = {'trunk_id': trunk_id,
+                           'endpoint_id': sip_id}
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.get_by_trunk(trunk_id)
+        self.session.get.assert_called_once_with("/trunks/1/endpoints/sip")
+
+        assert_that(response, expected_result)
+
+    def test_get_by_endpoint_sip(self):
+        trunk_id = 1
+        sip_id = 2
+
+        expected_result = {'trunk_id': trunk_id,
+                           'endpoint_id': sip_id}
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.get_by_endpoint_sip(sip_id)
+        self.session.get.assert_called_once_with("/endpoints/sip/2/trunks")
+
+        assert_that(response, expected_result)
+
+
+class TestTrunkEndpointCustomRelation(TestCommand):
+
+    Command = TrunkEndpointCustomRelation
+
+    def test_trunk_endpoint_custom_association(self):
+        trunk_id = 1
+        custom_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(trunk_id, custom_id)
+        self.session.put.assert_called_once_with("/trunks/1/endpoints/custom/2")
+
+    def test_trunk_endpoint_custom_dissociation(self):
+        trunk_id = 1
+        custom_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(trunk_id, custom_id)
+        self.session.delete.assert_called_once_with("/trunks/1/endpoints/custom/2")
+
+    def test_get_by_trunk(self):
+        trunk_id = 1
+        custom_id = 2
+
+        expected_result = {'trunk_id': trunk_id,
+                           'endpoint_id': custom_id}
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.get_by_trunk(trunk_id)
+        self.session.get.assert_called_once_with("/trunks/1/endpoints/custom")
+
+        assert_that(response, expected_result)
+
+    def test_get_by_endpoint_custom(self):
+        trunk_id = 1
+        custom_id = 2
+
+        expected_result = {'trunk_id': trunk_id,
+                           'endpoint_id': custom_id}
+
+        self.set_response('get', 200, expected_result)
+
+        response = self.command.get_by_endpoint_custom(custom_id)
+        self.session.get.assert_called_once_with("/endpoints/custom/2/trunks")
+
+        assert_that(response, expected_result)

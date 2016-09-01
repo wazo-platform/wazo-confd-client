@@ -250,6 +250,7 @@ Exposed via ```c.endpoints_sip.relations(endpoint_id)```
  * associate_line(line)
  * dissociate_line(line)
  * get_line()
+ * get_trunk()
 
 Endpoint SCCP relation
 ---------------------
@@ -268,6 +269,7 @@ Exposed via ```c.endpoints_custom.relations(endpoint_id)```
  * associate_line(line)
  * dissociate_line(line)
  * get_line()
+ * get_trunk()
 
 Extension relation
 ------------------
@@ -309,6 +311,18 @@ Exposed via ```c.lines.relations(line_id)```
  * add_device(device_id)
  * remove_device(device_id)
  * get_device()
+
+Trunk relation
+--------------
+
+Exposed via ```c.trunks.relations(trunk_id)```
+
+ * add_endpoint_sip(endpoint_sip)
+ * remove_endpoint_sip(endpoint_sip)
+ * get_endpoint_sip()
+ * add_endpoint_custom(endpoint_custom)
+ * remove_endpoint_custom(endpoint_custom)
+ * get_endpoint_custom()
 
 User relation
 -------------

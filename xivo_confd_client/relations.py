@@ -309,3 +309,45 @@ class UserEntityRelation(HTTPCommand):
         url = url_join('users', user_id, 'entities')
         response = self.session.get(url)
         return response.json()
+
+
+class TrunkEndpointSipRelation(HTTPCommand):
+
+    def associate(self, trunk_id, sip_id):
+        url = url_join('trunks', trunk_id, 'endpoints', 'sip', sip_id)
+        self.session.put(url)
+
+    def dissociate(self, trunk_id, sip_id):
+        url = url_join('trunks', trunk_id, 'endpoints', 'sip', sip_id)
+        self.session.delete(url)
+
+    def get_by_trunk(self, trunk_id):
+        url = url_join('trunks', trunk_id, 'endpoints', 'sip')
+        response = self.session.get(url)
+        return response.json()
+
+    def get_by_endpoint_sip(self, sip_id):
+        url = url_join('endpoints', 'sip', sip_id, 'trunks')
+        response = self.session.get(url)
+        return response.json()
+
+
+class TrunkEndpointCustomRelation(HTTPCommand):
+
+    def associate(self, trunk_id, custom_id):
+        url = url_join('trunks', trunk_id, 'endpoints', 'custom', custom_id)
+        self.session.put(url)
+
+    def dissociate(self, trunk_id, custom_id):
+        url = url_join('trunks', trunk_id, 'endpoints', 'custom', custom_id)
+        self.session.delete(url)
+
+    def get_by_trunk(self, trunk_id):
+        url = url_join('trunks', trunk_id, 'endpoints', 'custom')
+        response = self.session.get(url)
+        return response.json()
+
+    def get_by_endpoint_custom(self, custom_id):
+        url = url_join('endpoints', 'custom', custom_id, 'trunks')
+        response = self.session.get(url)
+        return response.json()
