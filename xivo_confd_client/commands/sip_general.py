@@ -24,7 +24,7 @@ class SIPGeneralCommand(RESTCommand):
 
     resource = 'asterisk/sip/general'
 
-    def list(self):
+    def get(self):
         response = self.session.get(self.base_url)
         return response.json()
 
