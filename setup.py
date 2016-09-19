@@ -45,6 +45,7 @@ setup(
             'entities = xivo_confd_client.commands.entities:EntitiesCommand',
             'extensions = xivo_confd_client.commands.extensions:ExtensionsCommand',
             'funckeys = xivo_confd_client.commands.funckeys:FuncKeysCommand',
+            'incalls = xivo_confd_client.commands.incalls:IncallsCommand',
             'infos = xivo_confd_client.commands.infos:InfosCommand',
             'lines = xivo_confd_client.commands.lines:LinesCommand',
             'lines_sip = xivo_confd_client.commands.lines_sip:LinesSIPCommand',
