@@ -309,6 +309,7 @@ Exposed via ```c.lines.relations(line_id)```
  * list_users()
  * add_extension(extension)
  * remove_extension(extension)
+ * list_extensions()
  * add_endpoint_sip(endpoint_sip)
  * remove_endpoint_sip(endpoint_sip)
  * get_endpoint_sip()
