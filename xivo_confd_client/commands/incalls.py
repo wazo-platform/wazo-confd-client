@@ -15,9 +15,30 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+from xivo_confd_client.util import extract_id
 from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.relations import IncallExtensionRelation
+
+
+class IncallRelation(object):
+
+    def __init__(self, builder, incall_id):
+        self.incall_id = incall_id
+        self.incall_extension = IncallExtensionRelation(builder)
+
+    @extract_id
+    def add_extension(self, extension_id):
+        return self.incall_extension.associate(self.incall_id, extension_id)
+
+    @extract_id
+    def remove_extension(self, extension_id):
+        return self.incall_extension.dissociate(self.incall_id, extension_id)
+
+    def list_extensions(self):
+        return self.incall_extension.list_by_incall(self.incall_id)
 
 
 class IncallsCommand(CRUDCommand):
 
     resource = 'incalls'
+    relation_cmd = IncallRelation

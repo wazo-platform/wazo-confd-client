@@ -280,14 +280,24 @@ Exposed via ```c.extensions.relations(extension_id)```
  * remove_line(line)
  * get_line()
  * list_lines()
+ * list_incalls()
 
 Funckey template relation
-----------------
+-------------------------
 
 Exposed via ```c.funckeys.relations(template_id)```
 
  * add_user(user)
  * remove_user(user)
+
+Incall relation
+---------------
+
+Exposed via ```c.incalls.relations(incall_id)```
+
+ * add_extension(extension)
+ * remove_extension(extension)
+ * list_extensions()
 
 Line relation
 -------------
@@ -299,6 +309,7 @@ Exposed via ```c.lines.relations(line_id)```
  * list_users()
  * add_extension(extension)
  * remove_extension(extension)
+ * list_extensions()
  * add_endpoint_sip(endpoint_sip)
  * remove_endpoint_sip(endpoint_sip)
  * get_endpoint_sip()
