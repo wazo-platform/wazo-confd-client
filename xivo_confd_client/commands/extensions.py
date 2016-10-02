@@ -42,7 +42,7 @@ class ExtensionRelation(object):
     def list_lines(self):
         return self.line_extension_relation.list_by_extension(self.extension_id)
 
-    def list_extension(self):
+    def list_incalls(self):
         return self.incall_extension_relation.list_by_extension(self.extension_id)
 
 
