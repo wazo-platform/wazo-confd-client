@@ -362,13 +362,3 @@ class IncallExtensionRelation(HTTPCommand):
     def dissociate(self, incall_id, extension_id):
         url = url_join('incalls', incall_id, 'extensions', extension_id)
         self.session.delete(url)
-
-    def list_by_incall(self, incall_id):
-        url = url_join('incalls', incall_id, 'extensions')
-        response = self.session.get(url)
-        return response.json()
-
-    def list_by_extension(self, extension_id):
-        url = url_join('extensions', extension_id, 'incalls')
-        response = self.session.get(url)
-        return response.json()

@@ -34,9 +34,6 @@ class IncallRelation(object):
     def remove_extension(self, extension_id):
         return self.incall_extension.dissociate(self.incall_id, extension_id)
 
-    def list_extensions(self):
-        return self.incall_extension.list_by_incall(self.incall_id)
-
 
 class IncallsCommand(CRUDCommand):
 
