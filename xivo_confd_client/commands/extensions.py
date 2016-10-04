@@ -17,8 +17,7 @@
 
 from xivo_confd_client.util import extract_id
 from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import (LineExtensionRelation,
-                                         IncallExtensionRelation)
+from xivo_confd_client.relations import LineExtensionRelation
 
 
 class ExtensionRelation(object):
@@ -26,7 +25,6 @@ class ExtensionRelation(object):
     def __init__(self, builder, extension_id):
         self.extension_id = extension_id
         self.line_extension_relation = LineExtensionRelation(builder)
-        self.incall_extension_relation = IncallExtensionRelation(builder)
 
     @extract_id
     def add_line(self, line_id):
@@ -41,9 +39,6 @@ class ExtensionRelation(object):
 
     def list_lines(self):
         return self.line_extension_relation.list_by_extension(self.extension_id)
-
-    def list_incalls(self):
-        return self.incall_extension_relation.list_by_extension(self.extension_id)
 
 
 class ExtensionsCommand(CRUDCommand):
