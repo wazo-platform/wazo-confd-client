@@ -26,6 +26,7 @@ from xivo_confd_client.relations import (IncallExtensionRelation,
                                          LineEndpointSccpRelation,
                                          LineEndpointSipRelation,
                                          LineExtensionRelation,
+                                         OutcallTrunkRelation,
                                          TrunkEndpointCustomRelation,
                                          TrunkEndpointSipRelation,
                                          UserCallPermissionRelation,
@@ -973,3 +974,18 @@ class TestIncallExtensionRelation(TestCommand):
 
         self.command.dissociate(incall_id, extension_id)
         self.session.delete.assert_called_once_with("/incalls/1/extensions/2")
+
+
+class TestOutcallTrunkRelation(TestCommand):
+
+    Command = OutcallTrunkRelation
+
+    def test_outcall_trunk_association(self):
+        outcall_id = 1
+        trunks = [{'id': 2}, {'id': 3}]
+
+        self.set_response('put', 204)
+        expected_body = {'trunks': trunks}
+
+        self.command.associate(outcall_id, trunks)
+        self.session.put.assert_called_once_with("/outcalls/1/trunks", expected_body)

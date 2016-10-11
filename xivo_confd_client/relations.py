@@ -362,3 +362,11 @@ class IncallExtensionRelation(HTTPCommand):
     def dissociate(self, incall_id, extension_id):
         url = url_join('incalls', incall_id, 'extensions', extension_id)
         self.session.delete(url)
+
+
+class OutcallTrunkRelation(HTTPCommand):
+
+    def associate(self, outcall_id, trunks):
+        url = url_join('outcalls', outcall_id, 'trunks')
+        body = {'trunks': [{'id': trunk['id']} for trunk in trunks]}
+        self.session.put(url, body)
