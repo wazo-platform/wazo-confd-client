@@ -16,8 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+from xivo_confd_client.util import extract_id
 from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import OutcallTrunkRelation
+from xivo_confd_client.relations import OutcallExtensionRelation, OutcallTrunkRelation
 
 
 class OutcallRelation(object):
@@ -25,9 +26,18 @@ class OutcallRelation(object):
     def __init__(self, builder, outcall_id):
         self.outcall_id = outcall_id
         self.outcall_trunk = OutcallTrunkRelation(builder)
+        self.outcall_extension = OutcallExtensionRelation(builder)
 
     def update_trunks(self, trunks):
         return self.outcall_trunk.associate(self.outcall_id, trunks)
+
+    @extract_id
+    def add_extension(self, extension_id):
+        return self.outcall_extension.associate(self.outcall_id, extension_id)
+
+    @extract_id
+    def remove_extension(self, extension_id):
+        return self.outcall_extension.dissociate(self.outcall_id, extension_id)
 
 
 class OutcallsCommand(CRUDCommand):

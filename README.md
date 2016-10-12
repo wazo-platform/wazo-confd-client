@@ -327,6 +327,8 @@ Outcall relation
 Exposed via ```c.outcalls.relations(outcall_id)```
 
  * update_trunks(trunks)
+ * add_extension(extension)
+ * remove_extension(extension)
 
 Trunk relation
 --------------

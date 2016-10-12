@@ -370,3 +370,14 @@ class OutcallTrunkRelation(HTTPCommand):
         url = url_join('outcalls', outcall_id, 'trunks')
         body = {'trunks': [{'id': trunk['id']} for trunk in trunks]}
         self.session.put(url, body)
+
+
+class OutcallExtensionRelation(HTTPCommand):
+
+    def associate(self, outcall_id, extension_id):
+        url = url_join('outcalls', outcall_id, 'extensions', extension_id)
+        self.session.put(url)
+
+    def dissociate(self, outcall_id, extension_id):
+        url = url_join('outcalls', outcall_id, 'extensions', extension_id)
+        self.session.delete(url)
