@@ -321,6 +321,13 @@ Exposed via ```c.lines.relations(line_id)```
  * remove_device(device_id)
  * get_device()
 
+Outcall relation
+----------------
+
+Exposed via ```c.outcalls.relations(outcall_id)```
+
+ * update_trunks(trunks)
+
 Trunk relation
 --------------
 

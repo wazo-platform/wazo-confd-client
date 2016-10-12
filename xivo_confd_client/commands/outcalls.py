@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Copyright (C) 2016 Avencall
+# Copyright (C) 2016 Proformatique Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,8 +17,20 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.relations import OutcallTrunkRelation
+
+
+class OutcallRelation(object):
+
+    def __init__(self, builder, outcall_id):
+        self.outcall_id = outcall_id
+        self.outcall_trunk = OutcallTrunkRelation(builder)
+
+    def update_trunks(self, trunks):
+        return self.outcall_trunk.associate(self.outcall_id, trunks)
 
 
 class OutcallsCommand(CRUDCommand):
 
     resource = 'outcalls'
+    relation_cmd = OutcallRelation
