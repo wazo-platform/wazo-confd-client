@@ -32,8 +32,8 @@ class OutcallRelation(object):
         return self.outcall_trunk.associate(self.outcall_id, trunks)
 
     @extract_id
-    def add_extension(self, extension_id):
-        return self.outcall_extension.associate(self.outcall_id, extension_id)
+    def add_extension(self, extension_id, **kwargs):
+        return self.outcall_extension.associate(self.outcall_id, extension_id, **kwargs)
 
     @extract_id
     def remove_extension(self, extension_id):
