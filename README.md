@@ -294,7 +294,7 @@ Incall relation
 
 Exposed via ```c.incalls.relations(incall_id)```
 
- * add_extension(extension)
+ * add_extension(extension, prefix='123', external_prefix='456', strip_digits=2, caller_id='toto')
  * remove_extension(extension)
 
 Line relation
@@ -327,6 +327,8 @@ Outcall relation
 Exposed via ```c.outcalls.relations(outcall_id)```
 
  * update_trunks(trunks)
+ * add_extension(extension)
+ * remove_extension(extension)
 
 Trunk relation
 --------------

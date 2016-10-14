@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 # Copyright (C) 2015-2016 Avencall
+# Copyright (C) 2016 Proformatique Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -370,3 +371,14 @@ class OutcallTrunkRelation(HTTPCommand):
         url = url_join('outcalls', outcall_id, 'trunks')
         body = {'trunks': [{'id': trunk['id']} for trunk in trunks]}
         self.session.put(url, body)
+
+
+class OutcallExtensionRelation(HTTPCommand):
+
+    def associate(self, outcall_id, extension_id, **body):
+        url = url_join('outcalls', outcall_id, 'extensions', extension_id)
+        self.session.put(url, body)
+
+    def dissociate(self, outcall_id, extension_id):
+        url = url_join('outcalls', outcall_id, 'extensions', extension_id)
+        self.session.delete(url)

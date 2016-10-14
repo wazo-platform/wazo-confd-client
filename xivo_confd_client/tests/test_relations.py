@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 # Copyright (C) 2015-2016 Avencall
+# Copyright (C) 2016 Proformatique Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,6 +27,7 @@ from xivo_confd_client.relations import (IncallExtensionRelation,
                                          LineEndpointSccpRelation,
                                          LineEndpointSipRelation,
                                          LineExtensionRelation,
+                                         OutcallExtensionRelation,
                                          OutcallTrunkRelation,
                                          TrunkEndpointCustomRelation,
                                          TrunkEndpointSipRelation,
@@ -989,3 +991,34 @@ class TestOutcallTrunkRelation(TestCommand):
 
         self.command.associate(outcall_id, trunks)
         self.session.put.assert_called_once_with("/outcalls/1/trunks", expected_body)
+
+
+class TestOutcallExtensionRelation(TestCommand):
+
+    Command = OutcallExtensionRelation
+
+    def test_outcall_extension_association(self):
+        outcall_id = 1
+        extension_id = 2
+
+        self.set_response('put', 204)
+        expected_body = {'prefix': '123',
+                         'external_prefix': '456',
+                         'strip_digits': 2,
+                         'caller_id': 'toto'}
+
+        self.command.associate(outcall_id, extension_id,
+                               prefix='123',
+                               external_prefix='456',
+                               strip_digits=2,
+                               caller_id='toto')
+        self.session.put.assert_called_once_with("/outcalls/1/extensions/2", expected_body)
+
+    def test_outcall_extension_dissociation(self):
+        outcall_id = 1
+        extension_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(outcall_id, extension_id)
+        self.session.delete.assert_called_once_with("/outcalls/1/extensions/2")
