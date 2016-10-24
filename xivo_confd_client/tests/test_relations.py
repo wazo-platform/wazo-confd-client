@@ -39,6 +39,7 @@ from xivo_confd_client.relations import (IncallExtensionRelation,
                                          UserLineRelation,
                                          UserServiceRelation,
                                          UserAgentRelation,
+                                         UserEndpointSipRelation,
                                          UserVoicemailRelation)
 
 
@@ -86,6 +87,24 @@ class TestUserLineRelation(TestCommand):
         self.set_response('get', 200, expected_result)
 
         result = self.command.list_by_line(line_id)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
+
+
+class TestUserEndpointSipRelation(TestCommand):
+
+    Command = UserEndpointSipRelation
+
+    def test_user_line_list_by_user(self):
+        user_uuid = '1234-abcd'
+        line_id = 42
+        expected_url = "/users/{}/lines/{}/associated/endpoints/sip".format(user_uuid, line_id)
+        expected_result = {"username": 'tata'}
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.get_by_user_line(user_uuid, line_id)
 
         self.session.get.assert_called_once_with(expected_url)
         assert_that(result, expected_result)

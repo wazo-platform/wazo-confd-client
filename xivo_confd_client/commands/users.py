@@ -17,6 +17,7 @@
 
 from xivo_confd_client.crud import CRUDCommand
 from xivo_confd_client.relations import (UserLineRelation,
+                                         UserEndpointSipRelation,
                                          UserVoicemailRelation,
                                          UserFuncKeyRelation,
                                          UserCtiProfileRelation,
@@ -33,6 +34,7 @@ class UserRelation(object):
     def __init__(self, builder, user_id):
         self.user_id = user_id
         self.user_line = UserLineRelation(builder)
+        self.user_endpoint_sip = UserEndpointSipRelation(builder)
         self.user_voicemail = UserVoicemailRelation(builder)
         self.user_funckey = UserFuncKeyRelation(builder)
         self.user_cti_profile = UserCtiProfileRelation(builder)
@@ -52,6 +54,9 @@ class UserRelation(object):
 
     def list_lines(self):
         return self.user_line.list_by_user(self.user_id)
+
+    def get_endpoint_sip(self, line_id):
+        return self.user_endpoint_sip.get_by_user_line(self.user_id, line_id)
 
     @extract_id
     def add_call_permission(self, call_permission_id):

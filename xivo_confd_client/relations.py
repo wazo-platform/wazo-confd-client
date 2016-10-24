@@ -42,6 +42,14 @@ class UserLineRelation(HTTPCommand):
         return response.json()
 
 
+class UserEndpointSipRelation(HTTPCommand):
+
+    def get_by_user_line(self, user_uuid, line_id):
+        url = url_join('users', user_uuid, 'lines', line_id, 'associated', 'endpoints', 'sip')
+        response = self.session.get(url)
+        return response.json()
+
+
 class UserVoicemailRelation(HTTPCommand):
 
     def associate(self, user_id, voicemail_id):

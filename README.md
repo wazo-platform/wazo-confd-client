@@ -388,6 +388,8 @@ Exposed via ```c.users.relations(user_id)```
  * update_forwards(forwards)
  * list_forwards()
 
+ * get_endpoint_sip(line_id)
+
 Voicemail relation
 ------------------
 
