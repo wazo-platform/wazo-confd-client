@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 # Copyright (C) 2015 Avencall
+# Copyright (C) 2016 Proformatique Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,10 +28,10 @@ def url_join(*parts):
 
 def extract_id(func):
     @wraps(func)
-    def wrapper(self, resource_or_id):
+    def wrapper(self, resource_or_id, **kwargs):
         if isinstance(resource_or_id, dict):
             resource_id = resource_or_id['id']
         else:
             resource_id = resource_or_id
-        return func(self, resource_id)
+        return func(self, resource_id, **kwargs)
     return wrapper
