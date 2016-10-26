@@ -47,6 +47,7 @@ setup(
             'funckeys = xivo_confd_client.commands.funckeys:FuncKeysCommand',
             'incalls = xivo_confd_client.commands.incalls:IncallsCommand',
             'infos = xivo_confd_client.commands.infos:InfosCommand',
+            'ivr = xivo_confd_client.commands.ivr:IVRCommand',
             'lines = xivo_confd_client.commands.lines:LinesCommand',
             'lines_sip = xivo_confd_client.commands.lines_sip:LinesSIPCommand',
             'outcalls = xivo_confd_client.commands.outcalls:OutcallsCommand',
