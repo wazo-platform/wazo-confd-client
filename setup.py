@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Copyright (C) 2014-2016 Avencall
+# Copyright (C) 2016 Proformatique Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -37,6 +38,7 @@ setup(
             'call_logs = xivo_confd_client.commands.call_logs:CallLogsCommand',
             'call_permissions = xivo_confd_client.commands.call_permissions:CallPermissionsCommand',
             'configuration = xivo_confd_client.commands.configuration:ConfigurationCommand',
+            'contexts = xivo_confd_client.commands.contexts:ContextsCommand',
             'cti_profiles = xivo_confd_client.commands.cti_profiles:CtiProfilesCommand',
             'devices = xivo_confd_client.commands.devices:DevicesCommand',
             'endpoints_custom = xivo_confd_client.commands.endpoints_custom:EndpointsCustomCommand',
