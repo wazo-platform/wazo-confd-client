@@ -15,7 +15,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+from xivo_confd_client.util import extract_id
 from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.relations import GroupExtensionRelation
+
+
+class GroupRelation(object):
+
+    def __init__(self, builder, group_id):
+        self.group_id = group_id
+        self.group_extension = GroupExtensionRelation(builder)
+
+    @extract_id
+    def add_extension(self, extension_id):
+        return self.group_extension.associate(self.group_id, extension_id)
+
+    @extract_id
+    def remove_extension(self, extension_id):
+        return self.group_extension.dissociate(self.group_id, extension_id)
 
 
 class GroupsCommand(CRUDCommand):

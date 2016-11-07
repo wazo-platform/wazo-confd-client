@@ -21,7 +21,8 @@
 from hamcrest import assert_that
 
 from xivo_confd_client.tests import TestCommand
-from xivo_confd_client.relations import (IncallExtensionRelation,
+from xivo_confd_client.relations import (GroupExtensionRelation,
+                                         IncallExtensionRelation,
                                          LineDeviceRelation,
                                          LineEndpointCustomRelation,
                                          LineEndpointSccpRelation,
@@ -1041,3 +1042,26 @@ class TestOutcallExtensionRelation(TestCommand):
 
         self.command.dissociate(outcall_id, extension_id)
         self.session.delete.assert_called_once_with("/outcalls/1/extensions/2")
+
+
+class TestGroupExtensionRelation(TestCommand):
+
+    Command = GroupExtensionRelation
+
+    def test_group_extension_association(self):
+        group_id = 1
+        extension_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(group_id, extension_id)
+        self.session.put.assert_called_once_with("/groups/1/extensions/2")
+
+    def test_group_extension_dissociation(self):
+        group_id = 1
+        extension_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(group_id, extension_id)
+        self.session.delete.assert_called_once_with("/groups/1/extensions/2")

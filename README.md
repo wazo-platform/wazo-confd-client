@@ -289,6 +289,14 @@ Exposed via ```c.funckeys.relations(template_id)```
  * add_user(user)
  * remove_user(user)
 
+Group relation
+---------------
+
+Exposed via ```c.groups.relations(group_id)```
+
+ * add_extension(extension)
+ * remove_extension(extension)
+
 Incall relation
 ---------------
 
