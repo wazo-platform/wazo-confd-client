@@ -390,3 +390,14 @@ class OutcallExtensionRelation(HTTPCommand):
     def dissociate(self, outcall_id, extension_id):
         url = url_join('outcalls', outcall_id, 'extensions', extension_id)
         self.session.delete(url)
+
+
+class GroupExtensionRelation(HTTPCommand):
+
+    def associate(self, group_id, extension_id):
+        url = url_join('groups', group_id, 'extensions', extension_id)
+        self.session.put(url)
+
+    def dissociate(self, group_id, extension_id):
+        url = url_join('groups', group_id, 'extensions', extension_id)
+        self.session.delete(url)
