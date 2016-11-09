@@ -38,3 +38,4 @@ class GroupRelation(object):
 class GroupsCommand(CRUDCommand):
 
     resource = 'groups'
+    relation_cmd = GroupRelation
