@@ -22,6 +22,7 @@ from hamcrest import assert_that
 
 from xivo_confd_client.tests import TestCommand
 from xivo_confd_client.relations import (GroupExtensionRelation,
+                                         GroupMemberUserRelation,
                                          IncallExtensionRelation,
                                          LineDeviceRelation,
                                          LineEndpointCustomRelation,
@@ -1065,3 +1066,18 @@ class TestGroupExtensionRelation(TestCommand):
 
         self.command.dissociate(group_id, extension_id)
         self.session.delete.assert_called_once_with("/groups/1/extensions/2")
+
+
+class TestGroupMemberUserRelation(TestCommand):
+
+    Command = GroupMemberUserRelation
+
+    def test_group_user_association(self):
+        group_id = 1
+        users = [{'uuid': 'a-2'}, {'uuid': 'b-3'}]
+
+        self.set_response('put', 204)
+        expected_body = {'users': users}
+
+        self.command.associate(group_id, users)
+        self.session.put.assert_called_once_with("/groups/1/members/users", expected_body)

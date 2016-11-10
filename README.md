@@ -296,6 +296,7 @@ Exposed via ```c.groups.relations(group_id)```
 
  * add_extension(extension)
  * remove_extension(extension)
+ * update_user_members(users)
 
 Incall relation
 ---------------

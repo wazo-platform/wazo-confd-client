@@ -17,7 +17,7 @@
 
 from xivo_confd_client.util import extract_id
 from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import GroupExtensionRelation
+from xivo_confd_client.relations import GroupExtensionRelation, GroupMemberUserRelation
 
 
 class GroupRelation(object):
@@ -25,6 +25,10 @@ class GroupRelation(object):
     def __init__(self, builder, group_id):
         self.group_id = group_id
         self.group_extension = GroupExtensionRelation(builder)
+        self.group_user_members = GroupMemberUserRelation(builder)
+
+    def update_user_members(self, users):
+        return self.group_user_members.associate(self.group_id, users)
 
     @extract_id
     def add_extension(self, extension_id):

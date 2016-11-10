@@ -401,3 +401,11 @@ class GroupExtensionRelation(HTTPCommand):
     def dissociate(self, group_id, extension_id):
         url = url_join('groups', group_id, 'extensions', extension_id)
         self.session.delete(url)
+
+
+class GroupMemberUserRelation(HTTPCommand):
+
+    def associate(self, group_id, users):
+        url = url_join('groups', group_id, 'members', 'users')
+        body = {'users': [{'uuid': user['uuid']} for user in users]}
+        self.session.put(url, body)
