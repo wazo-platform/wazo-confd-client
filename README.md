@@ -298,6 +298,9 @@ Exposed via ```c.groups.relations(group_id)```
  * remove_extension(extension)
  * update_user_members(users)
 
+ * update_fallbacks(fallbacks)
+ * list_fallbacks()
+
 Incall relation
 ---------------
 
