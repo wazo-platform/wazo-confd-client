@@ -413,11 +413,11 @@ class GroupMemberUserRelation(HTTPCommand):
 
 class GroupFallbackRelation(HTTPCommand):
 
-    def list_forwards(self, group_id):
+    def get_fallbacks(self, group_id):
         url = url_join('groups', group_id, 'fallbacks')
         response = self.session.get(url)
         return response.json()
 
-    def update_forwards(self, group_id, fallbacks):
+    def update_fallbacks(self, group_id, fallbacks):
         url = url_join('groups', group_id, 'fallbacks')
         self.session.put(url, fallbacks)
