@@ -409,3 +409,15 @@ class GroupMemberUserRelation(HTTPCommand):
         url = url_join('groups', group_id, 'members', 'users')
         body = {'users': [{'uuid': user['uuid']} for user in users]}
         self.session.put(url, body)
+
+
+class GroupFallbackRelation(HTTPCommand):
+
+    def get_fallbacks(self, group_id):
+        url = url_join('groups', group_id, 'fallbacks')
+        response = self.session.get(url)
+        return response.json()
+
+    def update_fallbacks(self, group_id, fallbacks):
+        url = url_join('groups', group_id, 'fallbacks')
+        self.session.put(url, fallbacks)

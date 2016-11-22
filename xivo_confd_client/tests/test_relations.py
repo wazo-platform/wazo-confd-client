@@ -22,6 +22,7 @@ from hamcrest import assert_that
 
 from xivo_confd_client.tests import TestCommand
 from xivo_confd_client.relations import (GroupExtensionRelation,
+                                         GroupFallbackRelation,
                                          GroupMemberUserRelation,
                                          IncallExtensionRelation,
                                          LineDeviceRelation,
@@ -1081,3 +1082,29 @@ class TestGroupMemberUserRelation(TestCommand):
 
         self.command.associate(group_id, users)
         self.session.put.assert_called_once_with("/groups/1/members/users", expected_body)
+
+
+class TestGroupFallbackRelation(TestCommand):
+
+    Command = GroupFallbackRelation
+
+    def test_list_fallbacks(self):
+        group_id = 1234
+        expected_url = "/groups/{}/fallbacks".format(group_id)
+        expected_result = {'noanswer_destination': {'type': 'none'}}
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.list_fallbacks(group_id)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
+
+    def test_update_fallbacks(self):
+        group_id = 1234
+        fallbacks = {'noanswer_destination': {'type': 'none'}}
+
+        self.command.update_fallbacks(group_id, fallbacks)
+
+        expected_url = "/groups/{}/fallbacks".format(group_id)
+        self.session.put.assert_called_with(expected_url, fallbacks)
