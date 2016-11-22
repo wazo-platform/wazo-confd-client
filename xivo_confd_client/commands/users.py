@@ -25,6 +25,7 @@ from xivo_confd_client.relations import (UserLineRelation,
                                          UserForwardRelation,
                                          UserCallPermissionRelation,
                                          UserEntityRelation,
+                                         UserFallbackRelation,
                                          UserAgentRelation)
 from xivo_confd_client.util import extract_id, url_join
 
@@ -43,6 +44,7 @@ class UserRelation(object):
         self.user_call_permission = UserCallPermissionRelation(builder)
         self.user_entity = UserEntityRelation(builder)
         self.user_agent = UserAgentRelation(builder)
+        self.user_fallback = UserFallbackRelation(builder)
 
     @extract_id
     def add_line(self, line_id):
@@ -152,6 +154,12 @@ class UserRelation(object):
 
     def update_forwards(self, body):
         return self.user_forward.update_forwards(self.user_id, body)
+
+    def update_fallbacks(self, fallbacks):
+        self.user_fallback.update_fallbacks(self.user_id, fallbacks)
+
+    def list_fallbacks(self):
+        return self.user_fallback.list_fallbacks(self.user_id)
 
 
 class UsersCommand(CRUDCommand):

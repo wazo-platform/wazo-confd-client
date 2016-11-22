@@ -402,6 +402,9 @@ Exposed via ```c.users.relations(user_id)```
 
  * get_endpoint_sip(line_id)
 
+ * update_fallbacks(fallbacks)
+ * list_fallbacks()
+
 Voicemail relation
 ------------------
 
