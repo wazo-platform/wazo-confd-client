@@ -45,7 +45,7 @@ class GroupRelation(object):
         self.group_fallback.update_fallbacks(self.group_id, fallbacks)
 
     def list_fallbacks(self):
-        return self.group_fallback.get_fallbacks(self.group_id)
+        return self.group_fallback.list_fallbacks(self.group_id)
 
 
 class GroupsCommand(CRUDCommand):

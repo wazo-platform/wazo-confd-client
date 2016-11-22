@@ -413,7 +413,7 @@ class GroupMemberUserRelation(HTTPCommand):
 
 class GroupFallbackRelation(HTTPCommand):
 
-    def get_fallbacks(self, group_id):
+    def list_fallbacks(self, group_id):
         url = url_join('groups', group_id, 'fallbacks')
         response = self.session.get(url)
         return response.json()
