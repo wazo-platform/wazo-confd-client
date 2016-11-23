@@ -37,6 +37,7 @@ from xivo_confd_client.relations import (GroupExtensionRelation,
                                          UserCallPermissionRelation,
                                          UserCtiProfileRelation,
                                          UserEntityRelation,
+                                         UserFallbackRelation,
                                          UserForwardRelation,
                                          UserFuncKeyRelation,
                                          UserLineRelation,
@@ -1107,4 +1108,36 @@ class TestGroupFallbackRelation(TestCommand):
         self.command.update_fallbacks(group_id, fallbacks)
 
         expected_url = "/groups/{}/fallbacks".format(group_id)
+        self.session.put.assert_called_with(expected_url, fallbacks)
+
+
+class TestUserFallbackRelation(TestCommand):
+
+    Command = UserFallbackRelation
+
+    def test_list_fallbacks(self):
+        user_id = 1234
+        expected_url = "/users/{}/fallbacks".format(user_id)
+        expected_result = {'noanswer_destination': None,
+                           'busy_destination': None,
+                           'congestion_destination': None,
+                           'fail_destination': None}
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.list_fallbacks(user_id)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
+
+    def test_update_fallbacks(self):
+        user_id = 1234
+        fallbacks = {'noanswer_destination': None,
+                     'busy_destination': None,
+                     'congestion_destination': None,
+                     'fail_destination': None}
+
+        self.command.update_fallbacks(user_id, fallbacks)
+
+        expected_url = "/users/{}/fallbacks".format(user_id)
         self.session.put.assert_called_with(expected_url, fallbacks)

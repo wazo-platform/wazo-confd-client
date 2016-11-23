@@ -421,3 +421,15 @@ class GroupFallbackRelation(HTTPCommand):
     def update_fallbacks(self, group_id, fallbacks):
         url = url_join('groups', group_id, 'fallbacks')
         self.session.put(url, fallbacks)
+
+
+class UserFallbackRelation(HTTPCommand):
+
+    def list_fallbacks(self, user_id):
+        url = url_join('users', user_id, 'fallbacks')
+        response = self.session.get(url)
+        return response.json()
+
+    def update_fallbacks(self, user_id, fallbacks):
+        url = url_join('users', user_id, 'fallbacks')
+        self.session.put(url, fallbacks)
