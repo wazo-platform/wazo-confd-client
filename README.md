@@ -1,6 +1,6 @@
 XiVO confd client
 =================
-[![Build Status](https://travis-ci.org/xivo-pbx/xivo-confd-client.svg?branch=master)](https://travis-ci.org/xivo-pbx/xivo-confd-client)
+[![Build Status](https://travis-ci.org/wazo-pbx/xivo-confd-client.svg?branch=master)](https://travis-ci.org/wazo-pbx/xivo-confd-client)
 
 A python library for using [xivo-confd](https://github.com/xivo-pbx/xivo-confd)
 
