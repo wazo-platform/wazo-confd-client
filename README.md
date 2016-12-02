@@ -226,6 +226,14 @@ Exposed via ```c.call_permissions.relations(call_permission_id)```
  * remove_user(user_id)
  * list_users()
 
+Conference relation
+---------------
+
+Exposed via ```c.conferences.relations(conference_id)```
+
+ * add_extension(extension)
+ * remove_extension(extension)
+
 CtiProfile relation
 -------------------
 

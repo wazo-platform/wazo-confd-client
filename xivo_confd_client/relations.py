@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (C) 2015-2016 Avencall
-# Copyright (C) 2016 Proformatique Inc.
+# Copyright 2015-2016 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -433,3 +432,14 @@ class UserFallbackRelation(HTTPCommand):
     def update_fallbacks(self, user_id, fallbacks):
         url = url_join('users', user_id, 'fallbacks')
         self.session.put(url, fallbacks)
+
+
+class ConferenceExtensionRelation(HTTPCommand):
+
+    def associate(self, conference_id, extension_id):
+        url = url_join('conferences', conference_id, 'extensions', extension_id)
+        self.session.put(url)
+
+    def dissociate(self, conference_id, extension_id):
+        url = url_join('conferences', conference_id, 'extensions', extension_id)
+        self.session.delete(url)

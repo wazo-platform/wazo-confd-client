@@ -15,9 +15,27 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+from xivo_confd_client.util import extract_id
 from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.relations import ConferenceExtensionRelation
+
+
+class ConferenceRelation(object):
+
+    def __init__(self, builder, conference_id):
+        self.conference_id = conference_id
+        self.conference_extension = ConferenceExtensionRelation(builder)
+
+    @extract_id
+    def add_extension(self, extension_id):
+        return self.conference_extension.associate(self.conference_id, extension_id)
+
+    @extract_id
+    def remove_extension(self, extension_id):
+        return self.conference_extension.dissociate(self.conference_id, extension_id)
 
 
 class ConferencesCommand(CRUDCommand):
 
     resource = 'conferences'
+    relation_cmd = ConferenceRelation
