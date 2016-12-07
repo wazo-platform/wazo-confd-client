@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2014-2016 Avencall
-# Copyright (C) 2016 Proformatique Inc.
+# Copyright (C) 2014-2016 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -37,6 +36,7 @@ setup(
         'confd_client.commands': [
             'call_logs = xivo_confd_client.commands.call_logs:CallLogsCommand',
             'call_permissions = xivo_confd_client.commands.call_permissions:CallPermissionsCommand',
+            'conferences = xivo_confd_client.commands.conferences:ConferencesCommand',
             'configuration = xivo_confd_client.commands.configuration:ConfigurationCommand',
             'contexts = xivo_confd_client.commands.contexts:ContextsCommand',
             'cti_profiles = xivo_confd_client.commands.cti_profiles:CtiProfilesCommand',

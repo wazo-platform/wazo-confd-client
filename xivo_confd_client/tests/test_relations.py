@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (C) 2015-2016 Avencall
-# Copyright (C) 2016 Proformatique Inc.
+# Copyright 2015-2016 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,7 +20,8 @@
 from hamcrest import assert_that
 
 from xivo_confd_client.tests import TestCommand
-from xivo_confd_client.relations import (GroupExtensionRelation,
+from xivo_confd_client.relations import (ConferenceExtensionRelation,
+                                         GroupExtensionRelation,
                                          GroupFallbackRelation,
                                          GroupMemberUserRelation,
                                          IncallExtensionRelation,
@@ -1141,3 +1141,26 @@ class TestUserFallbackRelation(TestCommand):
 
         expected_url = "/users/{}/fallbacks".format(user_id)
         self.session.put.assert_called_with(expected_url, fallbacks)
+
+
+class TestConferenceExtensionRelation(TestCommand):
+
+    Command = ConferenceExtensionRelation
+
+    def test_conference_extension_association(self):
+        conference_id = 1
+        extension_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(conference_id, extension_id)
+        self.session.put.assert_called_once_with("/conferences/1/extensions/2")
+
+    def test_conference_extension_dissociation(self):
+        conference_id = 1
+        extension_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(conference_id, extension_id)
+        self.session.delete.assert_called_once_with("/conferences/1/extensions/2")
