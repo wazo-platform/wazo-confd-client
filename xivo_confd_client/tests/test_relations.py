@@ -32,6 +32,7 @@ from xivo_confd_client.relations import (ConferenceExtensionRelation,
                                          LineExtensionRelation,
                                          OutcallExtensionRelation,
                                          OutcallTrunkRelation,
+                                         ParkingLotExtensionRelation,
                                          TrunkEndpointCustomRelation,
                                          TrunkEndpointSipRelation,
                                          UserCallPermissionRelation,
@@ -1164,3 +1165,26 @@ class TestConferenceExtensionRelation(TestCommand):
 
         self.command.dissociate(conference_id, extension_id)
         self.session.delete.assert_called_once_with("/conferences/1/extensions/2")
+
+
+class TestParkingLotExtensionRelation(TestCommand):
+
+    Command = ParkingLotExtensionRelation
+
+    def test_parking_lot_extension_association(self):
+        parking_lot_id = 1
+        extension_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(parking_lot_id, extension_id)
+        self.session.put.assert_called_once_with("/parkinglots/1/extensions/2")
+
+    def test_parking_lot_extension_dissociation(self):
+        parking_lot_id = 1
+        extension_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(parking_lot_id, extension_id)
+        self.session.delete.assert_called_once_with("/parkinglots/1/extensions/2")

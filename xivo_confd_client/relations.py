@@ -443,3 +443,14 @@ class ConferenceExtensionRelation(HTTPCommand):
     def dissociate(self, conference_id, extension_id):
         url = url_join('conferences', conference_id, 'extensions', extension_id)
         self.session.delete(url)
+
+
+class ParkingLotExtensionRelation(HTTPCommand):
+
+    def associate(self, parking_lot_id, extension_id):
+        url = url_join('parkinglots', parking_lot_id, 'extensions', extension_id)
+        self.session.put(url)
+
+    def dissociate(self, parking_lot_id, extension_id):
+        url = url_join('parkinglots', parking_lot_id, 'extensions', extension_id)
+        self.session.delete(url)
