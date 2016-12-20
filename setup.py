@@ -54,6 +54,7 @@ setup(
             'lines = xivo_confd_client.commands.lines:LinesCommand',
             'lines_sip = xivo_confd_client.commands.lines_sip:LinesSIPCommand',
             'outcalls = xivo_confd_client.commands.outcalls:OutcallsCommand',
+            'parking_lots = xivo_confd_client.commands.parking_lots:ParkingLotsCommand',
             'queues = xivo_confd_client.commands.queues:QueuesCommand',
             'sip_general = xivo_confd_client.commands.sip_general:SIPGeneralCommand',
             'trunks = xivo_confd_client.commands.trunks:TrunksCommand',
