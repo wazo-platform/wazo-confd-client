@@ -2,7 +2,7 @@ XiVO confd client
 =================
 [![Build Status](https://travis-ci.org/wazo-pbx/xivo-confd-client.svg?branch=master)](https://travis-ci.org/wazo-pbx/xivo-confd-client)
 
-A python library for using [xivo-confd](https://github.com/xivo-pbx/xivo-confd)
+A python library for using [xivo-confd](https://github.com/wazo-pbx/xivo-confd)
 
 
 Installation
@@ -48,7 +48,7 @@ Usage
 
 The client exposes each resource through command groups. Each group offers the
 same CRUD operations. A list of available resources can be found in the [confd
-docs](http://api.xivo.io). Additional operations are documented futher down in
+docs](http://api.wazo.community). Additional operations are documented futher down in
 this README.
 
 To start using the library, first configure a new client, then execute an
@@ -196,7 +196,7 @@ Resource relations
 Certain resources can be associated together in order to offer additional
 functionality.  These associations are known as "relations". Each resource
 exposes a subset of commands for manipulating relations through the
-```relations``` method. Consult the [confd documentaton](http://api.xivo.io) for
+```relations``` method. Consult the [confd documentaton](http://api.wazo.community) for
 a complete list of associations.
 
 ```python
@@ -492,7 +492,7 @@ wizard
 #Pass the wizard
 c.wizard.create(wizard)
 
-#Get the XiVO configuration status
+#Get the Wazo configuration status
 configured = c.wizard.get()
 
 #Get informations about the system on which xivo-confd is installed
