@@ -350,6 +350,14 @@ Exposed via ```c.outcalls.relations(outcall_id)```
  * add_extension(extension, prefix='123', external_prefix='456', strip_digits=2, caller_id='toto')
  * remove_extension(extension)
 
+Paging relation
+---------------
+
+Exposed via ```c.pagings.relations(paging_id)```
+
+ * update_user_members(users)
+ * update_user_callers(users)
+
 Parking Lot relation
 --------------------
 

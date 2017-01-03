@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright 2015-2016 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2017 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,6 +32,8 @@ from xivo_confd_client.relations import (ConferenceExtensionRelation,
                                          LineExtensionRelation,
                                          OutcallExtensionRelation,
                                          OutcallTrunkRelation,
+                                         PagingCallerUserRelation,
+                                         PagingMemberUserRelation,
                                          ParkingLotExtensionRelation,
                                          TrunkEndpointCustomRelation,
                                          TrunkEndpointSipRelation,
@@ -1188,3 +1190,33 @@ class TestParkingLotExtensionRelation(TestCommand):
 
         self.command.dissociate(parking_lot_id, extension_id)
         self.session.delete.assert_called_once_with("/parkinglots/1/extensions/2")
+
+
+class TestPagingMemberUserRelation(TestCommand):
+
+    Command = PagingMemberUserRelation
+
+    def test_paging_user_association(self):
+        paging_id = 1
+        users = [{'uuid': 'a-2'}, {'uuid': 'b-3'}]
+
+        self.set_response('put', 204)
+        expected_body = {'users': users}
+
+        self.command.associate(paging_id, users)
+        self.session.put.assert_called_once_with("/pagings/1/members/users", expected_body)
+
+
+class TestPagingCallerUserRelation(TestCommand):
+
+    Command = PagingCallerUserRelation
+
+    def test_paging_user_association(self):
+        paging_id = 1
+        users = [{'uuid': 'a-2'}, {'uuid': 'b-3'}]
+
+        self.set_response('put', 204)
+        expected_body = {'users': users}
+
+        self.command.associate(paging_id, users)
+        self.session.put.assert_called_once_with("/pagings/1/callers/users", expected_body)
