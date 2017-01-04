@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright 2015-2016 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2017 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -454,3 +454,19 @@ class ParkingLotExtensionRelation(HTTPCommand):
     def dissociate(self, parking_lot_id, extension_id):
         url = url_join('parkinglots', parking_lot_id, 'extensions', extension_id)
         self.session.delete(url)
+
+
+class PagingMemberUserRelation(HTTPCommand):
+
+    def associate(self, paging_id, users):
+        url = url_join('pagings', paging_id, 'members', 'users')
+        body = {'users': [{'uuid': user['uuid']} for user in users]}
+        self.session.put(url, body)
+
+
+class PagingCallerUserRelation(HTTPCommand):
+
+    def associate(self, paging_id, users):
+        url = url_join('pagings', paging_id, 'callers', 'users')
+        body = {'users': [{'uuid': user['uuid']} for user in users]}
+        self.session.put(url, body)
