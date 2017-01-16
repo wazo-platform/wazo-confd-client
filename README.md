@@ -366,6 +366,13 @@ Exposed via ```c.parking_lots.relations(parking_lot_id)```
  * add_extension(extension)
  * remove_extension(extension)
 
+Switchboard relation
+---------------
+
+Exposed via ```c.switchboards.relations(switchboard_id)```
+
+ * update_user_members(users)
+
 Trunk relation
 --------------
 

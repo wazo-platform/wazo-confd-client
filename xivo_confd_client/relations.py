@@ -470,3 +470,11 @@ class PagingCallerUserRelation(HTTPCommand):
         url = url_join('pagings', paging_id, 'callers', 'users')
         body = {'users': [{'uuid': user['uuid']} for user in users]}
         self.session.put(url, body)
+
+
+class SwitchboardMemberUserRelation(HTTPCommand):
+
+    def associate(self, switchboard_id, users):
+        url = url_join('switchboards', switchboard_id, 'members', 'users')
+        body = {'users': [{'uuid': user['uuid']} for user in users]}
+        self.session.put(url, body)

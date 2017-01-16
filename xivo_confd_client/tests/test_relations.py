@@ -35,6 +35,7 @@ from xivo_confd_client.relations import (ConferenceExtensionRelation,
                                          PagingCallerUserRelation,
                                          PagingMemberUserRelation,
                                          ParkingLotExtensionRelation,
+                                         SwitchboardMemberUserRelation,
                                          TrunkEndpointCustomRelation,
                                          TrunkEndpointSipRelation,
                                          UserCallPermissionRelation,
@@ -1220,3 +1221,18 @@ class TestPagingCallerUserRelation(TestCommand):
 
         self.command.associate(paging_id, users)
         self.session.put.assert_called_once_with("/pagings/1/callers/users", expected_body)
+
+
+class TestSwitchboardMemberUserRelation(TestCommand):
+
+    Command = SwitchboardMemberUserRelation
+
+    def test_switchboard_user_association(self):
+        switchboard_uuid = "abcd"
+        users = [{'uuid': 'a-2'}, {'uuid': 'b-3'}]
+
+        self.set_response('put', 204)
+        expected_body = {'users': users}
+
+        self.command.associate(switchboard_uuid, users)
+        self.session.put.assert_called_once_with("/switchboards/abcd/members/users", expected_body)
