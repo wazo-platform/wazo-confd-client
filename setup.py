@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Copyright 2014-2016 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2017 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -57,6 +57,7 @@ setup(
             'pagings = xivo_confd_client.commands.pagings:PagingsCommand',
             'parking_lots = xivo_confd_client.commands.parking_lots:ParkingLotsCommand',
             'queues = xivo_confd_client.commands.queues:QueuesCommand',
+            'schedules = xivo_confd_client.commands.schedules:SchedulesCommand',
             'sip_general = xivo_confd_client.commands.sip_general:SIPGeneralCommand',
             'trunks = xivo_confd_client.commands.trunks:TrunksCommand',
             'users = xivo_confd_client.commands.users:UsersCommand',
