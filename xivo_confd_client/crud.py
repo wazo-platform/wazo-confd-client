@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (C) 2015 Avencall
+# Copyright 2015-2017 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@ from xivo_confd_client.util import extract_id, url_join
 class CRUDCommand(HTTPCommand):
 
     __metaclass__ = abc.ABCMeta
+    id_field = 'id'
 
     @abc.abstractproperty
     def resource(self):
@@ -51,7 +52,7 @@ class CRUDCommand(HTTPCommand):
         return response.json()
 
     def update(self, body):
-        url = url_join(self.resource, body['id'])
+        url = url_join(self.resource, body[self.id_field])
         body = {key: value for key, value in body.iteritems() if key != "links"}
         self.session.put(url, body)
 
