@@ -57,6 +57,7 @@ setup(
             'pagings = xivo_confd_client.commands.pagings:PagingsCommand',
             'parking_lots = xivo_confd_client.commands.parking_lots:ParkingLotsCommand',
             'queues = xivo_confd_client.commands.queues:QueuesCommand',
+            'schedules = xivo_confd_client.commands.schedules:SchedulesCommand',
             'sip_general = xivo_confd_client.commands.sip_general:SIPGeneralCommand',
             'switchboards = xivo_confd_client.commands.switchboards:SwitchboardsCommand',
             'trunks = xivo_confd_client.commands.trunks:TrunksCommand',
