@@ -478,3 +478,14 @@ class SwitchboardMemberUserRelation(HTTPCommand):
         url = url_join('switchboards', switchboard_id, 'members', 'users')
         body = {'users': [{'uuid': user['uuid']} for user in users]}
         self.session.put(url, body)
+
+
+class IncallScheduleRelation(HTTPCommand):
+
+    def associate(self, incall_id, schedule_id):
+        url = url_join('incalls', incall_id, 'schedules', schedule_id)
+        self.session.put(url)
+
+    def dissociate(self, incall_id, schedule_id):
+        url = url_join('incalls', incall_id, 'schedules', schedule_id)
+        self.session.delete(url)

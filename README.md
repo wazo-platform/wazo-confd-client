@@ -316,6 +316,8 @@ Exposed via ```c.incalls.relations(incall_id)```
 
  * add_extension(extension)
  * remove_extension(extension)
+ * add_schedule(schedule)
+ * remove_schedule(schedule)
 
 Line relation
 -------------

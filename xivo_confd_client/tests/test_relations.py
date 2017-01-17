@@ -25,6 +25,7 @@ from xivo_confd_client.relations import (ConferenceExtensionRelation,
                                          GroupFallbackRelation,
                                          GroupMemberUserRelation,
                                          IncallExtensionRelation,
+                                         IncallScheduleRelation,
                                          LineDeviceRelation,
                                          LineEndpointCustomRelation,
                                          LineEndpointSccpRelation,
@@ -1236,3 +1237,26 @@ class TestSwitchboardMemberUserRelation(TestCommand):
 
         self.command.associate(switchboard_uuid, users)
         self.session.put.assert_called_once_with("/switchboards/abcd/members/users", expected_body)
+
+
+class TestIncallScheduleRelation(TestCommand):
+
+    Command = IncallScheduleRelation
+
+    def test_incall_schedule_association(self):
+        incall_id = 1
+        schedule_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(incall_id, schedule_id)
+        self.session.put.assert_called_once_with("/incalls/1/schedules/2")
+
+    def test_incall_schedule_dissociation(self):
+        incall_id = 1
+        schedule_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(incall_id, schedule_id)
+        self.session.delete.assert_called_once_with("/incalls/1/schedules/2")
