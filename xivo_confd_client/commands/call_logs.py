@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (C) 2015 Avencall
+# Copyright 2015-2017 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ class CallLogsCommand(RESTCommand):
 
     def list(self, start_date=None, end_date=None):
         params = self.build_params(start_date, end_date)
-        response = self.session.get(self.base_url,
+        response = self.session.get(self.resource,
                                     params=params,
                                     headers={'Accept': 'text/csv'})
 

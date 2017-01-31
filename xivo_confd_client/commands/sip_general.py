@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (C) 2016 Avencall
+# Copyright 2016-2017 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ class SIPGeneralCommand(RESTCommand):
     resource = 'asterisk/sip/general'
 
     def get(self):
-        response = self.session.get(self.base_url)
+        response = self.session.get(self.resource)
         return response.json()
 
     def update(self, body):
