@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (C) 2015 Avencall
-# Copyright (C) 2016 Proformatique Inc.
+# Copyright 2015-2017 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,10 +27,15 @@ def url_join(*parts):
 
 def extract_id(func):
     @wraps(func)
-    def wrapper(self, resource_or_id, **kwargs):
+    def wrapper(self, resource_or_id, *args, **kwargs):
         if isinstance(resource_or_id, dict):
-            resource_id = resource_or_id['id']
+            if 'id' in resource_or_id:
+                resource_id = resource_or_id['id']
+            elif 'uuid' in resource_or_id:
+                resource_id = resource_or_id['uuid']
+            else:
+                raise KeyError('no id or uuid key found')
         else:
             resource_id = resource_or_id
-        return func(self, resource_id, **kwargs)
+        return func(self, resource_id, *args, **kwargs)
     return wrapper

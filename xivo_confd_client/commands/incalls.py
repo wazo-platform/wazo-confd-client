@@ -37,7 +37,7 @@ class IncallRelation(object):
 
     @extract_id
     def add_schedule(self, schedule_id):
-        return self.schedule.associate(self.incall_id, schedule_id)
+        return self.incall_schedule.associate(self.incall_id, schedule_id)
 
     @extract_id
     def remove_schedule(self, schedule_id):
