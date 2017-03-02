@@ -30,7 +30,7 @@ class PagingRelation(object):
         return self.paging_user_members.associate(self.paging_id, users)
 
     def update_user_callers(self, users):
-        return self.paging_user_members.associate(self.paging_id, users)
+        return self.paging_user_callers.associate(self.paging_id, users)
 
 
 class PagingsCommand(CRUDCommand):
