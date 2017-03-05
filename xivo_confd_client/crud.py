@@ -25,7 +25,6 @@ from xivo_confd_client.util import extract_id, url_join
 class CRUDCommand(HTTPCommand):
 
     __metaclass__ = abc.ABCMeta
-    id_field = 'id'
 
     @abc.abstractproperty
     def resource(self):
@@ -52,7 +51,10 @@ class CRUDCommand(HTTPCommand):
         return response.json()
 
     def update(self, body):
-        url = url_join(self.resource, body[self.id_field])
+        resource_id = body.get('uuid')
+        if not resource_id:
+            resource_id = body['id']
+        url = url_join(self.resource, resource_id)
         body = {key: value for key, value in body.iteritems() if key != "links"}
         self.session.put(url, body)
 

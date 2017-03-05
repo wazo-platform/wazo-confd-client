@@ -21,7 +21,6 @@ from xivo_confd_client.util import extract_id, url_join
 
 class MOHCommand(CRUDCommand):
 
-    id_field = 'uuid'
     resource = 'moh'
 
     @extract_id

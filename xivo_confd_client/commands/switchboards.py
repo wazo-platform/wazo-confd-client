@@ -19,6 +19,5 @@ class SwitchboardRelation(object):
 
 class SwitchboardsCommand(CRUDCommand):
 
-    id_field = 'uuid'
     resource = 'switchboards'
     relation_cmd = SwitchboardRelation

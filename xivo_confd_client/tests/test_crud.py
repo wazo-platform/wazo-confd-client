@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2014-2015 Avencall
+# Copyright 2014-2017 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -97,6 +97,27 @@ class TestCRUD(TestCommand):
         self.command.update(body)
 
         self.session.put.assert_called_once_with(expected_url, expected_body)
+
+    def test_update_with_uuid(self):
+        resource_uuid = 'abcd-123'
+        expected_url = "/test/{}".format(resource_uuid)
+        self.set_response('put', 204)
+
+        body = {'uuid': resource_uuid,
+                'firstname': 'John',
+                'links': [{'rel': 'users', 'href': 'http://localhost/users/1'}]
+                }
+
+        expected_body = {'uuid': resource_uuid,
+                         'firstname': 'John'}
+
+        self.command.update(body)
+
+        self.session.put.assert_called_once_with(expected_url, expected_body)
+
+    def test_update_with_no_uuid_or_id(self):
+        body = {'firstname': 'John'}
+        self.assertRaises(KeyError, self.command.update, body)
 
     def test_delete(self):
         resource_id = 1
