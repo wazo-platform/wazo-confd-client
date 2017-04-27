@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2014-2016 Avencall
+# Copyright 2014-2017 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -133,6 +133,9 @@ class UserRelation(object):
 
     def disable_cti_profile(self):
         self.user_cti_profile.disable(self.user_id)
+
+    def update_cti_profile(self, cti_profile):
+        self.user_cti_profile.update(self.user_id, cti_profile)
 
     def update_service(self, service_name, service):
         self.user_service.update_service(self.user_id, service_name, service)

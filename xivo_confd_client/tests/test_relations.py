@@ -679,6 +679,38 @@ class TestUserCtiProfileRelation(TestCommand):
         self.session.get.assert_called_once_with(expected_url)
         assert_that(result, expected_result)
 
+    def test_update_with_cti_profile_id(self):
+        user_id = 1234
+        cti_profile = {'id': 2345}
+
+        expected_url = "/users/{}/cti".format(user_id)
+        expected_body = {
+            'cti_profile_id': 2345,
+            'enabled': True,
+        }
+
+        self.set_response('put', 204)
+
+        self.command.update(user_id, cti_profile)
+
+        self.session.put.assert_called_once_with(expected_url, expected_body)
+
+    def test_update_without_cti_profile_id(self):
+        user_id = 1234
+        cti_profile = {}
+
+        expected_url = "/users/{}/cti".format(user_id)
+        expected_body = {
+            'cti_profile_id': None,
+            'enabled': False,
+        }
+
+        self.set_response('put', 204)
+
+        self.command.update(user_id, cti_profile)
+
+        self.session.put.assert_called_once_with(expected_url, expected_body)
+
     def test_associate(self):
         user_id = 1234
         cti_profile_id = 2345

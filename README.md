@@ -416,6 +416,7 @@ Exposed via ```c.users.relations(user_id)```
  * add_cti_profile(cti_profile)
  * disable_cti_profile()
  * get_cti_profile()
+ * update_cti_profile(cti_profile)
 
  * add_entity(entity)
  * get_entity()
