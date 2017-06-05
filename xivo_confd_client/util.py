@@ -19,10 +19,11 @@
 from __future__ import unicode_literals
 
 from functools import wraps
+from six import text_type
 
 
 def url_join(*parts):
-    return "/" + "/".join(unicode(p) for p in parts)
+    return "/" + "/".join(text_type(p) for p in parts)
 
 
 def extract_id(func):

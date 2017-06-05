@@ -2,9 +2,15 @@ Source: xivo-confd-client
 Section: python
 Priority: extra
 Maintainer: Wazo Maintainers <dev.wazo@gmail.com>
-Build-Depends: debhelper (>= 9), dh-python, python-all (>= 2.7), python-setuptools
+Build-Depends: debhelper (>= 9),
+               dh-python,
+               python-all (>= 2.7),
+               python-setuptools,
+               python3-all,
+               python3-setuptools
 Standards-Version: 3.9.6
 X-Python-Version: >= 2.7
+X-Python3-Version: >= 3.4
 
 Package: xivo-confd-client
 Architecture: all
@@ -14,6 +20,18 @@ Depends: ${python:Depends},
          python-requests,
          python-stevedore,
          xivo-lib-rest-client (>= 15.19~20151201.154438.625c429-1)
-Description: xivo-confd client library in python
+Description: xivo-confd client library - Python 2
+ Wazo is a system based on a powerful IPBX, to bring an easy to
+ install solution for telephony and related services.
+
+Package: xivo-confd-client-python3
+Architecture: all
+Section: python
+Depends: ${python3:Depends},
+         ${misc:Depends},
+         python3-requests,
+         python3-stevedore,
+         xivo-lib-rest-client-python3
+Description: xivo-confd client library - Python 3
  Wazo is a system based on a powerful IPBX, to bring an easy to
  install solution for telephony and related services.

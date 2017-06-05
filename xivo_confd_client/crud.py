@@ -17,6 +17,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 import abc
+import six
 
 from xivo_lib_rest_client import HTTPCommand
 from xivo_confd_client.util import extract_id, url_join
@@ -55,7 +56,7 @@ class CRUDCommand(HTTPCommand):
         if not resource_id:
             resource_id = body['id']
         url = url_join(self.resource, resource_id)
-        body = {key: value for key, value in body.iteritems() if key != "links"}
+        body = {key: value for key, value in six.iteritems(body) if key != "links"}
         self.session.put(url, body)
 
     @extract_id

@@ -28,7 +28,7 @@ class TestCallLogs(RESTCommandTestCase):
 
     Command = CallLogsCommand
 
-    csvdata = u"Call Date,Caller,Called,Period,user Field\r\n2015-06-29T12:01:00.725871,John (1000),1234567890,0,\r\n"
+    csvdata = "Call Date,Caller,Called,Period,user Field\r\n2015-06-29T12:01:00.725871,John (1000),1234567890,0,\r\n"
     resource = 'call_logs'
 
     def test_list(self):
