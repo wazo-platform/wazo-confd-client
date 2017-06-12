@@ -439,6 +439,9 @@ Exposed via ```c.users.relations(user_id)```
  * update_fallbacks(fallbacks)
  * list_fallbacks()
 
+ * update_groups(groups)
+
+
 Voicemail relation
 ------------------
 
