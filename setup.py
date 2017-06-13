@@ -26,7 +26,7 @@ setup(
     description='a simple client library for the xivo-confd HTTP interface',
 
     author='Wazo Authors',
-    author_email='dev.wazo@gmail.com',
+    author_email='dev@wazo.community',
 
     url='http://wazo.community',
 

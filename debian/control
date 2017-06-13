@@ -1,7 +1,7 @@
 Source: xivo-confd-client
 Section: python
 Priority: extra
-Maintainer: Wazo Maintainers <dev.wazo@gmail.com>
+Maintainer: Wazo Maintainers <dev@wazo.community>
 Build-Depends: debhelper (>= 9),
                dh-python,
                python-all (>= 2.7),
