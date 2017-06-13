@@ -416,6 +416,14 @@ class GroupMemberUserRelation(HTTPCommand):
         self.session.put(url, body)
 
 
+class UserGroupRelation(HTTPCommand):
+
+    def associate(self, user_id, groups):
+        url = url_join('users', user_id, 'groups')
+        body = {'groups': [{'id': group['id']} for group in groups]}
+        self.session.put(url, body)
+
+
 class GroupFallbackRelation(HTTPCommand):
 
     def list_fallbacks(self, group_id):

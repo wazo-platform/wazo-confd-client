@@ -39,16 +39,17 @@ from xivo_confd_client.relations import (ConferenceExtensionRelation,
                                          SwitchboardMemberUserRelation,
                                          TrunkEndpointCustomRelation,
                                          TrunkEndpointSipRelation,
+                                         UserAgentRelation,
                                          UserCallPermissionRelation,
                                          UserCtiProfileRelation,
+                                         UserEndpointSipRelation,
                                          UserEntityRelation,
                                          UserFallbackRelation,
                                          UserForwardRelation,
                                          UserFuncKeyRelation,
+                                         UserGroupRelation,
                                          UserLineRelation,
                                          UserServiceRelation,
-                                         UserAgentRelation,
-                                         UserEndpointSipRelation,
                                          UserVoicemailRelation)
 
 
@@ -1120,6 +1121,21 @@ class TestGroupMemberUserRelation(TestCommand):
 
         self.command.associate(group_id, users)
         self.session.put.assert_called_once_with("/groups/1/members/users", expected_body)
+
+
+class TestUserGroupRelation(TestCommand):
+
+    Command = UserGroupRelation
+
+    def test_user_group_association(self):
+        user_id = 1
+        groups = [{'id': 2}, {'id': 3}]
+
+        self.set_response('put', 204)
+        expected_body = {'groups': groups}
+
+        self.command.associate(user_id, groups)
+        self.session.put.assert_called_once_with("/users/1/groups", expected_body)
 
 
 class TestGroupFallbackRelation(TestCommand):

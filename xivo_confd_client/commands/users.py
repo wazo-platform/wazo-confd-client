@@ -16,17 +16,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import (UserLineRelation,
-                                         UserEndpointSipRelation,
-                                         UserVoicemailRelation,
-                                         UserFuncKeyRelation,
-                                         UserCtiProfileRelation,
-                                         UserServiceRelation,
-                                         UserForwardRelation,
+from xivo_confd_client.relations import (UserAgentRelation,
                                          UserCallPermissionRelation,
+                                         UserCtiProfileRelation,
+                                         UserEndpointSipRelation,
                                          UserEntityRelation,
                                          UserFallbackRelation,
-                                         UserAgentRelation)
+                                         UserForwardRelation,
+                                         UserFuncKeyRelation,
+                                         UserGroupRelation,
+                                         UserLineRelation,
+                                         UserServiceRelation,
+                                         UserVoicemailRelation)
 from xivo_confd_client.util import extract_id, url_join
 
 
@@ -34,17 +35,18 @@ class UserRelation(object):
 
     def __init__(self, builder, user_id):
         self.user_id = user_id
-        self.user_line = UserLineRelation(builder)
-        self.user_endpoint_sip = UserEndpointSipRelation(builder)
-        self.user_voicemail = UserVoicemailRelation(builder)
-        self.user_funckey = UserFuncKeyRelation(builder)
-        self.user_cti_profile = UserCtiProfileRelation(builder)
-        self.user_service = UserServiceRelation(builder)
-        self.user_forward = UserForwardRelation(builder)
-        self.user_call_permission = UserCallPermissionRelation(builder)
-        self.user_entity = UserEntityRelation(builder)
         self.user_agent = UserAgentRelation(builder)
+        self.user_call_permission = UserCallPermissionRelation(builder)
+        self.user_cti_profile = UserCtiProfileRelation(builder)
+        self.user_endpoint_sip = UserEndpointSipRelation(builder)
+        self.user_entity = UserEntityRelation(builder)
         self.user_fallback = UserFallbackRelation(builder)
+        self.user_forward = UserForwardRelation(builder)
+        self.user_funckey = UserFuncKeyRelation(builder)
+        self.user_group = UserGroupRelation(builder)
+        self.user_line = UserLineRelation(builder)
+        self.user_service = UserServiceRelation(builder)
+        self.user_voicemail = UserVoicemailRelation(builder)
 
     @extract_id
     def add_line(self, line_id):
@@ -163,6 +165,9 @@ class UserRelation(object):
 
     def list_fallbacks(self):
         return self.user_fallback.list_fallbacks(self.user_id)
+
+    def update_groups(self, groups):
+        return self.user_group.associate(self.user_id, groups)
 
 
 class UsersCommand(CRUDCommand):
