@@ -40,6 +40,11 @@ class UserLineRelation(HTTPCommand):
         response = self.session.get(url)
         return response.json()
 
+    def update_lines(self, user_id, lines):
+        url = url_join('users', user_id, 'lines')
+        body = {'lines': [{'id': line['id']} for line in lines]}
+        self.session.put(url, body)
+
 
 class UserEndpointSipRelation(HTTPCommand):
 

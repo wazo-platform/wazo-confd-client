@@ -59,6 +59,9 @@ class UserRelation(object):
     def list_lines(self):
         return self.user_line.list_by_user(self.user_id)
 
+    def update_lines(self, lines):
+        return self.user_line.update_lines(self.user_id, lines)
+
     def get_endpoint_sip(self, line_id):
         return self.user_endpoint_sip.get_by_user_line(self.user_id, line_id)
 

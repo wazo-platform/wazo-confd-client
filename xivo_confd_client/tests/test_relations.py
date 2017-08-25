@@ -101,6 +101,16 @@ class TestUserLineRelation(TestCommand):
         self.session.get.assert_called_once_with(expected_url)
         assert_that(result, expected_result)
 
+    def test_user_line_update_lines(self):
+        user_id = 1
+        lines = [{'id': 2}, {'id': 3}]
+
+        self.set_response('put', 204)
+        expected_body = {'lines': lines}
+
+        self.command.update_lines(user_id, lines)
+        self.session.put.assert_called_once_with("/users/1/lines", expected_body)
+
 
 class TestUserEndpointSipRelation(TestCommand):
 
