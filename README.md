@@ -427,6 +427,7 @@ Exposed via ```c.users.relations(user_id)```
 
  * update_service(service_name, service)
  * get_service(service_name)
+ * update_services(services)
  * list_services()
 
  * update_forward(forward_name, forward)

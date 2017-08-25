@@ -785,6 +785,16 @@ class TestUserServiceRelation(TestCommand):
         self.session.get.assert_called_once_with(expected_url)
         assert_that(result, expected_result)
 
+    def test_update_services(self):
+        user_id = 1234
+        services = {'dnd': {'enabled': True},
+                    'incallfilter': {'enabled': False}}
+
+        self.command.update_services(user_id, services)
+
+        expected_url = "/users/{}/services".format(user_id)
+        self.session.put.assert_called_with(expected_url, services)
+
 
 class TestUserForwardRelation(TestCommand):
 

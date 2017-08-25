@@ -148,6 +148,9 @@ class UserRelation(object):
     def list_services(self):
         return self.user_service.list_services(self.user_id)
 
+    def update_services(self, body):
+        return self.user_forward.update_services(self.user_id, body)
+
     def update_forward(self, forward_name, forward):
         self.user_forward.update_forward(self.user_id, forward_name, forward)
 
