@@ -263,6 +263,10 @@ class UserServiceRelation(HTTPCommand):
         response = self.session.get(url)
         return response.json()
 
+    def update_services(self, user_id, services):
+        url = url_join('users', user_id, 'services')
+        self.session.put(url, services)
+
 
 class UserForwardRelation(HTTPCommand):
 
