@@ -395,6 +395,7 @@ Exposed via ```c.users.relations(user_id)```
  * add_line(line)
  * remove_line(line)
  * list_lines()
+ * update_lines(lines)
 
  * add_call_permission(call_permission)
  * remove_call_permission(call_permission)

@@ -2,19 +2,7 @@
 
 # Copyright 2015-2017 The Wazo Authors  (see the AUTHORS file)
 #
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along
-# with this program; if not, write to the Free Software Foundation, Inc.,
-# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+# SPDX-License-Identifier: GPL-3.0+
 
 
 from hamcrest import assert_that
@@ -100,6 +88,16 @@ class TestUserLineRelation(TestCommand):
 
         self.session.get.assert_called_once_with(expected_url)
         assert_that(result, expected_result)
+
+    def test_user_line_update_lines(self):
+        user_id = 1
+        lines = [{'id': 2}, {'id': 3}]
+
+        self.set_response('put', 204)
+        expected_body = {'lines': lines}
+
+        self.command.update_lines(user_id, lines)
+        self.session.put.assert_called_once_with("/users/1/lines", expected_body)
 
 
 class TestUserEndpointSipRelation(TestCommand):

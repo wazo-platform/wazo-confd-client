@@ -2,18 +2,7 @@
 
 # Copyright 2014-2017 The Wazo Authors  (see the AUTHORS file)
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>
+# SPDX-License-Identifier: GPL-3.0+
 
 from xivo_confd_client.crud import CRUDCommand
 from xivo_confd_client.relations import (UserAgentRelation,
@@ -58,6 +47,9 @@ class UserRelation(object):
 
     def list_lines(self):
         return self.user_line.list_by_user(self.user_id)
+
+    def update_lines(self, lines):
+        return self.user_line.update_lines(self.user_id, lines)
 
     def get_endpoint_sip(self, line_id):
         return self.user_endpoint_sip.get_by_user_line(self.user_id, line_id)
