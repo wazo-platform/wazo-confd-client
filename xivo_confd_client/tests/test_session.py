@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (C) 2015 Avencall
+# Copyright 2015-2017 The Wazo Authors  (see the AUTHORS file)
 #
 # SPDX-License-Identifier: GPL-3.0+
 
@@ -28,6 +28,16 @@ class TestConfdSession(unittest.TestCase):
         mock_action = getattr(self.session, action)
         mock_action.return_value = response
         return response
+
+    def test_head(self):
+        expected_url = "{}/users/123".format(self.base_url)
+        expected_response = self.set_response('head', 200)
+
+        result = self.confd_session.head("/users/123")
+
+        assert_that(result, equal_to(expected_response))
+        self.session.head.assert_called_once_with(expected_url,
+                                                  headers={'Accept': 'application/json'})
 
     def test_get(self):
         expected_url = "{}/users".format(self.base_url)
