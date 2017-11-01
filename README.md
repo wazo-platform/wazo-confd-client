@@ -1,18 +1,15 @@
-XiVO confd client
-=================
+# XiVO confd client
 [![Build Status](https://travis-ci.org/wazo-pbx/xivo-confd-client.svg?branch=master)](https://travis-ci.org/wazo-pbx/xivo-confd-client)
 
 A python library for using [xivo-confd](https://github.com/wazo-pbx/xivo-confd)
 
 
-Installation
-============
+# Installation
 
 This library requires python version 2.7. Other versions of python have not been
 tested.
 
-Installing in a virtualenv
---------------------------
+## Installing in a virtualenv
 
 It is recommended to install the library in a
 [virtualenv](https://virtualenv.readthedocs.org).  A virtualenv isolates python
@@ -31,8 +28,7 @@ the library will not be available.
 
     source confd-client/bin/activate
 
-Dependencies
-------------
+## Dependencies
 
 We recommend installing dependencies via ```pip```. It will already be available
 if you are using a virutalenv. Otherwise, it can be installed via apt-get:
@@ -43,8 +39,7 @@ Afterwards use the ```requirements.txt``` file for installing dependencies:
 
     pip install -r requirements.txt
 
-Usage
-=====
+# Usage
 
 The client exposes each resource through command groups. Each group offers the
 same CRUD operations. A list of available resources can be found in the [confd
@@ -69,8 +64,7 @@ users = c.users.list()
 
 Each resource offers the following CRUD operations:
 
-list
-----
+## list
 
 Return a list of items. You can also pass optional parameters for searching and
 sorting such as ```search```, ```sort```, ```order```, ```offset```,
@@ -81,8 +75,7 @@ sorting such as ```search```, ```sort```, ```order```, ```offset```,
 users = c.users.list(search='John')
 ```
 
-get
----
+## get
 
 Return an item for a given ID.
 
@@ -94,8 +87,7 @@ user_uuid = '2e752722-0864-4665-887d-a78a024cf7c7'
 user = c.users.get(user_uuid)  // users only
 ```
 
-create
-------
+## create
 
 Create a new resource item with given parameters.
 
@@ -104,8 +96,7 @@ Create a new resource item with given parameters.
 created_user = c.users.create({'firstname': 'John', 'lastname': 'Doe'})
 ```
 
-update
-------
+## update
 
 Update a resource item with given parameters. Only the parameters that need to
 be updated should be sent. The parameters dict **MUST** contain the id of the
@@ -116,8 +107,7 @@ user = {'id': 42, 'firstname': 'Johnny'}
 c.users.update(user)
 ```
 
-delete
-------
+## delete
 
 Delete a resource item.
 
@@ -126,13 +116,11 @@ user_id = 42
 c.users.delete(user_id)
 ```
 
-Additional operations
-=====================
+# Additional operations
 
 Some resources also offer additional operations:
 
-devices
--------
+## devices
 
 Resource for managing devices, such as SIP or SCCP phones
 
@@ -145,8 +133,7 @@ c.devices.autoprov(device_id)
 c.devices.synchronize(device_id)
 ```
 
-funckeys
---------
+## funckeys
 
 Resource for manipulating funckey templates and their keys.
 
@@ -161,8 +148,8 @@ c.funckeys.update_template_funckey(template_id, position, funckey)
 c.funckeys.delete_template_funckey(template_id, position)
 ```
 
-users
------
+## users
+
 Resource to known if user exists
 ```
 user_exists = c.users.exist('52d99c78-4f67-47da-90dd-aeba32afd251')
@@ -194,8 +181,7 @@ endpoint_sip = users.get_main_endpoint_sip(user_uuid)
 ```
 
 
-Resource relations
-==================
+# Resource relations
 
 Certain resources can be associated together in order to offer additional
 functionality.  These associations are known as "relations". Each resource
@@ -221,8 +207,7 @@ c.users(user).add_line(line)
 
 Here is a list of relations and their methods:
 
-Call Permission Relation
-------------------------
+## Call Permission Relation
 
 Exposed via ```c.call_permissions.relations(call_permission_id)```
 
@@ -230,23 +215,20 @@ Exposed via ```c.call_permissions.relations(call_permission_id)```
  * remove_user(user_id)
  * list_users()
 
-Conference relation
--------------------
+## Conference relation
 
 Exposed via ```c.conferences.relations(conference_id)```
 
  * add_extension(extension)
  * remove_extension(extension)
 
-CtiProfile relation
--------------------
+## CtiProfile relation
 
 Exposed via ```c.cti_profiles.relations(cti_profile_id)```
 
  * add_user(user)
 
-Device Relation
----------------
+## Device Relation
 
 Exposed via ```c.devices.relations(device_id)```
 
@@ -254,8 +236,7 @@ Exposed via ```c.devices.relations(device_id)```
  * remove_line(line_id)
  * list_lines()
 
-Endpoint SIP relation
----------------------
+## Endpoint SIP relation
 
 Exposed via ```c.endpoints_sip.relations(endpoint_id)```
 
@@ -264,8 +245,7 @@ Exposed via ```c.endpoints_sip.relations(endpoint_id)```
  * get_line()
  * get_trunk()
 
-Endpoint SCCP relation
-----------------------
+## Endpoint SCCP relation
 
 Exposed via ```c.endpoints_sccp.relations(endpoint_id)```
 
@@ -273,8 +253,7 @@ Exposed via ```c.endpoints_sccp.relations(endpoint_id)```
  * dissociate_line(line)
  * get_line()
 
-Endpoint Custom relation
-------------------------
+## Endpoint Custom relation
 
 Exposed via ```c.endpoints_custom.relations(endpoint_id)```
 
@@ -283,8 +262,7 @@ Exposed via ```c.endpoints_custom.relations(endpoint_id)```
  * get_line()
  * get_trunk()
 
-Extension relation
-------------------
+## Extension relation
 
 Exposed via ```c.extensions.relations(extension_id)```
 
@@ -293,16 +271,14 @@ Exposed via ```c.extensions.relations(extension_id)```
  * get_line()
  * list_lines()
 
-Funckey template relation
--------------------------
+## Funckey template relation
 
 Exposed via ```c.funckeys.relations(template_id)```
 
  * add_user(user)
  * remove_user(user)
 
-Group relation
---------------
+## Group relation
 
 Exposed via ```c.groups.relations(group_id)```
 
@@ -313,8 +289,7 @@ Exposed via ```c.groups.relations(group_id)```
  * update_fallbacks(fallbacks)
  * list_fallbacks()
 
-Incall relation
----------------
+## Incall relation
 
 Exposed via ```c.incalls.relations(incall_id)```
 
@@ -323,8 +298,7 @@ Exposed via ```c.incalls.relations(incall_id)```
  * add_schedule(schedule)
  * remove_schedule(schedule)
 
-Line relation
--------------
+## Line relation
 
 Exposed via ```c.lines.relations(line_id)```
 
@@ -347,8 +321,7 @@ Exposed via ```c.lines.relations(line_id)```
  * remove_device(device_id)
  * get_device()
 
-Outcall relation
-----------------
+## Outcall relation
 
 Exposed via ```c.outcalls.relations(outcall_id)```
 
@@ -356,31 +329,27 @@ Exposed via ```c.outcalls.relations(outcall_id)```
  * add_extension(extension, prefix='123', external_prefix='456', strip_digits=2, caller_id='toto')
  * remove_extension(extension)
 
-Paging relation
----------------
+## Paging relation
 
 Exposed via ```c.pagings.relations(paging_id)```
 
  * update_user_members(users)
  * update_user_callers(users)
 
-Parking Lot relation
---------------------
+## Parking Lot relation
 
 Exposed via ```c.parking_lots.relations(parking_lot_id)```
 
  * add_extension(extension)
  * remove_extension(extension)
 
-Switchboard relation
---------------------
+## Switchboard relation
 
 Exposed via ```c.switchboards.relations(switchboard_id)```
 
  * update_user_members(users)
 
-Trunk relation
---------------
+## Trunk relation
 
 Exposed via ```c.trunks.relations(trunk_id)```
 
@@ -391,8 +360,7 @@ Exposed via ```c.trunks.relations(trunk_id)```
  * remove_endpoint_custom(endpoint_custom)
  * get_endpoint_custom()
 
-User relation
--------------
+## User relation
 
 Exposed via ```c.users.relations(user_id)```
 
@@ -448,8 +416,7 @@ Exposed via ```c.users.relations(user_id)```
  * update_groups(groups)
 
 
-Voicemail relation
-------------------
+## Voicemail relation
 
 Exposed via ```c.voicemails.relations(voicemail_id)```
 
@@ -459,22 +426,19 @@ Exposed via ```c.voicemails.relations(voicemail_id)```
  * list_users()
 
 
-Other resources
-===============
+# Other resources
 
 Some resources do not expose CRUD methods. This section
 documents which operations are available for other resources.
 
-infos
------
+## infos
 
 ```python
 #Get information about server
 info = c.infos.get()
 ```
 
-configuration
--------------
+## configuration
 
 ```python
 #Get status of live reload
@@ -484,8 +448,7 @@ live_reload_status = c.configuration.live_reload.get()
 c.configuration.live_reload.update({'enabled': True})
 ```
 
-queues
-------
+## queues
 
 ```python
 #Add agent to a queue
@@ -501,8 +464,7 @@ c.queues.get_membership(queue_id, agent_id)
 c.queues.edit_membership(queue_id, agent_id, penalty)
 ```
 
-sip general
------------
+## sip general
 
 ```python
 #Get SIP general configuration
@@ -512,8 +474,7 @@ sip_general = c.sip_general.get()
 c.sip_general.update(sip_general)
 ```
 
-wizard
-------
+## wizard
 
 ```python
 #Pass the wizard
@@ -526,8 +487,7 @@ configured = c.wizard.get()
 discover = c.wizard.discover()
 ```
 
-Adding new commands
-===================
+# Adding new commands
 
 New command groups can be added to the client by sub-classing ```RESTCommand```.
 The new class must be added to the entry points in ```setup.py``` under
@@ -570,21 +530,17 @@ c.foo.bar()
 ```
 
 
-Changelog
-=========
+# Changelog
 
-1.1.1
------
+## 1.1.1
 
 * Remove argument auth_method from xivo_confd_client.Client. Auth method is
 always digest.
 
 
-Unit-tests
-==========
+# Unit-tests
 
-Running unit tests
-------------------
+## Running unit tests
 
 ```
 apt-get install libpq-dev python-dev libffi-dev libyaml-dev
