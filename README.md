@@ -218,7 +218,7 @@ c.users(user).add_line(line)
 Here is a list of relations and their methods:
 
 Call Permission Relation
----------------
+------------------------
 
 Exposed via ```c.call_permissions.relations(call_permission_id)```
 
@@ -227,7 +227,7 @@ Exposed via ```c.call_permissions.relations(call_permission_id)```
  * list_users()
 
 Conference relation
----------------
+-------------------
 
 Exposed via ```c.conferences.relations(conference_id)```
 
@@ -261,7 +261,7 @@ Exposed via ```c.endpoints_sip.relations(endpoint_id)```
  * get_trunk()
 
 Endpoint SCCP relation
----------------------
+----------------------
 
 Exposed via ```c.endpoints_sccp.relations(endpoint_id)```
 
@@ -270,7 +270,7 @@ Exposed via ```c.endpoints_sccp.relations(endpoint_id)```
  * get_line()
 
 Endpoint Custom relation
----------------------
+------------------------
 
 Exposed via ```c.endpoints_custom.relations(endpoint_id)```
 
@@ -298,7 +298,7 @@ Exposed via ```c.funckeys.relations(template_id)```
  * remove_user(user)
 
 Group relation
----------------
+--------------
 
 Exposed via ```c.groups.relations(group_id)```
 
@@ -369,7 +369,7 @@ Exposed via ```c.parking_lots.relations(parking_lot_id)```
  * remove_extension(extension)
 
 Switchboard relation
----------------
+--------------------
 
 Exposed via ```c.switchboards.relations(switchboard_id)```
 
