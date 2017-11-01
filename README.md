@@ -163,6 +163,10 @@ c.funckeys.delete_template_funckey(template_id, position)
 
 users
 -----
+Resource to known if user exists
+```
+user_exists = c.users.exist('52d99c78-4f67-47da-90dd-aeba32afd251')
+```
 
 Resource for managing user accounts
 

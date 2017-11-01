@@ -200,3 +200,11 @@ class UsersCommand(CRUDCommand):
         url = url_join(self.resource, user_uuid, "lines/main/associated/endpoints/sip")
         response = self.session.get(url)
         return response.json()
+
+    def exist(self, user_uuid):
+        url = url_join(self.resource, user_uuid)
+        response = self.session.head(url, check_response=False)
+        if response.status_code == 404:
+            return False
+        self.session.check_response(response)
+        return True

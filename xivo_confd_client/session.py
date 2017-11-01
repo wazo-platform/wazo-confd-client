@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (C) 2015 Avencall
+# Copyright 2015-2017 The Wazo Authors  (see the AUTHORS file)
 #
 # SPDX-License-Identifier: GPL-3.0+
 
@@ -36,6 +36,16 @@ class ConfdSession(object):
 
     def clean_url(self, part):
         return "{}/{}".format(self.base_url.rstrip('/'), part.lstrip('/'))
+
+    def head(self, url, **kwargs):
+        kwargs.setdefault('headers', self.READ_HEADERS)
+        check_response = kwargs.pop('check_response', True)
+
+        url = self.clean_url(url)
+        response = self.session.head(url, **kwargs)
+
+        self.check_response(response, check_response)
+        return response
 
     def get(self, url, **kwargs):
         kwargs.setdefault('headers', self.READ_HEADERS)
