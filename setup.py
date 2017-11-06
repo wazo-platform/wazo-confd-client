@@ -53,6 +53,7 @@ setup(
             'trunks = xivo_confd_client.commands.trunks:TrunksCommand',
             'users = xivo_confd_client.commands.users:UsersCommand',
             'voicemails = xivo_confd_client.commands.voicemails:VoicemailsCommand',
+            'voicemail_zonemessages = xivo_confd_client.commands.voicemail_zonemessages:VoicemailZoneMessagesCommand',
             'wizard = xivo_confd_client.commands.wizard:WizardCommand',
         ],
     }
