@@ -464,6 +464,18 @@ c.queues.get_membership(queue_id, agent_id)
 c.queues.edit_membership(queue_id, agent_id, penalty)
 ```
 
+
+## voicemail zonemessages
+
+```python
+#Get SIP general configuration
+voicemail_zonemessages = c.voicemail_zonemessages.get()
+
+#Update SIP general configuration
+c.voicemail_zonemessages.update(voicemail_zonemessages)
+```
+
+
 ## sip general
 
 ```python
