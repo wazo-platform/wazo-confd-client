@@ -1122,7 +1122,7 @@ class TestGroupMemberUserRelation(TestCommand):
 
     def test_group_user_association(self):
         group_id = 1
-        users = [{'uuid': 'a-2'}, {'uuid': 'b-3'}]
+        users = [{'uuid': 'a-2', 'priority': 7}, {'uuid': 'b-3'}]
 
         self.set_response('put', 204)
         expected_body = {'users': users}

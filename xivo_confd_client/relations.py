@@ -409,7 +409,12 @@ class GroupMemberUserRelation(HTTPCommand):
 
     def associate(self, group_id, users):
         url = url_join('groups', group_id, 'members', 'users')
-        body = {'users': [{'uuid': user['uuid']} for user in users]}
+        body = {'users': []}
+        for user in users:
+            result = {'uuid': user['uuid']}
+            if 'priority' in user:
+                result['priority'] = user['priority']
+            body['users'].append(result)
         self.session.put(url, body)
 
 
