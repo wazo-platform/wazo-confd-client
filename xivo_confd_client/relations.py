@@ -1,7 +1,5 @@
 # -*- coding: UTF-8 -*-
-
 # Copyright 2015-2017 The Wazo Authors  (see the AUTHORS file)
-#
 # SPDX-License-Identifier: GPL-3.0+
 
 from xivo_lib_rest_client import HTTPCommand
@@ -409,7 +407,26 @@ class GroupMemberUserRelation(HTTPCommand):
 
     def associate(self, group_id, users):
         url = url_join('groups', group_id, 'members', 'users')
-        body = {'users': [{'uuid': user['uuid']} for user in users]}
+        body = {'users': []}
+        for user in users:
+            result = {'uuid': user['uuid']}
+            if 'priority' in user:
+                result['priority'] = user['priority']
+            body['users'].append(result)
+        self.session.put(url, body)
+
+
+class GroupMemberExtensionRelation(HTTPCommand):
+
+    def associate(self, group_id, extensions):
+        url = url_join('groups', group_id, 'members', 'extensions')
+        body = {'extensions': []}
+        for extension in extensions:
+            result = {'exten': extension['exten'],
+                      'context': extension['context']}
+            if 'priority' in extension:
+                result['priority'] = extension['priority']
+            body['extensions'].append(result)
         self.session.put(url, body)
 
 

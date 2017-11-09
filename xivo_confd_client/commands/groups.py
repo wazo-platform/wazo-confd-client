@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
-
-# Copyright (C) 2016 Proformatique Inc.
-#
+# Copyright 2016-2017 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 from xivo_confd_client.util import extract_id
 from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import (GroupExtensionRelation,
-                                         GroupFallbackRelation,
-                                         GroupMemberUserRelation)
+from xivo_confd_client.relations import (
+    GroupExtensionRelation,
+    GroupFallbackRelation,
+    GroupMemberExtensionRelation,
+    GroupMemberUserRelation,
+)
 
 
 class GroupRelation(object):
@@ -17,10 +18,14 @@ class GroupRelation(object):
         self.group_id = group_id
         self.group_extension = GroupExtensionRelation(builder)
         self.group_user_members = GroupMemberUserRelation(builder)
+        self.group_extension_members = GroupMemberExtensionRelation(builder)
         self.group_fallback = GroupFallbackRelation(builder)
 
     def update_user_members(self, users):
         return self.group_user_members.associate(self.group_id, users)
+
+    def update_extension_members(self, extensions):
+        return self.group_extension_members.associate(self.group_id, extensions)
 
     @extract_id
     def add_extension(self, extension_id):
