@@ -1,44 +1,45 @@
 # -*- coding: UTF-8 -*-
-
 # Copyright 2015-2017 The Wazo Authors  (see the AUTHORS file)
-#
 # SPDX-License-Identifier: GPL-3.0+
 
 
 from hamcrest import assert_that
 
 from xivo_confd_client.tests import TestCommand
-from xivo_confd_client.relations import (ConferenceExtensionRelation,
-                                         GroupExtensionRelation,
-                                         GroupFallbackRelation,
-                                         GroupMemberUserRelation,
-                                         IncallExtensionRelation,
-                                         IncallScheduleRelation,
-                                         LineDeviceRelation,
-                                         LineEndpointCustomRelation,
-                                         LineEndpointSccpRelation,
-                                         LineEndpointSipRelation,
-                                         LineExtensionRelation,
-                                         OutcallExtensionRelation,
-                                         OutcallTrunkRelation,
-                                         PagingCallerUserRelation,
-                                         PagingMemberUserRelation,
-                                         ParkingLotExtensionRelation,
-                                         SwitchboardMemberUserRelation,
-                                         TrunkEndpointCustomRelation,
-                                         TrunkEndpointSipRelation,
-                                         UserAgentRelation,
-                                         UserCallPermissionRelation,
-                                         UserCtiProfileRelation,
-                                         UserEndpointSipRelation,
-                                         UserEntityRelation,
-                                         UserFallbackRelation,
-                                         UserForwardRelation,
-                                         UserFuncKeyRelation,
-                                         UserGroupRelation,
-                                         UserLineRelation,
-                                         UserServiceRelation,
-                                         UserVoicemailRelation)
+from xivo_confd_client.relations import (
+    ConferenceExtensionRelation,
+    GroupExtensionRelation,
+    GroupFallbackRelation,
+    GroupMemberExtensionRelation,
+    GroupMemberUserRelation,
+    IncallExtensionRelation,
+    IncallScheduleRelation,
+    LineDeviceRelation,
+    LineEndpointCustomRelation,
+    LineEndpointSccpRelation,
+    LineEndpointSipRelation,
+    LineExtensionRelation,
+    OutcallExtensionRelation,
+    OutcallTrunkRelation,
+    PagingCallerUserRelation,
+    PagingMemberUserRelation,
+    ParkingLotExtensionRelation,
+    SwitchboardMemberUserRelation,
+    TrunkEndpointCustomRelation,
+    TrunkEndpointSipRelation,
+    UserAgentRelation,
+    UserCallPermissionRelation,
+    UserCtiProfileRelation,
+    UserEndpointSipRelation,
+    UserEntityRelation,
+    UserFallbackRelation,
+    UserForwardRelation,
+    UserFuncKeyRelation,
+    UserGroupRelation,
+    UserLineRelation,
+    UserServiceRelation,
+    UserVoicemailRelation,
+)
 
 
 class TestUserLineRelation(TestCommand):
@@ -1129,6 +1130,21 @@ class TestGroupMemberUserRelation(TestCommand):
 
         self.command.associate(group_id, users)
         self.session.put.assert_called_once_with("/groups/1/members/users", expected_body)
+
+
+class TestGroupMemberExtensionRelation(TestCommand):
+
+    Command = GroupMemberExtensionRelation
+
+    def test_group_extension_association(self):
+        group_id = 1
+        extensions = [{'exten': '123', 'context': 'default', 'priority': 5}, {'exten': '567', 'context': 'other'}]
+
+        self.set_response('put', 204)
+        expected_body = {'extensions': extensions}
+
+        self.command.associate(group_id, extensions)
+        self.session.put.assert_called_once_with("/groups/1/members/extensions", expected_body)
 
 
 class TestUserGroupRelation(TestCommand):
