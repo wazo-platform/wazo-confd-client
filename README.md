@@ -290,6 +290,9 @@ Exposed via ```c.groups.relations(group_id)```
  * update_fallbacks(fallbacks)
  * list_fallbacks()
 
+ * add_schedule(schedule)
+ * remove_schedule(schedule)
+
 ## Incall relation
 
 Exposed via ```c.incalls.relations(incall_id)```

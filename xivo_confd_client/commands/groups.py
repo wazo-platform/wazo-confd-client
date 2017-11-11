@@ -9,6 +9,7 @@ from xivo_confd_client.relations import (
     GroupFallbackRelation,
     GroupMemberExtensionRelation,
     GroupMemberUserRelation,
+    GroupScheduleRelation,
 )
 
 
@@ -20,6 +21,7 @@ class GroupRelation(object):
         self.group_user_members = GroupMemberUserRelation(builder)
         self.group_extension_members = GroupMemberExtensionRelation(builder)
         self.group_fallback = GroupFallbackRelation(builder)
+        self.group_schedule = GroupScheduleRelation(builder)
 
     def update_user_members(self, users):
         return self.group_user_members.associate(self.group_id, users)
@@ -40,6 +42,14 @@ class GroupRelation(object):
 
     def list_fallbacks(self):
         return self.group_fallback.list_fallbacks(self.group_id)
+
+    @extract_id
+    def add_schedule(self, schedule_id):
+        return self.group_schedule.associate(self.group_id, schedule_id)
+
+    @extract_id
+    def remove_schedule(self, schedule_id):
+        return self.group_schedule.dissociate(self.group_id, schedule_id)
 
 
 class GroupsCommand(CRUDCommand):
