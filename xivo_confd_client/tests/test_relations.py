@@ -21,6 +21,7 @@ from xivo_confd_client.relations import (
     LineEndpointSipRelation,
     LineExtensionRelation,
     OutcallExtensionRelation,
+    OutcallScheduleRelation,
     OutcallTrunkRelation,
     PagingCallerUserRelation,
     PagingMemberUserRelation,
@@ -1380,3 +1381,26 @@ class TestGroupScheduleRelation(TestCommand):
 
         self.command.dissociate(group_id, schedule_id)
         self.session.delete.assert_called_once_with("/groups/1/schedules/2")
+
+
+class TestOutcallScheduleRelation(TestCommand):
+
+    Command = OutcallScheduleRelation
+
+    def test_outcall_schedule_association(self):
+        outcall_id = 1
+        schedule_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(outcall_id, schedule_id)
+        self.session.put.assert_called_once_with("/outcalls/1/schedules/2")
+
+    def test_outcall_schedule_dissociation(self):
+        outcall_id = 1
+        schedule_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(outcall_id, schedule_id)
+        self.session.delete.assert_called_once_with("/outcalls/1/schedules/2")

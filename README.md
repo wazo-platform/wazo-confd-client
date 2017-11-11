@@ -332,6 +332,8 @@ Exposed via ```c.outcalls.relations(outcall_id)```
  * update_trunks(trunks)
  * add_extension(extension, prefix='123', external_prefix='456', strip_digits=2, caller_id='toto')
  * remove_extension(extension)
+ * add_schedule(schedule)
+ * remove_schedule(schedule)
 
 ## Paging relation
 
