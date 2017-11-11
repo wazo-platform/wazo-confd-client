@@ -1,22 +1,23 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2014-2017 The Wazo Authors  (see the AUTHORS file)
-#
 # SPDX-License-Identifier: GPL-3.0+
 
 from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import (UserAgentRelation,
-                                         UserCallPermissionRelation,
-                                         UserCtiProfileRelation,
-                                         UserEndpointSipRelation,
-                                         UserEntityRelation,
-                                         UserFallbackRelation,
-                                         UserForwardRelation,
-                                         UserFuncKeyRelation,
-                                         UserGroupRelation,
-                                         UserLineRelation,
-                                         UserServiceRelation,
-                                         UserVoicemailRelation)
+from xivo_confd_client.relations import (
+    UserAgentRelation,
+    UserCallPermissionRelation,
+    UserCtiProfileRelation,
+    UserEndpointSipRelation,
+    UserEntityRelation,
+    UserFallbackRelation,
+    UserForwardRelation,
+    UserFuncKeyRelation,
+    UserGroupRelation,
+    UserLineRelation,
+    UserScheduleRelation,
+    UserServiceRelation,
+    UserVoicemailRelation,
+)
 from xivo_confd_client.util import extract_id, url_join
 
 
@@ -34,6 +35,7 @@ class UserRelation(object):
         self.user_funckey = UserFuncKeyRelation(builder)
         self.user_group = UserGroupRelation(builder)
         self.user_line = UserLineRelation(builder)
+        self.user_schedule = UserScheduleRelation(builder)
         self.user_service = UserServiceRelation(builder)
         self.user_voicemail = UserVoicemailRelation(builder)
 
@@ -163,6 +165,14 @@ class UserRelation(object):
 
     def update_groups(self, groups):
         return self.user_group.associate(self.user_id, groups)
+
+    @extract_id
+    def add_schedule(self, schedule_id):
+        return self.user_schedule.associate(self.user_id, schedule_id)
+
+    @extract_id
+    def remove_schedule(self, schedule_id):
+        return self.user_schedule.dissociate(self.user_id, schedule_id)
 
 
 class UsersCommand(CRUDCommand):

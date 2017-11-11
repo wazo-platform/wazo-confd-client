@@ -517,3 +517,14 @@ class IncallScheduleRelation(HTTPCommand):
     def dissociate(self, incall_id, schedule_id):
         url = url_join('incalls', incall_id, 'schedules', schedule_id)
         self.session.delete(url)
+
+
+class UserScheduleRelation(HTTPCommand):
+
+    def associate(self, user_id, schedule_id):
+        url = url_join('users', user_id, 'schedules', schedule_id)
+        self.session.put(url)
+
+    def dissociate(self, user_id, schedule_id):
+        url = url_join('users', user_id, 'schedules', schedule_id)
+        self.session.delete(url)

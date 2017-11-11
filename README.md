@@ -416,6 +416,9 @@ Exposed via ```c.users.relations(user_id)```
 
  * update_groups(groups)
 
+ * add_schedule(schedule)
+ * remove_schedule(schedule)
+
 
 ## Voicemail relation
 
