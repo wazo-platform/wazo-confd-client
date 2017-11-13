@@ -37,6 +37,7 @@ from xivo_confd_client.relations import (
     UserFuncKeyRelation,
     UserGroupRelation,
     UserLineRelation,
+    UserScheduleRelation,
     UserServiceRelation,
     UserVoicemailRelation,
 )
@@ -1332,3 +1333,26 @@ class TestIncallScheduleRelation(TestCommand):
 
         self.command.dissociate(incall_id, schedule_id)
         self.session.delete.assert_called_once_with("/incalls/1/schedules/2")
+
+
+class TestUserScheduleRelation(TestCommand):
+
+    Command = UserScheduleRelation
+
+    def test_user_schedule_association(self):
+        user_id = 1
+        schedule_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(user_id, schedule_id)
+        self.session.put.assert_called_once_with("/users/1/schedules/2")
+
+    def test_user_schedule_dissociation(self):
+        user_id = 1
+        schedule_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(user_id, schedule_id)
+        self.session.delete.assert_called_once_with("/users/1/schedules/2")
