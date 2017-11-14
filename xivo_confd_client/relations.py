@@ -528,3 +528,14 @@ class UserScheduleRelation(HTTPCommand):
     def dissociate(self, user_id, schedule_id):
         url = url_join('users', user_id, 'schedules', schedule_id)
         self.session.delete(url)
+
+
+class GroupScheduleRelation(HTTPCommand):
+
+    def associate(self, group_id, schedule_id):
+        url = url_join('groups', group_id, 'schedules', schedule_id)
+        self.session.put(url)
+
+    def dissociate(self, group_id, schedule_id):
+        url = url_join('groups', group_id, 'schedules', schedule_id)
+        self.session.delete(url)
