@@ -1,9 +1,6 @@
 # -*- coding: UTF-8 -*-
-
 # Copyright (C) 2015 Avencall
-#
 # SPDX-License-Identifier: GPL-3.0+
-
 
 from hamcrest import assert_that
 from hamcrest import has_entries

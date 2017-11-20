@@ -1,9 +1,6 @@
 # -*- coding: UTF-8 -*-
-
 # Copyright (C) 2015 Avencall
-#
 # SPDX-License-Identifier: GPL-3.0+
-
 
 from xivo_confd_client.crud import CRUDCommand
 from xivo_confd_client.relations import LineEndpointSccpRelation
