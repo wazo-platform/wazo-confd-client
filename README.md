@@ -52,11 +52,6 @@ operation on a resource.
 ```python
 from xivo_confd_client import Client
 
-c = Client('confd.example.com',
-           https=True,
-           port=9486,
-           username='alice',
-           password='s3cre7')
 c = Client('confd.example.com', port=9486, https=True, token='the-one-ring')
 
 users = c.users.list()
