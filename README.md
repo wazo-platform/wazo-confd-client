@@ -344,6 +344,12 @@ Exposed via ```c.parking_lots.relations(parking_lot_id)```
  * add_extension(extension)
  * remove_extension(extension)
 
+
+## Register SIP relation
+
+Exposed via ```c.registers_sip.relations(endpoint_sip_id)```
+
+
 ## Switchboard relation
 
 Exposed via ```c.switchboards.relations(switchboard_id)```
