@@ -475,6 +475,14 @@ c.queues.edit_membership(queue_id, agent_id, penalty)
 ```
 
 
+## timezones
+
+```python
+#Get available timezones
+timezones = c.timezones.list()
+```
+
+
 ## voicemail zonemessages
 
 ```python
