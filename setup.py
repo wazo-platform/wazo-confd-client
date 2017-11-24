@@ -48,6 +48,7 @@ setup(
             'schedules = xivo_confd_client.commands.schedules:SchedulesCommand',
             'sip_general = xivo_confd_client.commands.sip_general:SIPGeneralCommand',
             'switchboards = xivo_confd_client.commands.switchboards:SwitchboardsCommand',
+            'timezones = xivo_confd_client.commands.timezones:TimezonesCommand',
             'trunks = xivo_confd_client.commands.trunks:TrunksCommand',
             'users = xivo_confd_client.commands.users:UsersCommand',
             'voicemails = xivo_confd_client.commands.voicemails:VoicemailsCommand',
