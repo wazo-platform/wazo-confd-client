@@ -550,3 +550,14 @@ class OutcallScheduleRelation(HTTPCommand):
     def dissociate(self, outcall_id, schedule_id):
         url = url_join('outcalls', outcall_id, 'schedules', schedule_id)
         self.session.delete(url)
+
+
+class OutcallCallPermissionRelation(HTTPCommand):
+
+    def associate(self, outcall_id, call_permission_id):
+        url = url_join('outcalls', outcall_id, 'callpermissions', call_permission_id)
+        self.session.put(url)
+
+    def dissociate(self, outcall_id, call_permission_id):
+        url = url_join('outcalls', outcall_id, 'callpermissions', call_permission_id)
+        self.session.delete(url)
