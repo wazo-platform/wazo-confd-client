@@ -20,6 +20,7 @@ from xivo_confd_client.relations import (
     LineEndpointSccpRelation,
     LineEndpointSipRelation,
     LineExtensionRelation,
+    OutcallCallPermissionRelation,
     OutcallExtensionRelation,
     OutcallScheduleRelation,
     OutcallTrunkRelation,
@@ -1404,3 +1405,22 @@ class TestOutcallScheduleRelation(TestCommand):
 
         self.command.dissociate(outcall_id, schedule_id)
         self.session.delete.assert_called_once_with("/outcalls/1/schedules/2")
+
+
+class TestOutcallCallPermissionRelation(TestCommand):
+
+    Command = OutcallCallPermissionRelation
+
+    def test_outcall_call_permission_association(self):
+        outcall_id = 1
+        call_permission_id = 2
+
+        self.command.associate(outcall_id, call_permission_id)
+        self.session.put.assert_called_once_with("/outcalls/1/callpermissions/2")
+
+    def test_outcall_call_permission_dissociation(self):
+        outcall_id = 1
+        call_permission_id = 2
+
+        self.command.dissociate(outcall_id, call_permission_id)
+        self.session.delete.assert_called_once_with("/outcalls/1/callpermissions/2")

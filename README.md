@@ -329,6 +329,8 @@ Exposed via ```c.outcalls.relations(outcall_id)```
  * remove_extension(extension)
  * add_schedule(schedule)
  * remove_schedule(schedule)
+ * add_call_permission(call_permission)
+ * remove_call_permission(call_permission)
 
 ## Paging relation
 
