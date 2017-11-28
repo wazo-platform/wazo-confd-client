@@ -485,6 +485,14 @@ timezones = c.timezones.list()
 ```
 
 
+## sounds languages
+
+```python
+#Get available sounds languages
+timezones = c.sounds_languages.list()
+```
+
+
 ## voicemail zonemessages
 
 ```python
