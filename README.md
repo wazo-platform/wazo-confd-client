@@ -489,7 +489,7 @@ timezones = c.timezones.list()
 
 ```python
 #Get available sounds languages
-timezones = c.sounds_languages.list()
+sounds_languages = c.sounds_languages.list()
 ```
 
 
