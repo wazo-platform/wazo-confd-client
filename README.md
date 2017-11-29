@@ -288,6 +288,9 @@ Exposed via ```c.groups.relations(group_id)```
  * add_schedule(schedule)
  * remove_schedule(schedule)
 
+ * add_call_permission(call_permission)
+ * remove_call_permission(call_permission)
+
 ## Incall relation
 
 Exposed via ```c.incalls.relations(incall_id)```

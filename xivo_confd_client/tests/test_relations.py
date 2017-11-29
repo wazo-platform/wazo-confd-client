@@ -8,6 +8,7 @@ from hamcrest import assert_that
 from xivo_confd_client.tests import TestCommand
 from xivo_confd_client.relations import (
     ConferenceExtensionRelation,
+    GroupCallPermissionRelation,
     GroupExtensionRelation,
     GroupFallbackRelation,
     GroupMemberExtensionRelation,
@@ -1424,3 +1425,22 @@ class TestOutcallCallPermissionRelation(TestCommand):
 
         self.command.dissociate(outcall_id, call_permission_id)
         self.session.delete.assert_called_once_with("/outcalls/1/callpermissions/2")
+
+
+class TestGroupCallPermissionRelation(TestCommand):
+
+    Command = GroupCallPermissionRelation
+
+    def test_group_call_permission_association(self):
+        group_id = 1
+        call_permission_id = 2
+
+        self.command.associate(group_id, call_permission_id)
+        self.session.put.assert_called_once_with("/groups/1/callpermissions/2")
+
+    def test_group_call_permission_dissociation(self):
+        group_id = 1
+        call_permission_id = 2
+
+        self.command.dissociate(group_id, call_permission_id)
+        self.session.delete.assert_called_once_with("/groups/1/callpermissions/2")

@@ -5,6 +5,7 @@
 from xivo_confd_client.util import extract_id
 from xivo_confd_client.crud import CRUDCommand
 from xivo_confd_client.relations import (
+    GroupCallPermissionRelation,
     GroupExtensionRelation,
     GroupFallbackRelation,
     GroupMemberExtensionRelation,
@@ -17,6 +18,7 @@ class GroupRelation(object):
 
     def __init__(self, builder, group_id):
         self.group_id = group_id
+        self.group_call_permission = GroupCallPermissionRelation(builder)
         self.group_extension = GroupExtensionRelation(builder)
         self.group_user_members = GroupMemberUserRelation(builder)
         self.group_extension_members = GroupMemberExtensionRelation(builder)
@@ -50,6 +52,14 @@ class GroupRelation(object):
     @extract_id
     def remove_schedule(self, schedule_id):
         return self.group_schedule.dissociate(self.group_id, schedule_id)
+
+    @extract_id
+    def add_call_permission(self, call_permission_id):
+        return self.group_call_permission.associate(self.group_id, call_permission_id)
+
+    @extract_id
+    def remove_call_permission(self, call_permission_id):
+        self.group_call_permission.dissociate(self.group_id, call_permission_id)
 
 
 class GroupsCommand(CRUDCommand):
