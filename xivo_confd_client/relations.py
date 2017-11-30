@@ -561,3 +561,14 @@ class OutcallCallPermissionRelation(HTTPCommand):
     def dissociate(self, outcall_id, call_permission_id):
         url = url_join('outcalls', outcall_id, 'callpermissions', call_permission_id)
         self.session.delete(url)
+
+
+class GroupCallPermissionRelation(HTTPCommand):
+
+    def associate(self, group_id, call_permission_id):
+        url = url_join('groups', group_id, 'callpermissions', call_permission_id)
+        self.session.put(url)
+
+    def dissociate(self, group_id, call_permission_id):
+        url = url_join('groups', group_id, 'callpermissions', call_permission_id)
+        self.session.delete(url)
