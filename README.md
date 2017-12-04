@@ -507,6 +507,17 @@ c.voicemail_zonemessages.update(voicemail_zonemessages)
 ```
 
 
+## voicemail general
+
+```python
+#Get Voicemail general configuration
+voicemail_general = c.voicemail_general.get()
+
+#Update SIP general configuration
+c.voicemail_general.update(voicemail_general)
+```
+
+
 ## sip general
 
 ```python
