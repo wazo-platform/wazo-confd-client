@@ -499,10 +499,10 @@ sounds_languages = c.sounds_languages.list()
 ## voicemail zonemessages
 
 ```python
-#Get SIP general configuration
+#Get voicemail zonemessages configuration
 voicemail_zonemessages = c.voicemail_zonemessages.get()
 
-#Update SIP general configuration
+#Update voicemail zonemessages configuration
 c.voicemail_zonemessages.update(voicemail_zonemessages)
 ```
 
@@ -521,10 +521,10 @@ c.sip_general.update(sip_general)
 ## iax general
 
 ```python
-#Get SIP general configuration
+#Get IAX general configuration
 iax_general = c.iax_general.get()
 
-#Update SIP general configuration
+#Update IAX general configuration
 c.iax_general.update(iax_general)
 ```
 
