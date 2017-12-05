@@ -517,6 +517,18 @@ sip_general = c.sip_general.get()
 c.sip_general.update(sip_general)
 ```
 
+
+## iax general
+
+```python
+#Get SIP general configuration
+iax_general = c.iax_general.get()
+
+#Update SIP general configuration
+c.iax_general.update(iax_general)
+```
+
+
 ## wizard
 
 ```python
