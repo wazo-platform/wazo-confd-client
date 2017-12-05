@@ -35,6 +35,7 @@ setup(
             'extensions = xivo_confd_client.commands.extensions:ExtensionsCommand',
             'funckeys = xivo_confd_client.commands.funckeys:FuncKeysCommand',
             'groups = xivo_confd_client.commands.groups:GroupsCommand',
+            'iax_general = xivo_confd_client.commands.iax_general:IAXGeneralCommand',
             'incalls = xivo_confd_client.commands.incalls:IncallsCommand',
             'infos = xivo_confd_client.commands.infos:InfosCommand',
             'ivr = xivo_confd_client.commands.ivr:IVRCommand',
