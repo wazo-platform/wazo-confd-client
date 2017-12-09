@@ -357,7 +357,7 @@ Exposed via ```c.registers_iax.relations(register_iax_id)```
 
 ## Register SIP relation
 
-Exposed via ```c.registers_sip.relations(endpoint_sip_id)```
+Exposed via ```c.registers_sip.relations(register_sip_id)```
 
 
 ## Switchboard relation
