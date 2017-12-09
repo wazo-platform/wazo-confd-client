@@ -523,6 +523,17 @@ c.voicemail_general.update(voicemail_general)
 ```
 
 
+## sccp general
+
+```python
+#Get SCCP general configuration
+sccp_general = c.sccp_general.get()
+
+#Update SCCP general configuration
+c.sccp_general.update(sccp_general)
+```
+
+
 ## sip general
 
 ```python
