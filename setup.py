@@ -48,6 +48,7 @@ setup(
             'queues = xivo_confd_client.commands.queues:QueuesCommand',
             'registers_iax = xivo_confd_client.commands.registers_iax:RegistersIAXCommand',
             'registers_sip = xivo_confd_client.commands.registers_sip:RegistersSipCommand',
+            'sccp_general = xivo_confd_client.commands.sccp_general:SCCPGeneralCommand',
             'schedules = xivo_confd_client.commands.schedules:SchedulesCommand',
             'sip_general = xivo_confd_client.commands.sip_general:SIPGeneralCommand',
             'sounds_languages = xivo_confd_client.commands.sounds_languages:SoundsLanguagesCommand',
