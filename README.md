@@ -545,6 +545,17 @@ c.sip_general.update(sip_general)
 ```
 
 
+## iax callnumberlimits
+
+```python
+#Get IAX callnumberlimits configuration
+iax_callnumberlimits = c.iax_callnumberlimits.get()
+
+#Update IAX callnumberlimits configuration
+c.iax_callnumberlimits.update(iax_callnumberlimits)
+```
+
+
 ## iax general
 
 ```python
