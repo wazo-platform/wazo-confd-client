@@ -23,6 +23,8 @@ setup(
         'confd_client.commands': [
             'call_logs = xivo_confd_client.commands.call_logs:CallLogsCommand',
             'call_permissions = xivo_confd_client.commands.call_permissions:CallPermissionsCommand',
+            'confbridge_default_bridge = xivo_confd_client.commands.confbridge_default_bridge:ConfBridgeDefaultBridgeCommand',
+            'confbridge_default_user = xivo_confd_client.commands.confbridge_default_user:ConfBridgeDefaultUserCommand',
             'conferences = xivo_confd_client.commands.conferences:ConferencesCommand',
             'configuration = xivo_confd_client.commands.configuration:ConfigurationCommand',
             'contexts = xivo_confd_client.commands.contexts:ContextsCommand',
