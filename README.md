@@ -583,6 +583,29 @@ c.confbridge_default_user.update(default_user)
 ```
 
 
+## features
+
+```python
+#Get Features applicationmap configuration
+applicationmap = c.features_applicationmap.get()
+
+#Update Features applicationmap configuration
+c.features_default_bridge.update(applicationmap)
+
+#Get Features featuremap configuration
+featuremap = c.features_featuremap.get()
+
+#Update Features featuremap configuration
+c.features_default_bridge.update(featuremap)
+
+#Get Features general configuration
+general = c.features_general.get()
+
+#Update Features general configuration
+c.features_default_bridge.update(general)
+```
+
+
 ## wizard
 
 ```python
