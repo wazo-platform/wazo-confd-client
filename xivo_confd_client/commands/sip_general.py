@@ -14,4 +14,4 @@ class SIPGeneralCommand(RESTCommand):
         return response.json()
 
     def update(self, body):
-        self.session.put(self.base_url, body)
+        self.session.put(self.resource, body)
