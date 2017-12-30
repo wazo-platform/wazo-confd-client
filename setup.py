@@ -57,6 +57,7 @@ setup(
             'sccp_general = xivo_confd_client.commands.sccp_general:SCCPGeneralCommand',
             'schedules = xivo_confd_client.commands.schedules:SchedulesCommand',
             'sip_general = xivo_confd_client.commands.sip_general:SIPGeneralCommand',
+            'sounds = xivo_confd_client.commands.sounds:SoundsCommand',
             'sounds_languages = xivo_confd_client.commands.sounds_languages:SoundsLanguagesCommand',
             'switchboards = xivo_confd_client.commands.switchboards:SwitchboardsCommand',
             'timezones = xivo_confd_client.commands.timezones:TimezonesCommand',

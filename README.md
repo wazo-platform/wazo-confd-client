@@ -176,6 +176,21 @@ endpoint_sip = users.get_main_endpoint_sip(user_uuid)
 ```
 
 
+## sounds
+
+Resource for managing files
+```
+#Get sound file
+binary_content = c.sounds.download_file(sound_name, file_name, format, language)
+
+#Upload sound file
+c.sounds.upload_file(sound_name, file_name, binary_content, format, language)
+
+#Delete sound file
+c.sounds.delete_file(sound_name, file_name, format, language)
+```
+
+
 # Resource relations
 
 Certain resources can be associated together in order to offer additional
