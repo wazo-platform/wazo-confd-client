@@ -281,6 +281,10 @@ Exposed via ```c.extensions.relations(extension_id)```
  * get_line()
  * list_lines()
 
+## Extension feature relation
+
+Exposed via ```c.extensions_features.relations(extension_id)```
+
 ## Funckey template relation
 
 Exposed via ```c.funckeys.relations(template_id)```

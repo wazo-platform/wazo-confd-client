@@ -35,6 +35,7 @@ setup(
             'endpoints_sip = xivo_confd_client.commands.endpoints_sip:EndpointsSipCommand',
             'entities = xivo_confd_client.commands.entities:EntitiesCommand',
             'extensions = xivo_confd_client.commands.extensions:ExtensionsCommand',
+            'extensions_features = xivo_confd_client.commands.extensions_features:ExtensionsFeaturesCommand',
             'features_applicationmap = xivo_confd_client.commands.features_applicationmap:FeaturesApplicationmapCommand',
             'features_featuremap = xivo_confd_client.commands.features_featuremap:FeaturesFeaturemapCommand',
             'features_general = xivo_confd_client.commands.features_general:FeaturesGeneralCommand',
