@@ -392,6 +392,8 @@ Exposed via ```c.trunks.relations(trunk_id)```
  * add_endpoint_sip(endpoint_sip)
  * remove_endpoint_sip(endpoint_sip)
  * get_endpoint_sip()
+ * add_endpoint_iax(endpoint_iax)
+ * remove_endpoint_iax(endpoint_iax)
  * add_endpoint_custom(endpoint_custom)
  * remove_endpoint_custom(endpoint_custom)
  * get_endpoint_custom()

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2017 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 from xivo_lib_rest_client import HTTPCommand
@@ -339,6 +339,17 @@ class TrunkEndpointSipRelation(HTTPCommand):
         url = url_join('endpoints', 'sip', sip_id, 'trunks')
         response = self.session.get(url)
         return response.json()
+
+
+class TrunkEndpointIAXRelation(HTTPCommand):
+
+    def associate(self, trunk_id, iax_id):
+        url = url_join('trunks', trunk_id, 'endpoints', 'iax', iax_id)
+        self.session.put(url)
+
+    def dissociate(self, trunk_id, iax_id):
+        url = url_join('trunks', trunk_id, 'endpoints', 'iax', iax_id)
+        self.session.delete(url)
 
 
 class TrunkEndpointCustomRelation(HTTPCommand):

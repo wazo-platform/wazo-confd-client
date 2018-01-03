@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2017 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 
@@ -30,6 +30,7 @@ from xivo_confd_client.relations import (
     ParkingLotExtensionRelation,
     SwitchboardMemberUserRelation,
     TrunkEndpointCustomRelation,
+    TrunkEndpointIAXRelation,
     TrunkEndpointSipRelation,
     UserAgentRelation,
     UserCallPermissionRelation,
@@ -977,6 +978,29 @@ class TestTrunkEndpointSipRelation(TestCommand):
         self.session.get.assert_called_once_with("/endpoints/sip/2/trunks")
 
         assert_that(response, expected_result)
+
+
+class TestTrunkEndpointIAXRelation(TestCommand):
+
+    Command = TrunkEndpointIAXRelation
+
+    def test_trunk_endpoint_iax_association(self):
+        trunk_id = 1
+        iax_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(trunk_id, iax_id)
+        self.session.put.assert_called_once_with("/trunks/1/endpoints/iax/2")
+
+    def test_trunk_endpoint_iax_dissociation(self):
+        trunk_id = 1
+        iax_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(trunk_id, iax_id)
+        self.session.delete.assert_called_once_with("/trunks/1/endpoints/iax/2")
 
 
 class TestTrunkEndpointCustomRelation(TestCommand):
