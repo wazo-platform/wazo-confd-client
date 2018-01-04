@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2016 Avencall
+# Copyright 2016-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 from xivo_confd_client.util import extract_id
 from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import (TrunkEndpointSipRelation,
-                                         TrunkEndpointCustomRelation)
+from xivo_confd_client.relations import (
+    TrunkEndpointSipRelation,
+    TrunkEndpointIAXRelation,
+    TrunkEndpointCustomRelation,
+)
 
 
 class TrunkRelation(object):
@@ -13,6 +16,7 @@ class TrunkRelation(object):
     def __init__(self, builder, trunk_id):
         self.trunk_id = trunk_id
         self.trunk_endpoint_sip = TrunkEndpointSipRelation(builder)
+        self.trunk_endpoint_iax = TrunkEndpointIAXRelation(builder)
         self.trunk_endpoint_custom = TrunkEndpointCustomRelation(builder)
 
     @extract_id
@@ -25,6 +29,14 @@ class TrunkRelation(object):
 
     def get_endpoint_sip(self):
         return self.trunk_endpoint_sip.get_by_trunk(self.trunk_id)
+
+    @extract_id
+    def add_endpoint_iax(self, endpoint_iax_id):
+        return self.trunk_endpoint_iax.associate(self.trunk_id, endpoint_iax_id)
+
+    @extract_id
+    def remove_endpoint_iax(self, endpoint_iax_id):
+        return self.trunk_endpoint_iax.dissociate(self.trunk_id, endpoint_iax_id)
 
     @extract_id
     def add_endpoint_custom(self, endpoint_custom_id):
