@@ -352,6 +352,28 @@ class TrunkEndpointIAXRelation(HTTPCommand):
         self.session.delete(url)
 
 
+class TrunkRegisterSipRelation(HTTPCommand):
+
+    def associate(self, trunk_id, sip_id):
+        url = url_join('trunks', trunk_id, 'registers', 'sip', sip_id)
+        self.session.put(url)
+
+    def dissociate(self, trunk_id, sip_id):
+        url = url_join('trunks', trunk_id, 'registers', 'sip', sip_id)
+        self.session.delete(url)
+
+
+class TrunkRegisterIAXRelation(HTTPCommand):
+
+    def associate(self, trunk_id, iax_id):
+        url = url_join('trunks', trunk_id, 'registers', 'iax', iax_id)
+        self.session.put(url)
+
+    def dissociate(self, trunk_id, iax_id):
+        url = url_join('trunks', trunk_id, 'registers', 'iax', iax_id)
+        self.session.delete(url)
+
+
 class TrunkEndpointCustomRelation(HTTPCommand):
 
     def associate(self, trunk_id, custom_id):

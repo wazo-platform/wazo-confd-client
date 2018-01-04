@@ -397,6 +397,10 @@ Exposed via ```c.trunks.relations(trunk_id)```
  * add_endpoint_custom(endpoint_custom)
  * remove_endpoint_custom(endpoint_custom)
  * get_endpoint_custom()
+ * add_register_sip(register_sip)
+ * remove_register_sip(register_sip)
+ * add_register_iax(register_iax)
+ * remove_register_iax(register_iax)
 
 ## User relation
 
