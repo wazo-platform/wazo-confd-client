@@ -32,6 +32,8 @@ from xivo_confd_client.relations import (
     TrunkEndpointCustomRelation,
     TrunkEndpointIAXRelation,
     TrunkEndpointSipRelation,
+    TrunkRegisterIAXRelation,
+    TrunkRegisterSipRelation,
     UserAgentRelation,
     UserCallPermissionRelation,
     UserCtiProfileRelation,
@@ -1001,6 +1003,52 @@ class TestTrunkEndpointIAXRelation(TestCommand):
 
         self.command.dissociate(trunk_id, iax_id)
         self.session.delete.assert_called_once_with("/trunks/1/endpoints/iax/2")
+
+
+class TestTrunkRegisterSipRelation(TestCommand):
+
+    Command = TrunkRegisterSipRelation
+
+    def test_trunk_register_sip_association(self):
+        trunk_id = 1
+        sip_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(trunk_id, sip_id)
+        self.session.put.assert_called_once_with("/trunks/1/registers/sip/2")
+
+    def test_trunk_register_sip_dissociation(self):
+        trunk_id = 1
+        sip_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(trunk_id, sip_id)
+        self.session.delete.assert_called_once_with("/trunks/1/registers/sip/2")
+
+
+class TestTrunkRegisterIAXRelation(TestCommand):
+
+    Command = TrunkRegisterIAXRelation
+
+    def test_trunk_register_iax_association(self):
+        trunk_id = 1
+        iax_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(trunk_id, iax_id)
+        self.session.put.assert_called_once_with("/trunks/1/registers/iax/2")
+
+    def test_trunk_register_iax_dissociation(self):
+        trunk_id = 1
+        iax_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(trunk_id, iax_id)
+        self.session.delete.assert_called_once_with("/trunks/1/registers/iax/2")
 
 
 class TestTrunkEndpointCustomRelation(TestCommand):

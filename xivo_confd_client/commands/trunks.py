@@ -8,6 +8,8 @@ from xivo_confd_client.relations import (
     TrunkEndpointSipRelation,
     TrunkEndpointIAXRelation,
     TrunkEndpointCustomRelation,
+    TrunkRegisterSipRelation,
+    TrunkRegisterIAXRelation,
 )
 
 
@@ -18,6 +20,8 @@ class TrunkRelation(object):
         self.trunk_endpoint_sip = TrunkEndpointSipRelation(builder)
         self.trunk_endpoint_iax = TrunkEndpointIAXRelation(builder)
         self.trunk_endpoint_custom = TrunkEndpointCustomRelation(builder)
+        self.trunk_register_iax = TrunkRegisterIAXRelation(builder)
+        self.trunk_register_sip = TrunkRegisterSipRelation(builder)
 
     @extract_id
     def add_endpoint_sip(self, endpoint_sip_id):
@@ -48,6 +52,22 @@ class TrunkRelation(object):
 
     def get_endpoint_custom(self):
         return self.trunk_endpoint_custom.get_by_trunk(self.trunk_id)
+
+    @extract_id
+    def add_register_sip(self, register_sip_id):
+        return self.trunk_register_sip.associate(self.trunk_id, register_sip_id)
+
+    @extract_id
+    def remove_register_sip(self, register_sip_id):
+        return self.trunk_register_sip.dissociate(self.trunk_id, register_sip_id)
+
+    @extract_id
+    def add_register_iax(self, register_iax_id):
+        return self.trunk_register_iax.associate(self.trunk_id, register_iax_id)
+
+    @extract_id
+    def remove_register_iax(self, register_iax_id):
+        return self.trunk_register_iax.dissociate(self.trunk_id, register_iax_id)
 
 
 class TrunksCommand(CRUDCommand):
