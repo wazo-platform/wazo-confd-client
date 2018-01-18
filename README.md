@@ -594,17 +594,17 @@ c.iax_general.update(iax_general)
 ## confbridge
 
 ```python
-#Get ConfBridge default_bridge configuration
-default_bridge = c.confbridge_default_bridge.get()
+#Get ConfBridge wazo_default_bridge configuration
+wazo_default_bridge = c.confbridge_wazo_default_bridge.get()
 
-#Update ConfBridge default_bridge configuration
-c.confbridge_default_bridge.update(default_bridge)
+#Update ConfBridge wazo_default_bridge configuration
+c.confbridge_wazo_default_bridge.update(wazo_default_bridge)
 
-#Get ConfBridge default_user configuration
-default_user = c.confbridge_default_user.get()
+#Get ConfBridge wazo_default_user configuration
+wazo_default_user = c.confbridge_wazo_default_user.get()
 
-#Update ConfBridge default_user configuration
-c.confbridge_default_user.update(default_user)
+#Update ConfBridge wazo_default_user configuration
+c.confbridge_wazo_default_user.update(wazo_default_user)
 ```
 
 
