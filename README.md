@@ -615,19 +615,19 @@ c.confbridge_wazo_default_user.update(wazo_default_user)
 applicationmap = c.features_applicationmap.get()
 
 #Update Features applicationmap configuration
-c.features_default_bridge.update(applicationmap)
+c.features_applicationmap.update(applicationmap)
 
 #Get Features featuremap configuration
 featuremap = c.features_featuremap.get()
 
 #Update Features featuremap configuration
-c.features_default_bridge.update(featuremap)
+c.features_featuremap.update(featuremap)
 
 #Get Features general configuration
 general = c.features_general.get()
 
 #Update Features general configuration
-c.features_default_bridge.update(general)
+c.features_featuremap.update(general)
 ```
 
 
