@@ -12,7 +12,7 @@ class SoundsCommand(CRUDCommand):
 
     @extract_id
     def download_file(self, category, filename, **kwargs):
-        url = url_join(self.resource, category, 'files', filename)
+        url = url_join(self.resource, category, 'files', self._quote(filename))
         headers = {'Accept': '*/*'}
         response = self.session.get(url, headers=headers, params=kwargs)
         return response.content
@@ -27,3 +27,7 @@ class SoundsCommand(CRUDCommand):
     def delete_file(self, category, filename, **kwargs):
         url = url_join(self.resource, category, 'files', filename)
         self.session.delete(url, params=kwargs)
+
+    def _quote(self, value):
+        # to support system category with subdirectory
+        return value.replace('/', '%2F')
