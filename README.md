@@ -181,13 +181,13 @@ endpoint_sip = users.get_main_endpoint_sip(user_uuid)
 Resource for managing files
 ```
 #Get sound file
-binary_content = c.sounds.download_file(category, file_name, format, language)
+binary_content = c.sounds.download_file(category, file_name, format=format, language=language)
 
 #Upload sound file
-c.sounds.upload_file(category, file_name, binary_content, format, language)
+c.sounds.upload_file(category, file_name, binary_content, format=format, language=language)
 
 #Delete sound file
-c.sounds.delete_file(category, file_name, format, language)
+c.sounds.delete_file(category, file_name, format=format, language=language)
 ```
 
 
