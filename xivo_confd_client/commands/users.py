@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2014-2017 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 from xivo_confd_client.crud import CRUDCommand
@@ -143,7 +143,7 @@ class UserRelation(object):
         return self.user_service.list_services(self.user_id)
 
     def update_services(self, body):
-        return self.user_forward.update_services(self.user_id, body)
+        return self.user_service.update_services(self.user_id, body)
 
     def update_forward(self, forward_name, forward):
         self.user_forward.update_forward(self.user_id, forward_name, forward)
