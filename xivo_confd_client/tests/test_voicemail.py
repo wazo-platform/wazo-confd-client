@@ -1,13 +1,13 @@
 # -*- coding: UTF-8 -*-
-# Copyright (C) 2015 Avencall
+# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 import unittest
 
+from mock import Mock
+
 from xivo_confd_client.relations import UserVoicemailRelation
 from xivo_confd_client.commands.voicemails import VoicemailRelation
-
-from mock import Mock
 
 
 class TestVoicemailRelation(unittest.TestCase):

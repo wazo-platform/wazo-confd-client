@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015 Avencall
+# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from ..funckeys import FuncKeysCommand
-from hamcrest import assert_that
-from hamcrest import equal_to
-from hamcrest import none
+from hamcrest import (
+    assert_that,
+    equal_to,
+    none,
+)
 
 from xivo_confd_client.tests import TestCommand
+
+from ..funckeys import FuncKeysCommand
 
 
 class TestFuncKeys(TestCommand):

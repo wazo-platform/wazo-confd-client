@@ -1,10 +1,10 @@
 # -*- coding: UTF-8 -*-
-# Copyright (C) 2015 Avencall
+# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from ..devices import DevicesCommand
-
 from xivo_confd_client.tests import TestCommand
+
+from ..devices import DevicesCommand
 
 
 class TestFuncKeys(TestCommand):

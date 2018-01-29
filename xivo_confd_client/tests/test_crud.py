@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-# Copyright 2014-2017 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from ..crud import CRUDCommand
-
-from hamcrest import assert_that
-from hamcrest import equal_to
+from hamcrest import (
+    assert_that,
+    equal_to,
+)
 
 from xivo_confd_client.tests import TestCommand
+
+from ..crud import CRUDCommand
 
 
 class TestCRUDCommand(CRUDCommand):
@@ -72,10 +74,11 @@ class TestCRUD(TestCommand):
         expected_url = "/test/{}".format(resource_id)
         self.set_response('put', 204)
 
-        body = {'id': resource_id,
-                'firstname': 'John',
-                'links': [{'rel': 'users', 'href': 'http://localhost/users/1'}]
-                }
+        body = {
+            'id': resource_id,
+            'firstname': 'John',
+            'links': [{'rel': 'users', 'href': 'http://localhost/users/1'}]
+        }
 
         expected_body = {'id': resource_id,
                          'firstname': 'John'}
@@ -89,10 +92,11 @@ class TestCRUD(TestCommand):
         expected_url = "/test/{}".format(resource_uuid)
         self.set_response('put', 204)
 
-        body = {'uuid': resource_uuid,
-                'firstname': 'John',
-                'links': [{'rel': 'users', 'href': 'http://localhost/users/1'}]
-                }
+        body = {
+            'uuid': resource_uuid,
+            'firstname': 'John',
+            'links': [{'rel': 'users', 'href': 'http://localhost/users/1'}]
+        }
 
         expected_body = {'uuid': resource_uuid,
                          'firstname': 'John'}

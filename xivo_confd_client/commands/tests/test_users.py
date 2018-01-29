@@ -1,15 +1,16 @@
 # -*- coding: UTF-8 -*-
-# Copyright (C) 2015-2016 Avencall
+# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from hamcrest import assert_that, equal_to
 from unittest import TestCase
+
+from hamcrest import assert_that, equal_to
 from mock import Mock
+
+from xivo_confd_client.tests import TestCommand
 
 from ..users import UsersCommand
 from ..users import UserRelation
-
-from xivo_confd_client.tests import TestCommand
 
 FAKE_UUID = '00000000-aaaa-1111-bbbb-222222222222'
 

@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2014-2015 Avencall
+# Copyright 2014-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from ..infos import InfosCommand
-from hamcrest import assert_that
-from hamcrest import equal_to
+from hamcrest import (
+    assert_that,
+    equal_to,
+)
 from xivo_confd_client.tests import TestCommand
+
+from ..infos import InfosCommand
 
 
 class TestInfos(TestCommand):

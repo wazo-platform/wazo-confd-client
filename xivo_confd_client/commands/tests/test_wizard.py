@@ -1,10 +1,10 @@
 # -*- coding: UTF-8 -*-
-# Copyright (C) 2016 Avencall
+# Copyright 2016-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from ..wizard import WizardCommand
-
 from xivo_confd_client.tests import TestCommand
+
+from ..wizard import WizardCommand
 
 
 class TestWizard(TestCommand):

@@ -159,8 +159,8 @@ class TestLineExtensionRelation(TestCommand):
                      'href': 'http://localhost:9486/1.1/lines/1'},
                     {'rel': 'extensions',
                      'href': 'http://localhost:9486/1.1/extensions/2'},
-                ]}
-            ]
+                ]
+            }]
         }
 
         self.set_response('get', 200, expected_result)
@@ -184,8 +184,8 @@ class TestLineExtensionRelation(TestCommand):
                      'href': 'http://localhost:9486/1.1/lines/1'},
                     {'rel': 'extensions',
                      'href': 'http://localhost:9486/1.1/extensions/2'},
-                ]}
-            ]
+                ]
+            }]
         }
 
         self.set_response('get', 200, expected_result)
