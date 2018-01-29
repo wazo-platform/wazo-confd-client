@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2017-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 from xivo_confd_client.crud import CRUDCommand
@@ -15,7 +15,7 @@ class MOHCommand(CRUDCommand):
         url = url_join(self.resource, moh_uuid, 'files', filename)
         headers = {'Accept': '*/*'}
         response = self.session.get(url, headers=headers)
-        return response.content
+        return response
 
     @extract_id
     def upload_file(self, moh_uuid, filename, content):

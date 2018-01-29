@@ -17,7 +17,7 @@ class SoundsCommand(CRUDCommand):
         url = url_join(self.resource, category, 'files', quote(filename, safe=''))
         headers = {'Accept': '*/*'}
         response = self.session.get(url, headers=headers, params=kwargs)
-        return response.content
+        return response
 
     @extract_id
     def upload_file(self, category, filename, content, **kwargs):
