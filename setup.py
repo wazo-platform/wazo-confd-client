@@ -22,6 +22,7 @@ setup(
     entry_points={
         'confd_client.commands': [
             'call_logs = xivo_confd_client.commands.call_logs:CallLogsCommand',
+            'call_filters = xivo_confd_client.commands.call_filters:CallFiltersCommand',
             'call_permissions = xivo_confd_client.commands.call_permissions:CallPermissionsCommand',
             'confbridge_wazo_default_bridge = xivo_confd_client.commands.confbridge_wazo_default_bridge:ConfBridgeWazoDefaultBridgeCommand',
             'confbridge_wazo_default_user = xivo_confd_client.commands.confbridge_wazo_default_user:ConfBridgeWazoDefaultUserCommand',
