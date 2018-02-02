@@ -7,6 +7,8 @@ from hamcrest import assert_that
 
 from xivo_confd_client.tests import TestCommand
 from xivo_confd_client.relations import (
+    CallFilterRecipientUserRelation,
+    CallFilterSurrogateUserRelation,
     ConferenceExtensionRelation,
     GroupCallPermissionRelation,
     GroupExtensionRelation,
@@ -1516,3 +1518,33 @@ class TestGroupCallPermissionRelation(TestCommand):
 
         self.command.dissociate(group_id, call_permission_id)
         self.session.delete.assert_called_once_with("/groups/1/callpermissions/2")
+
+
+class TestCallFilterRecipientUserRelation(TestCommand):
+
+    Command = CallFilterRecipientUserRelation
+
+    def test_call_filter_user_association(self):
+        call_filter_id = 1
+        users = [{'uuid': 'a-2'}, {'uuid': 'b-3', 'timeout': 5}]
+
+        self.set_response('put', 204)
+        expected_body = {'users': users}
+
+        self.command.associate(call_filter_id, users)
+        self.session.put.assert_called_once_with("/callfilters/1/recipients/users", expected_body)
+
+
+class TestCallFilterSurrogateUserRelation(TestCommand):
+
+    Command = CallFilterSurrogateUserRelation
+
+    def test_call_filter_user_association(self):
+        call_filter_id = 1
+        users = [{'uuid': 'a-2'}, {'uuid': 'b-3'}]
+
+        self.set_response('put', 204)
+        expected_body = {'users': users}
+
+        self.command.associate(call_filter_id, users)
+        self.session.put.assert_called_once_with("/callfilters/1/surrogates/users", expected_body)

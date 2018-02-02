@@ -217,6 +217,14 @@ c.users(user).add_line(line)
 
 Here is a list of relations and their methods:
 
+## Call Filter Relation
+
+Exposed via ```c.callfilters.relations(call_filter_id)```
+
+ * update_user_recipients(users)
+ * update_user_surrogates(users)
+
+
 ## Call Permission Relation
 
 Exposed via ```c.call_permissions.relations(call_permission_id)```
