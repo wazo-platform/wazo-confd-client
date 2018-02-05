@@ -605,3 +605,24 @@ class GroupCallPermissionRelation(HTTPCommand):
     def dissociate(self, group_id, call_permission_id):
         url = url_join('groups', group_id, 'callpermissions', call_permission_id)
         self.session.delete(url)
+
+
+class CallFilterRecipientUserRelation(HTTPCommand):
+
+    def associate(self, call_filter_id, users):
+        url = url_join('callfilters', call_filter_id, 'recipients', 'users')
+        body = {'users': []}
+        for user in users:
+            result = {'uuid': user['uuid']}
+            if user.get('timeout'):
+                result['timeout'] = user['timeout']
+            body['users'].append(result)
+        self.session.put(url, body)
+
+
+class CallFilterSurrogateUserRelation(HTTPCommand):
+
+    def associate(self, call_filter_id, users):
+        url = url_join('callfilters', call_filter_id, 'surrogates', 'users')
+        body = {'users': [{'uuid': user['uuid']} for user in users]}
+        self.session.put(url, body)
