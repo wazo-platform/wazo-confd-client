@@ -7,6 +7,7 @@ from hamcrest import assert_that
 
 from xivo_confd_client.tests import TestCommand
 from xivo_confd_client.relations import (
+    CallFilterFallbackRelation,
     CallFilterRecipientUserRelation,
     CallFilterSurrogateUserRelation,
     ConferenceExtensionRelation,
@@ -1548,3 +1549,17 @@ class TestCallFilterSurrogateUserRelation(TestCommand):
 
         self.command.associate(call_filter_id, users)
         self.session.put.assert_called_once_with("/callfilters/1/surrogates/users", expected_body)
+
+
+class TestCallFilterFallbackRelation(TestCommand):
+
+    Command = CallFilterFallbackRelation
+
+    def test_update_fallbacks(self):
+        call_filter_id = 1234
+        fallbacks = {'noanswer_destination': {'type': 'none'}}
+
+        self.command.update_fallbacks(call_filter_id, fallbacks)
+
+        expected_url = "/callfilters/{}/fallbacks".format(call_filter_id)
+        self.session.put.assert_called_with(expected_url, fallbacks)

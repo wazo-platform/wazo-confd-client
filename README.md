@@ -221,6 +221,7 @@ Here is a list of relations and their methods:
 
 Exposed via ```c.callfilters.relations(call_filter_id)```
 
+ * update_fallbacks(fallbacks)
  * update_user_recipients(users)
  * update_user_surrogates(users)
 

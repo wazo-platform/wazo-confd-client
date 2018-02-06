@@ -626,3 +626,10 @@ class CallFilterSurrogateUserRelation(HTTPCommand):
         url = url_join('callfilters', call_filter_id, 'surrogates', 'users')
         body = {'users': [{'uuid': user['uuid']} for user in users]}
         self.session.put(url, body)
+
+
+class CallFilterFallbackRelation(HTTPCommand):
+
+    def update_fallbacks(self, call_filter_id, fallbacks):
+        url = url_join('callfilters', call_filter_id, 'fallbacks')
+        self.session.put(url, fallbacks)
