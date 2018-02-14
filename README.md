@@ -219,7 +219,7 @@ Here is a list of relations and their methods:
 
 ## Call Filter Relation
 
-Exposed via ```c.callfilters.relations(call_filter_id)```
+Exposed via ```c.call_filters.relations(call_filter_id)```
 
  * update_fallbacks(fallbacks)
  * update_user_recipients(users)
