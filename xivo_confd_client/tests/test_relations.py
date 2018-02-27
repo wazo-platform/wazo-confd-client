@@ -722,6 +722,23 @@ class TestUserCtiProfileRelation(TestCommand):
 
         self.session.put.assert_called_once_with(expected_url, expected_body)
 
+    def test_update_with_enabled(self):
+        user_id = 1234
+        cti_profile = {'id': 3}
+        enabled = False
+
+        expected_url = "/users/{}/cti".format(user_id)
+        expected_body = {
+            'cti_profile_id': 3,
+            'enabled': enabled,
+        }
+
+        self.set_response('put', 204)
+
+        self.command.update(user_id, cti_profile, enabled)
+
+        self.session.put.assert_called_once_with(expected_url, expected_body)
+
     def test_associate(self):
         user_id = 1234
         cti_profile_id = 2345

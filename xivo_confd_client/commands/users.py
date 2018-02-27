@@ -130,8 +130,8 @@ class UserRelation(object):
     def disable_cti_profile(self):
         self.user_cti_profile.disable(self.user_id)
 
-    def update_cti_profile(self, cti_profile):
-        self.user_cti_profile.update(self.user_id, cti_profile)
+    def update_cti_profile(self, cti_profile, enabled=None):
+        self.user_cti_profile.update(self.user_id, cti_profile, enabled)
 
     def update_service(self, service_name, service):
         self.user_service.update_service(self.user_id, service_name, service)

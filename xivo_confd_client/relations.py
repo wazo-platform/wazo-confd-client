@@ -227,10 +227,10 @@ class UserCtiProfileRelation(HTTPCommand):
         response = self.session.get(url)
         return response.json()
 
-    def update(self, user_id, cti_profile):
+    def update(self, user_id, cti_profile, enabled=None):
         url = url_join('users', user_id, 'cti')
         default_enabled = cti_profile.get('id') is not None
-        enabled = cti_profile.get('enabled', default_enabled)
+        enabled = enabled if enabled is not None else default_enabled
         body = {'cti_profile_id': cti_profile.get('id'),
                 'enabled': enabled}
         self.session.put(url, body)
