@@ -229,7 +229,7 @@ class UserCtiProfileRelation(HTTPCommand):
 
     def update(self, user_id, cti_profile):
         url = url_join('users', user_id, 'cti')
-        default_enabled = True if cti_profile.get('id') is not None else False
+        default_enabled = cti_profile.get('id') is not None
         enabled = cti_profile.get('enabled', default_enabled)
         body = {'cti_profile_id': cti_profile.get('id'),
                 'enabled': enabled}
