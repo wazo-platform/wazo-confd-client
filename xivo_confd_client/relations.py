@@ -229,8 +229,10 @@ class UserCtiProfileRelation(HTTPCommand):
 
     def update(self, user_id, cti_profile):
         url = url_join('users', user_id, 'cti')
+        default_enabled = cti_profile.get('id') is not None
+        enabled = cti_profile.get('enabled', default_enabled)
         body = {'cti_profile_id': cti_profile.get('id'),
-                'enabled': True if cti_profile.get('id') is not None else False}
+                'enabled': enabled}
         self.session.put(url, body)
 
     def associate(self, user_id, cti_profile_id, enabled=True):
