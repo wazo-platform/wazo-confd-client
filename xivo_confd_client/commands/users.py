@@ -180,9 +180,22 @@ class UsersCommand(CRUDCommand):
     resource = 'users'
     relation_cmd = UserRelation
 
-    def import_csv(self, csvdata, encoding='utf-8', timeout=300):
+    def create(self, body):
+        headers = self.session.WRITE_HEADERS
+        tenant_uuid = body.pop('tenant_uuid', None)
+        if tenant_uuid:
+            headers['Wazo-Tenant'] = tenant_uuid
+
+        url = url_join(self.resource)
+        response = self.session.post(url, body, headers=headers)
+        return response.json()
+
+    def import_csv(self, csvdata, encoding='utf-8', timeout=300, tenant_uuid=None):
         url = url_join(self.resource, "import")
         headers = {'Content-Type': 'text/csv; charset={}'.format(encoding)}
+        if tenant_uuid:
+            headers['Wazo-Tenant'] = tenant_uuid
+
         response = self.session.post(url,
                                      raw=csvdata,
                                      check_response=False,
