@@ -91,6 +91,13 @@ Create a new resource item with given parameters.
 created_user = c.users.create({'firstname': 'John', 'lastname': 'Doe'})
 ```
 
+For creation in a specific entity (tenant), add a `tenant_uuid` parameter:
+
+```python
+
+created_user = c.users.create({'firstname': 'John', 'lastname': 'Doe', 'tenant_uuid': 'my-tenant-uuid'})
+```
+
 ## update
 
 Update a resource item with given parameters. Only the parameters that need to
