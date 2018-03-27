@@ -5,7 +5,7 @@
 from unittest import TestCase
 
 from hamcrest import assert_that, equal_to
-from mock import Mock
+from mock import ANY, Mock
 
 from xivo_confd_client.tests import TestCommand
 
@@ -23,7 +23,7 @@ class TestUsers(TestCommand):
         csvdata = "firstname\nToto\n"
         expected_content = {'created': [{'user_id': 1}]}
         expected_url = "/users/import"
-        expected_headers = {'Content-Type': 'text/csv; charset=utf-8'}
+        expected_headers = {'Content-Type': 'text/csv; charset=utf-8', 'Wazo-Tenant': ANY}
 
         self.set_response('post', 204, expected_content)
 
