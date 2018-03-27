@@ -182,7 +182,7 @@ class UsersCommand(CRUDCommand):
 
     def create(self, body):
         headers = self.session.WRITE_HEADERS
-        tenant_uuid = body.pop('tenant_uuid', None)
+        tenant_uuid = body.pop('tenant_uuid', self._client.tenant())
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
 
@@ -193,6 +193,7 @@ class UsersCommand(CRUDCommand):
     def import_csv(self, csvdata, encoding='utf-8', timeout=300, tenant_uuid=None):
         url = url_join(self.resource, "import")
         headers = {'Content-Type': 'text/csv; charset={}'.format(encoding)}
+        tenant_uuid = tenant_uuid or self._client.tenant()
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
 
