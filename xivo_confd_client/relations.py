@@ -635,3 +635,35 @@ class CallFilterFallbackRelation(HTTPCommand):
     def update_fallbacks(self, call_filter_id, fallbacks):
         url = url_join('callfilters', call_filter_id, 'fallbacks')
         self.session.put(url, fallbacks)
+
+
+class CallPickupInterceptorUserRelation(HTTPCommand):
+
+    def associate(self, call_pickup_id, users):
+        url = url_join('callpickups', call_pickup_id, 'interceptors', 'users')
+        body = {'users': [{'uuid': user['uuid']} for user in users]}
+        self.session.put(url, body)
+
+
+class CallPickupTargetUserRelation(HTTPCommand):
+
+    def associate(self, call_pickup_id, users):
+        url = url_join('callpickups', call_pickup_id, 'targets', 'users')
+        body = {'users': [{'uuid': user['uuid']} for user in users]}
+        self.session.put(url, body)
+
+
+class CallPickupInterceptorGroupRelation(HTTPCommand):
+
+    def associate(self, call_pickup_id, groups):
+        url = url_join('callpickups', call_pickup_id, 'interceptors', 'groups')
+        body = {'groups': [{'id': group['id']} for group in groups]}
+        self.session.put(url, body)
+
+
+class CallPickupTargetGroupRelation(HTTPCommand):
+
+    def associate(self, call_pickup_id, groups):
+        url = url_join('callpickups', call_pickup_id, 'targets', 'groups')
+        body = {'groups': [{'id': group['id']} for group in groups]}
+        self.session.put(url, body)

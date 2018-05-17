@@ -233,6 +233,16 @@ Exposed via ```c.call_filters.relations(call_filter_id)```
  * update_user_surrogates(users)
 
 
+## Call Pickup Relation
+
+Exposed via ```c.call_pickups.relations(call_pickup_id)```
+
+ * update_group_interceptors(groups)
+ * update_group_targets(groups)
+ * update_user_interceptors(users)
+ * update_user_targets(users)
+
+
 ## Call Permission Relation
 
 Exposed via ```c.call_permissions.relations(call_permission_id)```
