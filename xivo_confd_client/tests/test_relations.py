@@ -10,6 +10,10 @@ from xivo_confd_client.relations import (
     CallFilterFallbackRelation,
     CallFilterRecipientUserRelation,
     CallFilterSurrogateUserRelation,
+    CallPickupInterceptorGroupRelation,
+    CallPickupInterceptorUserRelation,
+    CallPickupTargetGroupRelation,
+    CallPickupTargetUserRelation,
     ConferenceExtensionRelation,
     GroupCallPermissionRelation,
     GroupExtensionRelation,
@@ -1580,3 +1584,63 @@ class TestCallFilterFallbackRelation(TestCommand):
 
         expected_url = "/callfilters/{}/fallbacks".format(call_filter_id)
         self.session.put.assert_called_with(expected_url, fallbacks)
+
+
+class TestCallPickupInterceptorUserRelation(TestCommand):
+
+    Command = CallPickupInterceptorUserRelation
+
+    def test_call_pickup_user_association(self):
+        call_pickup_id = 1
+        users = [{'uuid': 'a-2'}, {'uuid': 'b-3'}]
+
+        self.set_response('put', 204)
+        expected_body = {'users': users}
+
+        self.command.associate(call_pickup_id, users)
+        self.session.put.assert_called_once_with("/callpickups/1/interceptors/users", expected_body)
+
+
+class TestCallPickupTargetUserRelation(TestCommand):
+
+    Command = CallPickupTargetUserRelation
+
+    def test_call_pickup_user_association(self):
+        call_pickup_id = 1
+        users = [{'uuid': 'a-2'}, {'uuid': 'b-3'}]
+
+        self.set_response('put', 204)
+        expected_body = {'users': users}
+
+        self.command.associate(call_pickup_id, users)
+        self.session.put.assert_called_once_with("/callpickups/1/targets/users", expected_body)
+
+
+class TestCallPickupInterceptorGroupRelation(TestCommand):
+
+    Command = CallPickupInterceptorGroupRelation
+
+    def test_call_pickup_group_association(self):
+        call_pickup_id = 1
+        groups = [{'id': 1}, {'id': 2}]
+
+        self.set_response('put', 204)
+        expected_body = {'groups': groups}
+
+        self.command.associate(call_pickup_id, groups)
+        self.session.put.assert_called_once_with("/callpickups/1/interceptors/groups", expected_body)
+
+
+class TestCallPickupTargetGroupRelation(TestCommand):
+
+    Command = CallPickupTargetGroupRelation
+
+    def test_call_pickup_group_association(self):
+        call_pickup_id = 1
+        groups = [{'id': 1}, {'id': 2}]
+
+        self.set_response('put', 204)
+        expected_body = {'groups': groups}
+
+        self.command.associate(call_pickup_id, groups)
+        self.session.put.assert_called_once_with("/callpickups/1/targets/groups", expected_body)
