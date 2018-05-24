@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2017 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 import abc
@@ -56,3 +56,17 @@ class CRUDCommand(HTTPCommand):
 
     def __call__(self, resource):
         return self.relations(resource)
+
+
+class MultiTenantCommand(CRUDCommand):
+
+    def list(self, **kwargs):
+        kwargs.setdefault('recurse', False)
+        tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant())
+        headers = dict(kwargs.get('headers', self.session.READ_HEADERS))
+        if tenant_uuid:
+            headers['Wazo-Tenant'] = tenant_uuid
+
+        url = url_join(self.resource)
+        response = self.session.get(url, headers=headers, params=kwargs)
+        return response.json()
