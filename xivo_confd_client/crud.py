@@ -70,3 +70,13 @@ class MultiTenantCommand(CRUDCommand):
         url = url_join(self.resource)
         response = self.session.get(url, headers=headers, params=kwargs)
         return response.json()
+
+    def create(self, body, **kwargs):
+        tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant())
+        headers = dict(kwargs.get('headers', self.session.WRITE_HEADERS))
+        if tenant_uuid:
+            headers['Wazo-Tenant'] = tenant_uuid
+
+        url = url_join(self.resource)
+        response = self.session.post(url, body, headers=headers)
+        return response.json()
