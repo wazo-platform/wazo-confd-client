@@ -67,10 +67,6 @@ class UserRelation(object):
     def list_call_permissions(self):
         return self.user_call_permission.list_by_user(self.user_id)
 
-    @extract_id
-    def add_entity(self, entity_id):
-        return self.user_entity.associate(self.user_id, entity_id)
-
     def get_entity(self):
         return self.user_entity.get_by_user(self.user_id)
 
