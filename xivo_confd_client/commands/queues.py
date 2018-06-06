@@ -1,12 +1,14 @@
 # -*- coding: UTF-8 -*-
-# Copyright (C) 2015 Avencall
+# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from xivo_lib_rest_client import HTTPCommand
+from xivo_confd_client.crud import CRUDCommand
 from xivo_confd_client.util import url_join
 
 
-class QueuesCommand(HTTPCommand):
+class QueuesCommand(CRUDCommand):
+
+    resource = 'queues'
 
     def add_agent(self, queue_id, agent_id, penalty=0):
         url = url_join('queues', queue_id, 'members', 'agents')
