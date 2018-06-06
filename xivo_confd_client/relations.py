@@ -312,10 +312,6 @@ class UserCallPermissionRelation(HTTPCommand):
 
 class UserEntityRelation(HTTPCommand):
 
-    def associate(self, user_id, entity_id):
-        url = url_join('users', user_id, 'entities', entity_id)
-        self.session.put(url)
-
     def get_by_user(self, user_id):
         url = url_join('users', user_id, 'entities')
         response = self.session.get(url)
