@@ -934,13 +934,6 @@ class TestEntityRelation(TestCommand):
 
     Command = UserEntityRelation
 
-    def test_user_entity_association(self):
-        user_id = 1
-        entity_id = 2
-
-        self.command.associate(user_id, entity_id)
-        self.session.put.assert_called_once_with("/users/1/entities/2")
-
     def test_user_entity_list_by_user(self):
         user_id = 1234
         expected_url = "/users/{}/entities".format(user_id)

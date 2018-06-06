@@ -459,7 +459,6 @@ Exposed via ```c.users.relations(user_id)```
  * get_cti_profile()
  * update_cti_profile(cti_profile, enabled)
 
- * add_entity(entity)
  * get_entity()
 
  * add_agent(agent)
