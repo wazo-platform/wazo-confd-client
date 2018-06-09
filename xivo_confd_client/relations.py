@@ -675,3 +675,14 @@ class QueueFallbackRelation(HTTPCommand):
     def update_fallbacks(self, queue_id, fallbacks):
         url = url_join('queues', queue_id, 'fallbacks')
         self.session.put(url, fallbacks)
+
+
+class QueueExtensionRelation(HTTPCommand):
+
+    def associate(self, queue_id, extension_id):
+        url = url_join('queues', queue_id, 'extensions', extension_id)
+        self.session.put(url)
+
+    def dissociate(self, queue_id, extension_id):
+        url = url_join('queues', queue_id, 'extensions', extension_id)
+        self.session.delete(url)
