@@ -395,6 +395,14 @@ Exposed via ```c.parking_lots.relations(parking_lot_id)```
  * remove_extension(extension)
 
 
+## Queue relation
+
+Exposed via ```c.queues.relations(queue_id)```
+
+ * update_fallbacks(fallbacks)
+ * list_fallbacks()
+
+
 ## Register IAX relation
 
 Exposed via ```c.registers_iax.relations(register_iax_id)```
