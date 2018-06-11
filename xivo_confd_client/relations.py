@@ -663,3 +663,11 @@ class CallPickupTargetGroupRelation(HTTPCommand):
         url = url_join('callpickups', call_pickup_id, 'targets', 'groups')
         body = {'groups': [{'id': group['id']} for group in groups]}
         self.session.put(url, body)
+
+
+class ContextContextRelation(HTTPCommand):
+
+    def associate(self, context_id, contexts):
+        url = url_join('contexts', context_id, 'contexts')
+        body = {'contexts': [{'id': context['id']} for context in contexts]}
+        self.session.put(url, body)
