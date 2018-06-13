@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015-2016 Avencall
+# Copyright 2016-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 from xivo_confd_client.util import extract_id
-from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.crud import MultiTenantCommand
 from xivo_confd_client.relations import LineExtensionRelation
 
 
@@ -28,7 +28,7 @@ class ExtensionRelation(object):
         return self.line_extension_relation.list_by_extension(self.extension_id)
 
 
-class ExtensionsCommand(CRUDCommand):
+class ExtensionsCommand(MultiTenantCommand):
 
     resource = 'extensions'
 
