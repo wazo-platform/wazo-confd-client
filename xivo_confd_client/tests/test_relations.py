@@ -35,6 +35,7 @@ from xivo_confd_client.relations import (
     PagingCallerUserRelation,
     PagingMemberUserRelation,
     ParkingLotExtensionRelation,
+    QueueExtensionRelation,
     QueueFallbackRelation,
     SwitchboardMemberUserRelation,
     TrunkEndpointCustomRelation,
@@ -1664,3 +1665,26 @@ class TestQueueFallbackRelation(TestCommand):
 
         expected_url = "/queues/{}/fallbacks".format(queue_id)
         self.session.put.assert_called_with(expected_url, fallbacks)
+
+
+class TestQueueExtensionRelation(TestCommand):
+
+    Command = QueueExtensionRelation
+
+    def test_queue_extension_association(self):
+        queue_id = 1
+        extension_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(queue_id, extension_id)
+        self.session.put.assert_called_once_with("/queues/1/extensions/2")
+
+    def test_queue_extension_dissociation(self):
+        queue_id = 1
+        extension_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(queue_id, extension_id)
+        self.session.delete.assert_called_once_with("/queues/1/extensions/2")

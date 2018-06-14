@@ -399,6 +399,9 @@ Exposed via ```c.parking_lots.relations(parking_lot_id)```
 
 Exposed via ```c.queues.relations(queue_id)```
 
+ * add_extension(extension)
+ * remove_extension(extension)
+
  * update_fallbacks(fallbacks)
  * list_fallbacks()
 

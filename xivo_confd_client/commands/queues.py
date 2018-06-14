@@ -7,6 +7,7 @@ from xivo_confd_client.crud import CRUDCommand
 from xivo_confd_client.util import url_join
 
 from xivo_confd_client.relations import (
+    QueueExtensionRelation,
     QueueFallbackRelation,
 )
 
@@ -15,7 +16,16 @@ class QueueRelation(object):
 
     def __init__(self, builder, queue_id):
         self.queue_id = queue_id
+        self.queue_extension = QueueExtensionRelation(builder)
         self.queue_fallback = QueueFallbackRelation(builder)
+
+    @extract_id
+    def add_extension(self, extension_id):
+        return self.queue_extension.associate(self.queue_id, extension_id)
+
+    @extract_id
+    def remove_extension(self, extension_id):
+        return self.queue_extension.dissociate(self.queue_id, extension_id)
 
     def update_fallbacks(self, fallbacks):
         self.queue_fallback.update_fallbacks(self.queue_id, fallbacks)
