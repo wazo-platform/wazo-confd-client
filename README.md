@@ -258,6 +258,12 @@ Exposed via ```c.conferences.relations(conference_id)```
  * add_extension(extension)
  * remove_extension(extension)
 
+## Context relation
+
+Exposed via ```c.contexts.relations(context_id)```
+
+ * update_contexts(contexts)
+
 ## CtiProfile relation
 
 Exposed via ```c.cti_profiles.relations(cti_profile_id)```

@@ -686,3 +686,11 @@ class QueueExtensionRelation(HTTPCommand):
     def dissociate(self, queue_id, extension_id):
         url = url_join('queues', queue_id, 'extensions', extension_id)
         self.session.delete(url)
+
+
+class ContextContextRelation(HTTPCommand):
+
+    def associate(self, context_id, contexts):
+        url = url_join('contexts', context_id, 'contexts')
+        body = {'contexts': [{'id': context['id']} for context in contexts]}
+        self.session.put(url, body)

@@ -15,6 +15,7 @@ from xivo_confd_client.relations import (
     CallPickupTargetGroupRelation,
     CallPickupTargetUserRelation,
     ConferenceExtensionRelation,
+    ContextContextRelation,
     GroupCallPermissionRelation,
     GroupExtensionRelation,
     GroupFallbackRelation,
@@ -1688,3 +1689,18 @@ class TestQueueExtensionRelation(TestCommand):
 
         self.command.dissociate(queue_id, extension_id)
         self.session.delete.assert_called_once_with("/queues/1/extensions/2")
+
+
+class TestContextContextRelation(TestCommand):
+
+    Command = ContextContextRelation
+
+    def test_context_context_association(self):
+        context_id = 1
+        contexts = [{'id': 2}, {'id': 3}]
+
+        self.set_response('put', 204)
+        expected_body = {'contexts': contexts}
+
+        self.command.associate(context_id, contexts)
+        self.session.put.assert_called_once_with("/contexts/1/contexts", expected_body)
