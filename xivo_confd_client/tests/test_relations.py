@@ -35,6 +35,7 @@ from xivo_confd_client.relations import (
     PagingCallerUserRelation,
     PagingMemberUserRelation,
     ParkingLotExtensionRelation,
+    QueueFallbackRelation,
     SwitchboardMemberUserRelation,
     TrunkEndpointCustomRelation,
     TrunkEndpointIAXRelation,
@@ -1637,3 +1638,29 @@ class TestCallPickupTargetGroupRelation(TestCommand):
 
         self.command.associate(call_pickup_id, groups)
         self.session.put.assert_called_once_with("/callpickups/1/targets/groups", expected_body)
+
+
+class TestQueueFallbackRelation(TestCommand):
+
+    Command = QueueFallbackRelation
+
+    def test_list_fallbacks(self):
+        queue_id = 1234
+        expected_url = "/queues/{}/fallbacks".format(queue_id)
+        expected_result = {'noanswer_destination': {'type': 'none'}}
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.list_fallbacks(queue_id)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
+
+    def test_update_fallbacks(self):
+        queue_id = 1234
+        fallbacks = {'noanswer_destination': {'type': 'none'}}
+
+        self.command.update_fallbacks(queue_id, fallbacks)
+
+        expected_url = "/queues/{}/fallbacks".format(queue_id)
+        self.session.put.assert_called_with(expected_url, fallbacks)

@@ -663,3 +663,15 @@ class CallPickupTargetGroupRelation(HTTPCommand):
         url = url_join('callpickups', call_pickup_id, 'targets', 'groups')
         body = {'groups': [{'id': group['id']} for group in groups]}
         self.session.put(url, body)
+
+
+class QueueFallbackRelation(HTTPCommand):
+
+    def list_fallbacks(self, queue_id):
+        url = url_join('queues', queue_id, 'fallbacks')
+        response = self.session.get(url)
+        return response.json()
+
+    def update_fallbacks(self, queue_id, fallbacks):
+        url = url_join('queues', queue_id, 'fallbacks')
+        self.session.put(url, fallbacks)
