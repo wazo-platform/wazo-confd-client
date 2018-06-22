@@ -177,7 +177,7 @@ class UsersCommand(CRUDCommand):
     relation_cmd = UserRelation
 
     def create(self, body):
-        headers = self.session.WRITE_HEADERS
+        headers = dict(self.session.WRITE_HEADERS)
         tenant_uuid = body.pop('tenant_uuid', self._client.tenant())
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
