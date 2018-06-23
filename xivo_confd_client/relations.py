@@ -572,6 +572,17 @@ class GroupScheduleRelation(HTTPCommand):
         self.session.delete(url)
 
 
+class QueueScheduleRelation(HTTPCommand):
+
+    def associate(self, queue_id, schedule_id):
+        url = url_join('queues', queue_id, 'schedules', schedule_id)
+        self.session.put(url)
+
+    def dissociate(self, queue_id, schedule_id):
+        url = url_join('queues', queue_id, 'schedules', schedule_id)
+        self.session.delete(url)
+
+
 class OutcallScheduleRelation(HTTPCommand):
 
     def associate(self, outcall_id, schedule_id):

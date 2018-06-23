@@ -411,6 +411,9 @@ Exposed via ```c.queues.relations(queue_id)```
  * update_fallbacks(fallbacks)
  * list_fallbacks()
 
+ * add_schedule(schedule)
+ * remove_schedule(schedule)
+
 
 ## Register IAX relation
 
