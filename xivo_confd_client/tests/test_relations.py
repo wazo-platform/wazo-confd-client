@@ -38,6 +38,7 @@ from xivo_confd_client.relations import (
     ParkingLotExtensionRelation,
     QueueExtensionRelation,
     QueueFallbackRelation,
+    QueueScheduleRelation,
     SwitchboardMemberUserRelation,
     TrunkEndpointCustomRelation,
     TrunkEndpointIAXRelation,
@@ -1475,6 +1476,29 @@ class TestGroupScheduleRelation(TestCommand):
 
         self.command.dissociate(group_id, schedule_id)
         self.session.delete.assert_called_once_with("/groups/1/schedules/2")
+
+
+class TestQueueScheduleRelation(TestCommand):
+
+    Command = QueueScheduleRelation
+
+    def test_queue_schedule_association(self):
+        queue_id = 1
+        schedule_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(queue_id, schedule_id)
+        self.session.put.assert_called_once_with("/queues/1/schedules/2")
+
+    def test_queue_schedule_dissociation(self):
+        queue_id = 1
+        schedule_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(queue_id, schedule_id)
+        self.session.delete.assert_called_once_with("/queues/1/schedules/2")
 
 
 class TestOutcallScheduleRelation(TestCommand):
