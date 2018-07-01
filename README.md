@@ -414,6 +414,11 @@ Exposed via ```c.queues.relations(queue_id)```
  * add_schedule(schedule)
  * remove_schedule(schedule)
 
+ * add_agent_member(agent, priority, penalty)
+ * remove_agent_member(agent)
+ * add_user_member(agent, priority)
+ * remove_user_member(user)
+
 
 ## Register IAX relation
 

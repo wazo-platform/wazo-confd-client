@@ -705,3 +705,25 @@ class ContextContextRelation(HTTPCommand):
         url = url_join('contexts', context_id, 'contexts')
         body = {'contexts': [{'id': context['id']} for context in contexts]}
         self.session.put(url, body)
+
+
+class QueueMemberAgentRelation(HTTPCommand):
+
+    def associate(self, queue_id, agent_id, **kwargs):
+        url = url_join('queues', queue_id, 'members', 'agents', agent_id)
+        self.session.put(url, kwargs)
+
+    def dissociate(self, queue_id, agent_id):
+        url = url_join('queues', queue_id, 'members', 'agents', agent_id)
+        self.session.delete(url)
+
+
+class QueueMemberUserRelation(HTTPCommand):
+
+    def associate(self, queue_id, user_uuid, **kwargs):
+        url = url_join('queues', queue_id, 'members', 'users', user_uuid)
+        self.session.put(url, kwargs)
+
+    def dissociate(self, queue_id, user_uuid):
+        url = url_join('queues', queue_id, 'members', 'users', user_uuid)
+        self.session.delete(url)

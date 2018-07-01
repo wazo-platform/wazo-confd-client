@@ -38,6 +38,8 @@ from xivo_confd_client.relations import (
     ParkingLotExtensionRelation,
     QueueExtensionRelation,
     QueueFallbackRelation,
+    QueueMemberAgentRelation,
+    QueueMemberUserRelation,
     QueueScheduleRelation,
     SwitchboardMemberUserRelation,
     TrunkEndpointCustomRelation,
@@ -1728,3 +1730,54 @@ class TestContextContextRelation(TestCommand):
 
         self.command.associate(context_id, contexts)
         self.session.put.assert_called_once_with("/contexts/1/contexts", expected_body)
+
+
+class TestQueueMemberAgentRelation(TestCommand):
+
+    Command = QueueMemberAgentRelation
+
+    def test_queue_agent_association(self):
+        queue_id = 1
+        agent_id = 2
+        priority = 3
+        penalty = 4
+
+        self.set_response('put', 204)
+        expected_body = {'priority': priority,  'penalty': penalty}
+
+        self.command.associate(queue_id, agent_id, priority=priority, penalty=penalty)
+        self.session.put.assert_called_once_with("/queues/1/members/agents/2", expected_body)
+
+    def test_queue_agent_dissociation(self):
+        queue_id = 1
+        agent_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(queue_id, agent_id)
+        self.session.delete.assert_called_once_with("/queues/1/members/agents/2")
+
+
+class TestQueueMemberUserRelation(TestCommand):
+
+    Command = QueueMemberUserRelation
+
+    def test_queue_user_association(self):
+        queue_id = 1
+        user_uuid = '1234-abcd'
+        priority = 3
+
+        self.set_response('put', 204)
+        expected_body = {'priority': priority}
+
+        self.command.associate(queue_id, user_uuid, priority=priority)
+        self.session.put.assert_called_once_with("/queues/1/members/users/1234-abcd", expected_body)
+
+    def test_queue_user_dissociation(self):
+        queue_id = 1
+        user_uuid = '1234-abcd'
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(queue_id, user_uuid)
+        self.session.delete.assert_called_once_with("/queues/1/members/users/1234-abcd")
