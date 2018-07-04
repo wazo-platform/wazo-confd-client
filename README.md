@@ -414,6 +414,11 @@ Exposed via ```c.queues.relations(queue_id)```
  * add_schedule(schedule)
  * remove_schedule(schedule)
 
+ * add_agent_member(agent, priority, penalty)
+ * remove_agent_member(agent)
+ * add_user_member(agent, priority)
+ * remove_user_member(user)
+
 
 ## Register IAX relation
 
@@ -537,23 +542,6 @@ live_reload_status = c.configuration.live_reload.get()
 #Update live reload configuration
 c.configuration.live_reload.update({'enabled': True})
 ```
-
-## queues
-
-```python
-#Add agent to a queue
-c.queues.add_agent(queue_id, agent_id, penalty=0)
-
-#Remove agent from a queue
-c.queues.remove_agent(queue_id, agent_id)
-
-#Get membership info for an agent in a queue
-c.queues.get_membership(queue_id, agent_id)
-
-#Update penalty for an agent in a queue
-c.queues.edit_membership(queue_id, agent_id, penalty)
-```
-
 
 ## timezones
 
