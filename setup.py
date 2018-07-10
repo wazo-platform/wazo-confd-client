@@ -22,6 +22,7 @@ setup(
     entry_points={
         'confd_client.commands': [
             'agents = xivo_confd_client.commands.agents:AgentsCommand',
+            'agent_skills = xivo_confd_client.commands.skills:SkillsCommand',
             'call_logs = xivo_confd_client.commands.call_logs:CallLogsCommand',
             'call_filters = xivo_confd_client.commands.call_filters:CallFiltersCommand',
             'call_permissions = xivo_confd_client.commands.call_permissions:CallPermissionsCommand',
