@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015 Avencall
+# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 from xivo_confd_client.util import extract_id
-from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.crud import MultiTenantCommand
 from xivo_confd_client.relations import UserVoicemailRelation
 
 
@@ -30,7 +30,7 @@ class VoicemailRelation(object):
         return self.user_voicemail_relation.list_by_voicemail(self.voicemail_id)
 
 
-class VoicemailsCommand(CRUDCommand):
+class VoicemailsCommand(MultiTenantCommand):
 
     resource = 'voicemails'
 
