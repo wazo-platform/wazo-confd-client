@@ -727,3 +727,18 @@ class QueueMemberUserRelation(HTTPCommand):
     def dissociate(self, queue_id, user_uuid):
         url = url_join('queues', queue_id, 'members', 'users', user_uuid)
         self.session.delete(url)
+
+
+class AgentSkillRelation(HTTPCommand):
+
+    def associate(self, agent_id, skill_id, **kwargs):
+        weight = kwargs.pop('weight', None)
+        if weight is not None:
+            kwargs['skill_weight'] = weight
+
+        url = url_join('agents', agent_id, 'skills', skill_id)
+        self.session.put(url, kwargs)
+
+    def dissociate(self, agent_id, skill_id):
+        url = url_join('agents', agent_id, 'skills', skill_id)
+        self.session.delete(url)

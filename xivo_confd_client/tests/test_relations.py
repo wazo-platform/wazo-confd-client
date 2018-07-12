@@ -7,6 +7,7 @@ from hamcrest import assert_that
 
 from xivo_confd_client.tests import TestCommand
 from xivo_confd_client.relations import (
+    AgentSkillRelation,
     CallFilterFallbackRelation,
     CallFilterRecipientUserRelation,
     CallFilterSurrogateUserRelation,
@@ -1781,3 +1782,28 @@ class TestQueueMemberUserRelation(TestCommand):
 
         self.command.dissociate(queue_id, user_uuid)
         self.session.delete.assert_called_once_with("/queues/1/members/users/1234-abcd")
+
+
+class TestQueueSkillRelation(TestCommand):
+
+    Command = AgentSkillRelation
+
+    def test_queue_skill_association(self):
+        queue_id = 1
+        skill_id = 2
+        weight = 42
+
+        self.set_response('put', 204)
+        expected_body = {'skill_weight': weight}
+
+        self.command.associate(queue_id, skill_id, weight=weight)
+        self.session.put.assert_called_once_with("/agents/1/skills/2", expected_body)
+
+    def test_queue_skill_dissociation(self):
+        queue_id = 1
+        skill_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(queue_id, skill_id)
+        self.session.delete.assert_called_once_with("/agents/1/skills/2")
