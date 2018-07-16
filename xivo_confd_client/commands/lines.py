@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015-2016 Avencall
+# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 from xivo_confd_client.util import extract_id
-from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import (UserLineRelation,
-                                         LineExtensionRelation,
-                                         LineEndpointSipRelation,
-                                         LineEndpointSccpRelation,
-                                         LineEndpointCustomRelation,
-                                         LineDeviceRelation)
+from xivo_confd_client.crud import MultiTenantCommand
+from xivo_confd_client.relations import (
+    LineDeviceRelation,
+    LineEndpointCustomRelation,
+    LineEndpointSccpRelation,
+    LineEndpointSipRelation,
+    LineExtensionRelation,
+    UserLineRelation,
+)
 
 
 class LineRelation(object):
@@ -90,7 +92,7 @@ class LineRelation(object):
         return self.line_device.get_by_line(self.line_id)
 
 
-class LinesCommand(CRUDCommand):
+class LinesCommand(MultiTenantCommand):
 
     resource = 'lines'
     relation_cmd = LineRelation
