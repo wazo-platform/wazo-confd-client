@@ -224,6 +224,14 @@ c.users(user).add_line(line)
 
 Here is a list of relations and their methods:
 
+## Agent relation
+
+Exposed via ```c.agents.relations(agent_id)```
+
+ * add_skill(skill_id, weight)
+ * remove_skill(skill_id)
+
+
 ## Agent skill relation
 
 Exposed via ```c.agent_skills.relations(skill_id)```
