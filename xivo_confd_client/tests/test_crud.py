@@ -12,14 +12,14 @@ from xivo_confd_client.tests import TestCommand
 from ..crud import CRUDCommand
 
 
-class TestCRUDCommand(CRUDCommand):
+class CRUDCommandTest(CRUDCommand):
 
     resource = 'test'
 
 
 class TestCRUD(TestCommand):
 
-    Command = TestCRUDCommand
+    Command = CRUDCommandTest
 
     def test_list(self):
         expected_response = self.set_response('get', 200, {
