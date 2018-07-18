@@ -58,6 +58,7 @@ setup(
             'pagings = xivo_confd_client.commands.pagings:PagingsCommand',
             'parking_lots = xivo_confd_client.commands.parking_lots:ParkingLotsCommand',
             'queues = xivo_confd_client.commands.queues:QueuesCommand',
+            'queue_skill_rules = xivo_confd_client.commands.skill_rules:SkillRulesCommand',
             'registers_iax = xivo_confd_client.commands.registers_iax:RegistersIAXCommand',
             'registers_sip = xivo_confd_client.commands.registers_sip:RegistersSipCommand',
             'sccp_general = xivo_confd_client.commands.sccp_general:SCCPGeneralCommand',
