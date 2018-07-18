@@ -433,6 +433,11 @@ Exposed via ```c.queues.relations(queue_id)```
  * remove_user_member(user)
 
 
+## Queue skill rule relation
+
+Exposed via ```c.queue_skill_rules.relations(skill_rule_id)```
+
+
 ## Register IAX relation
 
 Exposed via ```c.registers_iax.relations(register_iax_id)```
