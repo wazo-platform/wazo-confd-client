@@ -58,6 +58,7 @@ setup(
             'pagings = xivo_confd_client.commands.pagings:PagingsCommand',
             'parking_lots = xivo_confd_client.commands.parking_lots:ParkingLotsCommand',
             'queues = xivo_confd_client.commands.queues:QueuesCommand',
+            'queues_general = xivo_confd_client.commands.queues_general:QueuesGeneralCommand',
             'queue_skill_rules = xivo_confd_client.commands.skill_rules:SkillRulesCommand',
             'rtp_general = xivo_confd_client.commands.rtp_general:RTPGeneralCommand',
             'rtp_ice_host_candidates = xivo_confd_client.commands.rtp_ice_host_candidates:RTPIceHostCandidatesCommand',

@@ -599,6 +599,16 @@ c.voicemail_general.update(voicemail_general)
 ```
 
 
+## queues general
+
+```python
+#Get queues general configuration
+queues_general = c.queues_general.get()
+
+#Update queues general configuration
+c.queues_general.update(queues_general)
+
+
 ## sccp general
 
 ```python
