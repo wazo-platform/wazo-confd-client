@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0+
 
 from xivo_confd_client.util import extract_id
-from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.crud import MultiTenantCommand
 from xivo_confd_client.relations import (
     TrunkEndpointSipRelation,
     TrunkEndpointIAXRelation,
@@ -70,7 +70,7 @@ class TrunkRelation(object):
         return self.trunk_register_iax.dissociate(self.trunk_id, register_iax_id)
 
 
-class TrunksCommand(CRUDCommand):
+class TrunksCommand(MultiTenantCommand):
 
     resource = 'trunks'
     relation_cmd = TrunkRelation
