@@ -2,7 +2,7 @@
 # Copyright 2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.crud import MultiTenantCommand
 from xivo_confd_client.relations import (
     CallFilterFallbackRelation,
     CallFilterRecipientUserRelation,
@@ -28,7 +28,7 @@ class CallFilterRelation(object):
         self.call_filter_fallback.update_fallbacks(self.call_filter_id, fallbacks)
 
 
-class CallFiltersCommand(CRUDCommand):
+class CallFiltersCommand(MultiTenantCommand):
 
     resource = 'callfilters'
     relation_cmd = CallFilterRelation
