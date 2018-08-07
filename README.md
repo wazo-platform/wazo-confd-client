@@ -682,6 +682,23 @@ c.features_featuremap.update(general)
 ```
 
 
+## RTP
+
+```python
+#Get RTP General configuration
+rtp_general = c.rtp_general.get()
+
+#Update RTP General configuration
+c.rtp_general.update(rtp_general)
+
+#Get RTP Ice Host Candidates configuration
+rtp_general = c.rtp_ice_host_candidates.get()
+
+#Update RTP Ice Host Candidates configuration
+c.rtp_ice_host_candidates.update(ice_host_candidates)
+```
+
+
 ## wizard
 
 ```python
