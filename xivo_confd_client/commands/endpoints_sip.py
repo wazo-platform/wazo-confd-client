@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015-2016 Avencall
+# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import (LineEndpointSipRelation,
-                                         TrunkEndpointSipRelation)
+from xivo_confd_client.crud import MultiTenantCommand
+from xivo_confd_client.relations import (
+    LineEndpointSipRelation,
+    TrunkEndpointSipRelation,
+)
 
 
 class EndpointSipRelation(object):
@@ -27,7 +29,7 @@ class EndpointSipRelation(object):
         return self.trunk_endpoint_sip.get_by_endpoint_sip(self.sip_id)
 
 
-class EndpointsSipCommand(CRUDCommand):
+class EndpointsSipCommand(MultiTenantCommand):
 
     resource = 'endpoints/sip'
     relation_cmd = EndpointSipRelation
