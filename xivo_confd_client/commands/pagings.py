@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2017-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import PagingCallerUserRelation, PagingMemberUserRelation
+from xivo_confd_client.crud import MultiTenantCommand
+from xivo_confd_client.relations import (
+    PagingCallerUserRelation,
+    PagingMemberUserRelation,
+)
 
 
 class PagingRelation(object):
@@ -20,7 +23,7 @@ class PagingRelation(object):
         return self.paging_user_callers.associate(self.paging_id, users)
 
 
-class PagingsCommand(CRUDCommand):
+class PagingsCommand(MultiTenantCommand):
 
     resource = 'pagings'
     relation_cmd = PagingRelation
