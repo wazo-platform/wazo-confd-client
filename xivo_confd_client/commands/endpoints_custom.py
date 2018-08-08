@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2016 Avencall
+# Copyright 2016-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from xivo_confd_client.crud import CRUDCommand
-from xivo_confd_client.relations import (LineEndpointCustomRelation,
-                                         TrunkEndpointCustomRelation)
+from xivo_confd_client.crud import MultiTenantCommand
+from xivo_confd_client.relations import (
+    LineEndpointCustomRelation,
+    TrunkEndpointCustomRelation,
+)
 
 
 class EndpointCustomRelation(object):
@@ -27,7 +29,7 @@ class EndpointCustomRelation(object):
         return self.trunk_endpoint_custom.get_by_endpoint_custom(self.custom_id)
 
 
-class EndpointsCustomCommand(CRUDCommand):
+class EndpointsCustomCommand(MultiTenantCommand):
 
     resource = 'endpoints/custom'
     relation_cmd = EndpointCustomRelation
