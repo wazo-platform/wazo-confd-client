@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015 Avencall
+# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.crud import MultiTenantCommand
 from xivo_confd_client.relations import LineEndpointSccpRelation
 
 
@@ -22,7 +22,7 @@ class EndpointSccpRelation(object):
         return self.line_endpoint_sccp.get_by_endpoint_sccp(self.sccp_id)
 
 
-class EndpointsSccpCommand(CRUDCommand):
+class EndpointsSccpCommand(MultiTenantCommand):
 
     resource = 'endpoints/sccp'
     relation_cmd = EndpointSccpRelation
