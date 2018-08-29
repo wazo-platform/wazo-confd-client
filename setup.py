@@ -77,6 +77,7 @@ setup(
             'voicemails = xivo_confd_client.commands.voicemails:VoicemailsCommand',
             'voicemail_general = xivo_confd_client.commands.voicemail_general:VoicemailGeneralCommand',
             'voicemail_zonemessages = xivo_confd_client.commands.voicemail_zonemessages:VoicemailZoneMessagesCommand',
+            'wait = xivo_confd_client.commands.wait:WaitCommand',
             'wizard = xivo_confd_client.commands.wizard:WizardCommand',
         ],
     }
