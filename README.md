@@ -57,12 +57,13 @@ c = Client('confd.example.com', port=9486, https=True, token='the-one-ring')
 users = c.users.list()
 ```
 
-## Waiting for xivo-confd to be started
+## Waiting for xivo-confd to be ready
 
-The wait command will try to query xivo-confd for `retry` number of time waiting `delay` seconds before retrying
+The wait_until_ready command will try to query xivo-confd for `retry` number of time waiting `delay`
+seconds before retrying
 
 ```python
-c.wait(retry=20, delay=0.2)
+c.wait_until_ready(retry=20, delay=0.2)
 ```
 
 ## CRUD

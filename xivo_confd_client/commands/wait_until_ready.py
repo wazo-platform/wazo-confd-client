@@ -11,7 +11,7 @@ from xivo_lib_rest_client import HTTPCommand
 from xivo_confd_client.util import url_join
 
 
-class WaitCommand(HTTPCommand):
+class WaitUntilReadyCommand(HTTPCommand):
 
     resource = 'infos'
 
