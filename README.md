@@ -57,9 +57,20 @@ c = Client('confd.example.com', port=9486, https=True, token='the-one-ring')
 users = c.users.list()
 ```
 
+## Waiting for xivo-confd to be ready
+
+The wait_until_ready command will try to query xivo-confd for `retry` number of time waiting `delay`
+seconds before retrying
+
+```python
+c.wait_until_ready(retry=20, delay=0.2)
+```
+
+## CRUD
+
 Each resource offers the following CRUD operations:
 
-## list
+### list
 
 Return a list of items. You can also pass optional parameters for searching and
 sorting such as ```search```, ```sort```, ```order```, ```offset```,
@@ -70,7 +81,7 @@ sorting such as ```search```, ```sort```, ```order```, ```offset```,
 users = c.users.list(search='John')
 ```
 
-## get
+### get
 
 Return an item for a given ID.
 
@@ -82,7 +93,7 @@ user_uuid = '2e752722-0864-4665-887d-a78a024cf7c7'
 user = c.users.get(user_uuid)  // users only
 ```
 
-## create
+### create
 
 Create a new resource item with given parameters.
 
@@ -98,7 +109,7 @@ For creation in a specific entity (tenant), add a `tenant_uuid` parameter:
 created_user = c.users.create({'firstname': 'John', 'lastname': 'Doe', 'tenant_uuid': 'my-tenant-uuid'})
 ```
 
-## update
+### update
 
 Update a resource item with given parameters. Only the parameters that need to
 be updated should be sent. The parameters dict **MUST** contain the id of the
@@ -109,7 +120,7 @@ user = {'id': 42, 'firstname': 'Johnny'}
 c.users.update(user)
 ```
 
-## delete
+### delete
 
 Delete a resource item.
 
