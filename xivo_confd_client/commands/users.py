@@ -2,7 +2,7 @@
 # Copyright 2014-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.crud import MultiTenantCommand
 from xivo_confd_client.relations import (
     UserAgentRelation,
     UserCallPermissionRelation,
@@ -171,20 +171,10 @@ class UserRelation(object):
         return self.user_schedule.dissociate(self.user_id, schedule_id)
 
 
-class UsersCommand(CRUDCommand):
+class UsersCommand(MultiTenantCommand):
 
     resource = 'users'
     relation_cmd = UserRelation
-
-    def create(self, body):
-        headers = dict(self.session.WRITE_HEADERS)
-        tenant_uuid = body.pop('tenant_uuid', self._client.tenant())
-        if tenant_uuid:
-            headers['Wazo-Tenant'] = tenant_uuid
-
-        url = url_join(self.resource)
-        response = self.session.post(url, body, headers=headers)
-        return response.json()
 
     def import_csv(self, csvdata, encoding='utf-8', timeout=300, tenant_uuid=None):
         url = url_join(self.resource, "import")
