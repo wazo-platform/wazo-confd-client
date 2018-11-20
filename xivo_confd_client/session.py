@@ -28,9 +28,12 @@ class ConfdSession(object):
         if response.status_code not in self.OK_STATUSES:
             try:
                 messages = response.json()
+            except ValueError:
+                pass
+            else:
                 response.reason = ". ".join(messages)
-            finally:
-                response.raise_for_status()
+
+            response.raise_for_status()
 
     def clean_url(self, part):
         return "{}/{}".format(self.base_url.rstrip('/'), part.lstrip('/'))
