@@ -440,7 +440,8 @@ Exposed via ```c.queues.relations(queue_id)```
 
  * add_agent_member(agent, priority, penalty)
  * remove_agent_member(agent)
- * add_user_member(agent, priority)
+
+ * add_user_member(user, priority)
  * remove_user_member(user)
 
 
