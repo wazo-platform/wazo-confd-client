@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017-2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2017-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from six.moves.urllib.parse import quote
 
-from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.crud import MultiTenantCommand
 from xivo_confd_client.util import extract_id, url_join
 
 
-class SoundsCommand(CRUDCommand):
+class SoundsCommand(MultiTenantCommand):
 
     resource = 'sounds'
 
