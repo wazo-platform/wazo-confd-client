@@ -734,6 +734,16 @@ configured = c.wizard.get()
 discover = c.wizard.discover()
 ```
 
+## DHCP
+
+```python
+#Get DHCP configuration
+dhcp = c.dhcp.get()
+
+#Update DHCP configuration
+c.dhcp.update({'active': False})
+```
+
 # Adding new commands
 
 New command groups can be added to the client by sub-classing ```RESTCommand```.

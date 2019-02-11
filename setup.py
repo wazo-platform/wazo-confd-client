@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright 2014-2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from setuptools import setup
@@ -35,6 +35,7 @@ setup(
             'contexts = xivo_confd_client.commands.contexts:ContextsCommand',
             'cti_profiles = xivo_confd_client.commands.cti_profiles:CtiProfilesCommand',
             'devices = xivo_confd_client.commands.devices:DevicesCommand',
+            'dhcp = xivo_confd_client.commands.dhcp:DHCPCommand',
             'endpoints_custom = xivo_confd_client.commands.endpoints_custom:EndpointsCustomCommand',
             'endpoints_iax = xivo_confd_client.commands.endpoints_iax:EndpointsIAXCommand',
             'endpoints_sccp = xivo_confd_client.commands.endpoints_sccp:EndpointsSccpCommand',
