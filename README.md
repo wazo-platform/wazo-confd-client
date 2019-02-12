@@ -744,6 +744,18 @@ dhcp = c.dhcp.get()
 c.dhcp.update({'active': False})
 ```
 
+
+## high availability
+
+```python
+#Get HA config
+c.ha.get()
+
+#Update HA config
+c.ha.update(ha)
+```
+
+
 # Adding new commands
 
 New command groups can be added to the client by sub-classing ```RESTCommand```.
