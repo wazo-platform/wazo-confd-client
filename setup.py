@@ -48,6 +48,7 @@ setup(
             'features_general = xivo_confd_client.commands.features_general:FeaturesGeneralCommand',
             'funckeys = xivo_confd_client.commands.funckeys:FuncKeysCommand',
             'groups = xivo_confd_client.commands.groups:GroupsCommand',
+            'ha = xivo_confd_client.commands.ha:HACommand',
             'iax_callnumberlimits = xivo_confd_client.commands.iax_callnumberlimits:IAXCallNumberLimitsCommand',
             'iax_general = xivo_confd_client.commands.iax_general:IAXGeneralCommand',
             'incalls = xivo_confd_client.commands.incalls:IncallsCommand',
