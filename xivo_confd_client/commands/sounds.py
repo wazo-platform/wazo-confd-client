@@ -29,8 +29,7 @@ class SoundsCommand(MultiTenantCommand):
             headers['Wazo-Tenant'] = tenant_uuid
 
         url = url_join(self.resource, category)
-        response = self.session.delete(url, headers=headers)
-        return response.json()
+        self.session.delete(url, headers=headers)
 
     @extract_id
     def download_file(self, category, filename, **kwargs):
