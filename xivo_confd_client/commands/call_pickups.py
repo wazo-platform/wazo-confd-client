@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# Copyright 2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.crud import MultiTenantCommand
 from xivo_confd_client.relations import (
     CallPickupInterceptorGroupRelation,
     CallPickupInterceptorUserRelation,
@@ -33,7 +33,7 @@ class CallPickupRelation(object):
         return self.call_pickup_user_interceptors.associate(self.call_pickup_id, users)
 
 
-class CallPickupsCommand(CRUDCommand):
+class CallPickupsCommand(MultiTenantCommand):
 
     resource = 'callpickups'
     relation_cmd = CallPickupRelation
