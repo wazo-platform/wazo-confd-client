@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015-2016 Avencall
+# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.crud import MultiTenantCommand
 from xivo_confd_client.util import extract_id
 from xivo_confd_client.util import url_join
 from xivo_confd_client.relations import LineDeviceRelation
@@ -26,17 +26,25 @@ class DeviceRelation(object):
         return self.line_device.list_by_device(self.device_id)
 
 
-class DevicesCommand(CRUDCommand):
+class DevicesCommand(MultiTenantCommand):
 
     resource = 'devices'
     relation_cmd = DeviceRelation
 
     @extract_id
-    def autoprov(self, device_id):
+    def autoprov(self, device_id, **kwargs):
+        tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant())
+        headers = dict(kwargs.get('headers', self.session.WRITE_HEADERS))
+        if tenant_uuid:
+            headers['Wazo-Tenant'] = tenant_uuid
         url = url_join(self.resource, device_id, 'autoprov')
-        self.session.get(url)
+        self.session.get(url, headers=headers)
 
     @extract_id
-    def synchronize(self, device_id):
+    def synchronize(self, device_id, **kwargs):
+        tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant())
+        headers = dict(kwargs.get('headers', self.session.WRITE_HEADERS))
+        if tenant_uuid:
+            headers['Wazo-Tenant'] = tenant_uuid
         url = url_join(self.resource, device_id, 'synchronize')
-        self.session.get(url)
+        self.session.get(url, headers=headers)
