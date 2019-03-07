@@ -34,7 +34,7 @@ class DevicesCommand(MultiTenantCommand):
     @extract_id
     def autoprov(self, device_id, **kwargs):
         tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant())
-        headers = dict(kwargs.get('headers', self.session.WRITE_HEADERS))
+        headers = dict(kwargs.get('headers', self.session.READ_HEADERS))
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
         url = url_join(self.resource, device_id, 'autoprov')
@@ -43,7 +43,7 @@ class DevicesCommand(MultiTenantCommand):
     @extract_id
     def synchronize(self, device_id, **kwargs):
         tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant())
-        headers = dict(kwargs.get('headers', self.session.WRITE_HEADERS))
+        headers = dict(kwargs.get('headers', self.session.READ_HEADERS))
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
         url = url_join(self.resource, device_id, 'synchronize')

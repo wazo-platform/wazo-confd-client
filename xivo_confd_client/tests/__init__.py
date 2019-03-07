@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015 Avencall
+# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import unittest
@@ -12,6 +12,8 @@ class TestCommand(unittest.TestCase):
 
     def setUp(self):
         self.session = Mock(ConfdSession)
+        self.session.READ_HEADERS = ConfdSession.READ_HEADERS
+        self.session.WRITE_HEADERS = ConfdSession.WRITE_HEADERS
         self.client = Mock()
         self.client.session.return_value = self.session
         self.command = self.Command(self.client)
