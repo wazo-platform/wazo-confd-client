@@ -756,6 +756,17 @@ c.ha.update(ha)
 ```
 
 
+## Provisioning networking configuration
+
+```python
+#Get provisioning networking configuration
+c.provisioning_networking.get()
+
+#Update provisioning networking configuration
+c.provisioning_networking.update(provisioning_networking)
+```
+
+
 # Adding new commands
 
 New command groups can be added to the client by sub-classing ```RESTCommand```.

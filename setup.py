@@ -60,6 +60,7 @@ setup(
             'moh = xivo_confd_client.commands.moh:MOHCommand',
             'pagings = xivo_confd_client.commands.pagings:PagingsCommand',
             'parking_lots = xivo_confd_client.commands.parking_lots:ParkingLotsCommand',
+            'provisioning_networking = xivo_confd_client.commands.provisioning_networking:ProvisioningNetworkingCommand',
             'queues = xivo_confd_client.commands.queues:QueuesCommand',
             'queues_general = xivo_confd_client.commands.queues_general:QueuesGeneralCommand',
             'queue_skill_rules = xivo_confd_client.commands.skill_rules:SkillRulesCommand',
