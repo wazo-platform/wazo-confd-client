@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from xivo_confd_client.util import extract_id
-from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.crud import MultiTenantCommand
 
 from xivo_confd_client.relations import (
     QueueExtensionRelation,
@@ -63,7 +63,7 @@ class QueueRelation(object):
         return self.queue_member_user.dissociate(self.queue_id, user_uuid)
 
 
-class QueuesCommand(CRUDCommand):
+class QueuesCommand(MultiTenantCommand):
 
     resource = 'queues'
     relation_cmd = QueueRelation
