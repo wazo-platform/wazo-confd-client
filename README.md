@@ -703,6 +703,15 @@ general = c.features_general.get()
 c.features_featuremap.update(general)
 ```
 
+## HEP
+
+```python
+#Get HEP General configuration
+hep_general = c.hep_general.get()
+
+#Update HEP General configuration
+c.hep_general.update(hep_general)
+
 
 ## RTP
 
