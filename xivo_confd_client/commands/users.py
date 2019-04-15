@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2014-2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from xivo_confd_client.crud import MultiTenantCommand
@@ -200,9 +200,13 @@ class UsersCommand(MultiTenantCommand):
                                     headers=headers)
         return response.json()
 
-    def export_csv(self):
+    def export_csv(self, tenant_uuid=None):
         url = url_join(self.resource, "export")
         headers = {'Accept': 'text/csv; charset=utf-8'}
+        tenant_uuid = tenant_uuid or self._client.tenant()
+        if tenant_uuid:
+            headers['Wazo-Tenant'] = tenant_uuid
+
         response = self.session.get(url, headers=headers)
         return response.content
 
