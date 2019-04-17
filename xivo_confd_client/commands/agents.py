@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# Copyright 2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from xivo_confd_client.util import extract_id
-from xivo_confd_client.crud import CRUDCommand
+from xivo_confd_client.crud import MultiTenantCommand
 
 from xivo_confd_client.relations import (
     AgentSkillRelation,
@@ -25,7 +25,7 @@ class AgentRelation(object):
         return self.agent_skill.dissociate(self.agent_id, skill_id)
 
 
-class AgentsCommand(CRUDCommand):
+class AgentsCommand(MultiTenantCommand):
 
     resource = 'agents'
     relation_cmd = AgentRelation
