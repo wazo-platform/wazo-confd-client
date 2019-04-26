@@ -573,6 +573,14 @@ live_reload_status = c.configuration.live_reload.get()
 c.configuration.live_reload.update({'enabled': True})
 ```
 
+
+## Unallocated devices
+```python
+#Get the list of unallocated devices
+unallocated_devices = c.unallocated_devices.list()
+```
+
+
 ## timezones
 
 ```python

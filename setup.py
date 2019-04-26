@@ -77,6 +77,7 @@ setup(
             'switchboards = xivo_confd_client.commands.switchboards:SwitchboardsCommand',
             'timezones = xivo_confd_client.commands.timezones:TimezonesCommand',
             'trunks = xivo_confd_client.commands.trunks:TrunksCommand',
+            'unallocated_devices = xivo_confd_client.commands.devices:UnallocatedDevicesCommand',
             'users = xivo_confd_client.commands.users:UsersCommand',
             'voicemails = xivo_confd_client.commands.voicemails:VoicemailsCommand',
             'voicemail_general = xivo_confd_client.commands.voicemail_general:VoicemailGeneralCommand',
