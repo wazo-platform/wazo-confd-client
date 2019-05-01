@@ -578,6 +578,12 @@ c.configuration.live_reload.update({'enabled': True})
 ```python
 #Get the list of unallocated devices
 unallocated_devices = c.unallocated_devices.list()
+
+#Assign the current token's tenant to an unallocated device
+c.unallocated_devices.assign_tenant(device_id)
+
+#Assign a token-accessible tenant to an unallocated device
+c.unallocated_devices.assign_tenant(device_id, tenant_uuid='tenant')
 ```
 
 
