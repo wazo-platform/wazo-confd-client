@@ -6,6 +6,7 @@ from xivo_confd_client.crud import MultiTenantCommand
 from xivo_confd_client.util import extract_id
 from xivo_confd_client.util import url_join
 from xivo_confd_client.relations import LineDeviceRelation
+from xivo_lib_rest_client import RESTCommand
 
 
 class DeviceRelation(object):
@@ -48,3 +49,21 @@ class DevicesCommand(MultiTenantCommand):
             headers['Wazo-Tenant'] = tenant_uuid
         url = url_join(self.resource, device_id, 'synchronize')
         self.session.get(url, headers=headers)
+
+
+class UnallocatedDevicesCommand(RESTCommand):
+
+    resource = 'devices/unallocated'
+
+    def list(self, **kwargs):
+        url = url_join(self.resource)
+        response = self.session.get(url, params=kwargs)
+        return response.json()
+
+    def assign_tenant(self, device_id, **kwargs):
+        tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant())
+        headers = dict(kwargs.get('headers', self.session.WRITE_HEADERS))
+        if tenant_uuid:
+            headers['Wazo-Tenant'] = tenant_uuid
+        url = url_join(self.resource, device_id)
+        response = self.session.put(url, headers=headers)
