@@ -33,7 +33,6 @@ setup(
             'conferences = xivo_confd_client.commands.conferences:ConferencesCommand',
             'configuration = xivo_confd_client.commands.configuration:ConfigurationCommand',
             'contexts = xivo_confd_client.commands.contexts:ContextsCommand',
-            'cti_profiles = xivo_confd_client.commands.cti_profiles:CtiProfilesCommand',
             'devices = xivo_confd_client.commands.devices:DevicesCommand',
             'dhcp = xivo_confd_client.commands.dhcp:DHCPCommand',
             'endpoints_custom = xivo_confd_client.commands.endpoints_custom:EndpointsCustomCommand',

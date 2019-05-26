@@ -288,12 +288,6 @@ Exposed via ```c.contexts.relations(context_id)```
 
  * update_contexts(contexts)
 
-## CtiProfile relation
-
-Exposed via ```c.cti_profiles.relations(cti_profile_id)```
-
- * add_user(user)
-
 ## Device Relation
 
 Exposed via ```c.devices.relations(device_id)```
@@ -508,11 +502,6 @@ Exposed via ```c.users.relations(user_id)```
  * update_funckeys(funckeys)
  * add_funckey_template(funckey_template)
  * remove_funckey_template(funckey_template)
-
- * add_cti_profile(cti_profile)
- * disable_cti_profile()
- * get_cti_profile()
- * update_cti_profile(cti_profile, enabled)
 
  * get_entity()
 
