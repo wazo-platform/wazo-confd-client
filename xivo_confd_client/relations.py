@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from xivo_lib_rest_client import HTTPCommand
@@ -218,33 +218,6 @@ class UserFuncKeyRelation(HTTPCommand):
     def dissociate_funckey_template(self, user_id, template_id):
         url = url_join('users', user_id, 'funckeys', 'templates', template_id)
         self.session.delete(url)
-
-
-class UserCtiProfileRelation(HTTPCommand):
-
-    def get_by_user(self, user_id):
-        url = url_join('users', user_id, 'cti')
-        response = self.session.get(url)
-        return response.json()
-
-    def update(self, user_id, cti_profile, enabled=None):
-        url = url_join('users', user_id, 'cti')
-        default_enabled = cti_profile.get('id') is not None
-        enabled = enabled if enabled is not None else default_enabled
-        body = {'cti_profile_id': cti_profile.get('id'),
-                'enabled': enabled}
-        self.session.put(url, body)
-
-    def associate(self, user_id, cti_profile_id, enabled=True):
-        url = url_join('users', user_id, 'cti')
-        body = {'cti_profile_id': cti_profile_id,
-                'enabled': enabled}
-        self.session.put(url, body)
-
-    def disable(self, user_id):
-        url = url_join('users', user_id, 'cti')
-        body = {'enabled': False}
-        self.session.put(url, body)
 
 
 class UserServiceRelation(HTTPCommand):

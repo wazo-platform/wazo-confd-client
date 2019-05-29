@@ -6,7 +6,6 @@ from xivo_confd_client.crud import MultiTenantCommand
 from xivo_confd_client.relations import (
     UserAgentRelation,
     UserCallPermissionRelation,
-    UserCtiProfileRelation,
     UserEndpointSipRelation,
     UserEntityRelation,
     UserFallbackRelation,
@@ -27,7 +26,6 @@ class UserRelation(object):
         self.user_id = user_id
         self.user_agent = UserAgentRelation(builder)
         self.user_call_permission = UserCallPermissionRelation(builder)
-        self.user_cti_profile = UserCtiProfileRelation(builder)
         self.user_endpoint_sip = UserEndpointSipRelation(builder)
         self.user_entity = UserEntityRelation(builder)
         self.user_fallback = UserFallbackRelation(builder)
@@ -115,19 +113,6 @@ class UserRelation(object):
     @extract_id
     def remove_funckey_template(self, template_id):
         self.user_funckey.dissociate_funckey_template(self.user_id, template_id)
-
-    def get_cti_profile(self):
-        return self.user_cti_profile.get_by_user(self.user_id)
-
-    @extract_id
-    def add_cti_profile(self, profile_id):
-        self.user_cti_profile.associate(self.user_id, profile_id)
-
-    def disable_cti_profile(self):
-        self.user_cti_profile.disable(self.user_id)
-
-    def update_cti_profile(self, cti_profile, enabled=None):
-        self.user_cti_profile.update(self.user_id, cti_profile, enabled)
 
     def update_service(self, service_name, service):
         self.user_service.update_service(self.user_id, service_name, service)
