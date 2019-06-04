@@ -1,13 +1,10 @@
-# XiVO confd client
-[![Build Status](https://jenkins.wazo.community/buildStatus/icon?job=xivo-confd-client)](https://jenkins.wazo.community/job/xivo-confd-client)
+# wazo-confd-client
+[![Build Status](https://jenkins.wazo.community/buildStatus/icon?job=wazo-confd-client)](https://jenkins.wazo.community/job/wazo-confd-client)
 
 A python library for using [xivo-confd](https://github.com/wazo-pbx/xivo-confd)
 
 
 # Installation
-
-This library requires python version 2.7. Other versions of python have not been
-tested.
 
 ## Installing in a virtualenv
 
@@ -50,7 +47,7 @@ To start using the library, first configure a new client, then execute an
 operation on a resource.
 
 ```python
-from xivo_confd_client import Client
+from wazo_confd_client import Client
 
 c = Client('confd.example.com', port=9486, https=True, token='the-one-ring')
 
@@ -826,7 +823,7 @@ c.foo.bar()
 
 ## 1.1.1
 
-* Remove argument auth_method from xivo_confd_client.Client. Auth method is
+* Remove argument auth_method from wazo_confd_client.Client. Auth method is
 always digest.
 
 
