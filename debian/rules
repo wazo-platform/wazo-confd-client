@@ -1,9 +1,9 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 
-export PYBUILD_NAME=xivo_confd_client
-export PYBUILD_DESTDIR_python2=debian/xivo-confd-client/
-export PYBUILD_DESTDIR_python3=debian/xivo-confd-client-python3/
+export PYBUILD_NAME=wazo_confd_client
+export PYBUILD_DESTDIR_python2=debian/wazo-confd-client/
+export PYBUILD_DESTDIR_python3=debian/wazo-confd-client-python3/
 export PYBUILD_DISABLE=test
 
 %:
