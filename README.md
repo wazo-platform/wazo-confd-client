@@ -6,9 +6,6 @@ A python library for using [xivo-confd](https://github.com/wazo-pbx/xivo-confd)
 
 # Installation
 
-This library requires python version 2.7. Other versions of python have not been
-tested.
-
 ## Installing in a virtualenv
 
 It is recommended to install the library in a
