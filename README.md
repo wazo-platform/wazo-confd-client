@@ -1,7 +1,7 @@
 # wazo-confd-client
 [![Build Status](https://jenkins.wazo.community/buildStatus/icon?job=wazo-confd-client)](https://jenkins.wazo.community/job/wazo-confd-client)
 
-A python library for using [xivo-confd](https://github.com/wazo-pbx/xivo-confd)
+A python library for using [wazo-confd](https://github.com/wazo-pbx/wazo-confd)
 
 
 # Installation

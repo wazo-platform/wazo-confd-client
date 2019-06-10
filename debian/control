@@ -20,7 +20,7 @@ Depends: ${python:Depends},
          python-requests,
          python-stevedore,
          xivo-lib-rest-client
-Description: xivo-confd client library - Python 2
+Description: wazo-confd client library - Python 2
  Wazo is a system based on a powerful IPBX, to bring an easy to
  install solution for telephony and related services.
 
@@ -32,6 +32,6 @@ Depends: ${python3:Depends},
          python3-requests,
          python3-stevedore,
          xivo-lib-rest-client-python3
-Description: xivo-confd client library - Python 3
+Description: wazo-confd client library - Python 3
  Wazo is a system based on a powerful IPBX, to bring an easy to
  install solution for telephony and related services.

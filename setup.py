@@ -10,7 +10,7 @@ setup(
     name='wazo_confd_client',
     version='1.1.2',  # <confd-api-version>.<confd-client-version>
 
-    description='a simple client library for the xivo-confd HTTP interface',
+    description='a simple client library for the wazo-confd HTTP interface',
 
     author='Wazo Authors',
     author_email='dev@wazo.community',
