@@ -54,9 +54,9 @@ c = Client('confd.example.com', port=9486, https=True, token='the-one-ring')
 users = c.users.list()
 ```
 
-## Waiting for xivo-confd to be ready
+## Waiting for wazo-confd to be ready
 
-The wait_until_ready command will try to query xivo-confd for `retry` number of time waiting `delay`
+The wait_until_ready command will try to query wazo-confd for `retry` number of time waiting `delay`
 seconds before retrying
 
 ```python
@@ -739,7 +739,7 @@ c.wizard.create(wizard)
 #Get the Wazo configuration status
 configured = c.wizard.get()
 
-#Get informations about the system on which xivo-confd is installed
+#Get informations about the system on which wazo-confd is installed
 discover = c.wizard.discover()
 ```
 
