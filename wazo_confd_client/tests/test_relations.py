@@ -25,6 +25,7 @@ from wazo_confd_client.relations import (
     GroupScheduleRelation,
     IncallExtensionRelation,
     IncallScheduleRelation,
+    LineApplicationRelation,
     LineDeviceRelation,
     LineEndpointCustomRelation,
     LineEndpointSccpRelation,
@@ -229,6 +230,29 @@ class TestLineExtensionRelation(TestCommand):
         self.session.get.assert_called_once_with("/extensions/2/line")
 
         assert_that(response, expected_result)
+
+
+class TestLineApplicationRelation(TestCommand):
+
+    Command = LineApplicationRelation
+
+    def test_line_application_association(self):
+        line_id = 1
+        application_id = 2
+
+        self.set_response('put', 204)
+
+        self.command.associate(line_id, application_id)
+        self.session.put.assert_called_once_with("/lines/1/applications/2")
+
+    def test_line_application_dissociation(self):
+        line_id = 1
+        application_id = 2
+
+        self.set_response('delete', 204)
+
+        self.command.dissociate(line_id, application_id)
+        self.session.delete.assert_called_once_with("/lines/1/applications/2")
 
 
 class TestLineDeviceRelation(TestCommand):

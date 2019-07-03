@@ -388,6 +388,8 @@ Exposed via ```c.lines.relations(line_id)```
  * add_device(device_id)
  * remove_device(device_id)
  * get_device()
+ * add_application(application)
+ * remove_application(application)
 
 ## Outcall relation
 

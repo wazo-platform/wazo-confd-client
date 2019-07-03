@@ -98,6 +98,17 @@ class LineDeviceRelation(HTTPCommand):
         return response.json()
 
 
+class LineApplicationRelation(HTTPCommand):
+
+    def associate(self, line_id, application_uuid):
+        url = url_join('lines', line_id, 'applications', application_uuid)
+        self.session.put(url)
+
+    def dissociate(self, line_id, application_uuid):
+        url = url_join('lines', line_id, 'applications', application_uuid)
+        self.session.delete(url)
+
+
 class LineExtensionRelation(HTTPCommand):
 
     def associate(self, line_id, extension_id):

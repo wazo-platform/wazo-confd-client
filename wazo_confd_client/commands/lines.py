@@ -5,6 +5,7 @@
 from wazo_confd_client.util import extract_id
 from wazo_confd_client.crud import MultiTenantCommand
 from wazo_confd_client.relations import (
+    LineApplicationRelation,
     LineDeviceRelation,
     LineEndpointCustomRelation,
     LineEndpointSccpRelation,
@@ -19,6 +20,7 @@ class LineRelation(object):
     def __init__(self, builder, line_id):
         self.line_id = line_id
         self.user_line = UserLineRelation(builder)
+        self.line_application = LineApplicationRelation(builder)
         self.line_extension = LineExtensionRelation(builder)
         self.line_endpoint_sip = LineEndpointSipRelation(builder)
         self.line_endpoint_sccp = LineEndpointSccpRelation(builder)
@@ -90,6 +92,14 @@ class LineRelation(object):
 
     def get_device(self):
         return self.line_device.get_by_line(self.line_id)
+
+    @extract_id
+    def add_application(self, application_uuid):
+        return self.line_application.associate(self.line_id, application_uuid)
+
+    @extract_id
+    def remove_application(self, application_uuid):
+        return self.line_application.dissociate(self.line_id, application_uuid)
 
 
 class LinesCommand(MultiTenantCommand):
