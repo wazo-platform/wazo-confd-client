@@ -1,4 +1,4 @@
 git+https://github.com/wazo-pbx/xivo-lib-rest-client.git
-requests==2.21.0
-stevedore==1.17.1
-six==1.10.0
+requests==0.4.13
+stevedore==1.29.0
+six==1.12.0
