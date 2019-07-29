@@ -778,6 +778,18 @@ c.provisioning_networking.update(provisioning_networking)
 ```
 
 
+## Provisioning registrars
+
+```python
+#Get registrars
+registrars = c.registrars.list()
+
+#Update the proxy of a registrar
+#This will update all devices that rely on this registrar
+c.registrars.update({'id': 'default', 'proxy_main_host': '1.2.3.4'})
+```
+
+
 # Adding new commands
 
 New command groups can be added to the client by sub-classing ```RESTCommand```.
