@@ -68,6 +68,7 @@ setup(
             'rtp_ice_host_candidates = wazo_confd_client.commands.rtp_ice_host_candidates:RTPIceHostCandidatesCommand',
             'registers_iax = wazo_confd_client.commands.registers_iax:RegistersIAXCommand',
             'registers_sip = wazo_confd_client.commands.registers_sip:RegistersSipCommand',
+            'registrars = wazo_confd_client.commands.registrars:RegistrarsCommand',
             'sccp_general = wazo_confd_client.commands.sccp_general:SCCPGeneralCommand',
             'schedules = wazo_confd_client.commands.schedules:SchedulesCommand',
             'sip_general = wazo_confd_client.commands.sip_general:SIPGeneralCommand',
