@@ -21,6 +21,7 @@ setup(
 
     entry_points={
         'confd_client.commands': [
+            'access_features = wazo_confd_client.commands.access_features:AccessFeaturesCommand',
             'agents = wazo_confd_client.commands.agents:AgentsCommand',
             'agent_skills = wazo_confd_client.commands.skills:SkillsCommand',
             'applications = wazo_confd_client.commands.applications:ApplicationsCommand',
