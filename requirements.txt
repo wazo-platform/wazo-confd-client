@@ -1,4 +1,4 @@
-git+https://github.com/wazo-pbx/xivo-lib-rest-client.git
+https://github.com/wazo-pbx/xivo-lib-rest-client/archive/buster.zip
 requests==2.21.0
-stevedore==1.17.1
-six==1.10.0
+stevedore==1.29.0
+six==1.12.0
