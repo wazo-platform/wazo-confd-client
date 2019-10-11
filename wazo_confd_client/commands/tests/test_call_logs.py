@@ -8,7 +8,7 @@ from hamcrest import (
     assert_that,
     equal_to,
 )
-from xivo_lib_rest_client.tests.command import RESTCommandTestCase
+from wazo_lib_rest_client.tests.command import RESTCommandTestCase
 
 from ..call_logs import CallLogsCommand
 
