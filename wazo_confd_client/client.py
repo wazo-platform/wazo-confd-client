@@ -10,7 +10,7 @@ from wazo_confd_client.session import ConfdSession
 
 class ConfdClient(BaseClient):
 
-    namespace = 'confd_client.commands'
+    namespace = 'wazo_confd_client.commands'
 
     def __init__(self,
                  host,
