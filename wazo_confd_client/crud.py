@@ -5,7 +5,7 @@
 import abc
 import six
 
-from xivo_lib_rest_client import HTTPCommand
+from wazo_lib_rest_client import HTTPCommand
 from wazo_confd_client.util import extract_id, url_join
 
 

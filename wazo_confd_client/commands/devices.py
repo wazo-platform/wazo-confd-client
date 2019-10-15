@@ -6,7 +6,7 @@ from wazo_confd_client.crud import MultiTenantCommand
 from wazo_confd_client.util import extract_id
 from wazo_confd_client.util import url_join
 from wazo_confd_client.relations import LineDeviceRelation
-from xivo_lib_rest_client import RESTCommand
+from wazo_lib_rest_client import RESTCommand
 
 
 class DeviceRelation(object):

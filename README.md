@@ -799,7 +799,7 @@ the group in the client. For example, commands for the ```Foo``` resource would 
 like this:
 
 ```python
-from xivo_lib_rest_client import RESTCommand
+from wazo_lib_rest_client import RESTCommand
 
 class FooCommands(RESTCommand):
 

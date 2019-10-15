@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
-from xivo_lib_rest_client import RESTCommand
+from wazo_lib_rest_client import RESTCommand
 
 
 class VoicemailZoneMessagesCommand(RESTCommand):

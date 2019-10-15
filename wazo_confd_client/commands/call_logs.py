@@ -4,7 +4,7 @@
 
 import requests
 
-from xivo_lib_rest_client import RESTCommand
+from wazo_lib_rest_client import RESTCommand
 
 
 class CallLogsCommand(RESTCommand):

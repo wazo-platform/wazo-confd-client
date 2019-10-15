@@ -7,7 +7,7 @@ from six.moves import range
 
 from requests import RequestException, HTTPError
 
-from xivo_lib_rest_client import HTTPCommand
+from wazo_lib_rest_client import HTTPCommand
 from wazo_confd_client.util import url_join
 
 
