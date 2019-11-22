@@ -236,8 +236,8 @@ Here is a list of relations and their methods:
 
 Exposed via ```c.agents.relations(agent_id)```
 
- * add_skill(skill_id, weight)
- * remove_skill(skill_id)
+ * add_skill(skill, weight=weight)
+ * remove_skill(skill)
 
 
 ## Agent skill relation
