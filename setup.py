@@ -61,6 +61,7 @@ setup(
             'moh = wazo_confd_client.commands.moh:MOHCommand',
             'pagings = wazo_confd_client.commands.pagings:PagingsCommand',
             'parking_lots = wazo_confd_client.commands.parking_lots:ParkingLotsCommand',
+            'pjsip_doc = wazo_confd_client.commands.pjsip_doc:PJSIPDocCommand',
             'provisioning_networking = wazo_confd_client.commands.provisioning_networking:ProvisioningNetworkingCommand',
             'queues = wazo_confd_client.commands.queues:QueuesCommand',
             'queues_general = wazo_confd_client.commands.queues_general:QueuesGeneralCommand',
