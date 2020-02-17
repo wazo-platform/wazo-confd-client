@@ -705,6 +705,13 @@ general = c.features_general.get()
 c.features_featuremap.update(general)
 ```
 
+## PJSIP
+
+```python
+# Get the PJSIP doc specification
+doc = c.pjsip_doc.get()
+```
+
 ## HEP
 
 ```python
