@@ -710,6 +710,11 @@ c.features_featuremap.update(general)
 ```python
 # Get the PJSIP doc specification
 doc = c.pjsip_doc.get()
+
+pjsip_global = c.pjsip_global.get()
+pjsip_global['max_forwards'] = '42'
+
+c.pjsip_global.update(pjsip_global)
 ```
 
 ## HEP
