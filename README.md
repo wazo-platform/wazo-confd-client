@@ -715,6 +715,11 @@ pjsip_global = c.pjsip_global.get()
 pjsip_global['max_forwards'] = '42'
 
 c.pjsip_global.update(pjsip_global)
+
+pjsip_system = c.pjsip_system.get()
+pjsip_system['compact_headers'] = 'yes'
+
+c.pjsip_system.update(pjsip_system)
 ```
 
 ## HEP
