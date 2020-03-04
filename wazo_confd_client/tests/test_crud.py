@@ -28,8 +28,8 @@ class TestCRUD(TestCommand):
             {
                 "total": 2,
                 "items": [
-                    {"id": 1, "firstname": "John",},
-                    {"id": 2, "firstname": "Mary",},
+                    {"id": 1, "firstname": "John"},
+                    {"id": 2, "firstname": "Mary"},
                 ],
             },
         )

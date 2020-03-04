@@ -65,4 +65,4 @@ class UnallocatedDevicesCommand(RESTCommand):
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
         url = url_join(self.resource, device_id)
-        response = self.session.put(url, headers=headers)
+        self.session.put(url, headers=headers)

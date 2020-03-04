@@ -100,5 +100,5 @@ class TestUnallocatedDevices(TestCommand):
         self.client.tenant.return_value = 'tenant'
         self.set_response('put', 204)
 
-        result = self.command.assign_tenant(device_id)
+        self.command.assign_tenant(device_id)
         self.session.put.assert_called_once_with(expected_url, headers=expected_headers)
