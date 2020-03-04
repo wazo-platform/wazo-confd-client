@@ -8,7 +8,6 @@ from wazo_confd_client.relations import UserCallPermissionRelation
 
 
 class CallPermissionRelation(object):
-
     def __init__(self, builder, call_permission_id):
         self.call_permission_id = call_permission_id
         self.user_call_permission = UserCallPermissionRelation(builder)
@@ -22,7 +21,9 @@ class CallPermissionRelation(object):
         return self.user_call_permission.dissociate(user_id, self.call_permission_id)
 
     def list_users(self):
-        return self.user_call_permission.list_by_call_permission(self.call_permission_id)
+        return self.user_call_permission.list_by_call_permission(
+            self.call_permission_id
+        )
 
 
 class CallPermissionsCommand(MultiTenantCommand):

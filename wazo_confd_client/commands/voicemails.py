@@ -8,7 +8,6 @@ from wazo_confd_client.relations import UserVoicemailRelation
 
 
 class VoicemailRelation(object):
-
     def __init__(self, builder, voicemail_id):
         self.voicemail_id = voicemail_id
         self.user_voicemail_relation = UserVoicemailRelation(builder)

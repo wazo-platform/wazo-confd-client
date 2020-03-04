@@ -15,9 +15,9 @@ class CallLogsCommand(RESTCommand):
 
     def list(self, start_date=None, end_date=None):
         params = self.build_params(start_date, end_date)
-        response = self.session.get(self.resource,
-                                    params=params,
-                                    headers={'Accept': 'text/csv'})
+        response = self.session.get(
+            self.resource, params=params, headers={'Accept': 'text/csv'}
+        )
 
         if response.status_code != requests.codes.ok:
             self.raise_from_response(response)

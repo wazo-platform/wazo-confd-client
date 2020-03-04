@@ -10,7 +10,6 @@ from wazo_confd_client.relations import (
 
 
 class EndpointSipRelation(object):
-
     def __init__(self, builder, sip_id):
         self.sip_id = sip_id
         self.line_endpoint_sip = LineEndpointSipRelation(builder)

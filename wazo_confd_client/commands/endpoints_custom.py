@@ -10,7 +10,6 @@ from wazo_confd_client.relations import (
 
 
 class EndpointCustomRelation(object):
-
     def __init__(self, builder, custom_id):
         self.custom_id = custom_id
         self.line_endpoint_custom = LineEndpointCustomRelation(builder)

@@ -8,7 +8,6 @@ from wazo_confd_client.relations import LineExtensionRelation
 
 
 class ExtensionRelation(object):
-
     def __init__(self, builder, extension_id):
         self.extension_id = extension_id
         self.line_extension_relation = LineExtensionRelation(builder)

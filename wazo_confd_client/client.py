@@ -12,18 +12,12 @@ class ConfdClient(BaseClient):
 
     namespace = 'wazo_confd_client.commands'
 
-    def __init__(self,
-                 host,
-                 port=9486,
-                 version='1.1',
-                 username=None,
-                 password=None,
-                 **kwargs):
+    def __init__(
+        self, host, port=9486, version='1.1', username=None, password=None, **kwargs
+    ):
         super(ConfdClient, self).__init__(
-            host=host,
-            port=port,
-            version=version,
-            **kwargs)
+            host=host, port=port, version=version, **kwargs
+        )
         self.username = username
         self.password = password
 

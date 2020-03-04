@@ -8,7 +8,6 @@ from wazo_confd_client.relations import ConferenceExtensionRelation
 
 
 class ConferenceRelation(object):
-
     def __init__(self, builder, conference_id):
         self.conference_id = conference_id
         self.conference_extension = ConferenceExtensionRelation(builder)

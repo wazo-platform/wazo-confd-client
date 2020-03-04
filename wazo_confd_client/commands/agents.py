@@ -5,13 +5,10 @@
 from wazo_confd_client.util import extract_id
 from wazo_confd_client.crud import MultiTenantCommand
 
-from wazo_confd_client.relations import (
-    AgentSkillRelation,
-)
+from wazo_confd_client.relations import AgentSkillRelation
 
 
 class AgentRelation(object):
-
     def __init__(self, builder, agent_id):
         self.agent_id = agent_id
         self.agent_skill = AgentSkillRelation(builder)

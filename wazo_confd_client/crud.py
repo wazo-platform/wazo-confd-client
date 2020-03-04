@@ -59,7 +59,6 @@ class CRUDCommand(HTTPCommand):
 
 
 class MultiTenantCommand(CRUDCommand):
-
     def list(self, **kwargs):
         kwargs.setdefault('recurse', False)
         tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant())

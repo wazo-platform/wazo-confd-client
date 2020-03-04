@@ -3,13 +3,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.crud import MultiTenantCommand
-from wazo_confd_client.relations import (
-    ContextContextRelation,
-)
+from wazo_confd_client.relations import ContextContextRelation
 
 
 class ContextRelation(object):
-
     def __init__(self, builder, context_id):
         self.context_id = context_id
         self.context_context = ContextContextRelation(builder)

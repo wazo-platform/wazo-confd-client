@@ -15,7 +15,6 @@ from wazo_confd_client.relations import (
 
 
 class GroupRelation(object):
-
     def __init__(self, builder, group_id):
         self.group_id = group_id
         self.group_call_permission = GroupCallPermissionRelation(builder)

@@ -7,7 +7,6 @@ from wazo_confd_client.util import url_join
 
 
 class LiveReloadCommand(HTTPCommand):
-
     def get(self):
         url = url_join('configuration', 'live_reload')
         r = self.session.get(url)
@@ -20,6 +19,5 @@ class LiveReloadCommand(HTTPCommand):
 
 
 class ConfigurationCommand(object):
-
     def __init__(self, client):
         self.live_reload = LiveReloadCommand(client)

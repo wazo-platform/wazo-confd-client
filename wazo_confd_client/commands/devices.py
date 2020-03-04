@@ -10,7 +10,6 @@ from wazo_lib_rest_client import RESTCommand
 
 
 class DeviceRelation(object):
-
     def __init__(self, builder, device_id):
         self.device_id = device_id
         self.line_device = LineDeviceRelation(builder)

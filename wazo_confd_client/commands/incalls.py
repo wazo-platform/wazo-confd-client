@@ -8,7 +8,6 @@ from wazo_confd_client.relations import IncallExtensionRelation, IncallScheduleR
 
 
 class IncallRelation(object):
-
     def __init__(self, builder, incall_id):
         self.incall_id = incall_id
         self.incall_extension = IncallExtensionRelation(builder)

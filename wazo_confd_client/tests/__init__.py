@@ -9,7 +9,6 @@ from ..session import ConfdSession
 
 
 class TestCommand(unittest.TestCase):
-
     def setUp(self):
         self.session = Mock(ConfdSession)
         self.session.READ_HEADERS = ConfdSession.READ_HEADERS

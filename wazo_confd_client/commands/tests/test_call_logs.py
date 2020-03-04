@@ -25,9 +25,9 @@ class TestCallLogs(RESTCommandTestCase):
 
         result = self.command.list()
 
-        self.session.get.assert_called_once_with(self.resource,
-                                                 params={},
-                                                 headers={'Accept': 'text/csv'})
+        self.session.get.assert_called_once_with(
+            self.resource, params={}, headers={'Accept': 'text/csv'}
+        )
         assert_that(result, equal_to(self.csvdata))
 
     def test_list_with_dates(self):
@@ -38,12 +38,14 @@ class TestCallLogs(RESTCommandTestCase):
             'end_date': '2015-01-02T12:13:14',
         }
 
-        self.command.list(start_date=datetime(2015, 1, 1, 12, 13, 14),
-                          end_date=datetime(2015, 1, 2, 12, 13, 14))
+        self.command.list(
+            start_date=datetime(2015, 1, 1, 12, 13, 14),
+            end_date=datetime(2015, 1, 2, 12, 13, 14),
+        )
 
-        self.session.get.assert_called_once_with(self.resource,
-                                                 params=expected_params,
-                                                 headers={'Accept': 'text/csv'})
+        self.session.get.assert_called_once_with(
+            self.resource, params=expected_params, headers={'Accept': 'text/csv'}
+        )
 
     def test_when_not_200(self):
         self.session.get.return_value = self.new_response(404)

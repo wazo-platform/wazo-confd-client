@@ -12,8 +12,7 @@ class TestWizard(TestCommand):
     Command = WizardCommand
 
     def test_create(self):
-        body = {'admin_password': 'password',
-                'etc': '...'}
+        body = {'admin_password': 'password', 'etc': '...'}
 
         expected_content = {'xivo_uuid': 'UUID'}
         expected_url = "/wizard"
@@ -35,8 +34,7 @@ class TestWizard(TestCommand):
 
     def test_discover(self):
         expected_url = "/wizard/discover"
-        expected_content = {'hostname': 'xivo',
-                            'etc': '...'}
+        expected_content = {'hostname': 'xivo', 'etc': '...'}
 
         self.set_response('get', 200, expected_content)
 

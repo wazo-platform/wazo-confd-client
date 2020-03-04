@@ -85,10 +85,7 @@ class TestUserLineRelation(TestCommand):
     def test_user_line_list_by_user(self):
         user_id = 1234
         expected_url = "/users/{}/lines".format(user_id)
-        expected_result = {
-            "total": 0,
-            "items": []
-        }
+        expected_result = {"total": 0, "items": []}
 
         self.set_response('get', 200, expected_result)
 
@@ -100,10 +97,7 @@ class TestUserLineRelation(TestCommand):
     def test_user_line_list_by_line(self):
         line_id = 1234
         expected_url = "/lines/{}/users".format(line_id)
-        expected_result = {
-            "total": 0,
-            "items": []
-        }
+        expected_result = {"total": 0, "items": []}
 
         self.set_response('get', 200, expected_result)
 
@@ -130,7 +124,9 @@ class TestUserEndpointSipRelation(TestCommand):
     def test_user_line_list_by_user(self):
         user_uuid = '1234-abcd'
         line_id = 42
-        expected_url = "/users/{}/lines/{}/associated/endpoints/sip".format(user_uuid, line_id)
+        expected_url = "/users/{}/lines/{}/associated/endpoints/sip".format(
+            user_uuid, line_id
+        )
         expected_result = {"username": 'tata'}
 
         self.set_response('get', 200, expected_result)
@@ -165,16 +161,19 @@ class TestLineExtensionRelation(TestCommand):
 
         expected_result = {
             'total': 1,
-            'items': [{
-                'line_id': line_id,
-                'extension_id': extension_id,
-                'links': [
-                    {'rel': 'lines',
-                     'href': 'http://localhost:9486/1.1/lines/1'},
-                    {'rel': 'extensions',
-                     'href': 'http://localhost:9486/1.1/extensions/2'},
-                ]
-            }]
+            'items': [
+                {
+                    'line_id': line_id,
+                    'extension_id': extension_id,
+                    'links': [
+                        {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
+                        {
+                            'rel': 'extensions',
+                            'href': 'http://localhost:9486/1.1/extensions/2',
+                        },
+                    ],
+                }
+            ],
         }
 
         self.set_response('get', 200, expected_result)
@@ -190,16 +189,19 @@ class TestLineExtensionRelation(TestCommand):
 
         expected_result = {
             'total': 1,
-            'items': [{
-                'line_id': line_id,
-                'extension_id': extension_id,
-                'links': [
-                    {'rel': 'lines',
-                     'href': 'http://localhost:9486/1.1/lines/1'},
-                    {'rel': 'extensions',
-                     'href': 'http://localhost:9486/1.1/extensions/2'},
-                ]
-            }]
+            'items': [
+                {
+                    'line_id': line_id,
+                    'extension_id': extension_id,
+                    'links': [
+                        {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
+                        {
+                            'rel': 'extensions',
+                            'href': 'http://localhost:9486/1.1/extensions/2',
+                        },
+                    ],
+                }
+            ],
         }
 
         self.set_response('get', 200, expected_result)
@@ -217,11 +219,9 @@ class TestLineExtensionRelation(TestCommand):
             'line_id': line_id,
             'extension_id': extension_id,
             'links': [
-                {'rel': 'lines',
-                 'href': 'http://localhost:9486/1.1/lines/1'},
-                {'rel': 'extensions',
-                 'href': 'http://localhost:9486/1.1/extensions/2'},
-            ]
+                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
+                {'rel': 'extensions', 'href': 'http://localhost:9486/1.1/extensions/2'},
+            ],
         }
 
         self.set_response('get', 200, expected_result)
@@ -285,11 +285,9 @@ class TestLineDeviceRelation(TestCommand):
             'line_id': line_id,
             'device_id': device_id,
             'links': [
-                {'rel': 'lines',
-                 'href': 'http://localhost:9486/1.1/lines/1'},
-                {'rel': 'devices',
-                 'href': 'http://localhost:9486/1.1/devices/1'},
-            ]
+                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
+                {'rel': 'devices', 'href': 'http://localhost:9486/1.1/devices/1'},
+            ],
         }
 
         self.set_response('get', 200, expected_result)
@@ -303,16 +301,22 @@ class TestLineDeviceRelation(TestCommand):
         line_id = 1
         device_id = 2
 
-        expected_result = {'total': 1,
-                           'items': [
-                               {'line_id': line_id,
-                                'device_id': device_id,
-                                'links': [
-                                    {'rel': 'lines',
-                                     'href': 'http://localhost:9486/1.1/lines/1'},
-                                    {'rel': 'devices',
-                                     'href': 'http://localhost:9486/1.1/devices/1'},
-                                ]}]}
+        expected_result = {
+            'total': 1,
+            'items': [
+                {
+                    'line_id': line_id,
+                    'device_id': device_id,
+                    'links': [
+                        {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
+                        {
+                            'rel': 'devices',
+                            'href': 'http://localhost:9486/1.1/devices/1',
+                        },
+                    ],
+                }
+            ],
+        }
 
         self.set_response('get', 200, expected_result)
 
@@ -352,11 +356,12 @@ class TestLineEndpointSipRelation(TestCommand):
             'line_id': line_id,
             'sip_id': sip_id,
             'links': [
-                {'rel': 'lines',
-                 'href': 'http://localhost:9486/1.1/lines/1'},
-                {'rel': 'endpoints_sip',
-                 'href': 'http://localhost:9486/1.1/endpoints/sip/1'},
-            ]
+                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
+                {
+                    'rel': 'endpoints_sip',
+                    'href': 'http://localhost:9486/1.1/endpoints/sip/1',
+                },
+            ],
         }
 
         self.set_response('get', 200, expected_result)
@@ -374,11 +379,12 @@ class TestLineEndpointSipRelation(TestCommand):
             'line_id': line_id,
             'sip_id': sip_id,
             'links': [
-                {'rel': 'lines',
-                 'href': 'http://localhost:9486/1.1/lines/1'},
-                {'rel': 'endpoints_sip',
-                 'href': 'http://localhost:9486/1.1/endpoints/sip/1'},
-            ]
+                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
+                {
+                    'rel': 'endpoints_sip',
+                    'href': 'http://localhost:9486/1.1/endpoints/sip/1',
+                },
+            ],
         }
 
         self.set_response('get', 200, expected_result)
@@ -419,11 +425,12 @@ class TestLineEndpointSccpRelation(TestCommand):
             'line_id': line_id,
             'sccp_id': sccp_id,
             'links': [
-                {'rel': 'lines',
-                 'href': 'http://localhost:9486/1.1/lines/1'},
-                {'rel': 'endpoints_sccp',
-                 'href': 'http://localhost:9486/1.1/endpoints/sccp/1'},
-            ]
+                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
+                {
+                    'rel': 'endpoints_sccp',
+                    'href': 'http://localhost:9486/1.1/endpoints/sccp/1',
+                },
+            ],
         }
 
         self.set_response('get', 200, expected_result)
@@ -441,11 +448,12 @@ class TestLineEndpointSccpRelation(TestCommand):
             'line_id': line_id,
             'sccp_id': sccp_id,
             'links': [
-                {'rel': 'lines',
-                 'href': 'http://localhost:9486/1.1/lines/1'},
-                {'rel': 'endpoints_sccp',
-                 'href': 'http://localhost:9486/1.1/endpoints/sccp/1'},
-            ]
+                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
+                {
+                    'rel': 'endpoints_sccp',
+                    'href': 'http://localhost:9486/1.1/endpoints/sccp/1',
+                },
+            ],
         }
 
         self.set_response('get', 200, expected_result)
@@ -486,11 +494,12 @@ class TestLineEndpointCustomRelation(TestCommand):
             'line_id': line_id,
             'custom_id': custom_id,
             'links': [
-                {'rel': 'lines',
-                 'href': 'http://localhost:9486/1.1/lines/1'},
-                {'rel': 'endpoints_custom',
-                 'href': 'http://localhost:9486/1.1/endpoints/custom/1'},
-            ]
+                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
+                {
+                    'rel': 'endpoints_custom',
+                    'href': 'http://localhost:9486/1.1/endpoints/custom/1',
+                },
+            ],
         }
 
         self.set_response('get', 200, expected_result)
@@ -508,11 +517,12 @@ class TestLineEndpointCustomRelation(TestCommand):
             'line_id': line_id,
             'custom_id': custom_id,
             'links': [
-                {'rel': 'lines',
-                 'href': 'http://localhost:9486/1.1/lines/1'},
-                {'rel': 'endpoints_custom',
-                 'href': 'http://localhost:9486/1.1/endpoints/custom/1'},
-            ]
+                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
+                {
+                    'rel': 'endpoints_custom',
+                    'href': 'http://localhost:9486/1.1/endpoints/custom/1',
+                },
+            ],
         }
 
         self.set_response('get', 200, expected_result)
@@ -546,11 +556,9 @@ class TestUserVoicemailRelation(TestCommand):
             'user_id': user_id,
             'voicemail_id': 2,
             'links': [
-                {'rel': 'users',
-                 'href': 'http://localhost:9486/1.1/users/1'},
-                {'rel': 'voicemails',
-                 'href': 'http://localhost:9486/1.1/voicemails/2'},
-            ]
+                {'rel': 'users', 'href': 'http://localhost:9486/1.1/users/1'},
+                {'rel': 'voicemails', 'href': 'http://localhost:9486/1.1/voicemails/2'},
+            ],
         }
 
         self.set_response('get', 200, expected_result)
@@ -562,10 +570,7 @@ class TestUserVoicemailRelation(TestCommand):
 
     def test_list_by_voicemail(self):
         voicemail_id = 1
-        expected_result = {
-            'items': [],
-            'total': 0
-        }
+        expected_result = {'items': [], 'total': 0}
 
         self.set_response('get', 200, expected_result)
 
@@ -598,11 +603,9 @@ class TestUserAgentRelation(TestCommand):
             'user_id': user_id,
             'agent_id': 2,
             'links': [
-                {'rel': 'users',
-                 'href': 'http://localhost:9486/1.1/users/1'},
-                {'rel': 'agents',
-                 'href': 'http://localhost:9486/1.1/agents/2'},
-            ]
+                {'rel': 'users', 'href': 'http://localhost:9486/1.1/users/1'},
+                {'rel': 'agents', 'href': 'http://localhost:9486/1.1/agents/2'},
+            ],
         }
 
         self.set_response('get', 200, expected_result)
@@ -639,10 +642,7 @@ class TestUserFuncKeyRelation(TestCommand):
     def test_list_funckeys(self):
         user_id = 1234
         expected_url = "/users/{}/funckeys".format(user_id)
-        expected_result = {
-            "total": 0,
-            "items": []
-        }
+        expected_result = {"total": 0, "items": []}
 
         self.set_response('get', 200, expected_result)
 
@@ -658,10 +658,7 @@ class TestUserFuncKeyRelation(TestCommand):
         expected_result = {
             "blf": True,
             "label": "Call john",
-            "destination": {
-                "type": "user",
-                "user_id": 34
-            }
+            "destination": {"type": "user", "user_id": 34},
         }
 
         self.set_response('get', 200, expected_result)
@@ -673,8 +670,12 @@ class TestUserFuncKeyRelation(TestCommand):
 
     def test_update_funckeys(self):
         user_id = 1234
-        funckeys = {'keys': {'1': {'destination': {'type': 'service', 'service': 'enablednd'}},
-                             '2': {'destination': {'type': 'custom', 'exten': '1234'}}}}
+        funckeys = {
+            'keys': {
+                '1': {'destination': {'type': 'service', 'service': 'enablednd'}},
+                '2': {'destination': {'type': 'custom', 'exten': '1234'}},
+            }
+        }
 
         self.command.update_funckeys(user_id, funckeys)
 
@@ -734,10 +735,7 @@ class TestUserServiceRelation(TestCommand):
     def test_list_services(self):
         user_id = 1234
         expected_url = "/users/{}/services".format(user_id)
-        expected_result = {
-            "total": 0,
-            "items": []
-        }
+        expected_result = {"total": 0, "items": []}
 
         self.set_response('get', 200, expected_result)
 
@@ -748,8 +746,7 @@ class TestUserServiceRelation(TestCommand):
 
     def test_update_services(self):
         user_id = 1234
-        services = {'dnd': {'enabled': True},
-                    'incallfilter': {'enabled': False}}
+        services = {'dnd': {'enabled': True}, 'incallfilter': {'enabled': False}}
 
         self.command.update_services(user_id, services)
 
@@ -787,10 +784,7 @@ class TestUserForwardRelation(TestCommand):
     def test_list_forwards(self):
         user_id = 1234
         expected_url = "/users/{}/forwards".format(user_id)
-        expected_result = {
-            "total": 0,
-            "items": []
-        }
+        expected_result = {"total": 0, "items": []}
 
         self.set_response('get', 200, expected_result)
 
@@ -801,9 +795,11 @@ class TestUserForwardRelation(TestCommand):
 
     def test_update_forwards(self):
         user_id = 1234
-        forwards = {'busy': {'enabled': True, 'destination': '123'},
-                    'noanswer': {'enabled': False, 'destination': '456'},
-                    'unconditional': {'enabled': False, 'destination': None}}
+        forwards = {
+            'busy': {'enabled': True, 'destination': '123'},
+            'noanswer': {'enabled': False, 'destination': '456'},
+            'unconditional': {'enabled': False, 'destination': None},
+        }
 
         self.command.update_forwards(user_id, forwards)
 
@@ -832,10 +828,7 @@ class TestUserCallPermissionRelation(TestCommand):
     def test_user_call_permission_list_by_user(self):
         user_id = 1234
         expected_url = "/users/{}/callpermissions".format(user_id)
-        expected_result = {
-            "total": 0,
-            "items": []
-        }
+        expected_result = {"total": 0, "items": []}
 
         self.set_response('get', 200, expected_result)
 
@@ -847,10 +840,7 @@ class TestUserCallPermissionRelation(TestCommand):
     def test_user_call_permission_list_by_call_permission(self):
         call_permission_id = 1234
         expected_url = "/callpermissions/{}/users".format(call_permission_id)
-        expected_result = {
-            "total": 0,
-            "items": []
-        }
+        expected_result = {"total": 0, "items": []}
 
         self.set_response('get', 200, expected_result)
 
@@ -867,8 +857,7 @@ class TestEntityRelation(TestCommand):
     def test_user_entity_list_by_user(self):
         user_id = 1234
         expected_url = "/users/{}/entities".format(user_id)
-        expected_result = {'entity_id': '1',
-                           'user_id': '2'}
+        expected_result = {'entity_id': '1', 'user_id': '2'}
 
         self.set_response('get', 200, expected_result)
 
@@ -904,8 +893,7 @@ class TestTrunkEndpointSipRelation(TestCommand):
         trunk_id = 1
         sip_id = 2
 
-        expected_result = {'trunk_id': trunk_id,
-                           'endpoint_id': sip_id}
+        expected_result = {'trunk_id': trunk_id, 'endpoint_id': sip_id}
 
         self.set_response('get', 200, expected_result)
 
@@ -918,8 +906,7 @@ class TestTrunkEndpointSipRelation(TestCommand):
         trunk_id = 1
         sip_id = 2
 
-        expected_result = {'trunk_id': trunk_id,
-                           'endpoint_id': sip_id}
+        expected_result = {'trunk_id': trunk_id, 'endpoint_id': sip_id}
 
         self.set_response('get', 200, expected_result)
 
@@ -1024,8 +1011,7 @@ class TestTrunkEndpointCustomRelation(TestCommand):
         trunk_id = 1
         custom_id = 2
 
-        expected_result = {'trunk_id': trunk_id,
-                           'endpoint_id': custom_id}
+        expected_result = {'trunk_id': trunk_id, 'endpoint_id': custom_id}
 
         self.set_response('get', 200, expected_result)
 
@@ -1038,8 +1024,7 @@ class TestTrunkEndpointCustomRelation(TestCommand):
         trunk_id = 1
         custom_id = 2
 
-        expected_result = {'trunk_id': trunk_id,
-                           'endpoint_id': custom_id}
+        expected_result = {'trunk_id': trunk_id, 'endpoint_id': custom_id}
 
         self.set_response('get', 200, expected_result)
 
@@ -1096,17 +1081,24 @@ class TestOutcallExtensionRelation(TestCommand):
         extension_id = 2
 
         self.set_response('put', 204)
-        expected_body = {'prefix': '123',
-                         'external_prefix': '456',
-                         'strip_digits': 2,
-                         'caller_id': 'toto'}
+        expected_body = {
+            'prefix': '123',
+            'external_prefix': '456',
+            'strip_digits': 2,
+            'caller_id': 'toto',
+        }
 
-        self.command.associate(outcall_id, extension_id,
-                               prefix='123',
-                               external_prefix='456',
-                               strip_digits=2,
-                               caller_id='toto')
-        self.session.put.assert_called_once_with("/outcalls/1/extensions/2", expected_body)
+        self.command.associate(
+            outcall_id,
+            extension_id,
+            prefix='123',
+            external_prefix='456',
+            strip_digits=2,
+            caller_id='toto',
+        )
+        self.session.put.assert_called_once_with(
+            "/outcalls/1/extensions/2", expected_body
+        )
 
     def test_outcall_extension_dissociation(self):
         outcall_id = 1
@@ -1153,7 +1145,9 @@ class TestGroupMemberUserRelation(TestCommand):
         expected_body = {'users': users}
 
         self.command.associate(group_id, users)
-        self.session.put.assert_called_once_with("/groups/1/members/users", expected_body)
+        self.session.put.assert_called_once_with(
+            "/groups/1/members/users", expected_body
+        )
 
 
 class TestGroupMemberExtensionRelation(TestCommand):
@@ -1162,13 +1156,18 @@ class TestGroupMemberExtensionRelation(TestCommand):
 
     def test_group_extension_association(self):
         group_id = 1
-        extensions = [{'exten': '123', 'context': 'default', 'priority': 5}, {'exten': '567', 'context': 'other'}]
+        extensions = [
+            {'exten': '123', 'context': 'default', 'priority': 5},
+            {'exten': '567', 'context': 'other'},
+        ]
 
         self.set_response('put', 204)
         expected_body = {'extensions': extensions}
 
         self.command.associate(group_id, extensions)
-        self.session.put.assert_called_once_with("/groups/1/members/extensions", expected_body)
+        self.session.put.assert_called_once_with(
+            "/groups/1/members/extensions", expected_body
+        )
 
 
 class TestUserGroupRelation(TestCommand):
@@ -1219,10 +1218,12 @@ class TestUserFallbackRelation(TestCommand):
     def test_list_fallbacks(self):
         user_id = 1234
         expected_url = "/users/{}/fallbacks".format(user_id)
-        expected_result = {'noanswer_destination': None,
-                           'busy_destination': None,
-                           'congestion_destination': None,
-                           'fail_destination': None}
+        expected_result = {
+            'noanswer_destination': None,
+            'busy_destination': None,
+            'congestion_destination': None,
+            'fail_destination': None,
+        }
 
         self.set_response('get', 200, expected_result)
 
@@ -1233,10 +1234,12 @@ class TestUserFallbackRelation(TestCommand):
 
     def test_update_fallbacks(self):
         user_id = 1234
-        fallbacks = {'noanswer_destination': None,
-                     'busy_destination': None,
-                     'congestion_destination': None,
-                     'fail_destination': None}
+        fallbacks = {
+            'noanswer_destination': None,
+            'busy_destination': None,
+            'congestion_destination': None,
+            'fail_destination': None,
+        }
 
         self.command.update_fallbacks(user_id, fallbacks)
 
@@ -1302,7 +1305,9 @@ class TestPagingMemberUserRelation(TestCommand):
         expected_body = {'users': users}
 
         self.command.associate(paging_id, users)
-        self.session.put.assert_called_once_with("/pagings/1/members/users", expected_body)
+        self.session.put.assert_called_once_with(
+            "/pagings/1/members/users", expected_body
+        )
 
 
 class TestPagingCallerUserRelation(TestCommand):
@@ -1317,7 +1322,9 @@ class TestPagingCallerUserRelation(TestCommand):
         expected_body = {'users': users}
 
         self.command.associate(paging_id, users)
-        self.session.put.assert_called_once_with("/pagings/1/callers/users", expected_body)
+        self.session.put.assert_called_once_with(
+            "/pagings/1/callers/users", expected_body
+        )
 
 
 class TestSwitchboardMemberUserRelation(TestCommand):
@@ -1332,7 +1339,9 @@ class TestSwitchboardMemberUserRelation(TestCommand):
         expected_body = {'users': users}
 
         self.command.associate(switchboard_uuid, users)
-        self.session.put.assert_called_once_with("/switchboards/abcd/members/users", expected_body)
+        self.session.put.assert_called_once_with(
+            "/switchboards/abcd/members/users", expected_body
+        )
 
 
 class TestIncallScheduleRelation(TestCommand):
@@ -1500,7 +1509,9 @@ class TestCallFilterRecipientUserRelation(TestCommand):
         expected_body = {'users': users}
 
         self.command.associate(call_filter_id, users)
-        self.session.put.assert_called_once_with("/callfilters/1/recipients/users", expected_body)
+        self.session.put.assert_called_once_with(
+            "/callfilters/1/recipients/users", expected_body
+        )
 
 
 class TestCallFilterSurrogateUserRelation(TestCommand):
@@ -1515,7 +1526,9 @@ class TestCallFilterSurrogateUserRelation(TestCommand):
         expected_body = {'users': users}
 
         self.command.associate(call_filter_id, users)
-        self.session.put.assert_called_once_with("/callfilters/1/surrogates/users", expected_body)
+        self.session.put.assert_called_once_with(
+            "/callfilters/1/surrogates/users", expected_body
+        )
 
 
 class TestCallFilterFallbackRelation(TestCommand):
@@ -1544,7 +1557,9 @@ class TestCallPickupInterceptorUserRelation(TestCommand):
         expected_body = {'users': users}
 
         self.command.associate(call_pickup_id, users)
-        self.session.put.assert_called_once_with("/callpickups/1/interceptors/users", expected_body)
+        self.session.put.assert_called_once_with(
+            "/callpickups/1/interceptors/users", expected_body
+        )
 
 
 class TestCallPickupTargetUserRelation(TestCommand):
@@ -1559,7 +1574,9 @@ class TestCallPickupTargetUserRelation(TestCommand):
         expected_body = {'users': users}
 
         self.command.associate(call_pickup_id, users)
-        self.session.put.assert_called_once_with("/callpickups/1/targets/users", expected_body)
+        self.session.put.assert_called_once_with(
+            "/callpickups/1/targets/users", expected_body
+        )
 
 
 class TestCallPickupInterceptorGroupRelation(TestCommand):
@@ -1574,7 +1591,9 @@ class TestCallPickupInterceptorGroupRelation(TestCommand):
         expected_body = {'groups': groups}
 
         self.command.associate(call_pickup_id, groups)
-        self.session.put.assert_called_once_with("/callpickups/1/interceptors/groups", expected_body)
+        self.session.put.assert_called_once_with(
+            "/callpickups/1/interceptors/groups", expected_body
+        )
 
 
 class TestCallPickupTargetGroupRelation(TestCommand):
@@ -1589,7 +1608,9 @@ class TestCallPickupTargetGroupRelation(TestCommand):
         expected_body = {'groups': groups}
 
         self.command.associate(call_pickup_id, groups)
-        self.session.put.assert_called_once_with("/callpickups/1/targets/groups", expected_body)
+        self.session.put.assert_called_once_with(
+            "/callpickups/1/targets/groups", expected_body
+        )
 
 
 class TestQueueFallbackRelation(TestCommand):
@@ -1667,10 +1688,12 @@ class TestQueueMemberAgentRelation(TestCommand):
         penalty = 4
 
         self.set_response('put', 204)
-        expected_body = {'priority': priority,  'penalty': penalty}
+        expected_body = {'priority': priority, 'penalty': penalty}
 
         self.command.associate(queue_id, agent_id, priority=priority, penalty=penalty)
-        self.session.put.assert_called_once_with("/queues/1/members/agents/2", expected_body)
+        self.session.put.assert_called_once_with(
+            "/queues/1/members/agents/2", expected_body
+        )
 
     def test_queue_agent_dissociation(self):
         queue_id = 1
@@ -1695,7 +1718,9 @@ class TestQueueMemberUserRelation(TestCommand):
         expected_body = {'priority': priority}
 
         self.command.associate(queue_id, user_uuid, priority=priority)
-        self.session.put.assert_called_once_with("/queues/1/members/users/1234-abcd", expected_body)
+        self.session.put.assert_called_once_with(
+            "/queues/1/members/users/1234-abcd", expected_body
+        )
 
     def test_queue_user_dissociation(self):
         queue_id = 1

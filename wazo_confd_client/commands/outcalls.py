@@ -13,7 +13,6 @@ from wazo_confd_client.relations import (
 
 
 class OutcallRelation(object):
-
     def __init__(self, builder, outcall_id):
         self.outcall_id = outcall_id
         self.outcall_call_permission = OutcallCallPermissionRelation(builder)
@@ -42,7 +41,9 @@ class OutcallRelation(object):
 
     @extract_id
     def add_call_permission(self, call_permission_id):
-        return self.outcall_call_permission.associate(self.outcall_id, call_permission_id)
+        return self.outcall_call_permission.associate(
+            self.outcall_id, call_permission_id
+        )
 
     @extract_id
     def remove_call_permission(self, call_permission_id):

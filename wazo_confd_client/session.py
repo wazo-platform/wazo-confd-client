@@ -8,14 +8,11 @@ import requests
 
 class ConfdSession(object):
 
-    OK_STATUSES = (requests.codes.ok,
-                   requests.codes.created,
-                   requests.codes.no_content)
+    OK_STATUSES = (requests.codes.ok, requests.codes.created, requests.codes.no_content)
 
     READ_HEADERS = {'Accept': 'application/json'}
 
-    WRITE_HEADERS = {'Accept': 'application/json',
-                     'Content-Type': 'application/json'}
+    WRITE_HEADERS = {'Accept': 'application/json', 'Content-Type': 'application/json'}
 
     def __init__(self, session, base_url):
         self.session = session

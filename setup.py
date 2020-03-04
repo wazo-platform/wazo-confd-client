@@ -9,16 +9,11 @@ from setuptools import find_packages
 setup(
     name='wazo_confd_client',
     version='1.1.2',  # <confd-api-version>.<confd-client-version>
-
     description='a simple client library for the wazo-confd HTTP interface',
-
     author='Wazo Authors',
     author_email='dev@wazo.community',
-
     url='http://wazo.community',
-
     packages=find_packages(),
-
     entry_points={
         'wazo_confd_client.commands': [
             'access_features = wazo_confd_client.commands.access_features:AccessFeaturesCommand',
@@ -89,5 +84,5 @@ setup(
             'wait_until_ready = wazo_confd_client.commands.wait_until_ready:WaitUntilReadyCommand',
             'wizard = wazo_confd_client.commands.wizard:WizardCommand',
         ],
-    }
+    },
 )

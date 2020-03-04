@@ -7,7 +7,6 @@ from wazo_confd_client.relations import SwitchboardMemberUserRelation
 
 
 class SwitchboardRelation(object):
-
     def __init__(self, builder, switchboard_id):
         self.switchboard_id = switchboard_id
         self.switchboard_user_members = SwitchboardMemberUserRelation(builder)

@@ -9,4 +9,3 @@ from wazo_confd_client.crud import CRUDCommand
 class AccessFeaturesCommand(CRUDCommand):
 
     resource = 'access_features'
-

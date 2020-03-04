@@ -7,7 +7,6 @@ from wazo_confd_client.util import url_join
 
 
 class UserLineRelation(HTTPCommand):
-
     def associate(self, user_id, line_id):
         url = url_join('users', user_id, 'lines', line_id)
         self.session.put(url)
@@ -33,15 +32,15 @@ class UserLineRelation(HTTPCommand):
 
 
 class UserEndpointSipRelation(HTTPCommand):
-
     def get_by_user_line(self, user_uuid, line_id):
-        url = url_join('users', user_uuid, 'lines', line_id, 'associated', 'endpoints', 'sip')
+        url = url_join(
+            'users', user_uuid, 'lines', line_id, 'associated', 'endpoints', 'sip'
+        )
         response = self.session.get(url)
         return response.json()
 
 
 class UserVoicemailRelation(HTTPCommand):
-
     def associate(self, user_id, voicemail_id):
         url = url_join('users', user_id, 'voicemails', voicemail_id)
         self.session.put(url)
@@ -62,7 +61,6 @@ class UserVoicemailRelation(HTTPCommand):
 
 
 class UserAgentRelation(HTTPCommand):
-
     def associate(self, user_id, agent_id):
         url = url_join('users', user_id, 'agents', agent_id)
         self.session.put(url)
@@ -78,7 +76,6 @@ class UserAgentRelation(HTTPCommand):
 
 
 class LineDeviceRelation(HTTPCommand):
-
     def associate(self, line_id, device_id):
         url = url_join('lines', line_id, 'devices', device_id)
         self.session.put(url)
@@ -99,7 +96,6 @@ class LineDeviceRelation(HTTPCommand):
 
 
 class LineApplicationRelation(HTTPCommand):
-
     def associate(self, line_id, application_uuid):
         url = url_join('lines', line_id, 'applications', application_uuid)
         self.session.put(url)
@@ -110,7 +106,6 @@ class LineApplicationRelation(HTTPCommand):
 
 
 class LineExtensionRelation(HTTPCommand):
-
     def associate(self, line_id, extension_id):
         url = url_join('lines', line_id, 'extensions', extension_id)
         self.session.put(url)
@@ -136,7 +131,6 @@ class LineExtensionRelation(HTTPCommand):
 
 
 class LineEndpointSipRelation(HTTPCommand):
-
     def associate(self, line_id, sip_id):
         url = url_join('lines', line_id, 'endpoints', 'sip', sip_id)
         self.session.put(url)
@@ -157,7 +151,6 @@ class LineEndpointSipRelation(HTTPCommand):
 
 
 class LineEndpointSccpRelation(HTTPCommand):
-
     def associate(self, line_id, sccp_id):
         url = url_join('lines', line_id, 'endpoints', 'sccp', sccp_id)
         self.session.put(url)
@@ -178,7 +171,6 @@ class LineEndpointSccpRelation(HTTPCommand):
 
 
 class LineEndpointCustomRelation(HTTPCommand):
-
     def associate(self, line_id, custom_id):
         url = url_join('lines', line_id, 'endpoints', 'custom', custom_id)
         self.session.put(url)
@@ -199,7 +191,6 @@ class LineEndpointCustomRelation(HTTPCommand):
 
 
 class UserFuncKeyRelation(HTTPCommand):
-
     def update_funckey(self, user_id, position, funckey):
         url = url_join('users', user_id, 'funckeys', position)
         self.session.put(url, funckey)
@@ -232,7 +223,6 @@ class UserFuncKeyRelation(HTTPCommand):
 
 
 class UserServiceRelation(HTTPCommand):
-
     def update_service(self, user_id, service_name, service):
         url = url_join('users', user_id, 'services', service_name)
         self.session.put(url, service)
@@ -253,7 +243,6 @@ class UserServiceRelation(HTTPCommand):
 
 
 class UserForwardRelation(HTTPCommand):
-
     def update_forward(self, user_id, forward_name, forward):
         url = url_join('users', user_id, 'forwards', forward_name)
         self.session.put(url, forward)
@@ -274,7 +263,6 @@ class UserForwardRelation(HTTPCommand):
 
 
 class UserCallPermissionRelation(HTTPCommand):
-
     def associate(self, user_id, call_permission_id):
         url = url_join('users', user_id, 'callpermissions', call_permission_id)
         self.session.put(url)
@@ -295,7 +283,6 @@ class UserCallPermissionRelation(HTTPCommand):
 
 
 class UserEntityRelation(HTTPCommand):
-
     def get_by_user(self, user_id):
         url = url_join('users', user_id, 'entities')
         response = self.session.get(url)
@@ -303,7 +290,6 @@ class UserEntityRelation(HTTPCommand):
 
 
 class TrunkEndpointSipRelation(HTTPCommand):
-
     def associate(self, trunk_id, sip_id):
         url = url_join('trunks', trunk_id, 'endpoints', 'sip', sip_id)
         self.session.put(url)
@@ -324,7 +310,6 @@ class TrunkEndpointSipRelation(HTTPCommand):
 
 
 class TrunkEndpointIAXRelation(HTTPCommand):
-
     def associate(self, trunk_id, iax_id):
         url = url_join('trunks', trunk_id, 'endpoints', 'iax', iax_id)
         self.session.put(url)
@@ -335,7 +320,6 @@ class TrunkEndpointIAXRelation(HTTPCommand):
 
 
 class TrunkRegisterSipRelation(HTTPCommand):
-
     def associate(self, trunk_id, sip_id):
         url = url_join('trunks', trunk_id, 'registers', 'sip', sip_id)
         self.session.put(url)
@@ -346,7 +330,6 @@ class TrunkRegisterSipRelation(HTTPCommand):
 
 
 class TrunkRegisterIAXRelation(HTTPCommand):
-
     def associate(self, trunk_id, iax_id):
         url = url_join('trunks', trunk_id, 'registers', 'iax', iax_id)
         self.session.put(url)
@@ -357,7 +340,6 @@ class TrunkRegisterIAXRelation(HTTPCommand):
 
 
 class TrunkEndpointCustomRelation(HTTPCommand):
-
     def associate(self, trunk_id, custom_id):
         url = url_join('trunks', trunk_id, 'endpoints', 'custom', custom_id)
         self.session.put(url)
@@ -378,7 +360,6 @@ class TrunkEndpointCustomRelation(HTTPCommand):
 
 
 class IncallExtensionRelation(HTTPCommand):
-
     def associate(self, incall_id, extension_id):
         url = url_join('incalls', incall_id, 'extensions', extension_id)
         self.session.put(url)
@@ -389,7 +370,6 @@ class IncallExtensionRelation(HTTPCommand):
 
 
 class OutcallTrunkRelation(HTTPCommand):
-
     def associate(self, outcall_id, trunks):
         url = url_join('outcalls', outcall_id, 'trunks')
         body = {'trunks': [{'id': trunk['id']} for trunk in trunks]}
@@ -397,7 +377,6 @@ class OutcallTrunkRelation(HTTPCommand):
 
 
 class OutcallExtensionRelation(HTTPCommand):
-
     def associate(self, outcall_id, extension_id, **body):
         url = url_join('outcalls', outcall_id, 'extensions', extension_id)
         self.session.put(url, body)
@@ -408,7 +387,6 @@ class OutcallExtensionRelation(HTTPCommand):
 
 
 class GroupExtensionRelation(HTTPCommand):
-
     def associate(self, group_id, extension_id):
         url = url_join('groups', group_id, 'extensions', extension_id)
         self.session.put(url)
@@ -419,7 +397,6 @@ class GroupExtensionRelation(HTTPCommand):
 
 
 class GroupMemberUserRelation(HTTPCommand):
-
     def associate(self, group_id, users):
         url = url_join('groups', group_id, 'members', 'users')
         body = {'users': []}
@@ -432,13 +409,11 @@ class GroupMemberUserRelation(HTTPCommand):
 
 
 class GroupMemberExtensionRelation(HTTPCommand):
-
     def associate(self, group_id, extensions):
         url = url_join('groups', group_id, 'members', 'extensions')
         body = {'extensions': []}
         for extension in extensions:
-            result = {'exten': extension['exten'],
-                      'context': extension['context']}
+            result = {'exten': extension['exten'], 'context': extension['context']}
             if 'priority' in extension:
                 result['priority'] = extension['priority']
             body['extensions'].append(result)
@@ -446,7 +421,6 @@ class GroupMemberExtensionRelation(HTTPCommand):
 
 
 class UserGroupRelation(HTTPCommand):
-
     def associate(self, user_id, groups):
         url = url_join('users', user_id, 'groups')
         body = {'groups': [{'id': group['id']} for group in groups]}
@@ -454,7 +428,6 @@ class UserGroupRelation(HTTPCommand):
 
 
 class GroupFallbackRelation(HTTPCommand):
-
     def list_fallbacks(self, group_id):
         url = url_join('groups', group_id, 'fallbacks')
         response = self.session.get(url)
@@ -466,7 +439,6 @@ class GroupFallbackRelation(HTTPCommand):
 
 
 class UserFallbackRelation(HTTPCommand):
-
     def list_fallbacks(self, user_id):
         url = url_join('users', user_id, 'fallbacks')
         response = self.session.get(url)
@@ -478,7 +450,6 @@ class UserFallbackRelation(HTTPCommand):
 
 
 class ConferenceExtensionRelation(HTTPCommand):
-
     def associate(self, conference_id, extension_id):
         url = url_join('conferences', conference_id, 'extensions', extension_id)
         self.session.put(url)
@@ -489,7 +460,6 @@ class ConferenceExtensionRelation(HTTPCommand):
 
 
 class ParkingLotExtensionRelation(HTTPCommand):
-
     def associate(self, parking_lot_id, extension_id):
         url = url_join('parkinglots', parking_lot_id, 'extensions', extension_id)
         self.session.put(url)
@@ -500,7 +470,6 @@ class ParkingLotExtensionRelation(HTTPCommand):
 
 
 class PagingMemberUserRelation(HTTPCommand):
-
     def associate(self, paging_id, users):
         url = url_join('pagings', paging_id, 'members', 'users')
         body = {'users': [{'uuid': user['uuid']} for user in users]}
@@ -508,7 +477,6 @@ class PagingMemberUserRelation(HTTPCommand):
 
 
 class PagingCallerUserRelation(HTTPCommand):
-
     def associate(self, paging_id, users):
         url = url_join('pagings', paging_id, 'callers', 'users')
         body = {'users': [{'uuid': user['uuid']} for user in users]}
@@ -516,7 +484,6 @@ class PagingCallerUserRelation(HTTPCommand):
 
 
 class SwitchboardMemberUserRelation(HTTPCommand):
-
     def associate(self, switchboard_id, users):
         url = url_join('switchboards', switchboard_id, 'members', 'users')
         body = {'users': [{'uuid': user['uuid']} for user in users]}
@@ -524,7 +491,6 @@ class SwitchboardMemberUserRelation(HTTPCommand):
 
 
 class IncallScheduleRelation(HTTPCommand):
-
     def associate(self, incall_id, schedule_id):
         url = url_join('incalls', incall_id, 'schedules', schedule_id)
         self.session.put(url)
@@ -535,7 +501,6 @@ class IncallScheduleRelation(HTTPCommand):
 
 
 class UserScheduleRelation(HTTPCommand):
-
     def associate(self, user_id, schedule_id):
         url = url_join('users', user_id, 'schedules', schedule_id)
         self.session.put(url)
@@ -546,7 +511,6 @@ class UserScheduleRelation(HTTPCommand):
 
 
 class GroupScheduleRelation(HTTPCommand):
-
     def associate(self, group_id, schedule_id):
         url = url_join('groups', group_id, 'schedules', schedule_id)
         self.session.put(url)
@@ -557,7 +521,6 @@ class GroupScheduleRelation(HTTPCommand):
 
 
 class QueueScheduleRelation(HTTPCommand):
-
     def associate(self, queue_id, schedule_id):
         url = url_join('queues', queue_id, 'schedules', schedule_id)
         self.session.put(url)
@@ -568,7 +531,6 @@ class QueueScheduleRelation(HTTPCommand):
 
 
 class OutcallScheduleRelation(HTTPCommand):
-
     def associate(self, outcall_id, schedule_id):
         url = url_join('outcalls', outcall_id, 'schedules', schedule_id)
         self.session.put(url)
@@ -579,7 +541,6 @@ class OutcallScheduleRelation(HTTPCommand):
 
 
 class OutcallCallPermissionRelation(HTTPCommand):
-
     def associate(self, outcall_id, call_permission_id):
         url = url_join('outcalls', outcall_id, 'callpermissions', call_permission_id)
         self.session.put(url)
@@ -590,7 +551,6 @@ class OutcallCallPermissionRelation(HTTPCommand):
 
 
 class GroupCallPermissionRelation(HTTPCommand):
-
     def associate(self, group_id, call_permission_id):
         url = url_join('groups', group_id, 'callpermissions', call_permission_id)
         self.session.put(url)
@@ -601,7 +561,6 @@ class GroupCallPermissionRelation(HTTPCommand):
 
 
 class CallFilterRecipientUserRelation(HTTPCommand):
-
     def associate(self, call_filter_id, users):
         url = url_join('callfilters', call_filter_id, 'recipients', 'users')
         body = {'users': []}
@@ -614,7 +573,6 @@ class CallFilterRecipientUserRelation(HTTPCommand):
 
 
 class CallFilterSurrogateUserRelation(HTTPCommand):
-
     def associate(self, call_filter_id, users):
         url = url_join('callfilters', call_filter_id, 'surrogates', 'users')
         body = {'users': [{'uuid': user['uuid']} for user in users]}
@@ -622,14 +580,12 @@ class CallFilterSurrogateUserRelation(HTTPCommand):
 
 
 class CallFilterFallbackRelation(HTTPCommand):
-
     def update_fallbacks(self, call_filter_id, fallbacks):
         url = url_join('callfilters', call_filter_id, 'fallbacks')
         self.session.put(url, fallbacks)
 
 
 class CallPickupInterceptorUserRelation(HTTPCommand):
-
     def associate(self, call_pickup_id, users):
         url = url_join('callpickups', call_pickup_id, 'interceptors', 'users')
         body = {'users': [{'uuid': user['uuid']} for user in users]}
@@ -637,7 +593,6 @@ class CallPickupInterceptorUserRelation(HTTPCommand):
 
 
 class CallPickupTargetUserRelation(HTTPCommand):
-
     def associate(self, call_pickup_id, users):
         url = url_join('callpickups', call_pickup_id, 'targets', 'users')
         body = {'users': [{'uuid': user['uuid']} for user in users]}
@@ -645,7 +600,6 @@ class CallPickupTargetUserRelation(HTTPCommand):
 
 
 class CallPickupInterceptorGroupRelation(HTTPCommand):
-
     def associate(self, call_pickup_id, groups):
         url = url_join('callpickups', call_pickup_id, 'interceptors', 'groups')
         body = {'groups': [{'id': group['id']} for group in groups]}
@@ -653,7 +607,6 @@ class CallPickupInterceptorGroupRelation(HTTPCommand):
 
 
 class CallPickupTargetGroupRelation(HTTPCommand):
-
     def associate(self, call_pickup_id, groups):
         url = url_join('callpickups', call_pickup_id, 'targets', 'groups')
         body = {'groups': [{'id': group['id']} for group in groups]}
@@ -661,7 +614,6 @@ class CallPickupTargetGroupRelation(HTTPCommand):
 
 
 class QueueFallbackRelation(HTTPCommand):
-
     def list_fallbacks(self, queue_id):
         url = url_join('queues', queue_id, 'fallbacks')
         response = self.session.get(url)
@@ -673,7 +625,6 @@ class QueueFallbackRelation(HTTPCommand):
 
 
 class QueueExtensionRelation(HTTPCommand):
-
     def associate(self, queue_id, extension_id):
         url = url_join('queues', queue_id, 'extensions', extension_id)
         self.session.put(url)
@@ -684,7 +635,6 @@ class QueueExtensionRelation(HTTPCommand):
 
 
 class ContextContextRelation(HTTPCommand):
-
     def associate(self, context_id, contexts):
         url = url_join('contexts', context_id, 'contexts')
         body = {'contexts': [{'id': context['id']} for context in contexts]}
@@ -692,7 +642,6 @@ class ContextContextRelation(HTTPCommand):
 
 
 class QueueMemberAgentRelation(HTTPCommand):
-
     def associate(self, queue_id, agent_id, **kwargs):
         url = url_join('queues', queue_id, 'members', 'agents', agent_id)
         self.session.put(url, kwargs)
@@ -703,7 +652,6 @@ class QueueMemberAgentRelation(HTTPCommand):
 
 
 class QueueMemberUserRelation(HTTPCommand):
-
     def associate(self, queue_id, user_uuid, **kwargs):
         url = url_join('queues', queue_id, 'members', 'users', user_uuid)
         self.session.put(url, kwargs)
@@ -714,7 +662,6 @@ class QueueMemberUserRelation(HTTPCommand):
 
 
 class AgentSkillRelation(HTTPCommand):
-
     def associate(self, agent_id, skill_id, **kwargs):
         weight = kwargs.pop('weight', None)
         if weight is not None:
