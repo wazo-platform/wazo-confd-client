@@ -21,7 +21,6 @@ from wazo_confd_client.util import extract_id, url_join
 
 
 class UserRelation(object):
-
     def __init__(self, builder, user_id):
         self.user_id = user_id
         self.user_agent = UserAgentRelation(builder)
@@ -168,21 +167,17 @@ class UsersCommand(MultiTenantCommand):
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
 
-        response = self.session.post(url,
-                                     raw=csvdata,
-                                     check_response=False,
-                                     timeout=timeout,
-                                     headers=headers)
+        response = self.session.post(
+            url, raw=csvdata, check_response=False, timeout=timeout, headers=headers
+        )
         return response.json()
 
     def update_csv(self, csvdata, encoding='utf-8', timeout=300):
         url = url_join(self.resource, "import")
         headers = {'Content-Type': 'text/csv; charset={}'.format(encoding)}
-        response = self.session.put(url,
-                                    raw=csvdata,
-                                    check_response=False,
-                                    timeout=timeout,
-                                    headers=headers)
+        response = self.session.put(
+            url, raw=csvdata, check_response=False, timeout=timeout, headers=headers
+        )
         return response.json()
 
     def export_csv(self, tenant_uuid=None):

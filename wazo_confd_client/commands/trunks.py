@@ -14,7 +14,6 @@ from wazo_confd_client.relations import (
 
 
 class TrunkRelation(object):
-
     def __init__(self, builder, trunk_id):
         self.trunk_id = trunk_id
         self.trunk_endpoint_sip = TrunkEndpointSipRelation(builder)

@@ -23,17 +23,22 @@ class TestUsers(TestCommand):
         csvdata = "firstname\nToto\n"
         expected_content = {'created': [{'user_id': 1}]}
         expected_url = "/users/import"
-        expected_headers = {'Content-Type': 'text/csv; charset=utf-8', 'Wazo-Tenant': ANY}
+        expected_headers = {
+            'Content-Type': 'text/csv; charset=utf-8',
+            'Wazo-Tenant': ANY,
+        }
 
         self.set_response('post', 204, expected_content)
 
         self.command.import_csv(csvdata)
 
-        self.session.post.assert_called_once_with(expected_url,
-                                                  raw=csvdata,
-                                                  check_response=False,
-                                                  timeout=300,
-                                                  headers=expected_headers)
+        self.session.post.assert_called_once_with(
+            expected_url,
+            raw=csvdata,
+            check_response=False,
+            timeout=300,
+            headers=expected_headers,
+        )
 
     def test_update_csv(self):
         csvdata = "firstname\nToto\n"
@@ -45,11 +50,13 @@ class TestUsers(TestCommand):
 
         self.command.update_csv(csvdata)
 
-        self.session.put.assert_called_once_with(expected_url,
-                                                 raw=csvdata,
-                                                 check_response=False,
-                                                 timeout=300,
-                                                 headers=expected_headers)
+        self.session.put.assert_called_once_with(
+            expected_url,
+            raw=csvdata,
+            check_response=False,
+            timeout=300,
+            headers=expected_headers,
+        )
 
     def test_export_csv(self):
         expected_url = "/users/export"
@@ -78,7 +85,6 @@ class TestUsers(TestCommand):
 
 
 class TestUserRelation(TestCase):
-
     def test_get_funckey(self):
         user_id = 34
         position = 1

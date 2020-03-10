@@ -6,7 +6,6 @@ from wazo_lib_rest_client import HTTPCommand
 
 
 class InfosCommand(HTTPCommand):
-
     def __call__(self):
         return self.get()
 

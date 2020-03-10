@@ -10,7 +10,6 @@ from wazo_lib_rest_client import RESTCommand
 
 
 class DeviceRelation(object):
-
     def __init__(self, builder, device_id):
         self.device_id = device_id
         self.line_device = LineDeviceRelation(builder)
@@ -66,4 +65,4 @@ class UnallocatedDevicesCommand(RESTCommand):
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
         url = url_join(self.resource, device_id)
-        response = self.session.put(url, headers=headers)
+        self.session.put(url, headers=headers)

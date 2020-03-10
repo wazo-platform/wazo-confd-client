@@ -11,7 +11,6 @@ from wazo_confd_client.relations import (
 
 
 class CallFilterRelation(object):
-
     def __init__(self, builder, call_filter_id):
         self.call_filter_id = call_filter_id
         self.call_filter_user_recipients = CallFilterRecipientUserRelation(builder)

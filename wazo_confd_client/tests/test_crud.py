@@ -22,20 +22,17 @@ class TestCRUD(TestCommand):
     Command = CRUDCommandTest
 
     def test_list(self):
-        expected_response = self.set_response('get', 200, {
-            "total": 2,
-            "items":
-            [
-                {
-                    "id": 1,
-                    "firstname": "John",
-                },
-                {
-                    "id": 2,
-                    "firstname": "Mary",
-                }
-            ]
-        })
+        expected_response = self.set_response(
+            'get',
+            200,
+            {
+                "total": 2,
+                "items": [
+                    {"id": 1, "firstname": "John"},
+                    {"id": 2, "firstname": "Mary"},
+                ],
+            },
+        )
 
         result = self.command.list(search='term')
 
@@ -45,10 +42,9 @@ class TestCRUD(TestCommand):
     def test_get(self):
         resource_id = 1
         expected_url = "/test/{}".format(resource_id)
-        expected_response = self.set_response('get', 200, {
-            'id': resource_id,
-            'firstname': 'John'
-        })
+        expected_response = self.set_response(
+            'get', 200, {'id': resource_id, 'firstname': 'John'}
+        )
 
         result = self.command.get(resource_id)
 
@@ -57,10 +53,9 @@ class TestCRUD(TestCommand):
 
     def test_create(self):
         expected_url = "/test"
-        expected_response = self.set_response('post', 201, {
-            'id': 1,
-            'firstname': 'John'
-        })
+        expected_response = self.set_response(
+            'post', 201, {'id': 1, 'firstname': 'John'}
+        )
 
         body = {'firstname': 'John'}
 
@@ -77,11 +72,10 @@ class TestCRUD(TestCommand):
         body = {
             'id': resource_id,
             'firstname': 'John',
-            'links': [{'rel': 'users', 'href': 'http://localhost/users/1'}]
+            'links': [{'rel': 'users', 'href': 'http://localhost/users/1'}],
         }
 
-        expected_body = {'id': resource_id,
-                         'firstname': 'John'}
+        expected_body = {'id': resource_id, 'firstname': 'John'}
 
         self.command.update(body)
 
@@ -95,11 +89,10 @@ class TestCRUD(TestCommand):
         body = {
             'uuid': resource_uuid,
             'firstname': 'John',
-            'links': [{'rel': 'users', 'href': 'http://localhost/users/1'}]
+            'links': [{'rel': 'users', 'href': 'http://localhost/users/1'}],
         }
 
-        expected_body = {'uuid': resource_uuid,
-                         'firstname': 'John'}
+        expected_body = {'uuid': resource_uuid, 'firstname': 'John'}
 
         self.command.update(body)
 

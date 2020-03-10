@@ -8,7 +8,6 @@ from wazo_confd_client.relations import ParkingLotExtensionRelation
 
 
 class ParkingLotRelation(object):
-
     def __init__(self, builder, parking_lot_id):
         self.parking_lot_id = parking_lot_id
         self.parking_lot_extension = ParkingLotExtensionRelation(builder)

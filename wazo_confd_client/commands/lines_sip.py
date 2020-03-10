@@ -8,7 +8,6 @@ from wazo_confd_client.relations import UserLineRelation, LineExtensionRelation
 
 
 class LineSIPRelation(object):
-
     def __init__(self, builder, line_id):
         self.line_id = line_id
         self.line_extension_relation = LineExtensionRelation(builder)

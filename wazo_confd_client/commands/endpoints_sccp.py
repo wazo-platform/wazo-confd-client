@@ -7,7 +7,6 @@ from wazo_confd_client.relations import LineEndpointSccpRelation
 
 
 class EndpointSccpRelation(object):
-
     def __init__(self, builder, sccp_id):
         self.sccp_id = sccp_id
         self.line_endpoint_sccp = LineEndpointSccpRelation(builder)

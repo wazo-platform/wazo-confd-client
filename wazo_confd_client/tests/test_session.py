@@ -13,7 +13,6 @@ from wazo_confd_client.session import ConfdSession
 
 
 class TestConfdSession(unittest.TestCase):
-
     def setUp(self):
         self.session = Mock(Session)
         self.base_url = "http://localhost/1.1"
@@ -34,8 +33,9 @@ class TestConfdSession(unittest.TestCase):
         result = self.confd_session.head("/users/123")
 
         assert_that(result, equal_to(expected_response))
-        self.session.head.assert_called_once_with(expected_url,
-                                                  headers={'Accept': 'application/json'})
+        self.session.head.assert_called_once_with(
+            expected_url, headers={'Accept': 'application/json'}
+        )
 
     def test_get(self):
         expected_url = "{}/users".format(self.base_url)
@@ -44,9 +44,11 @@ class TestConfdSession(unittest.TestCase):
         result = self.confd_session.get("/users", params={'search': 'term'})
 
         assert_that(result, equal_to(expected_response))
-        self.session.get.assert_called_once_with(expected_url,
-                                                 params={'search': 'term'},
-                                                 headers={'Accept': 'application/json'})
+        self.session.get.assert_called_once_with(
+            expected_url,
+            params={'search': 'term'},
+            headers={'Accept': 'application/json'},
+        )
 
     def test_post(self):
         expected_url = "{}/users".format(self.base_url)
@@ -57,24 +59,25 @@ class TestConfdSession(unittest.TestCase):
         result = self.confd_session.post("/users", body)
 
         assert_that(result, equal_to(expected_response))
-        self.session.post.assert_called_once_with(expected_url,
-                                                  data=json.dumps(body),
-                                                  headers={'Accept': 'application/json',
-                                                           'Content-Type': 'application/json'})
+        self.session.post.assert_called_once_with(
+            expected_url,
+            data=json.dumps(body),
+            headers={'Accept': 'application/json', 'Content-Type': 'application/json'},
+        )
 
     def test_put(self):
         expected_url = "{}/users/1".format(self.base_url)
         self.set_response('put', 204)
 
-        body = {'id': 1,
-                'firstname': 'John'}
+        body = {'id': 1, 'firstname': 'John'}
 
         self.confd_session.put("/users/1", body)
 
-        self.session.put.assert_called_once_with(expected_url,
-                                                 data=json.dumps(body),
-                                                 headers={'Accept': 'application/json',
-                                                          'Content-Type': 'application/json'})
+        self.session.put.assert_called_once_with(
+            expected_url,
+            data=json.dumps(body),
+            headers={'Accept': 'application/json', 'Content-Type': 'application/json'},
+        )
 
     def test_delete(self):
         expected_url = "{}/users/1".format(self.base_url)
@@ -82,7 +85,9 @@ class TestConfdSession(unittest.TestCase):
 
         self.confd_session.delete("/users/1")
 
-        self.session.delete.assert_called_once_with(expected_url, headers={'Accept': 'application/json'})
+        self.session.delete.assert_called_once_with(
+            expected_url, headers={'Accept': 'application/json'}
+        )
 
     def test_given_status_ok_then_no_error_raised(self):
         response = Mock()

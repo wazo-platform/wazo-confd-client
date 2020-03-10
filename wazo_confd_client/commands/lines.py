@@ -16,7 +16,6 @@ from wazo_confd_client.relations import (
 
 
 class LineRelation(object):
-
     def __init__(self, builder, line_id):
         self.line_id = line_id
         self.user_line = UserLineRelation(builder)

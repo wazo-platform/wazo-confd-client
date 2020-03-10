@@ -10,7 +10,6 @@ from wazo_confd_client.relations import (
 
 
 class PagingRelation(object):
-
     def __init__(self, builder, paging_id):
         self.paging_id = paging_id
         self.paging_user_callers = PagingCallerUserRelation(builder)

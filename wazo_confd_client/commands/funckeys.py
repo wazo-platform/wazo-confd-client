@@ -8,7 +8,6 @@ from wazo_confd_client.util import url_join
 
 
 class TemplateRelation(object):
-
     def __init__(self, builder, template_id):
         self.template_id = template_id
         self.user_funckey = UserFuncKeyRelation(builder)

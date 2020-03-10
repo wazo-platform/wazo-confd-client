@@ -25,4 +25,5 @@ def extract_id(func):
         else:
             resource_id = resource_or_id
         return func(self, resource_id, *args, **kwargs)
+
     return wrapper

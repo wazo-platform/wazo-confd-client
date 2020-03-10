@@ -12,10 +12,11 @@ from wazo_confd_client.relations import (
 
 
 class CallPickupRelation(object):
-
     def __init__(self, builder, call_pickup_id):
         self.call_pickup_id = call_pickup_id
-        self.call_pickup_group_interceptors = CallPickupInterceptorGroupRelation(builder)
+        self.call_pickup_group_interceptors = CallPickupInterceptorGroupRelation(
+            builder
+        )
         self.call_pickup_group_targets = CallPickupTargetGroupRelation(builder)
         self.call_pickup_user_interceptors = CallPickupInterceptorUserRelation(builder)
         self.call_pickup_user_targets = CallPickupTargetUserRelation(builder)
@@ -24,7 +25,9 @@ class CallPickupRelation(object):
         return self.call_pickup_group_targets.associate(self.call_pickup_id, groups)
 
     def update_group_interceptors(self, groups):
-        return self.call_pickup_group_interceptors.associate(self.call_pickup_id, groups)
+        return self.call_pickup_group_interceptors.associate(
+            self.call_pickup_id, groups
+        )
 
     def update_user_targets(self, users):
         return self.call_pickup_user_targets.associate(self.call_pickup_id, users)

@@ -15,7 +15,6 @@ from wazo_confd_client.relations import (
 
 
 class QueueRelation(object):
-
     def __init__(self, builder, queue_id):
         self.queue_id = queue_id
         self.queue_member_agent = QueueMemberAgentRelation(builder)

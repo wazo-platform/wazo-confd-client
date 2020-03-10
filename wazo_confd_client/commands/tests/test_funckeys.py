@@ -21,12 +21,14 @@ class TestFuncKeys(TestCommand):
         template_id = 2
         position = 1
         expected_url = "/funckeys/templates/{}/{}".format(template_id, position)
-        expected_content = {'blf': True,
-                            'destination': {'exten': '1234', 'href': None, 'type': 'custom'},
-                            'id': 32,
-                            'inherited': True,
-                            'label': 'pouet',
-                            'links': []}
+        expected_content = {
+            'blf': True,
+            'destination': {'exten': '1234', 'href': None, 'type': 'custom'},
+            'id': 32,
+            'inherited': True,
+            'label': 'pouet',
+            'links': [],
+        }
 
         self.set_response('get', 200, expected_content)
 

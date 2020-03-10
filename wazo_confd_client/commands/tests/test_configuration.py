@@ -26,4 +26,6 @@ class TestInfos(TestCommand):
 
         self.command.live_reload.update({'enabled': True})
 
-        self.session.put.assert_called_once_with('/configuration/live_reload', {'enabled': True})
+        self.session.put.assert_called_once_with(
+            '/configuration/live_reload', {'enabled': True}
+        )
