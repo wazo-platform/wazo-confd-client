@@ -59,6 +59,7 @@ setup(
             'pjsip_doc = wazo_confd_client.commands.pjsip_doc:PJSIPDocCommand',
             'pjsip_global = wazo_confd_client.commands.pjsip_global:PJSIPGlobalCommand',
             'pjsip_system = wazo_confd_client.commands.pjsip_system:PJSIPSystemCommand',
+            'sip_transports = wazo_confd_client.commands.sip_transports:SIPTransportsCommand',
             'provisioning_networking = wazo_confd_client.commands.provisioning_networking:ProvisioningNetworkingCommand',
             'queues = wazo_confd_client.commands.queues:QueuesCommand',
             'queues_general = wazo_confd_client.commands.queues_general:QueuesGeneralCommand',
