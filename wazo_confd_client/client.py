@@ -10,11 +10,9 @@ class ConfdClient(BaseClient):
 
     namespace = 'wazo_confd_client.commands'
 
-    def __init__(
-        self, host, port=9486, version='1.1', **kwargs
-    ):
+    def __init__(self, host, port=443, prefix='/api/confd', version='1.1', **kwargs):
         super(ConfdClient, self).__init__(
-            host=host, port=port, version=version, **kwargs
+            host=host, port=port, prefix=prefix, version=version, **kwargs
         )
 
     def session(self):
