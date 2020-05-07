@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
@@ -82,30 +82,6 @@ class TestUserLineRelation(TestCommand):
         self.command.dissociate(user_id, line_id)
         self.session.delete.assert_called_once_with("/users/1/lines/2")
 
-    def test_user_line_list_by_user(self):
-        user_id = 1234
-        expected_url = "/users/{}/lines".format(user_id)
-        expected_result = {"total": 0, "items": []}
-
-        self.set_response('get', 200, expected_result)
-
-        result = self.command.list_by_user(user_id)
-
-        self.session.get.assert_called_once_with(expected_url)
-        assert_that(result, expected_result)
-
-    def test_user_line_list_by_line(self):
-        line_id = 1234
-        expected_url = "/lines/{}/users".format(line_id)
-        expected_result = {"total": 0, "items": []}
-
-        self.set_response('get', 200, expected_result)
-
-        result = self.command.list_by_line(line_id)
-
-        self.session.get.assert_called_once_with(expected_url)
-        assert_that(result, expected_result)
-
     def test_user_line_update_lines(self):
         user_id = 1
         lines = [{'id': 2}, {'id': 3}]
@@ -154,82 +130,6 @@ class TestLineExtensionRelation(TestCommand):
 
         self.command.dissociate(line_id, extension_id)
         self.session.delete.assert_called_once_with("/lines/1/extensions/2")
-
-    def test_list_by_line(self):
-        line_id = 1
-        extension_id = 2
-
-        expected_result = {
-            'total': 1,
-            'items': [
-                {
-                    'line_id': line_id,
-                    'extension_id': extension_id,
-                    'links': [
-                        {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
-                        {
-                            'rel': 'extensions',
-                            'href': 'http://localhost:9486/1.1/extensions/2',
-                        },
-                    ],
-                }
-            ],
-        }
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.list_by_line(line_id)
-        self.session.get.assert_called_once_with("/lines/1/extensions")
-
-        assert_that(response, expected_result)
-
-    def test_list_by_extension(self):
-        line_id = 1
-        extension_id = 2
-
-        expected_result = {
-            'total': 1,
-            'items': [
-                {
-                    'line_id': line_id,
-                    'extension_id': extension_id,
-                    'links': [
-                        {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
-                        {
-                            'rel': 'extensions',
-                            'href': 'http://localhost:9486/1.1/extensions/2',
-                        },
-                    ],
-                }
-            ],
-        }
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.list_by_extension(extension_id)
-        self.session.get.assert_called_once_with("/extensions/2/lines")
-
-        assert_that(response, expected_result)
-
-    def test_get_by_extension(self):
-        line_id = 1
-        extension_id = 2
-
-        expected_result = {
-            'line_id': line_id,
-            'extension_id': extension_id,
-            'links': [
-                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
-                {'rel': 'extensions', 'href': 'http://localhost:9486/1.1/extensions/2'},
-            ],
-        }
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.get_by_extension(extension_id)
-        self.session.get.assert_called_once_with("/extensions/2/line")
-
-        assert_that(response, expected_result)
 
 
 class TestLineApplicationRelation(TestCommand):
@@ -348,52 +248,6 @@ class TestLineEndpointSipRelation(TestCommand):
         self.command.dissociate(line_id, sip_id)
         self.session.delete.assert_called_once_with("/lines/1/endpoints/sip/2")
 
-    def test_get_by_line(self):
-        line_id = 1
-        sip_id = 2
-
-        expected_result = {
-            'line_id': line_id,
-            'sip_id': sip_id,
-            'links': [
-                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
-                {
-                    'rel': 'endpoints_sip',
-                    'href': 'http://localhost:9486/1.1/endpoints/sip/1',
-                },
-            ],
-        }
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.get_by_line(line_id)
-        self.session.get.assert_called_once_with("/lines/1/endpoints/sip")
-
-        assert_that(response, expected_result)
-
-    def test_get_by_endpoint_sip(self):
-        line_id = 1
-        sip_id = 2
-
-        expected_result = {
-            'line_id': line_id,
-            'sip_id': sip_id,
-            'links': [
-                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
-                {
-                    'rel': 'endpoints_sip',
-                    'href': 'http://localhost:9486/1.1/endpoints/sip/1',
-                },
-            ],
-        }
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.get_by_endpoint_sip(sip_id)
-        self.session.get.assert_called_once_with("/endpoints/sip/2/lines")
-
-        assert_that(response, expected_result)
-
 
 class TestLineEndpointSccpRelation(TestCommand):
 
@@ -416,52 +270,6 @@ class TestLineEndpointSccpRelation(TestCommand):
 
         self.command.dissociate(line_id, sccp_id)
         self.session.delete.assert_called_once_with("/lines/1/endpoints/sccp/2")
-
-    def test_get_by_line(self):
-        line_id = 1
-        sccp_id = 2
-
-        expected_result = {
-            'line_id': line_id,
-            'sccp_id': sccp_id,
-            'links': [
-                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
-                {
-                    'rel': 'endpoints_sccp',
-                    'href': 'http://localhost:9486/1.1/endpoints/sccp/1',
-                },
-            ],
-        }
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.get_by_line(line_id)
-        self.session.get.assert_called_once_with("/lines/1/endpoints/sccp")
-
-        assert_that(response, expected_result)
-
-    def test_get_by_endpoint_sccp(self):
-        line_id = 1
-        sccp_id = 2
-
-        expected_result = {
-            'line_id': line_id,
-            'sccp_id': sccp_id,
-            'links': [
-                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
-                {
-                    'rel': 'endpoints_sccp',
-                    'href': 'http://localhost:9486/1.1/endpoints/sccp/1',
-                },
-            ],
-        }
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.get_by_endpoint_sccp(sccp_id)
-        self.session.get.assert_called_once_with("/endpoints/sccp/2/lines")
-
-        assert_that(response, expected_result)
 
 
 class TestLineEndpointCustomRelation(TestCommand):
@@ -486,52 +294,6 @@ class TestLineEndpointCustomRelation(TestCommand):
         self.command.dissociate(line_id, custom_id)
         self.session.delete.assert_called_once_with("/lines/1/endpoints/custom/2")
 
-    def test_get_by_line(self):
-        line_id = 1
-        custom_id = 2
-
-        expected_result = {
-            'line_id': line_id,
-            'custom_id': custom_id,
-            'links': [
-                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
-                {
-                    'rel': 'endpoints_custom',
-                    'href': 'http://localhost:9486/1.1/endpoints/custom/1',
-                },
-            ],
-        }
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.get_by_line(line_id)
-        self.session.get.assert_called_once_with("/lines/1/endpoints/custom")
-
-        assert_that(response, expected_result)
-
-    def test_get_by_endpoint_custom(self):
-        line_id = 1
-        custom_id = 2
-
-        expected_result = {
-            'line_id': line_id,
-            'custom_id': custom_id,
-            'links': [
-                {'rel': 'lines', 'href': 'http://localhost:9486/1.1/lines/1'},
-                {
-                    'rel': 'endpoints_custom',
-                    'href': 'http://localhost:9486/1.1/endpoints/custom/1',
-                },
-            ],
-        }
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.get_by_endpoint_custom(custom_id)
-        self.session.get.assert_called_once_with("/endpoints/custom/2/lines")
-
-        assert_that(response, expected_result)
-
 
 class TestUserVoicemailRelation(TestCommand):
 
@@ -550,35 +312,6 @@ class TestUserVoicemailRelation(TestCommand):
         self.command.dissociate(user_id)
         self.session.delete.assert_called_once_with("/users/1/voicemails")
 
-    def test_get_by_user(self):
-        user_id = 1
-        expected_result = {
-            'user_id': user_id,
-            'voicemail_id': 2,
-            'links': [
-                {'rel': 'users', 'href': 'http://localhost:9486/1.1/users/1'},
-                {'rel': 'voicemails', 'href': 'http://localhost:9486/1.1/voicemails/2'},
-            ],
-        }
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.get_by_user(user_id)
-
-        self.session.get.assert_called_once_with("/users/1/voicemails")
-        assert_that(response, expected_result)
-
-    def test_list_by_voicemail(self):
-        voicemail_id = 1
-        expected_result = {'items': [], 'total': 0}
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.list_by_voicemail(voicemail_id)
-
-        self.session.get.assert_called_once_with("/voicemails/1/users")
-        assert_that(response, expected_result)
-
 
 class TestUserAgentRelation(TestCommand):
 
@@ -596,24 +329,6 @@ class TestUserAgentRelation(TestCommand):
 
         self.command.dissociate(user_id)
         self.session.delete.assert_called_once_with("/users/1/agents")
-
-    def test_get_by_user(self):
-        user_id = 1
-        expected_result = {
-            'user_id': user_id,
-            'agent_id': 2,
-            'links': [
-                {'rel': 'users', 'href': 'http://localhost:9486/1.1/users/1'},
-                {'rel': 'agents', 'href': 'http://localhost:9486/1.1/agents/2'},
-            ],
-        }
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.get_by_user(user_id)
-
-        self.session.get.assert_called_once_with("/users/1/agents")
-        assert_that(response, expected_result)
 
 
 class TestUserFuncKeyRelation(TestCommand):
@@ -825,30 +540,6 @@ class TestUserCallPermissionRelation(TestCommand):
         self.command.dissociate(user_id, call_permission_id)
         self.session.delete.assert_called_once_with("/users/1/callpermissions/2")
 
-    def test_user_call_permission_list_by_user(self):
-        user_id = 1234
-        expected_url = "/users/{}/callpermissions".format(user_id)
-        expected_result = {"total": 0, "items": []}
-
-        self.set_response('get', 200, expected_result)
-
-        result = self.command.list_by_user(user_id)
-
-        self.session.get.assert_called_once_with(expected_url)
-        assert_that(result, expected_result)
-
-    def test_user_call_permission_list_by_call_permission(self):
-        call_permission_id = 1234
-        expected_url = "/callpermissions/{}/users".format(call_permission_id)
-        expected_result = {"total": 0, "items": []}
-
-        self.set_response('get', 200, expected_result)
-
-        result = self.command.list_by_call_permission(call_permission_id)
-
-        self.session.get.assert_called_once_with(expected_url)
-        assert_that(result, expected_result)
-
 
 class TestEntityRelation(TestCommand):
 
@@ -888,32 +579,6 @@ class TestTrunkEndpointSipRelation(TestCommand):
 
         self.command.dissociate(trunk_id, sip_id)
         self.session.delete.assert_called_once_with("/trunks/1/endpoints/sip/2")
-
-    def test_get_by_trunk(self):
-        trunk_id = 1
-        sip_id = 2
-
-        expected_result = {'trunk_id': trunk_id, 'endpoint_id': sip_id}
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.get_by_trunk(trunk_id)
-        self.session.get.assert_called_once_with("/trunks/1/endpoints/sip")
-
-        assert_that(response, expected_result)
-
-    def test_get_by_endpoint_sip(self):
-        trunk_id = 1
-        sip_id = 2
-
-        expected_result = {'trunk_id': trunk_id, 'endpoint_id': sip_id}
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.get_by_endpoint_sip(sip_id)
-        self.session.get.assert_called_once_with("/endpoints/sip/2/trunks")
-
-        assert_that(response, expected_result)
 
 
 class TestTrunkEndpointIAXRelation(TestCommand):
@@ -1006,32 +671,6 @@ class TestTrunkEndpointCustomRelation(TestCommand):
 
         self.command.dissociate(trunk_id, custom_id)
         self.session.delete.assert_called_once_with("/trunks/1/endpoints/custom/2")
-
-    def test_get_by_trunk(self):
-        trunk_id = 1
-        custom_id = 2
-
-        expected_result = {'trunk_id': trunk_id, 'endpoint_id': custom_id}
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.get_by_trunk(trunk_id)
-        self.session.get.assert_called_once_with("/trunks/1/endpoints/custom")
-
-        assert_that(response, expected_result)
-
-    def test_get_by_endpoint_custom(self):
-        trunk_id = 1
-        custom_id = 2
-
-        expected_result = {'trunk_id': trunk_id, 'endpoint_id': custom_id}
-
-        self.set_response('get', 200, expected_result)
-
-        response = self.command.get_by_endpoint_custom(custom_id)
-        self.session.get.assert_called_once_with("/endpoints/custom/2/trunks")
-
-        assert_that(response, expected_result)
 
 
 class TestIncallExtensionRelation(TestCommand):

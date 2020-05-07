@@ -221,7 +221,7 @@ line_id = 34
 c.users.relations(user_id).add_line(line_id)
 
 user = c.users.get(user_id)
-line = c.lines_sip.get(line_id)
+line = c.lines.get(line_id)
 
 #dicts can also be used instead of IDs
 c.users.relations(user).add_line(line)
@@ -270,7 +270,6 @@ Exposed via ```c.call_permissions.relations(call_permission_id)```
 
  * add_user(user_id)
  * remove_user(user_id)
- * list_users()
 
 ## Conference relation
 
@@ -299,8 +298,6 @@ Exposed via ```c.endpoints_sip.relations(endpoint_id)```
 
  * associate_line(line)
  * dissociate_line(line)
- * get_line()
- * get_trunk()
 
 ## Endpoint SCCP relation
 
@@ -308,7 +305,6 @@ Exposed via ```c.endpoints_sccp.relations(endpoint_id)```
 
  * associate_line(line)
  * dissociate_line(line)
- * get_line()
 
 ## Endpoint Custom relation
 
@@ -316,8 +312,6 @@ Exposed via ```c.endpoints_custom.relations(endpoint_id)```
 
  * associate_line(line)
  * dissociate_line(line)
- * get_line()
- * get_trunk()
 
 ## Extension relation
 
@@ -325,8 +319,6 @@ Exposed via ```c.extensions.relations(extension_id)```
 
  * add_line(line)
  * remove_line(line)
- * get_line()
- * list_lines()
 
 ## Extension feature relation
 
@@ -372,19 +364,14 @@ Exposed via ```c.lines.relations(line_id)```
 
  * add_user(user)
  * remove_user(user)
- * list_users()
  * add_extension(extension)
  * remove_extension(extension)
- * list_extensions()
  * add_endpoint_sip(endpoint_sip)
  * remove_endpoint_sip(endpoint_sip)
- * get_endpoint_sip()
  * add_endpoint_sccp(endpoint_sccp)
  * remove_endpoint_sccp(endpoint_sccp)
- * get_endpoint_sccp()
  * add_endpoint_custom(endpoint_custom)
  * remove_endpoint_custom(endpoint_custom)
- * get_endpoint_custom()
  * add_device(device_id)
  * remove_device(device_id)
  * get_device()
@@ -465,12 +452,10 @@ Exposed via ```c.trunks.relations(trunk_id)```
 
  * add_endpoint_sip(endpoint_sip)
  * remove_endpoint_sip(endpoint_sip)
- * get_endpoint_sip()
  * add_endpoint_iax(endpoint_iax)
  * remove_endpoint_iax(endpoint_iax)
  * add_endpoint_custom(endpoint_custom)
  * remove_endpoint_custom(endpoint_custom)
- * get_endpoint_custom()
  * add_register_sip(register_sip)
  * remove_register_sip(register_sip)
  * add_register_iax(register_iax)
@@ -482,16 +467,13 @@ Exposed via ```c.users.relations(user_id)```
 
  * add_line(line)
  * remove_line(line)
- * list_lines()
  * update_lines(lines)
 
  * add_call_permission(call_permission)
  * remove_call_permission(call_permission)
- * list_call_permissions()
 
  * add_voicemail(voicemail)
  * remove_voicemail()
- * get_voicemail()
 
  * add_funckey(position, funckey)
  * update_funckey(position, funckey)
@@ -506,7 +488,6 @@ Exposed via ```c.users.relations(user_id)```
 
  * add_agent(agent)
  * remove_agent()
- * get_agent()
 
  * update_service(service_name, service)
  * get_service(service_name)
@@ -536,7 +517,6 @@ Exposed via ```c.voicemails.relations(voicemail_id)```
  * add_user(user)
  * remove_user(user)
  * remove_users()
- * list_users()
 
 
 # Other resources

@@ -51,7 +51,6 @@ setup(
             'infos = wazo_confd_client.commands.infos:InfosCommand',
             'ivr = wazo_confd_client.commands.ivr:IVRCommand',
             'lines = wazo_confd_client.commands.lines:LinesCommand',
-            'lines_sip = wazo_confd_client.commands.lines_sip:LinesSIPCommand',
             'outcalls = wazo_confd_client.commands.outcalls:OutcallsCommand',
             'moh = wazo_confd_client.commands.moh:MOHCommand',
             'pagings = wazo_confd_client.commands.pagings:PagingsCommand',

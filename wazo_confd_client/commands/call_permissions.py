@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2016-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.crud import MultiTenantCommand
@@ -19,11 +19,6 @@ class CallPermissionRelation(object):
     @extract_id
     def remove_user(self, user_id):
         return self.user_call_permission.dissociate(user_id, self.call_permission_id)
-
-    def list_users(self):
-        return self.user_call_permission.list_by_call_permission(
-            self.call_permission_id
-        )
 
 
 class CallPermissionsCommand(MultiTenantCommand):

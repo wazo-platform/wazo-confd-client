@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2016-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.crud import MultiTenantCommand
@@ -20,12 +20,6 @@ class EndpointCustomRelation(object):
 
     def dissociate_line(self, line_id):
         self.line_endpoint_custom.dissociate(line_id, self.custom_id)
-
-    def get_line(self):
-        return self.line_endpoint_custom.get_by_endpoint_custom(self.custom_id)
-
-    def get_trunk(self):
-        return self.trunk_endpoint_custom.get_by_endpoint_custom(self.custom_id)
 
 
 class EndpointsCustomCommand(MultiTenantCommand):

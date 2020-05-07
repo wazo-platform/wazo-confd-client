@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2014-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.crud import MultiTenantCommand
@@ -44,9 +44,6 @@ class UserRelation(object):
     def remove_line(self, line_id):
         self.user_line.dissociate(self.user_id, line_id)
 
-    def list_lines(self):
-        return self.user_line.list_by_user(self.user_id)
-
     def update_lines(self, lines):
         return self.user_line.update_lines(self.user_id, lines)
 
@@ -61,9 +58,6 @@ class UserRelation(object):
     def remove_call_permission(self, call_permission_id):
         self.user_call_permission.dissociate(self.user_id, call_permission_id)
 
-    def list_call_permissions(self):
-        return self.user_call_permission.list_by_user(self.user_id)
-
     def get_entity(self):
         return self.user_entity.get_by_user(self.user_id)
 
@@ -74,18 +68,12 @@ class UserRelation(object):
     def remove_voicemail(self):
         self.user_voicemail.dissociate(self.user_id)
 
-    def get_voicemail(self):
-        return self.user_voicemail.get_by_user(self.user_id)
-
     @extract_id
     def add_agent(self, agent_id):
         self.user_agent.associate(self.user_id, agent_id)
 
     def remove_agent(self):
         self.user_agent.dissociate(self.user_id)
-
-    def get_agent(self):
-        return self.user_agent.get_by_user(self.user_id)
 
     def add_funckey(self, position, funckey):
         self.update_funckey(position, funckey)

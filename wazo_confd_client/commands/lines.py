@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.util import extract_id
@@ -34,9 +34,6 @@ class LineRelation(object):
     def remove_extension(self, extension_id):
         return self.line_extension.dissociate(self.line_id, extension_id)
 
-    def list_extensions(self):
-        return self.line_extension.list_by_line(self.line_id)
-
     @extract_id
     def add_user(self, user_id):
         return self.user_line.associate(user_id, self.line_id)
@@ -44,9 +41,6 @@ class LineRelation(object):
     @extract_id
     def remove_user(self, user_id):
         return self.user_line.dissociate(user_id, self.line_id)
-
-    def list_users(self):
-        return self.user_line.list_by_line(self.line_id)
 
     @extract_id
     def add_endpoint_sip(self, endpoint_sip_id):
@@ -56,9 +50,6 @@ class LineRelation(object):
     def remove_endpoint_sip(self, endpoint_sip_id):
         return self.line_endpoint_sip.dissociate(self.line_id, endpoint_sip_id)
 
-    def get_endpoint_sip(self):
-        return self.line_endpoint_sip.get_by_line(self.line_id)
-
     @extract_id
     def add_endpoint_sccp(self, endpoint_sccp_id):
         return self.line_endpoint_sccp.associate(self.line_id, endpoint_sccp_id)
@@ -67,9 +58,6 @@ class LineRelation(object):
     def remove_endpoint_sccp(self, endpoint_sccp_id):
         return self.line_endpoint_sccp.dissociate(self.line_id, endpoint_sccp_id)
 
-    def get_endpoint_sccp(self):
-        return self.line_endpoint_sccp.get_by_line(self.line_id)
-
     @extract_id
     def add_endpoint_custom(self, endpoint_custom_id):
         return self.line_endpoint_custom.associate(self.line_id, endpoint_custom_id)
@@ -77,9 +65,6 @@ class LineRelation(object):
     @extract_id
     def remove_endpoint_custom(self, endpoint_custom_id):
         return self.line_endpoint_custom.dissociate(self.line_id, endpoint_custom_id)
-
-    def get_endpoint_custom(self):
-        return self.line_endpoint_custom.get_by_line(self.line_id)
 
     @extract_id
     def add_device(self, device_id):
