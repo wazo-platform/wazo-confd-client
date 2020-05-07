@@ -52,7 +52,6 @@ from wazo_confd_client.relations import (
     UserAgentRelation,
     UserCallPermissionRelation,
     UserEndpointSipRelation,
-    UserEntityRelation,
     UserFallbackRelation,
     UserForwardRelation,
     UserFuncKeyRelation,
@@ -539,23 +538,6 @@ class TestUserCallPermissionRelation(TestCommand):
 
         self.command.dissociate(user_id, call_permission_id)
         self.session.delete.assert_called_once_with("/users/1/callpermissions/2")
-
-
-class TestEntityRelation(TestCommand):
-
-    Command = UserEntityRelation
-
-    def test_user_entity_list_by_user(self):
-        user_id = 1234
-        expected_url = "/users/{}/entities".format(user_id)
-        expected_result = {'entity_id': '1', 'user_id': '2'}
-
-        self.set_response('get', 200, expected_result)
-
-        result = self.command.get_by_user(user_id)
-
-        self.session.get.assert_called_once_with(expected_url)
-        assert_that(result, expected_result)
 
 
 class TestTrunkEndpointSipRelation(TestCommand):

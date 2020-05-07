@@ -7,7 +7,6 @@ from wazo_confd_client.relations import (
     UserAgentRelation,
     UserCallPermissionRelation,
     UserEndpointSipRelation,
-    UserEntityRelation,
     UserFallbackRelation,
     UserForwardRelation,
     UserFuncKeyRelation,
@@ -26,7 +25,6 @@ class UserRelation(object):
         self.user_agent = UserAgentRelation(builder)
         self.user_call_permission = UserCallPermissionRelation(builder)
         self.user_endpoint_sip = UserEndpointSipRelation(builder)
-        self.user_entity = UserEntityRelation(builder)
         self.user_fallback = UserFallbackRelation(builder)
         self.user_forward = UserForwardRelation(builder)
         self.user_funckey = UserFuncKeyRelation(builder)
@@ -57,9 +55,6 @@ class UserRelation(object):
     @extract_id
     def remove_call_permission(self, call_permission_id):
         self.user_call_permission.dissociate(self.user_id, call_permission_id)
-
-    def get_entity(self):
-        return self.user_entity.get_by_user(self.user_id)
 
     @extract_id
     def add_voicemail(self, voicemail_id):

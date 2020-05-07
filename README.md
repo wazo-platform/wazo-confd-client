@@ -484,8 +484,6 @@ Exposed via ```c.users.relations(user_id)```
  * add_funckey_template(funckey_template)
  * remove_funckey_template(funckey_template)
 
- * get_entity()
-
  * add_agent(agent)
  * remove_agent()
 
