@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.util import extract_id
@@ -24,9 +24,6 @@ class VoicemailRelation(object):
         response = self.list_users()
         for association in response['items']:
             self.remove_user(association['user_id'])
-
-    def list_users(self):
-        return self.user_voicemail_relation.list_by_voicemail(self.voicemail_id)
 
 
 class VoicemailsCommand(MultiTenantCommand):

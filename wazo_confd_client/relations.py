@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_lib_rest_client import HTTPCommand
@@ -14,16 +14,6 @@ class UserLineRelation(HTTPCommand):
     def dissociate(self, user_id, line_id):
         url = url_join('users', user_id, 'lines', line_id)
         self.session.delete(url)
-
-    def list_by_user(self, user_id):
-        url = url_join('users', user_id, 'lines')
-        response = self.session.get(url)
-        return response.json()
-
-    def list_by_line(self, line_id):
-        url = url_join('lines', line_id, 'users')
-        response = self.session.get(url)
-        return response.json()
 
     def update_lines(self, user_id, lines):
         url = url_join('users', user_id, 'lines')
@@ -49,16 +39,6 @@ class UserVoicemailRelation(HTTPCommand):
         url = url_join('users', user_id, 'voicemails')
         self.session.delete(url)
 
-    def get_by_user(self, user_id):
-        url = url_join('users', user_id, 'voicemails')
-        response = self.session.get(url)
-        return response.json()
-
-    def list_by_voicemail(self, voicemail_id):
-        url = url_join('voicemails', voicemail_id, 'users')
-        response = self.session.get(url)
-        return response.json()
-
 
 class UserAgentRelation(HTTPCommand):
     def associate(self, user_id, agent_id):
@@ -68,11 +48,6 @@ class UserAgentRelation(HTTPCommand):
     def dissociate(self, user_id):
         url = url_join('users', user_id, 'agents')
         self.session.delete(url)
-
-    def get_by_user(self, user_id):
-        url = url_join('users', user_id, 'agents')
-        response = self.session.get(url)
-        return response.json()
 
 
 class LineDeviceRelation(HTTPCommand):
@@ -114,21 +89,6 @@ class LineExtensionRelation(HTTPCommand):
         url = url_join('lines', line_id, 'extensions', extension_id)
         self.session.delete(url)
 
-    def list_by_line(self, line_id):
-        url = url_join('lines', line_id, 'extensions')
-        response = self.session.get(url)
-        return response.json()
-
-    def list_by_extension(self, extension_id):
-        url = url_join('extensions', extension_id, 'lines')
-        response = self.session.get(url)
-        return response.json()
-
-    def get_by_extension(self, extension_id):
-        url = url_join('extensions', extension_id, 'line')
-        response = self.session.get(url)
-        return response.json()
-
 
 class LineEndpointSipRelation(HTTPCommand):
     def associate(self, line_id, sip_id):
@@ -138,16 +98,6 @@ class LineEndpointSipRelation(HTTPCommand):
     def dissociate(self, line_id, sip_id):
         url = url_join('lines', line_id, 'endpoints', 'sip', sip_id)
         self.session.delete(url)
-
-    def get_by_line(self, line_id):
-        url = url_join('lines', line_id, 'endpoints', 'sip')
-        response = self.session.get(url)
-        return response.json()
-
-    def get_by_endpoint_sip(self, sip_id):
-        url = url_join('endpoints', 'sip', sip_id, 'lines')
-        response = self.session.get(url)
-        return response.json()
 
 
 class LineEndpointSccpRelation(HTTPCommand):
@@ -159,16 +109,6 @@ class LineEndpointSccpRelation(HTTPCommand):
         url = url_join('lines', line_id, 'endpoints', 'sccp', sccp_id)
         self.session.delete(url)
 
-    def get_by_line(self, line_id):
-        url = url_join('lines', line_id, 'endpoints', 'sccp')
-        response = self.session.get(url)
-        return response.json()
-
-    def get_by_endpoint_sccp(self, sccp_id):
-        url = url_join('endpoints', 'sccp', sccp_id, 'lines')
-        response = self.session.get(url)
-        return response.json()
-
 
 class LineEndpointCustomRelation(HTTPCommand):
     def associate(self, line_id, custom_id):
@@ -178,16 +118,6 @@ class LineEndpointCustomRelation(HTTPCommand):
     def dissociate(self, line_id, custom_id):
         url = url_join('lines', line_id, 'endpoints', 'custom', custom_id)
         self.session.delete(url)
-
-    def get_by_line(self, line_id):
-        url = url_join('lines', line_id, 'endpoints', 'custom')
-        response = self.session.get(url)
-        return response.json()
-
-    def get_by_endpoint_custom(self, custom_id):
-        url = url_join('endpoints', 'custom', custom_id, 'lines')
-        response = self.session.get(url)
-        return response.json()
 
 
 class UserFuncKeyRelation(HTTPCommand):
@@ -271,16 +201,6 @@ class UserCallPermissionRelation(HTTPCommand):
         url = url_join('users', user_id, 'callpermissions', call_permission_id)
         self.session.delete(url)
 
-    def list_by_user(self, user_id):
-        url = url_join('users', user_id, 'callpermissions')
-        response = self.session.get(url)
-        return response.json()
-
-    def list_by_call_permission(self, call_permission_id):
-        url = url_join('callpermissions', call_permission_id, 'users')
-        response = self.session.get(url)
-        return response.json()
-
 
 class UserEntityRelation(HTTPCommand):
     def get_by_user(self, user_id):
@@ -297,16 +217,6 @@ class TrunkEndpointSipRelation(HTTPCommand):
     def dissociate(self, trunk_id, sip_id):
         url = url_join('trunks', trunk_id, 'endpoints', 'sip', sip_id)
         self.session.delete(url)
-
-    def get_by_trunk(self, trunk_id):
-        url = url_join('trunks', trunk_id, 'endpoints', 'sip')
-        response = self.session.get(url)
-        return response.json()
-
-    def get_by_endpoint_sip(self, sip_id):
-        url = url_join('endpoints', 'sip', sip_id, 'trunks')
-        response = self.session.get(url)
-        return response.json()
 
 
 class TrunkEndpointIAXRelation(HTTPCommand):
@@ -347,16 +257,6 @@ class TrunkEndpointCustomRelation(HTTPCommand):
     def dissociate(self, trunk_id, custom_id):
         url = url_join('trunks', trunk_id, 'endpoints', 'custom', custom_id)
         self.session.delete(url)
-
-    def get_by_trunk(self, trunk_id):
-        url = url_join('trunks', trunk_id, 'endpoints', 'custom')
-        response = self.session.get(url)
-        return response.json()
-
-    def get_by_endpoint_custom(self, custom_id):
-        url = url_join('endpoints', 'custom', custom_id, 'trunks')
-        response = self.session.get(url)
-        return response.json()
 
 
 class IncallExtensionRelation(HTTPCommand):

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2016-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.util import extract_id
@@ -19,12 +19,6 @@ class ExtensionRelation(object):
     @extract_id
     def remove_line(self, line_id):
         return self.line_extension_relation.dissociate(line_id, self.extension_id)
-
-    def get_line(self):
-        return self.line_extension_relation.get_by_extension(self.extension_id)
-
-    def list_lines(self):
-        return self.line_extension_relation.list_by_extension(self.extension_id)
 
 
 class ExtensionsCommand(MultiTenantCommand):

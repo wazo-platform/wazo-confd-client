@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2016-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.util import extract_id
@@ -30,9 +30,6 @@ class TrunkRelation(object):
     def remove_endpoint_sip(self, endpoint_sip_id):
         return self.trunk_endpoint_sip.dissociate(self.trunk_id, endpoint_sip_id)
 
-    def get_endpoint_sip(self):
-        return self.trunk_endpoint_sip.get_by_trunk(self.trunk_id)
-
     @extract_id
     def add_endpoint_iax(self, endpoint_iax_id):
         return self.trunk_endpoint_iax.associate(self.trunk_id, endpoint_iax_id)
@@ -48,9 +45,6 @@ class TrunkRelation(object):
     @extract_id
     def remove_endpoint_custom(self, endpoint_custom_id):
         return self.trunk_endpoint_custom.dissociate(self.trunk_id, endpoint_custom_id)
-
-    def get_endpoint_custom(self):
-        return self.trunk_endpoint_custom.get_by_trunk(self.trunk_id)
 
     @extract_id
     def add_register_sip(self, register_sip_id):
