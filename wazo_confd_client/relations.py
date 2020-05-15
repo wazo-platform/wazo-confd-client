@@ -39,6 +39,11 @@ class UserVoicemailRelation(HTTPCommand):
         url = url_join('users', user_id, 'voicemails')
         self.session.delete(url)
 
+    def list_users(self, voicemail_id):
+        url = url_join('voicemails', voicemail_id)
+        response = self.session.get(url)
+        return response.json()['users']
+
 
 class UserAgentRelation(HTTPCommand):
     def associate(self, user_id, agent_id):
