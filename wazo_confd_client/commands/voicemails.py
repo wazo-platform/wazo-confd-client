@@ -21,9 +21,8 @@ class VoicemailRelation(object):
         self.user_voicemail_relation.dissociate(user_id)
 
     def remove_users(self):
-        response = self.list_users()
-        for association in response['items']:
-            self.remove_user(association['user_id'])
+        for user in self.user_voicemail_relation.list_users(self.voicemail_id):
+            self.user_voicemail_relation.dissociate(user['uuid'])
 
 
 class VoicemailsCommand(MultiTenantCommand):
