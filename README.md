@@ -612,17 +612,6 @@ c.sccp_general.update(sccp_general)
 ```
 
 
-## sip general
-
-```python
-#Get SIP general configuration
-sip_general = c.sip_general.get()
-
-#Update SIP general configuration
-c.sip_general.update(sip_general)
-```
-
-
 ## iax callnumberlimits
 
 ```python
