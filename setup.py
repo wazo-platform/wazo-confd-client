@@ -70,7 +70,6 @@ setup(
             'registrars = wazo_confd_client.commands.registrars:RegistrarsCommand',
             'sccp_general = wazo_confd_client.commands.sccp_general:SCCPGeneralCommand',
             'schedules = wazo_confd_client.commands.schedules:SchedulesCommand',
-            'sip_general = wazo_confd_client.commands.sip_general:SIPGeneralCommand',
             'sounds = wazo_confd_client.commands.sounds:SoundsCommand',
             'sounds_languages = wazo_confd_client.commands.sounds_languages:SoundsLanguagesCommand',
             'switchboards = wazo_confd_client.commands.switchboards:SwitchboardsCommand',
