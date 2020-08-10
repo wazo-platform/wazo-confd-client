@@ -35,6 +35,7 @@ setup(
             'endpoints_iax = wazo_confd_client.commands.endpoints_iax:EndpointsIAXCommand',
             'endpoints_sccp = wazo_confd_client.commands.endpoints_sccp:EndpointsSccpCommand',
             'endpoints_sip = wazo_confd_client.commands.endpoints_sip:EndpointsSipCommand',
+            'endpoints_sip_templates = wazo_confd_client.commands.endpoints_sip_templates:EndpointsSipTemplatesCommand',
             'entities = wazo_confd_client.commands.entities:EntitiesCommand',
             'extensions = wazo_confd_client.commands.extensions:ExtensionsCommand',
             'extensions_features = wazo_confd_client.commands.extensions_features:ExtensionsFeaturesCommand',
