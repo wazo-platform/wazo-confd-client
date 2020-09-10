@@ -22,11 +22,14 @@ class UserLineRelation(HTTPCommand):
 
 
 class UserEndpointSipRelation(HTTPCommand):
-    def get_by_user_line(self, user_uuid, line_id):
+    def get_by_user_line(self, user_uuid, line_id, view=None):
         url = url_join(
             'users', user_uuid, 'lines', line_id, 'associated', 'endpoints', 'sip'
         )
-        response = self.session.get(url)
+        params = {}
+        if view:
+            params['view'] = view
+        response = self.session.get(url, params=params)
         return response.json()
 
 

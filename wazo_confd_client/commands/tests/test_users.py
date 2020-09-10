@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from unittest import TestCase
@@ -81,7 +81,7 @@ class TestUsers(TestCommand):
         result = self.command.get_main_endpoint_sip(FAKE_UUID)
 
         assert_that(result, equal_to(expected_content))
-        self.session.get.assert_called_once_with(expected_url)
+        self.session.get.assert_called_once_with(expected_url, params={})
 
 
 class TestUserRelation(TestCase):

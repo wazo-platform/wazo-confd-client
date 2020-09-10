@@ -173,9 +173,12 @@ class UsersCommand(MultiTenantCommand):
         response = self.session.get(url, headers=headers)
         return response.content
 
-    def get_main_endpoint_sip(self, user_uuid):
+    def get_main_endpoint_sip(self, user_uuid, view=None):
         url = url_join(self.resource, user_uuid, "lines/main/associated/endpoints/sip")
-        response = self.session.get(url)
+        params = {}
+        if view:
+            params['view'] = view
+        response = self.session.get(url, params=params)
         return response.json()
 
     def exist(self, user_uuid):
