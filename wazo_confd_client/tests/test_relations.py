@@ -108,7 +108,7 @@ class TestUserEndpointSipRelation(TestCommand):
 
         result = self.command.get_by_user_line(user_uuid, line_id)
 
-        self.session.get.assert_called_once_with(expected_url)
+        self.session.get.assert_called_once_with(expected_url, params={})
         assert_that(result, expected_result)
 
 
