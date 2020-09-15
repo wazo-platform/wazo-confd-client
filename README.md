@@ -337,7 +337,7 @@ Exposed via ```c.groups.relations(group_id)```
 
  * add_extension(extension)
  * remove_extension(extension)
- * update_extensions_members(extensions)
+ * update_extension_members(extensions)
  * update_user_members(users)
 
  * update_fallbacks(fallbacks)
