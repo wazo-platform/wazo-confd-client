@@ -74,6 +74,7 @@ setup(
             'sounds = wazo_confd_client.commands.sounds:SoundsCommand',
             'sounds_languages = wazo_confd_client.commands.sounds_languages:SoundsLanguagesCommand',
             'switchboards = wazo_confd_client.commands.switchboards:SwitchboardsCommand',
+            'tenants = wazo_confd_client.commands.tenants:TenantsCommand',
             'timezones = wazo_confd_client.commands.timezones:TimezonesCommand',
             'trunks = wazo_confd_client.commands.trunks:TrunksCommand',
             'unallocated_devices = wazo_confd_client.commands.devices:UnallocatedDevicesCommand',
