@@ -39,6 +39,7 @@ setup(
             'entities = wazo_confd_client.commands.entities:EntitiesCommand',
             'extensions = wazo_confd_client.commands.extensions:ExtensionsCommand',
             'extensions_features = wazo_confd_client.commands.extensions_features:ExtensionsFeaturesCommand',
+            'external_apps = wazo_confd_client.commands.external_apps:ExternalAppsCommand',
             'features_applicationmap = wazo_confd_client.commands.features_applicationmap:FeaturesApplicationmapCommand',
             'features_featuremap = wazo_confd_client.commands.features_featuremap:FeaturesFeaturemapCommand',
             'features_general = wazo_confd_client.commands.features_general:FeaturesGeneralCommand',
