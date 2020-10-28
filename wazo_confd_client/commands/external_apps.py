@@ -17,7 +17,7 @@ def extract_name(func):
             if 'name' in resource_or_id:
                 resource_id = resource_or_id['name']
             else:
-                raise KeyError('no id or uuid key found')
+                raise KeyError('no "name" key found')
         else:
             resource_id = resource_or_id
         return func(self, resource_id, *args, **kwargs)
