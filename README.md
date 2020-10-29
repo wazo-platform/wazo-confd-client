@@ -507,6 +507,11 @@ Exposed via ```c.users.relations(user_id)```
  * add_schedule(schedule)
  * remove_schedule(schedule)
 
+ * list_external_apps()
+ * create_external_app(external_app)
+ * update_external_app(external_app)
+ * get_external_app(external_app)
+ * delete_external_app(external_app)
 
 ## Voicemail relation
 
