@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2017 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from __future__ import unicode_literals
@@ -27,3 +27,22 @@ def extract_id(func):
         return func(self, resource_id, *args, **kwargs)
 
     return wrapper
+
+
+def extract_name(pass_original=False):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(self, resource_or_id, *args, **kwargs):
+            if isinstance(resource_or_id, dict):
+                if 'name' in resource_or_id:
+                    resource_id = resource_or_id['name']
+                else:
+                    raise KeyError('no "name" key found')
+            else:
+                resource_id = resource_or_id
+            if pass_original:
+                return func(self, resource_id, resource_or_id, *args, **kwargs)
+            else:
+                return func(self, resource_id, *args, **kwargs)
+        return wrapper
+    return decorator
