@@ -581,3 +581,28 @@ class AgentSkillRelation(HTTPCommand):
     def dissociate(self, agent_id, skill_id):
         url = url_join('agents', agent_id, 'skills', skill_id)
         self.session.delete(url)
+
+
+class UserExternalAppRelation(HTTPCommand):
+    def list(self, user_uuid, **kwargs):
+        url = url_join('users', user_uuid, 'external', 'apps')
+        response = self.session.get(url, params=kwargs)
+        return response.json()
+
+    def create(self, user_uuid, name, body):
+        url = url_join('users', user_uuid, 'external', 'apps', name)
+        response = self.session.post(url, body)
+        return response.json()
+
+    def update(self, user_uuid, name, body):
+        url = url_join('users', user_uuid, 'external', 'apps', name)
+        self.session.put(url, body)
+
+    def get(self, user_uuid, name):
+        url = url_join('users', user_uuid, 'external', 'apps', name)
+        response = self.session.get(url)
+        return response.json()
+
+    def delete(self, user_uuid, name):
+        url = url_join('users', user_uuid, 'external', 'apps', name)
+        self.session.delete(url)

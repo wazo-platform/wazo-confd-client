@@ -7,6 +7,7 @@ from wazo_confd_client.relations import (
     UserAgentRelation,
     UserCallPermissionRelation,
     UserEndpointSipRelation,
+    UserExternalAppRelation,
     UserFallbackRelation,
     UserForwardRelation,
     UserFuncKeyRelation,
@@ -16,7 +17,7 @@ from wazo_confd_client.relations import (
     UserServiceRelation,
     UserVoicemailRelation,
 )
-from wazo_confd_client.util import extract_id, url_join
+from wazo_confd_client.util import extract_id, extract_name, url_join
 
 
 class UserRelation(object):
@@ -25,6 +26,7 @@ class UserRelation(object):
         self.user_agent = UserAgentRelation(builder)
         self.user_call_permission = UserCallPermissionRelation(builder)
         self.user_endpoint_sip = UserEndpointSipRelation(builder)
+        self.user_external_app = UserExternalAppRelation(builder)
         self.user_fallback = UserFallbackRelation(builder)
         self.user_forward = UserForwardRelation(builder)
         self.user_funckey = UserFuncKeyRelation(builder)
@@ -136,6 +138,25 @@ class UserRelation(object):
     @extract_id
     def remove_schedule(self, schedule_id):
         return self.user_schedule.dissociate(self.user_id, schedule_id)
+
+    def list_external_apps(self, **kwargs):
+        return self.user_external_app.list(self.user_id, **kwargs)
+
+    @extract_name(pass_original=True)
+    def create_external_app(self, name, body):
+        return self.user_external_app.create(self.user_id, name, body)
+
+    @extract_name(pass_original=True)
+    def update_external_app(self, name, body):
+        self.user_external_app.update(self.user_id, name, body)
+
+    @extract_name()
+    def get_external_app(self, name):
+        return self.user_external_app.get(self.user_id, name)
+
+    @extract_name()
+    def delete_external_app(self, name):
+        self.user_external_app.delete(self.user_id, name)
 
 
 class UsersCommand(MultiTenantCommand):
