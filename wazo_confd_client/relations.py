@@ -584,7 +584,6 @@ class AgentSkillRelation(HTTPCommand):
 
 
 class UserExternalAppRelation(HTTPCommand):
-
     def list(self, user_uuid, **kwargs):
         url = url_join('users', user_uuid, 'external', 'apps')
         response = self.session.get(url, params=kwargs)

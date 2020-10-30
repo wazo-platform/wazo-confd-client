@@ -44,5 +44,7 @@ def extract_name(pass_original=False):
                 return func(self, resource_id, resource_or_id, *args, **kwargs)
             else:
                 return func(self, resource_id, *args, **kwargs)
+
         return wrapper
+
     return decorator
