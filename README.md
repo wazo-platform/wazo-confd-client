@@ -474,6 +474,7 @@ Exposed via ```c.users.relations(user_id)```
 
  * add_voicemail(voicemail)
  * remove_voicemail()
+ * get_voicemail()
 
  * add_funckey(position, funckey)
  * update_funckey(position, funckey)
