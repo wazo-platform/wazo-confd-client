@@ -47,6 +47,12 @@ class UserVoicemailRelation(HTTPCommand):
         response = self.session.get(url)
         return response.json()['users']
 
+    def get_voicemail(self, user_id):
+        url = url_join('users', user_id, 'voicemails')
+        response = self.session.get(url)
+        voicemails = response.json()['items']
+        return voicemails[0] if voicemails else None
+
 
 class UserAgentRelation(HTTPCommand):
     def associate(self, user_id, agent_id):

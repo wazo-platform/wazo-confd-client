@@ -65,6 +65,9 @@ class UserRelation(object):
     def remove_voicemail(self):
         self.user_voicemail.dissociate(self.user_id)
 
+    def get_voicemail(self):
+        return self.user_voicemail.get_voicemail(self.user_id)
+
     @extract_id
     def add_agent(self, agent_id):
         self.user_agent.associate(self.user_id, agent_id)
