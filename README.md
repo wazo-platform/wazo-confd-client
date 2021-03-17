@@ -786,7 +786,7 @@ c.registrars.update({'id': 'default', 'proxy_main_host': '1.2.3.4'})
 emails = c.emails.get()
 
 # Update E-mail configuration
-emails['domain_name'] = 'smtp.test.com'
+emails['domain_name'] = 'smtp.example.org'
 c.emails.update(emails)
 ```
 
