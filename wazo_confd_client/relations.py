@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_lib_rest_client import HTTPCommand
@@ -402,6 +402,17 @@ class SwitchboardMemberUserRelation(HTTPCommand):
         url = url_join('switchboards', switchboard_id, 'members', 'users')
         body = {'users': [{'uuid': user['uuid']} for user in users]}
         self.session.put(url, body)
+
+
+class SwitchboardFallbackRelation(HTTPCommand):
+    def list_fallbacks(self, switchboard_id):
+        url = url_join('switchboards', switchboard_id, 'fallbacks')
+        response = self.session.get(url)
+        return response.json()
+
+    def update_fallbacks(self, switchboard_id, fallbacks):
+        url = url_join('switchboards', switchboard_id, 'fallbacks')
+        self.session.put(url, fallbacks)
 
 
 class IncallScheduleRelation(HTTPCommand):
