@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
@@ -44,6 +44,7 @@ from wazo_confd_client.relations import (
     QueueMemberUserRelation,
     QueueScheduleRelation,
     SwitchboardMemberUserRelation,
+    SwitchboardFallbackRelation,
     TrunkEndpointCustomRelation,
     TrunkEndpointIAXRelation,
     TrunkEndpointSipRelation,
@@ -963,6 +964,32 @@ class TestSwitchboardMemberUserRelation(TestCommand):
         self.session.put.assert_called_once_with(
             "/switchboards/abcd/members/users", expected_body
         )
+
+
+class TestSwitchboardFallbackRelation(TestCommand):
+
+    Command = SwitchboardFallbackRelation
+
+    def test_list_fallbacks(self):
+        switchboard_id = 1234
+        expected_url = "/switchboards/{}/fallbacks".format(switchboard_id)
+        expected_result = {'noanswer_destination': {'type': 'none'}}
+
+        self.set_response('get', 200, expected_result)
+
+        result = self.command.list_fallbacks(switchboard_id)
+
+        self.session.get.assert_called_once_with(expected_url)
+        assert_that(result, expected_result)
+
+    def test_update_fallbacks(self):
+        switchboard_id = 1234
+        fallbacks = {'noanswer_destination': {'type': 'none'}}
+
+        self.command.update_fallbacks(switchboard_id, fallbacks)
+
+        expected_url = "/switchboards/{}/fallbacks".format(switchboard_id)
+        self.session.put.assert_called_with(expected_url, fallbacks)
 
 
 class TestIncallScheduleRelation(TestCommand):
