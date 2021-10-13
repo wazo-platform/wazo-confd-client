@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from hamcrest import (
@@ -22,7 +22,7 @@ class TestDevices(TestCommand):
         expected_headers = {
             'Accept': 'application/json',
         }
-        self.client.tenant.return_value = None
+        self.client.tenant_uuid = None
         self.set_response('get', 204)
 
         self.command.autoprov(device_id)
@@ -36,7 +36,7 @@ class TestDevices(TestCommand):
             'Accept': 'application/json',
             'Wazo-Tenant': 'tenant',
         }
-        self.client.tenant.return_value = 'tenant'
+        self.client.tenant_uuid = 'tenant'
         self.set_response('get', 204)
 
         self.command.autoprov(device_id)
@@ -49,7 +49,7 @@ class TestDevices(TestCommand):
         expected_headers = {
             'Accept': 'application/json',
         }
-        self.client.tenant.return_value = None
+        self.client.tenant_uuid = None
         self.set_response('get', 204)
 
         self.command.synchronize(device_id)
@@ -63,7 +63,7 @@ class TestDevices(TestCommand):
             'Accept': 'application/json',
             'Wazo-Tenant': 'tenant',
         }
-        self.client.tenant.return_value = 'tenant'
+        self.client.tenant_uuid = 'tenant'
         self.set_response('get', 204)
 
         self.command.synchronize(device_id)
@@ -77,7 +77,7 @@ class TestUnallocatedDevices(TestCommand):
 
     def test_unallocated_listing(self):
         expected_url = "/devices/unallocated"
-        self.client.tenant.return_value = None
+        self.client.tenant_uuid = None
         expected_response = self.set_response(
             'get', 200, {"total": 2, "items": [{"device": {}}, {"device": {}}]}
         )
@@ -97,7 +97,7 @@ class TestUnallocatedDevices(TestCommand):
             'Content-Type': 'application/json',
             'Wazo-Tenant': 'tenant',
         }
-        self.client.tenant.return_value = 'tenant'
+        self.client.tenant_uuid = 'tenant'
         self.set_response('put', 204)
 
         self.command.assign_tenant(device_id)
