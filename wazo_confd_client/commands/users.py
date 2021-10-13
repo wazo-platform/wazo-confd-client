@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2014-2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.crud import MultiTenantCommand
@@ -170,7 +170,7 @@ class UsersCommand(MultiTenantCommand):
     def import_csv(self, csvdata, encoding='utf-8', timeout=300, tenant_uuid=None):
         url = url_join(self.resource, "import")
         headers = {'Content-Type': 'text/csv; charset={}'.format(encoding)}
-        tenant_uuid = tenant_uuid or self._client.tenant()
+        tenant_uuid = tenant_uuid or self._client.tenant_uuid
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
 
@@ -190,7 +190,7 @@ class UsersCommand(MultiTenantCommand):
     def export_csv(self, tenant_uuid=None):
         url = url_join(self.resource, "export")
         headers = {'Accept': 'text/csv; charset=utf-8'}
-        tenant_uuid = tenant_uuid or self._client.tenant()
+        tenant_uuid = tenant_uuid or self._client.tenant_uuid
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
 

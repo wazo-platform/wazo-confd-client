@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.crud import MultiTenantCommand
@@ -33,7 +33,7 @@ class DevicesCommand(MultiTenantCommand):
 
     @extract_id
     def autoprov(self, device_id, **kwargs):
-        tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant())
+        tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant_uuid)
         headers = dict(kwargs.get('headers', self.session.READ_HEADERS))
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
@@ -42,7 +42,7 @@ class DevicesCommand(MultiTenantCommand):
 
     @extract_id
     def synchronize(self, device_id, **kwargs):
-        tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant())
+        tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant_uuid)
         headers = dict(kwargs.get('headers', self.session.READ_HEADERS))
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
@@ -60,7 +60,7 @@ class UnallocatedDevicesCommand(RESTCommand):
         return response.json()
 
     def assign_tenant(self, device_id, **kwargs):
-        tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant())
+        tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant_uuid)
         headers = dict(kwargs.get('headers', self.session.WRITE_HEADERS))
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid

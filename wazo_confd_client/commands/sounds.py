@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2017-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from six.moves.urllib.parse import quote
@@ -13,7 +13,7 @@ class SoundsCommand(MultiTenantCommand):
     resource = 'sounds'
 
     def get(self, category, tenant_uuid=None):
-        tenant_uuid = tenant_uuid or self._client.tenant()
+        tenant_uuid = tenant_uuid or self._client.tenant_uuid
         headers = dict(self.session.READ_HEADERS)
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
@@ -23,7 +23,7 @@ class SoundsCommand(MultiTenantCommand):
         return response.json()
 
     def delete(self, category, tenant_uuid=None):
-        tenant_uuid = tenant_uuid or self._client.tenant()
+        tenant_uuid = tenant_uuid or self._client.tenant_uuid
         headers = dict(self.session.READ_HEADERS)
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
@@ -33,7 +33,7 @@ class SoundsCommand(MultiTenantCommand):
 
     @extract_id
     def download_file(self, category, filename, **kwargs):
-        tenant_uuid = kwargs.pop('tenant_uuid', None) or self._client.tenant()
+        tenant_uuid = kwargs.pop('tenant_uuid', None) or self._client.tenant_uuid
         headers = {'Accept': '*/*'}
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
@@ -43,7 +43,7 @@ class SoundsCommand(MultiTenantCommand):
 
     @extract_id
     def upload_file(self, category, filename, content, **kwargs):
-        tenant_uuid = kwargs.pop('tenant_uuid', None) or self._client.tenant()
+        tenant_uuid = kwargs.pop('tenant_uuid', None) or self._client.tenant_uuid
         headers = {'Content-Type': 'application/octet-stream'}
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
@@ -52,7 +52,7 @@ class SoundsCommand(MultiTenantCommand):
 
     @extract_id
     def delete_file(self, category, filename, **kwargs):
-        tenant_uuid = kwargs.pop('tenant_uuid', None) or self._client.tenant()
+        tenant_uuid = kwargs.pop('tenant_uuid', None) or self._client.tenant_uuid
         headers = {}
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid

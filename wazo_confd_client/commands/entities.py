@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2016-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.util import url_join
@@ -12,7 +12,7 @@ class EntitiesCommand(CRUDCommand):
 
     def create(self, body):
         headers = dict(self.session.WRITE_HEADERS)
-        tenant_uuid = body.pop('tenant_uuid', self._client.tenant())
+        tenant_uuid = body.pop('tenant_uuid', self._client.tenant_uuid)
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
 
