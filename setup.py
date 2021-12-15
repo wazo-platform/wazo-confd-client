@@ -52,6 +52,7 @@ setup(
             'iax_general = wazo_confd_client.commands.iax_general:IAXGeneralCommand',
             'incalls = wazo_confd_client.commands.incalls:IncallsCommand',
             'infos = wazo_confd_client.commands.infos:InfosCommand',
+            'ingress_http = wazo_confd_client.commands.ingress_http:IngressHttpCommand',
             'ivr = wazo_confd_client.commands.ivr:IVRCommand',
             'lines = wazo_confd_client.commands.lines:LinesCommand',
             'meetings = wazo_confd_client.commands.meetings:MeetingsCommand',
