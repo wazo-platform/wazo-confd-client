@@ -377,7 +377,7 @@ Exposed via ```c.lines.relations(line_id)```
  * get_device()
  * add_application(application)
  * remove_application(application)
-
+ 
 ## Outcall relation
 
 Exposed via ```c.outcalls.relations(outcall_id)```
@@ -791,6 +791,35 @@ emails = c.emails.get()
 # Update E-mail configuration
 emails['domain_name'] = 'smtp.example.org'
 c.emails.update(emails)
+```
+
+## Meetings
+
+Admin meetings are available at:
+
+```python
+meetings = c.meetings.list()  # equivalent to GET /meetings
+# and all other CRUD operations on c.meetings...
+```
+
+User meetings are available at:
+
+```python
+meetings = c.my_meetings.list()  # equivalent to GET /users/me/meetings
+# and all other CRUD operations on c.my_meetings...
+```
+
+Guest meetings are available at:
+
+```python
+# equivalent to GET /guests/me/meetings/uuid
+meeting = c.my_guest_meetings.get(uuid)
+
+# equivalent to METHOD /guests/guest_uuid/meetings/uuid/authorizations...
+meeting = c.guests(guest_uuid).meetings(uuid).authorizations.create(authorization)
+meeting = c.guests(guest_uuid).meetings(uuid).authorizations.get(auth_uuid)
+meeting = c.guests(guest_uuid).meetings(uuid).authorizations.accept(auth_uuid)
+meeting = c.guests(guest_uuid).meetings(uuid).authorizations.reject(auth_uuid)
 ```
 
 

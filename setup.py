@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright 2014-2021 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from setuptools import setup
@@ -46,6 +46,7 @@ setup(
             'features_general = wazo_confd_client.commands.features_general:FeaturesGeneralCommand',
             'funckeys = wazo_confd_client.commands.funckeys:FuncKeysCommand',
             'groups = wazo_confd_client.commands.groups:GroupsCommand',
+            'guests = wazo_confd_client.commands.guests:GuestsCommand',
             'ha = wazo_confd_client.commands.ha:HACommand',
             'hep_general = wazo_confd_client.commands.hep_general:HEPGeneralCommand',
             'iax_callnumberlimits = wazo_confd_client.commands.iax_callnumberlimits:IAXCallNumberLimitsCommand',
@@ -57,6 +58,8 @@ setup(
             'lines = wazo_confd_client.commands.lines:LinesCommand',
             'meetings = wazo_confd_client.commands.meetings:MeetingsCommand',
             'moh = wazo_confd_client.commands.moh:MOHCommand',
+            'my_guest_meetings = wazo_confd_client.commands.my_guest_meetings:GuestsMeMeetingsCommand',
+            'my_meetings = wazo_confd_client.commands.my_meetings:UsersMeMeetingsCommand',
             'outcalls = wazo_confd_client.commands.outcalls:OutcallsCommand',
             'pagings = wazo_confd_client.commands.pagings:PagingsCommand',
             'parking_lots = wazo_confd_client.commands.parking_lots:ParkingLotsCommand',
