@@ -80,6 +80,7 @@ setup(
             'schedules = wazo_confd_client.commands.schedules:SchedulesCommand',
             'sounds = wazo_confd_client.commands.sounds:SoundsCommand',
             'sounds_languages = wazo_confd_client.commands.sounds_languages:SoundsLanguagesCommand',
+            'status = wazo_confd_client.commands.status:StatusCommand',
             'switchboards = wazo_confd_client.commands.switchboards:SwitchboardsCommand',
             'tenants = wazo_confd_client.commands.tenants:TenantsCommand',
             'timezones = wazo_confd_client.commands.timezones:TimezonesCommand',
