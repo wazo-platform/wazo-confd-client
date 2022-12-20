@@ -1,14 +1,13 @@
-# -*- coding: utf-8 -*-
-# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import unittest
-from mock import Mock
+from unittest import TestCase
+from unittest.mock import Mock
 
 from ..session import ConfdSession
 
 
-class TestCommand(unittest.TestCase):
+class TestCommand(TestCase):
     def setUp(self):
         self.session = Mock(ConfdSession)
         self.session.READ_HEADERS = ConfdSession.READ_HEADERS

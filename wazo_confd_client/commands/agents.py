@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2018-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.util import extract_id
@@ -8,7 +7,7 @@ from wazo_confd_client.crud import MultiTenantCommand
 from wazo_confd_client.relations import AgentSkillRelation
 
 
-class AgentRelation(object):
+class AgentRelation:
     def __init__(self, builder, agent_id):
         self.agent_id = agent_id
         self.agent_skill = AgentSkillRelation(builder)

@@ -1,15 +1,10 @@
-# -*- coding: utf-8 -*-
-# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
-
-from __future__ import unicode_literals
-
 from functools import wraps
-from six import text_type
 
 
 def url_join(*parts):
-    return "/" + "/".join(text_type(p) for p in parts)
+    return "/" + "/".join(str(p) for p in parts)
 
 
 def extract_id(func):

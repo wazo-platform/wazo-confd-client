@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
-# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from unittest import TestCase
+from unittest.mock import ANY, Mock
 
 from hamcrest import assert_that, equal_to
-from mock import ANY, Mock
 
 from wazo_confd_client.tests import TestCommand
 
@@ -73,7 +72,7 @@ class TestUsers(TestCommand):
         )
 
     def test_main_endpoint_sip(self):
-        expected_url = "/users/{}/lines/main/associated/endpoints/sip".format(FAKE_UUID)
+        expected_url = f"/users/{FAKE_UUID}/lines/main/associated/endpoints/sip"
         expected_content = {"username": 'tata'}
 
         self.set_response('get', 200, json=expected_content)

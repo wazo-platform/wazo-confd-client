@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2015-2021 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.crud import MultiTenantCommand
@@ -9,7 +8,7 @@ from wazo_confd_client.relations import LineDeviceRelation
 from wazo_lib_rest_client import RESTCommand
 
 
-class DeviceRelation(object):
+class DeviceRelation:
     def __init__(self, builder, device_id):
         self.device_id = device_id
         self.line_device = LineDeviceRelation(builder)

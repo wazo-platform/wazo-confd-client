@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2016-2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2016-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.util import extract_id
@@ -7,7 +6,7 @@ from wazo_confd_client.crud import MultiTenantCommand
 from wazo_confd_client.relations import LineExtensionRelation
 
 
-class ExtensionRelation(object):
+class ExtensionRelation:
     def __init__(self, builder, extension_id):
         self.extension_id = extension_id
         self.line_extension_relation = LineExtensionRelation(builder)

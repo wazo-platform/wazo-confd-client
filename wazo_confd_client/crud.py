@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
-# Copyright 2015-2021 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import abc
-import six
 
 from wazo_lib_rest_client import HTTPCommand
 from wazo_confd_client.util import extract_id, url_join
@@ -42,7 +40,7 @@ class CRUDCommand(HTTPCommand):
         if not resource_id:
             resource_id = body['id']
         url = url_join(self.resource, resource_id)
-        body = {key: value for key, value in six.iteritems(body) if key != "links"}
+        body = {key: value for key, value in body.items() if key != "links"}
         self.session.put(url, body)
 
     @extract_id

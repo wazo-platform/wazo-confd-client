@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2015-2021 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
@@ -100,9 +99,7 @@ class TestUserEndpointSipRelation(TestCommand):
     def test_user_line_list_by_user(self):
         user_uuid = '1234-abcd'
         line_id = 42
-        expected_url = "/users/{}/lines/{}/associated/endpoints/sip".format(
-            user_uuid, line_id
-        )
+        expected_url = f"/users/{user_uuid}/lines/{line_id}/associated/endpoints/sip"
         expected_result = {"username": 'tata'}
 
         self.set_response('get', 200, expected_result)
@@ -342,13 +339,13 @@ class TestUserFuncKeyRelation(TestCommand):
 
         self.command.update_funckey(user_id, position, funckey)
 
-        expected_url = "/users/{}/funckeys/{}".format(user_id, position)
+        expected_url = f"/users/{user_id}/funckeys/{position}"
         self.session.put.assert_called_with(expected_url, funckey)
 
     def test_remove_func_key(self):
         user_id = 1234
         position = 1
-        expected_url = "/users/{}/funckeys/{}".format(user_id, position)
+        expected_url = f"/users/{user_id}/funckeys/{position}"
 
         self.command.remove_funckey(user_id, position)
 
@@ -356,7 +353,7 @@ class TestUserFuncKeyRelation(TestCommand):
 
     def test_list_funckeys(self):
         user_id = 1234
-        expected_url = "/users/{}/funckeys".format(user_id)
+        expected_url = f"/users/{user_id}/funckeys"
         expected_result = {"total": 0, "items": []}
 
         self.set_response('get', 200, expected_result)
@@ -369,7 +366,7 @@ class TestUserFuncKeyRelation(TestCommand):
     def test_get_funckey(self):
         user_id = 1234
         position = 3
-        expected_url = "/users/{}/funckeys/{}".format(user_id, position)
+        expected_url = f"/users/{user_id}/funckeys/{position}"
         expected_result = {
             "blf": True,
             "label": "Call john",
@@ -394,13 +391,13 @@ class TestUserFuncKeyRelation(TestCommand):
 
         self.command.update_funckeys(user_id, funckeys)
 
-        expected_url = "/users/{}/funckeys".format(user_id)
+        expected_url = f"/users/{user_id}/funckeys"
         self.session.put.assert_called_with(expected_url, funckeys)
 
     def test_dissociate_funckey_template(self):
         user_id = 1234
         template_id = 25
-        expected_url = "/users/{}/funckeys/templates/{}".format(user_id, template_id)
+        expected_url = f"/users/{user_id}/funckeys/templates/{template_id}"
 
         self.set_response('delete', 204)
 
@@ -411,7 +408,7 @@ class TestUserFuncKeyRelation(TestCommand):
     def test_associate_funckey_template(self):
         user_id = 1234
         template_id = 25
-        expected_url = "/users/{}/funckeys/templates/{}".format(user_id, template_id)
+        expected_url = f"/users/{user_id}/funckeys/templates/{template_id}"
 
         self.set_response('put', 204)
 
@@ -431,13 +428,13 @@ class TestUserServiceRelation(TestCommand):
 
         self.command.update_service(user_id, service_name, service)
 
-        expected_url = "/users/{}/services/{}".format(user_id, service_name)
+        expected_url = f"/users/{user_id}/services/{service_name}"
         self.session.put.assert_called_with(expected_url, service)
 
     def test_get_service(self):
         user_id = 1234
         service_name = 'dnd'
-        expected_url = "/users/{}/services/{}".format(user_id, service_name)
+        expected_url = f"/users/{user_id}/services/{service_name}"
         expected_result = {'enabled': True}
 
         self.set_response('get', 200, expected_result)
@@ -449,7 +446,7 @@ class TestUserServiceRelation(TestCommand):
 
     def test_list_services(self):
         user_id = 1234
-        expected_url = "/users/{}/services".format(user_id)
+        expected_url = f"/users/{user_id}/services"
         expected_result = {"total": 0, "items": []}
 
         self.set_response('get', 200, expected_result)
@@ -465,7 +462,7 @@ class TestUserServiceRelation(TestCommand):
 
         self.command.update_services(user_id, services)
 
-        expected_url = "/users/{}/services".format(user_id)
+        expected_url = f"/users/{user_id}/services"
         self.session.put.assert_called_with(expected_url, services)
 
 
@@ -480,13 +477,13 @@ class TestUserForwardRelation(TestCommand):
 
         self.command.update_forward(user_id, forward_name, forward)
 
-        expected_url = "/users/{}/forwards/{}".format(user_id, forward_name)
+        expected_url = f"/users/{user_id}/forwards/{forward_name}"
         self.session.put.assert_called_with(expected_url, forward)
 
     def test_get_forward(self):
         user_id = 1234
         forward_name = 'dnd'
-        expected_url = "/users/{}/forwards/{}".format(user_id, forward_name)
+        expected_url = f"/users/{user_id}/forwards/{forward_name}"
         expected_result = {'enabled': True}
 
         self.set_response('get', 200, expected_result)
@@ -498,7 +495,7 @@ class TestUserForwardRelation(TestCommand):
 
     def test_list_forwards(self):
         user_id = 1234
-        expected_url = "/users/{}/forwards".format(user_id)
+        expected_url = f"/users/{user_id}/forwards"
         expected_result = {"total": 0, "items": []}
 
         self.set_response('get', 200, expected_result)
@@ -518,7 +515,7 @@ class TestUserForwardRelation(TestCommand):
 
         self.command.update_forwards(user_id, forwards)
 
-        expected_url = "/users/{}/forwards".format(user_id)
+        expected_url = f"/users/{user_id}/forwards"
         self.session.put.assert_called_with(expected_url, forwards)
 
 
@@ -813,7 +810,7 @@ class TestGroupFallbackRelation(TestCommand):
 
     def test_list_fallbacks(self):
         group_id = 1234
-        expected_url = "/groups/{}/fallbacks".format(group_id)
+        expected_url = f"/groups/{group_id}/fallbacks"
         expected_result = {'noanswer_destination': {'type': 'none'}}
 
         self.set_response('get', 200, expected_result)
@@ -829,7 +826,7 @@ class TestGroupFallbackRelation(TestCommand):
 
         self.command.update_fallbacks(group_id, fallbacks)
 
-        expected_url = "/groups/{}/fallbacks".format(group_id)
+        expected_url = f"/groups/{group_id}/fallbacks"
         self.session.put.assert_called_with(expected_url, fallbacks)
 
 
@@ -839,7 +836,7 @@ class TestUserFallbackRelation(TestCommand):
 
     def test_list_fallbacks(self):
         user_id = 1234
-        expected_url = "/users/{}/fallbacks".format(user_id)
+        expected_url = f"/users/{user_id}/fallbacks"
         expected_result = {
             'noanswer_destination': None,
             'busy_destination': None,
@@ -865,7 +862,7 @@ class TestUserFallbackRelation(TestCommand):
 
         self.command.update_fallbacks(user_id, fallbacks)
 
-        expected_url = "/users/{}/fallbacks".format(user_id)
+        expected_url = f"/users/{user_id}/fallbacks"
         self.session.put.assert_called_with(expected_url, fallbacks)
 
 
@@ -972,7 +969,7 @@ class TestSwitchboardFallbackRelation(TestCommand):
 
     def test_list_fallbacks(self):
         switchboard_id = 1234
-        expected_url = "/switchboards/{}/fallbacks".format(switchboard_id)
+        expected_url = f"/switchboards/{switchboard_id}/fallbacks"
         expected_result = {'noanswer_destination': {'type': 'none'}}
 
         self.set_response('get', 200, expected_result)
@@ -988,7 +985,7 @@ class TestSwitchboardFallbackRelation(TestCommand):
 
         self.command.update_fallbacks(switchboard_id, fallbacks)
 
-        expected_url = "/switchboards/{}/fallbacks".format(switchboard_id)
+        expected_url = f"/switchboards/{switchboard_id}/fallbacks"
         self.session.put.assert_called_with(expected_url, fallbacks)
 
 
@@ -1189,7 +1186,7 @@ class TestCallFilterFallbackRelation(TestCommand):
 
         self.command.update_fallbacks(call_filter_id, fallbacks)
 
-        expected_url = "/callfilters/{}/fallbacks".format(call_filter_id)
+        expected_url = f"/callfilters/{call_filter_id}/fallbacks"
         self.session.put.assert_called_with(expected_url, fallbacks)
 
 
@@ -1267,7 +1264,7 @@ class TestQueueFallbackRelation(TestCommand):
 
     def test_list_fallbacks(self):
         queue_id = 1234
-        expected_url = "/queues/{}/fallbacks".format(queue_id)
+        expected_url = f"/queues/{queue_id}/fallbacks"
         expected_result = {'noanswer_destination': {'type': 'none'}}
 
         self.set_response('get', 200, expected_result)
@@ -1283,7 +1280,7 @@ class TestQueueFallbackRelation(TestCommand):
 
         self.command.update_fallbacks(queue_id, fallbacks)
 
-        expected_url = "/queues/{}/fallbacks".format(queue_id)
+        expected_url = f"/queues/{queue_id}/fallbacks"
         self.session.put.assert_called_with(expected_url, fallbacks)
 
 

@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
-# Copyright 2016-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2016-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.crud import MultiTenantCommand
 from wazo_confd_client.relations import ContextContextRelation
 
 
-class ContextRelation(object):
+class ContextRelation:
     def __init__(self, builder, context_id):
         self.context_id = context_id
         self.context_context = ContextContextRelation(builder)

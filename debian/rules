@@ -2,9 +2,8 @@
 # -*- makefile -*-
 
 export PYBUILD_NAME=wazo_confd_client
-export PYBUILD_DESTDIR_python2=debian/wazo-confd-client/
 export PYBUILD_DESTDIR_python3=debian/wazo-confd-client-python3/
 export PYBUILD_DISABLE=test
 
 %:
-	dh $@ --with python2,python3 --buildsystem=pybuild
+	dh $@ --with python3 --buildsystem=pybuild
