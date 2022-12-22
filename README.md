@@ -14,11 +14,11 @@ packages from the rest of the system, hence avoiding conflicts with your OS
 package manager. On debian based systems, virtualenv can be install with
 apt-get:
 
-    sudo apt-get install python-virtualenv
+    sudo apt-get install python3-virtualenv
 
 Afterwards create a virtual environment for the library:
 
-    virtualenv -p /usr/bin/python2 confd-client
+    virtualenv -p /usr/bin/python3 confd-client
 
 When opening a new terminal **do not forget to activate your virtualenv**, otherwise
 the library will not be available.
@@ -30,7 +30,7 @@ the library will not be available.
 We recommend installing dependencies via ```pip```. It will already be available
 if you are using a virutalenv. Otherwise, it can be installed via apt-get:
 
-    sudo apt-get install python-pip
+    sudo apt-get install python3-pip
 
 Afterwards use the ```requirements.txt``` file for installing dependencies:
 
@@ -834,12 +834,12 @@ like this:
 ```python
 from wazo_lib_rest_client import RESTCommand
 
-class FooCommands(RESTCommand):
 
+class FooCommands(RESTCommand):
     resource = 'foo'
 
     def bar(self):
-        url = "{}/bar".format(self.base_url)
+        url = f"{self.base_url}/bar"
         response = self.session.get(url)
 
         if response.status_code != 200:
@@ -848,9 +848,9 @@ class FooCommands(RESTCommand):
         return response.json()
 
 
-#in setup.py
+# in setup.py
 
-entry_points={
+entry_points = {
     'confd_client.commands': [
         'foo = package.to.foo:FooCommands'
     ]

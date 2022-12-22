@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2014-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from hamcrest import (
@@ -41,7 +40,7 @@ class TestCRUD(TestCommand):
 
     def test_get(self):
         resource_id = 1
-        expected_url = "/test/{}".format(resource_id)
+        expected_url = f"/test/{resource_id}"
         expected_response = self.set_response(
             'get', 200, {'id': resource_id, 'firstname': 'John'}
         )
@@ -66,7 +65,7 @@ class TestCRUD(TestCommand):
 
     def test_update(self):
         resource_id = 1
-        expected_url = "/test/{}".format(resource_id)
+        expected_url = f"/test/{resource_id}"
         self.set_response('put', 204)
 
         body = {
@@ -83,7 +82,7 @@ class TestCRUD(TestCommand):
 
     def test_update_with_uuid(self):
         resource_uuid = 'abcd-123'
-        expected_url = "/test/{}".format(resource_uuid)
+        expected_url = f"/test/{resource_uuid}"
         self.set_response('put', 204)
 
         body = {
@@ -104,7 +103,7 @@ class TestCRUD(TestCommand):
 
     def test_delete(self):
         resource_id = 1
-        expected_url = "/test/{}".format(resource_id)
+        expected_url = f"/test/{resource_id}"
         self.set_response('delete', 204)
 
         self.command.delete(resource_id)

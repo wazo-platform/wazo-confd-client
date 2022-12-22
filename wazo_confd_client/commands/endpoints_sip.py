@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.crud import MultiTenantCommand
@@ -9,7 +8,7 @@ from wazo_confd_client.relations import (
 )
 
 
-class EndpointSipRelation(object):
+class EndpointSipRelation:
     def __init__(self, builder, sip_id):
         self.sip_id = sip_id
         self.line_endpoint_sip = LineEndpointSipRelation(builder)

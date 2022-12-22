@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2018-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.crud import MultiTenantCommand
@@ -11,7 +10,7 @@ from wazo_confd_client.relations import (
 )
 
 
-class CallPickupRelation(object):
+class CallPickupRelation:
     def __init__(self, builder, call_pickup_id):
         self.call_pickup_id = call_pickup_id
         self.call_pickup_group_interceptors = CallPickupInterceptorGroupRelation(

@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
-# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import json
 import requests
 
 
-class ConfdSession(object):
+class ConfdSession:
 
     OK_STATUSES = (requests.codes.ok, requests.codes.created, requests.codes.no_content)
 
@@ -33,7 +32,7 @@ class ConfdSession(object):
             response.raise_for_status()
 
     def clean_url(self, part):
-        return "{}/{}".format(self.base_url.rstrip('/'), part.lstrip('/'))
+        return f"{self.base_url.rstrip('/')}/{part.lstrip('/')}"
 
     def head(self, url, **kwargs):
         kwargs.setdefault('headers', self.READ_HEADERS)

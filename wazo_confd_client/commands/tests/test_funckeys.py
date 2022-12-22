@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from hamcrest import (
@@ -20,7 +19,7 @@ class TestFuncKeys(TestCommand):
     def test_get_template_funckey(self):
         template_id = 2
         position = 1
-        expected_url = "/funckeys/templates/{}/{}".format(template_id, position)
+        expected_url = f"/funckeys/templates/{template_id}/{position}"
         expected_content = {
             'blf': True,
             'destination': {'exten': '1234', 'href': None, 'type': 'custom'},
@@ -40,7 +39,7 @@ class TestFuncKeys(TestCommand):
     def test_delete_template_funckey(self):
         template_id = 2
         position = 1
-        expected_url = "/funckeys/templates/{}/{}".format(template_id, position)
+        expected_url = f"/funckeys/templates/{template_id}/{position}"
 
         self.set_response('delete', 204)
 
@@ -52,7 +51,7 @@ class TestFuncKeys(TestCommand):
     def test_update_template_funckey(self):
         template_id = 2
         position = 1
-        expected_url = "/funckeys/templates/{}/{}".format(template_id, position)
+        expected_url = f"/funckeys/templates/{template_id}/{position}"
         funckey = {'blf': False}
 
         self.set_response('put', 204)

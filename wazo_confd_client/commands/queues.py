@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.util import extract_id
@@ -14,7 +13,7 @@ from wazo_confd_client.relations import (
 )
 
 
-class QueueRelation(object):
+class QueueRelation:
     def __init__(self, builder, queue_id):
         self.queue_id = queue_id
         self.queue_member_agent = QueueMemberAgentRelation(builder)

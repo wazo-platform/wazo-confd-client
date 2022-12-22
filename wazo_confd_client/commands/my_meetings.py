@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -8,7 +7,7 @@ from wazo_confd_client.util import url_join
 
 class UsersMeMeetingsAuthorizationsCommand(MultiTenantCommand):
     def __init__(self, client, meeting_uuid):
-        super(UsersMeMeetingsAuthorizationsCommand, self).__init__(client)
+        super().__init__(client)
         self._resource = url_join(
             'users', 'me', 'meetings', meeting_uuid, 'authorizations'
         )
@@ -45,7 +44,7 @@ class UsersMeMeetingsAuthorizationsCommand(MultiTenantCommand):
 
 class UsersMeMeetingsRelation(CRUDCommand):
     def __init__(self, client, meeting_uuid):
-        super(UsersMeMeetingsRelation, self).__init__(client)
+        super().__init__(client)
         self.authorizations = UsersMeMeetingsAuthorizationsCommand(client, meeting_uuid)
 
     @property

@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2016-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2016-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.util import extract_id
@@ -12,7 +11,7 @@ from wazo_confd_client.relations import (
 )
 
 
-class OutcallRelation(object):
+class OutcallRelation:
     def __init__(self, builder, outcall_id):
         self.outcall_id = outcall_id
         self.outcall_call_permission = OutcallCallPermissionRelation(builder)

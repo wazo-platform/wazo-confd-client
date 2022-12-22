@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2014-2021 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.crud import MultiTenantCommand
@@ -20,7 +19,7 @@ from wazo_confd_client.relations import (
 from wazo_confd_client.util import extract_id, extract_name, url_join
 
 
-class UserRelation(object):
+class UserRelation:
     def __init__(self, builder, user_id):
         self.user_id = user_id
         self.user_agent = UserAgentRelation(builder)
@@ -169,7 +168,7 @@ class UsersCommand(MultiTenantCommand):
 
     def import_csv(self, csvdata, encoding='utf-8', timeout=300, tenant_uuid=None):
         url = url_join(self.resource, "import")
-        headers = {'Content-Type': 'text/csv; charset={}'.format(encoding)}
+        headers = {'Content-Type': f'text/csv; charset={encoding}'}
         tenant_uuid = tenant_uuid or self._client.tenant_uuid
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
@@ -181,7 +180,7 @@ class UsersCommand(MultiTenantCommand):
 
     def update_csv(self, csvdata, encoding='utf-8', timeout=300):
         url = url_join(self.resource, "import")
-        headers = {'Content-Type': 'text/csv; charset={}'.format(encoding)}
+        headers = {'Content-Type': f'text/csv; charset={encoding}'}
         response = self.session.put(
             url, raw=csvdata, check_response=False, timeout=timeout, headers=headers
         )

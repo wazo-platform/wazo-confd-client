@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
-# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import unittest
+from unittest.mock import Mock
 import json
 
-from mock import Mock
 from hamcrest import assert_that, equal_to
 
 from requests import Session
@@ -27,7 +26,7 @@ class TestConfdSession(unittest.TestCase):
         return response
 
     def test_head(self):
-        expected_url = "{}/users/123".format(self.base_url)
+        expected_url = f"{self.base_url}/users/123"
         expected_response = self.set_response('head', 200)
 
         result = self.confd_session.head("/users/123")
@@ -38,7 +37,7 @@ class TestConfdSession(unittest.TestCase):
         )
 
     def test_get(self):
-        expected_url = "{}/users".format(self.base_url)
+        expected_url = f"{self.base_url}/users"
         expected_response = self.set_response('get', 200)
 
         result = self.confd_session.get("/users", params={'search': 'term'})
@@ -51,7 +50,7 @@ class TestConfdSession(unittest.TestCase):
         )
 
     def test_post(self):
-        expected_url = "{}/users".format(self.base_url)
+        expected_url = f"{self.base_url}/users"
         expected_response = self.set_response('post', 201)
 
         body = {'firstname': 'John'}
@@ -66,7 +65,7 @@ class TestConfdSession(unittest.TestCase):
         )
 
     def test_put(self):
-        expected_url = "{}/users/1".format(self.base_url)
+        expected_url = f"{self.base_url}/users/1"
         self.set_response('put', 204)
 
         body = {'id': 1, 'firstname': 'John'}
@@ -80,7 +79,7 @@ class TestConfdSession(unittest.TestCase):
         )
 
     def test_delete(self):
-        expected_url = "{}/users/1".format(self.base_url)
+        expected_url = f"{self.base_url}/users/1"
         self.set_response('delete', 204)
 
         self.confd_session.delete("/users/1")

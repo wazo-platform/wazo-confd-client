@@ -4,25 +4,10 @@ Priority: extra
 Maintainer: Wazo Maintainers <dev@wazo.community>
 Build-Depends: debhelper (>= 9),
                dh-python,
-               python-all (>= 2.7),
-               python-setuptools,
                python3-all,
                python3-setuptools
 Standards-Version: 3.9.6
-X-Python-Version: >= 2.7
-X-Python3-Version: >= 3.4
-
-Package: wazo-confd-client
-Architecture: all
-Section: python
-Depends: ${python:Depends},
-         ${misc:Depends},
-         python-requests,
-         python-stevedore,
-         wazo-lib-rest-client
-Description: wazo-confd client library - Python 2
- Wazo is a system based on a powerful IPBX, to bring an easy to
- install solution for telephony and related services.
+X-Python3-Version: >= 3.7
 
 Package: wazo-confd-client-python3
 Architecture: all
