@@ -1,4 +1,4 @@
-# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.util import extract_id
@@ -62,6 +62,5 @@ class QueueRelation:
 
 
 class QueuesCommand(MultiTenantCommand):
-
     resource = 'queues'
     relation_cmd = QueueRelation

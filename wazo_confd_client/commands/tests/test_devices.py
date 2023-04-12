@@ -1,4 +1,4 @@
-# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from hamcrest import (
@@ -12,7 +12,6 @@ from ..devices import DevicesCommand, UnallocatedDevicesCommand
 
 
 class TestDevices(TestCommand):
-
     Command = DevicesCommand
 
     def test_autoprov(self):
@@ -71,7 +70,6 @@ class TestDevices(TestCommand):
 
 
 class TestUnallocatedDevices(TestCommand):
-
     Command = UnallocatedDevicesCommand
 
     def test_unallocated_listing(self):

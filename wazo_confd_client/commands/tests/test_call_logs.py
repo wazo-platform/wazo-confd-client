@@ -13,7 +13,6 @@ from ..call_logs import CallLogsCommand
 
 
 class TestCallLogs(RESTCommandTestCase):
-
     Command = CallLogsCommand
 
     csvdata = (

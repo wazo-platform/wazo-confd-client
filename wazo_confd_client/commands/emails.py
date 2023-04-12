@@ -1,11 +1,10 @@
-# Copyright 2021-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2021-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_lib_rest_client import RESTCommand
 
 
 class EmailsCommand(RESTCommand):
-
     resource = 'emails'
 
     def get(self):

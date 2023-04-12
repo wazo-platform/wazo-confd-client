@@ -1,4 +1,4 @@
-# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import json
@@ -6,7 +6,6 @@ import requests
 
 
 class ConfdSession:
-
     OK_STATUSES = (requests.codes.ok, requests.codes.created, requests.codes.no_content)
 
     READ_HEADERS = {'Accept': 'application/json'}

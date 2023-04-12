@@ -1,4 +1,4 @@
-# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.crud import MultiTenantCommand
@@ -26,7 +26,6 @@ class DeviceRelation:
 
 
 class DevicesCommand(MultiTenantCommand):
-
     resource = 'devices'
     relation_cmd = DeviceRelation
 
@@ -50,7 +49,6 @@ class DevicesCommand(MultiTenantCommand):
 
 
 class UnallocatedDevicesCommand(RESTCommand):
-
     resource = 'devices/unallocated'
 
     def list(self, **kwargs):
