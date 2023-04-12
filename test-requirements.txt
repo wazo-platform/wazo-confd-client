@@ -1,2 +1,2 @@
 pyhamcrest
-nose
+pytest

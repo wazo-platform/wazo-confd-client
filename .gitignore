@@ -4,6 +4,4 @@
 .coverage
 .tox
 coverage.xml
-pycodestyle.txt
-pylint.txt
 unit-tests.xml

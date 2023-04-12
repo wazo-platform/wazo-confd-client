@@ -1,4 +1,4 @@
-# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
@@ -64,7 +64,6 @@ from wazo_confd_client.relations import (
 
 
 class TestUserLineRelation(TestCommand):
-
     Command = UserLineRelation
 
     def test_user_line_association(self):
@@ -93,7 +92,6 @@ class TestUserLineRelation(TestCommand):
 
 
 class TestUserEndpointSipRelation(TestCommand):
-
     Command = UserEndpointSipRelation
 
     def test_user_line_list_by_user(self):
@@ -111,7 +109,6 @@ class TestUserEndpointSipRelation(TestCommand):
 
 
 class TestLineExtensionRelation(TestCommand):
-
     Command = LineExtensionRelation
 
     def test_line_extension_association(self):
@@ -130,7 +127,6 @@ class TestLineExtensionRelation(TestCommand):
 
 
 class TestLineApplicationRelation(TestCommand):
-
     Command = LineApplicationRelation
 
     def test_line_application_association(self):
@@ -153,7 +149,6 @@ class TestLineApplicationRelation(TestCommand):
 
 
 class TestLineDeviceRelation(TestCommand):
-
     Command = LineDeviceRelation
 
     def test_line_device_association(self):
@@ -224,7 +219,6 @@ class TestLineDeviceRelation(TestCommand):
 
 
 class TestLineEndpointSipRelation(TestCommand):
-
     Command = LineEndpointSipRelation
 
     def test_line_endpoint_sip_association(self):
@@ -247,7 +241,6 @@ class TestLineEndpointSipRelation(TestCommand):
 
 
 class TestLineEndpointSccpRelation(TestCommand):
-
     Command = LineEndpointSccpRelation
 
     def test_line_endpoint_sccp_association(self):
@@ -270,7 +263,6 @@ class TestLineEndpointSccpRelation(TestCommand):
 
 
 class TestLineEndpointCustomRelation(TestCommand):
-
     Command = LineEndpointCustomRelation
 
     def test_line_endpoint_custom_association(self):
@@ -293,7 +285,6 @@ class TestLineEndpointCustomRelation(TestCommand):
 
 
 class TestUserVoicemailRelation(TestCommand):
-
     Command = UserVoicemailRelation
 
     def test_user_voicemail_association(self):
@@ -311,7 +302,6 @@ class TestUserVoicemailRelation(TestCommand):
 
 
 class TestUserAgentRelation(TestCommand):
-
     Command = UserAgentRelation
 
     def test_user_agent_association(self):
@@ -329,7 +319,6 @@ class TestUserAgentRelation(TestCommand):
 
 
 class TestUserFuncKeyRelation(TestCommand):
-
     Command = UserFuncKeyRelation
 
     def test_update_func_key(self):
@@ -418,7 +407,6 @@ class TestUserFuncKeyRelation(TestCommand):
 
 
 class TestUserServiceRelation(TestCommand):
-
     Command = UserServiceRelation
 
     def test_update_service(self):
@@ -467,7 +455,6 @@ class TestUserServiceRelation(TestCommand):
 
 
 class TestUserForwardRelation(TestCommand):
-
     Command = UserForwardRelation
 
     def test_update_forward(self):
@@ -520,7 +507,6 @@ class TestUserForwardRelation(TestCommand):
 
 
 class TestUserCallPermissionRelation(TestCommand):
-
     Command = UserCallPermissionRelation
 
     def test_user_call_permission_association(self):
@@ -539,7 +525,6 @@ class TestUserCallPermissionRelation(TestCommand):
 
 
 class TestTrunkEndpointSipRelation(TestCommand):
-
     Command = TrunkEndpointSipRelation
 
     def test_trunk_endpoint_sip_association(self):
@@ -562,7 +547,6 @@ class TestTrunkEndpointSipRelation(TestCommand):
 
 
 class TestTrunkEndpointIAXRelation(TestCommand):
-
     Command = TrunkEndpointIAXRelation
 
     def test_trunk_endpoint_iax_association(self):
@@ -585,7 +569,6 @@ class TestTrunkEndpointIAXRelation(TestCommand):
 
 
 class TestTrunkRegisterSipRelation(TestCommand):
-
     Command = TrunkRegisterSipRelation
 
     def test_trunk_register_sip_association(self):
@@ -608,7 +591,6 @@ class TestTrunkRegisterSipRelation(TestCommand):
 
 
 class TestTrunkRegisterIAXRelation(TestCommand):
-
     Command = TrunkRegisterIAXRelation
 
     def test_trunk_register_iax_association(self):
@@ -631,7 +613,6 @@ class TestTrunkRegisterIAXRelation(TestCommand):
 
 
 class TestTrunkEndpointCustomRelation(TestCommand):
-
     Command = TrunkEndpointCustomRelation
 
     def test_trunk_endpoint_custom_association(self):
@@ -654,7 +635,6 @@ class TestTrunkEndpointCustomRelation(TestCommand):
 
 
 class TestIncallExtensionRelation(TestCommand):
-
     Command = IncallExtensionRelation
 
     def test_incall_extension_association(self):
@@ -677,7 +657,6 @@ class TestIncallExtensionRelation(TestCommand):
 
 
 class TestOutcallTrunkRelation(TestCommand):
-
     Command = OutcallTrunkRelation
 
     def test_outcall_trunk_association(self):
@@ -692,7 +671,6 @@ class TestOutcallTrunkRelation(TestCommand):
 
 
 class TestOutcallExtensionRelation(TestCommand):
-
     Command = OutcallExtensionRelation
 
     def test_outcall_extension_association(self):
@@ -730,7 +708,6 @@ class TestOutcallExtensionRelation(TestCommand):
 
 
 class TestGroupExtensionRelation(TestCommand):
-
     Command = GroupExtensionRelation
 
     def test_group_extension_association(self):
@@ -753,7 +730,6 @@ class TestGroupExtensionRelation(TestCommand):
 
 
 class TestGroupMemberUserRelation(TestCommand):
-
     Command = GroupMemberUserRelation
 
     def test_group_user_association(self):
@@ -770,7 +746,6 @@ class TestGroupMemberUserRelation(TestCommand):
 
 
 class TestGroupMemberExtensionRelation(TestCommand):
-
     Command = GroupMemberExtensionRelation
 
     def test_group_extension_association(self):
@@ -790,7 +765,6 @@ class TestGroupMemberExtensionRelation(TestCommand):
 
 
 class TestUserGroupRelation(TestCommand):
-
     Command = UserGroupRelation
 
     def test_user_group_association(self):
@@ -805,7 +779,6 @@ class TestUserGroupRelation(TestCommand):
 
 
 class TestGroupFallbackRelation(TestCommand):
-
     Command = GroupFallbackRelation
 
     def test_list_fallbacks(self):
@@ -831,7 +804,6 @@ class TestGroupFallbackRelation(TestCommand):
 
 
 class TestUserFallbackRelation(TestCommand):
-
     Command = UserFallbackRelation
 
     def test_list_fallbacks(self):
@@ -867,7 +839,6 @@ class TestUserFallbackRelation(TestCommand):
 
 
 class TestConferenceExtensionRelation(TestCommand):
-
     Command = ConferenceExtensionRelation
 
     def test_conference_extension_association(self):
@@ -890,7 +861,6 @@ class TestConferenceExtensionRelation(TestCommand):
 
 
 class TestParkingLotExtensionRelation(TestCommand):
-
     Command = ParkingLotExtensionRelation
 
     def test_parking_lot_extension_association(self):
@@ -913,7 +883,6 @@ class TestParkingLotExtensionRelation(TestCommand):
 
 
 class TestPagingMemberUserRelation(TestCommand):
-
     Command = PagingMemberUserRelation
 
     def test_paging_user_association(self):
@@ -930,7 +899,6 @@ class TestPagingMemberUserRelation(TestCommand):
 
 
 class TestPagingCallerUserRelation(TestCommand):
-
     Command = PagingCallerUserRelation
 
     def test_paging_user_association(self):
@@ -947,7 +915,6 @@ class TestPagingCallerUserRelation(TestCommand):
 
 
 class TestSwitchboardMemberUserRelation(TestCommand):
-
     Command = SwitchboardMemberUserRelation
 
     def test_switchboard_user_association(self):
@@ -964,7 +931,6 @@ class TestSwitchboardMemberUserRelation(TestCommand):
 
 
 class TestSwitchboardFallbackRelation(TestCommand):
-
     Command = SwitchboardFallbackRelation
 
     def test_list_fallbacks(self):
@@ -990,7 +956,6 @@ class TestSwitchboardFallbackRelation(TestCommand):
 
 
 class TestIncallScheduleRelation(TestCommand):
-
     Command = IncallScheduleRelation
 
     def test_incall_schedule_association(self):
@@ -1013,7 +978,6 @@ class TestIncallScheduleRelation(TestCommand):
 
 
 class TestUserScheduleRelation(TestCommand):
-
     Command = UserScheduleRelation
 
     def test_user_schedule_association(self):
@@ -1036,7 +1000,6 @@ class TestUserScheduleRelation(TestCommand):
 
 
 class TestGroupScheduleRelation(TestCommand):
-
     Command = GroupScheduleRelation
 
     def test_group_schedule_association(self):
@@ -1059,7 +1022,6 @@ class TestGroupScheduleRelation(TestCommand):
 
 
 class TestQueueScheduleRelation(TestCommand):
-
     Command = QueueScheduleRelation
 
     def test_queue_schedule_association(self):
@@ -1082,7 +1044,6 @@ class TestQueueScheduleRelation(TestCommand):
 
 
 class TestOutcallScheduleRelation(TestCommand):
-
     Command = OutcallScheduleRelation
 
     def test_outcall_schedule_association(self):
@@ -1105,7 +1066,6 @@ class TestOutcallScheduleRelation(TestCommand):
 
 
 class TestOutcallCallPermissionRelation(TestCommand):
-
     Command = OutcallCallPermissionRelation
 
     def test_outcall_call_permission_association(self):
@@ -1124,7 +1084,6 @@ class TestOutcallCallPermissionRelation(TestCommand):
 
 
 class TestGroupCallPermissionRelation(TestCommand):
-
     Command = GroupCallPermissionRelation
 
     def test_group_call_permission_association(self):
@@ -1143,7 +1102,6 @@ class TestGroupCallPermissionRelation(TestCommand):
 
 
 class TestCallFilterRecipientUserRelation(TestCommand):
-
     Command = CallFilterRecipientUserRelation
 
     def test_call_filter_user_association(self):
@@ -1160,7 +1118,6 @@ class TestCallFilterRecipientUserRelation(TestCommand):
 
 
 class TestCallFilterSurrogateUserRelation(TestCommand):
-
     Command = CallFilterSurrogateUserRelation
 
     def test_call_filter_user_association(self):
@@ -1177,7 +1134,6 @@ class TestCallFilterSurrogateUserRelation(TestCommand):
 
 
 class TestCallFilterFallbackRelation(TestCommand):
-
     Command = CallFilterFallbackRelation
 
     def test_update_fallbacks(self):
@@ -1191,7 +1147,6 @@ class TestCallFilterFallbackRelation(TestCommand):
 
 
 class TestCallPickupInterceptorUserRelation(TestCommand):
-
     Command = CallPickupInterceptorUserRelation
 
     def test_call_pickup_user_association(self):
@@ -1208,7 +1163,6 @@ class TestCallPickupInterceptorUserRelation(TestCommand):
 
 
 class TestCallPickupTargetUserRelation(TestCommand):
-
     Command = CallPickupTargetUserRelation
 
     def test_call_pickup_user_association(self):
@@ -1225,7 +1179,6 @@ class TestCallPickupTargetUserRelation(TestCommand):
 
 
 class TestCallPickupInterceptorGroupRelation(TestCommand):
-
     Command = CallPickupInterceptorGroupRelation
 
     def test_call_pickup_group_association(self):
@@ -1242,7 +1195,6 @@ class TestCallPickupInterceptorGroupRelation(TestCommand):
 
 
 class TestCallPickupTargetGroupRelation(TestCommand):
-
     Command = CallPickupTargetGroupRelation
 
     def test_call_pickup_group_association(self):
@@ -1259,7 +1211,6 @@ class TestCallPickupTargetGroupRelation(TestCommand):
 
 
 class TestQueueFallbackRelation(TestCommand):
-
     Command = QueueFallbackRelation
 
     def test_list_fallbacks(self):
@@ -1285,7 +1236,6 @@ class TestQueueFallbackRelation(TestCommand):
 
 
 class TestQueueExtensionRelation(TestCommand):
-
     Command = QueueExtensionRelation
 
     def test_queue_extension_association(self):
@@ -1308,7 +1258,6 @@ class TestQueueExtensionRelation(TestCommand):
 
 
 class TestContextContextRelation(TestCommand):
-
     Command = ContextContextRelation
 
     def test_context_context_association(self):
@@ -1323,7 +1272,6 @@ class TestContextContextRelation(TestCommand):
 
 
 class TestQueueMemberAgentRelation(TestCommand):
-
     Command = QueueMemberAgentRelation
 
     def test_queue_agent_association(self):
@@ -1351,7 +1299,6 @@ class TestQueueMemberAgentRelation(TestCommand):
 
 
 class TestQueueMemberUserRelation(TestCommand):
-
     Command = QueueMemberUserRelation
 
     def test_queue_user_association(self):
@@ -1378,7 +1325,6 @@ class TestQueueMemberUserRelation(TestCommand):
 
 
 class TestQueueSkillRelation(TestCommand):
-
     Command = AgentSkillRelation
 
     def test_queue_skill_association(self):

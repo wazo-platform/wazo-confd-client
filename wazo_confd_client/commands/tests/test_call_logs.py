@@ -1,4 +1,4 @@
-# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from datetime import datetime
@@ -13,10 +13,12 @@ from ..call_logs import CallLogsCommand
 
 
 class TestCallLogs(RESTCommandTestCase):
-
     Command = CallLogsCommand
 
-    csvdata = "Call Date,Caller,Called,Period,user Field\r\n2015-06-29T12:01:00.725871,John (1000),1234567890,0,\r\n"
+    csvdata = (
+        "Call Date,Caller,Called,Period,user Field\r\n"
+        "2015-06-29T12:01:00.725871,John (1000),1234567890,0,\r\n"
+    )
     resource = 'call_logs'
 
     def test_list(self):

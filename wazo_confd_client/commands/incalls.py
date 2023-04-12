@@ -1,4 +1,4 @@
-# Copyright 2016-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2016-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.util import extract_id
@@ -30,6 +30,5 @@ class IncallRelation:
 
 
 class IncallsCommand(MultiTenantCommand):
-
     resource = 'incalls'
     relation_cmd = IncallRelation

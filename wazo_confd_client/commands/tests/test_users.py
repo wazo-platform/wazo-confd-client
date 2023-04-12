@@ -1,4 +1,4 @@
-# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from unittest import TestCase
@@ -15,7 +15,6 @@ FAKE_UUID = '00000000-aaaa-1111-bbbb-222222222222'
 
 
 class TestUsers(TestCommand):
-
     Command = UsersCommand
 
     def test_import_csv(self):

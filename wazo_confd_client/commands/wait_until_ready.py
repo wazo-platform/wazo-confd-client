@@ -1,4 +1,4 @@
-# Copyright 2018-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import time
@@ -10,7 +10,6 @@ from wazo_confd_client.util import url_join
 
 
 class WaitUntilReadyCommand(HTTPCommand):
-
     resource = 'infos'
 
     def __call__(self, retry=20, delay=0.2):
