@@ -13,6 +13,9 @@ class ContextRelation:
     def update_contexts(self, contexts):
         return self.context_context.associate(self.context_id, contexts)
 
+    def list_ranges(self, range_type, **kwargs):
+        return self.context_context.list_ranges(self.context_id, range_type, **kwargs)
+
 
 class ContextsCommand(MultiTenantCommand):
     resource = 'contexts'
