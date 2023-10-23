@@ -564,6 +564,8 @@ class ContextContextRelation(HTTPCommand):
         body = {'contexts': [{'id': context['id']} for context in contexts]}
         self.session.put(url, body)
 
+
+class ContextRangeRelation(HTTPCommand):
     def list_ranges(self, context_id, range_type, tenant_uuid=None, **kwargs):
         headers = dict(self.session.READ_HEADERS)
         if tenant_uuid:
