@@ -1,4 +1,4 @@
-# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_lib_rest_client import HTTPCommand
@@ -563,6 +563,17 @@ class ContextContextRelation(HTTPCommand):
         url = url_join('contexts', context_id, 'contexts')
         body = {'contexts': [{'id': context['id']} for context in contexts]}
         self.session.put(url, body)
+
+
+class ContextRangeRelation(HTTPCommand):
+    def list_ranges(self, context_id, range_type, tenant_uuid=None, **kwargs):
+        headers = dict(self.session.READ_HEADERS)
+        if tenant_uuid:
+            headers['Wazo-Tenant'] = tenant_uuid
+
+        url = url_join('contexts', context_id, 'ranges', range_type)
+        response = self.session.get(url, headers=headers, params=kwargs)
+        return response.json()
 
 
 class QueueMemberAgentRelation(HTTPCommand):

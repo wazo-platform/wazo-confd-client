@@ -283,6 +283,7 @@ Exposed via ```c.conferences.relations(conference_id)```
 Exposed via ```c.contexts.relations(context_id)```
 
  * update_contexts(contexts)
+ * list_ranges('user', availability='available', order='start', limit=10)
 
 ## Device Relation
 
