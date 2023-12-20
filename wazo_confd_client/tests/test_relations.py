@@ -4,7 +4,6 @@
 
 from hamcrest import assert_that
 
-from wazo_confd_client.tests import TestCommand
 from wazo_confd_client.relations import (
     AgentSkillRelation,
     CallFilterFallbackRelation,
@@ -42,8 +41,8 @@ from wazo_confd_client.relations import (
     QueueMemberAgentRelation,
     QueueMemberUserRelation,
     QueueScheduleRelation,
-    SwitchboardMemberUserRelation,
     SwitchboardFallbackRelation,
+    SwitchboardMemberUserRelation,
     TrunkEndpointCustomRelation,
     TrunkEndpointIAXRelation,
     TrunkEndpointSipRelation,
@@ -61,6 +60,7 @@ from wazo_confd_client.relations import (
     UserServiceRelation,
     UserVoicemailRelation,
 )
+from wazo_confd_client.tests import TestCommand
 
 
 class TestUserLineRelation(TestCommand):

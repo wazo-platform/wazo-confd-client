@@ -8,8 +8,7 @@ from hamcrest import assert_that, equal_to
 
 from wazo_confd_client.tests import TestCommand
 
-from ..users import UsersCommand
-from ..users import UserRelation
+from ..users import UserRelation, UsersCommand
 
 FAKE_UUID = '00000000-aaaa-1111-bbbb-222222222222'
 

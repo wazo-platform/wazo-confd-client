@@ -1,8 +1,8 @@
 # Copyright 2016-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from wazo_confd_client.util import url_join
 from wazo_confd_client.crud import CRUDCommand
+from wazo_confd_client.util import url_join
 
 
 class EntitiesCommand(CRUDCommand):

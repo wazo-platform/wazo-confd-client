@@ -1,15 +1,15 @@
 # Copyright 2016-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from wazo_confd_client.util import extract_id
 from wazo_confd_client.crud import MultiTenantCommand
 from wazo_confd_client.relations import (
-    TrunkEndpointSipRelation,
-    TrunkEndpointIAXRelation,
     TrunkEndpointCustomRelation,
-    TrunkRegisterSipRelation,
+    TrunkEndpointIAXRelation,
+    TrunkEndpointSipRelation,
     TrunkRegisterIAXRelation,
+    TrunkRegisterSipRelation,
 )
+from wazo_confd_client.util import extract_id
 
 
 class TrunkRelation:

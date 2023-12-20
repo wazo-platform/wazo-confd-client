@@ -1,8 +1,8 @@
 # Copyright 2014-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from hamcrest import assert_that
-from hamcrest import has_entry
+from hamcrest import assert_that, has_entry
+
 from wazo_confd_client.tests import TestCommand
 
 from ..configuration import ConfigurationCommand

@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_lib_rest_client import HTTPCommand
+
 from wazo_confd_client.util import url_join
 
 
