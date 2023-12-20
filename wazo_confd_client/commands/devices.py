@@ -1,11 +1,11 @@
 # Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from wazo_confd_client.crud import MultiTenantCommand
-from wazo_confd_client.util import extract_id
-from wazo_confd_client.util import url_join
-from wazo_confd_client.relations import LineDeviceRelation
 from wazo_lib_rest_client import RESTCommand
+
+from wazo_confd_client.crud import MultiTenantCommand
+from wazo_confd_client.relations import LineDeviceRelation
+from wazo_confd_client.util import extract_id, url_join
 
 
 class DeviceRelation:

@@ -1,7 +1,6 @@
 # Copyright 2016-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from wazo_confd_client.util import extract_id
 from wazo_confd_client.crud import MultiTenantCommand
 from wazo_confd_client.relations import (
     OutcallCallPermissionRelation,
@@ -9,6 +8,7 @@ from wazo_confd_client.relations import (
     OutcallScheduleRelation,
     OutcallTrunkRelation,
 )
+from wazo_confd_client.util import extract_id
 
 
 class OutcallRelation:

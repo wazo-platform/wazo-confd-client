@@ -3,10 +3,7 @@
 
 from datetime import datetime
 
-from hamcrest import (
-    assert_that,
-    equal_to,
-)
+from hamcrest import assert_that, equal_to
 from wazo_lib_rest_client.tests.command import RESTCommandTestCase
 
 from ..call_logs import CallLogsCommand

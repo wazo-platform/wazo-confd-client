@@ -378,7 +378,7 @@ Exposed via ```c.lines.relations(line_id)```
  * get_device()
  * add_application(application)
  * remove_application(application)
- 
+
 ## Outcall relation
 
 Exposed via ```c.outcalls.relations(outcall_id)```
@@ -446,7 +446,7 @@ Exposed via ```c.registers_sip.relations(register_sip_id)```
 Exposed via ```c.switchboards.relations(switchboard_id)```
 
  * update_user_members(users)
- 
+
  * update_fallbacks(fallbacks)
  * list_fallbacks()
 

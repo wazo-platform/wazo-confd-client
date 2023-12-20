@@ -3,9 +3,9 @@
 
 import time
 
-from requests import RequestException, HTTPError
-
+from requests import HTTPError, RequestException
 from wazo_lib_rest_client import HTTPCommand
+
 from wazo_confd_client.util import url_join
 
 

@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.crud import MultiTenantCommand
-from wazo_confd_client.util import extract_id
 from wazo_confd_client.relations import UserCallPermissionRelation
+from wazo_confd_client.util import extract_id
 
 
 class CallPermissionRelation:
