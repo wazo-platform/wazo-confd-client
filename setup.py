@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2014-2023 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2024 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from setuptools import find_packages, setup
@@ -54,6 +54,7 @@ setup(
             'ingress_http = wazo_confd_client.commands.ingress_http:IngressHttpCommand',
             'ivr = wazo_confd_client.commands.ivr:IVRCommand',
             'lines = wazo_confd_client.commands.lines:LinesCommand',
+            'localization = wazo_confd_client.commands.localization:LocalizationCommand',
             'meetings = wazo_confd_client.commands.meetings:MeetingsCommand',
             'moh = wazo_confd_client.commands.moh:MOHCommand',
             'my_guest_meetings = wazo_confd_client.commands.my_guest_meetings:GuestsMeMeetingsCommand',
