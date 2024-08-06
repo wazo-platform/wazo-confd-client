@@ -24,4 +24,4 @@ class LocalizationCommand(HTTPCommand):
         if tenant_uuid:
             headers['Wazo-Tenant'] = tenant_uuid
         url = url_join(self.resource)
-        self.session.put(url, body)
+        self.session.put(url, json=body, headers=headers, params=kwargs)
