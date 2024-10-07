@@ -62,6 +62,7 @@ setup(
             'outcalls = wazo_confd_client.commands.outcalls:OutcallsCommand',
             'pagings = wazo_confd_client.commands.pagings:PagingsCommand',
             'parking_lots = wazo_confd_client.commands.parking_lots:ParkingLotsCommand',
+            'phone_numbers = wazo_confd_client.commands.phone_numbers:PhoneNumbersCommand',
             'pjsip_doc = wazo_confd_client.commands.pjsip_doc:PJSIPDocCommand',
             'pjsip_global = wazo_confd_client.commands.pjsip_global:PJSIPGlobalCommand',
             'pjsip_system = wazo_confd_client.commands.pjsip_system:PJSIPSystemCommand',
