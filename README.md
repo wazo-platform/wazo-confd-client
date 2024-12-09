@@ -518,6 +518,8 @@ Exposed via ```c.users.relations(user_id)```
  * get_external_app(external_app)
  * delete_external_app(external_app)
 
+ * list_outgoing_callerids()
+
 ## Voicemail relation
 
 Exposed via ```c.voicemails.relations(voicemail_id)```

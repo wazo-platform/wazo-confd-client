@@ -1,4 +1,4 @@
-# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2024 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_lib_rest_client import HTTPCommand
@@ -634,3 +634,14 @@ class UserExternalAppRelation(HTTPCommand):
     def delete(self, user_uuid, name):
         url = url_join('users', user_uuid, 'external', 'apps', name)
         self.session.delete(url)
+
+
+class UserOutgoingCalleridRelation(HTTPCommand):
+    def list(self, user_uuid, tenant_uuid=None, **kwargs):
+        headers = dict(self.session.READ_HEADERS)
+        if tenant_uuid:
+            headers['Wazo-Tenant'] = tenant_uuid
+
+        url = url_join('users', user_uuid, 'callerids', 'outgoing')
+        response = self.session.get(url, headers=headers, params=kwargs)
+        return response.json()

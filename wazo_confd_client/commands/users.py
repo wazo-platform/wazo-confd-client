@@ -1,4 +1,4 @@
-# Copyright 2014-2023 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2024 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_confd_client.crud import MultiTenantCommand
@@ -12,6 +12,7 @@ from wazo_confd_client.relations import (
     UserFuncKeyRelation,
     UserGroupRelation,
     UserLineRelation,
+    UserOutgoingCalleridRelation,
     UserScheduleRelation,
     UserServiceRelation,
     UserVoicemailRelation,
@@ -31,6 +32,7 @@ class UserRelation:
         self.user_funckey = UserFuncKeyRelation(builder)
         self.user_group = UserGroupRelation(builder)
         self.user_line = UserLineRelation(builder)
+        self.user_outgoing_callerid = UserOutgoingCalleridRelation(builder)
         self.user_schedule = UserScheduleRelation(builder)
         self.user_service = UserServiceRelation(builder)
         self.user_voicemail = UserVoicemailRelation(builder)
@@ -159,6 +161,9 @@ class UserRelation:
     @extract_name()
     def delete_external_app(self, name):
         self.user_external_app.delete(self.user_id, name)
+
+    def list_outgoing_callerids(self):
+        return self.user_outgoing_callerid.list(self.user_id)
 
 
 class UsersCommand(MultiTenantCommand):
