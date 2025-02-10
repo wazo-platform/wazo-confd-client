@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2014-2024 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2025 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from setuptools import find_packages, setup
@@ -73,6 +73,7 @@ setup(
             'queue_skill_rules = wazo_confd_client.commands.skill_rules:SkillRulesCommand',
             'rtp_general = wazo_confd_client.commands.rtp_general:RTPGeneralCommand',
             'rtp_ice_host_candidates = wazo_confd_client.commands.rtp_ice_host_candidates:RTPIceHostCandidatesCommand',
+            'recordings_announcements = wazo_confd_client.commands.recordings:RecordingsAnnouncementsCommand',
             'registers_iax = wazo_confd_client.commands.registers_iax:RegistersIAXCommand',
             'registers_sip = wazo_confd_client.commands.registers_sip:RegistersSipCommand',
             'registrars = wazo_confd_client.commands.registrars:RegistrarsCommand',
