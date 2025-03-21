@@ -1,5 +1,7 @@
-# Copyright 2014-2024 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2025 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
+
+import json
 
 from wazo_confd_client.crud import MultiTenantCommand
 from wazo_confd_client.relations import (
@@ -180,7 +182,10 @@ class UsersCommand(MultiTenantCommand):
         response = self.session.post(
             url, raw=csvdata, check_response=False, timeout=timeout, headers=headers
         )
-        return response.json()
+        try:
+            return response.json()
+        except json.decoder.JSONDecodeError:
+            response.raise_for_status()
 
     def update_csv(self, csvdata, encoding='utf-8', timeout=300):
         url = url_join(self.resource, "import")
@@ -188,7 +193,10 @@ class UsersCommand(MultiTenantCommand):
         response = self.session.put(
             url, raw=csvdata, check_response=False, timeout=timeout, headers=headers
         )
-        return response.json()
+        try:
+            return response.json()
+        except json.decoder.JSONDecodeError:
+            response.raise_for_status()
 
     def export_csv(self, tenant_uuid=None):
         url = url_join(self.resource, "export")
