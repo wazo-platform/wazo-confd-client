@@ -1,7 +1,8 @@
-# Copyright 2015-2024 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2025 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from wazo_lib_rest_client import HTTPCommand
+from wazo_lib_rest_client.client import BaseClient
 
 from wazo_confd_client.util import url_join
 
@@ -645,3 +646,53 @@ class UserOutgoingCalleridRelation(HTTPCommand):
         url = url_join('users', user_uuid, 'callerids', 'outgoing')
         response = self.session.get(url, headers=headers, params=kwargs)
         return response.json()
+
+
+class UserMeBlocklistNumberRelation(HTTPCommand):
+    resource = 'users/me/blocklist/numbers'
+
+    def __init__(self, client: BaseClient, number_uuid: str) -> None:
+        super().__init__(client)
+        self.number_uuid = number_uuid
+
+    def update(self, number: dict):
+        url = url_join(self.resource, self.number_uuid)
+        self.session.put(url, json=number)
+
+    def delete(self):
+        url = url_join(self.resource, self.number_uuid)
+        self.session.delete(url)
+
+    def get(self):
+        url = url_join(self.resource, self.number_uuid)
+        response = self.session.get(url)
+        return response.json()
+
+
+class UserMeBlocklistNumbersRelation(HTTPCommand):
+    resource = 'users/me/blocklist/numbers'
+
+    def __init__(self, client: BaseClient) -> None:
+        super().__init__(client)
+
+    def list(self, **kwargs):
+        url = url_join(self.resource)
+        response = self.session.get(url, params=kwargs)
+        return response.json()
+
+    def create(self, number: dict):
+        url = url_join(self.resource)
+        response = self.session.post(url, json=number)
+        return response.json()
+
+    def __call__(self, number_uuid: str) -> UserMeBlocklistNumberRelation:
+        return UserMeBlocklistNumberRelation(self._client, number_uuid)
+
+
+class UserMeBlocklistRelation(HTTPCommand):
+    def __init__(self, client: BaseClient) -> None:
+        super().__init__(client)
+
+    @property
+    def numbers(self) -> UserMeBlocklistNumbersRelation:
+        return UserMeBlocklistNumbersRelation(self._client)
