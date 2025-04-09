@@ -6,6 +6,7 @@ import json
 from wazo_confd_client.crud import MultiTenantCommand
 from wazo_confd_client.relations import (
     UserAgentRelation,
+    UserBlocklistRelation,
     UserCallPermissionRelation,
     UserEndpointSipRelation,
     UserExternalAppRelation,
@@ -26,6 +27,7 @@ from wazo_confd_client.util import extract_id, extract_name, url_join
 class UserRelation:
     def __init__(self, builder, user_id):
         self.user_id = user_id
+        self.builder = builder
         self.user_agent = UserAgentRelation(builder)
         self.user_call_permission = UserCallPermissionRelation(builder)
         self.user_endpoint_sip = UserEndpointSipRelation(builder)
@@ -167,6 +169,10 @@ class UserRelation:
 
     def list_outgoing_callerids(self):
         return self.user_outgoing_callerid.list(self.user_id)
+
+    @property
+    def blocklist(self):
+        return UserBlocklistRelation(self.builder, self.user_id)
 
 
 class UsersCommand(MultiTenantCommand):
