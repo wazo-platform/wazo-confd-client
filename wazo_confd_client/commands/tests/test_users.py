@@ -1,8 +1,9 @@
-# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2025 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from unittest import TestCase
 from unittest.mock import ANY, Mock
+from uuid import uuid4
 
 from hamcrest import assert_that, equal_to
 
@@ -79,6 +80,103 @@ class TestUsers(TestCommand):
 
         assert_that(result, equal_to(expected_content))
         self.session.get.assert_called_once_with(expected_url, params={})
+
+    def test_list_user_me_blocklist_numbers(self):
+        response = {
+            'total': 10,
+            'items': [
+                {
+                    'uuid': (number_uuid := str(uuid4())),
+                    'label': f'test {i}',
+                    'number': f'123456789{i}',
+                    'links': {
+                        'users_me_blocklist_number': f'/users/me/blocklist/numbers/{number_uuid}'
+                    },
+                }
+                for i in range(10)
+            ],
+        }
+        self.set_response('get', 200, json=response)
+
+        result = self.command.my_blocklist.numbers.list(
+            label='test',
+            number='123456789',
+        )
+
+        assert_that(result, equal_to(response))
+        self.session.get.assert_called_once_with(
+            '/users/me/blocklist/numbers',
+            params={
+                'label': 'test',
+                'number': '123456789',
+            },
+        )
+
+    def test_get_users_me_blocklist_number(self):
+        response = {
+            'uuid': (number_uuid := str(uuid4())),
+            'label': 'test',
+            'number': '1234567890',
+            'links': {
+                'users_me_blocklist_number': f'/users/me/blocklist/numbers/{number_uuid}'
+            },
+        }
+        self.set_response('get', 200, json=response)
+
+        result = self.command.my_blocklist.numbers(number_uuid).get()
+
+        assert_that(result, equal_to(response))
+        self.session.get.assert_called_once_with(
+            f'/users/me/blocklist/numbers/{number_uuid}'
+        )
+
+    def test_create_users_me_blocklist_number(self):
+        number = {
+            'label': 'test',
+            'number': '1234567890',
+        }
+        response = {
+            'uuid': (number_uuid := str(uuid4())),
+            **number,
+            'links': {
+                'users_me_blocklist_number': f'/users/me/blocklist/numbers/{number_uuid}'
+            },
+        }
+        self.set_response('post', 201, json=response)
+
+        result = self.command.my_blocklist.numbers.create(number)
+
+        assert_that(result, equal_to(response))
+        self.session.post.assert_called_once_with(
+            '/users/me/blocklist/numbers', json=number
+        )
+
+    def test_update_users_me_blocklist_number(self):
+        number = {
+            'label': 'test',
+            'number': '1234567890',
+        }
+        number_uuid = str(uuid4())
+
+        self.set_response('put', 204)
+
+        result = self.command.my_blocklist.numbers(number_uuid).update(number)
+
+        assert_that(result, equal_to(None))
+        self.session.put.assert_called_once_with(
+            f'/users/me/blocklist/numbers/{number_uuid}', json=number
+        )
+
+    def test_delete_users_me_blocklist_number(self):
+        number_uuid = str(uuid4())
+        self.set_response('delete', 204)
+
+        result = self.command.my_blocklist.numbers(number_uuid).delete()
+
+        assert_that(result, equal_to(None))
+        self.session.delete.assert_called_once_with(
+            f'/users/me/blocklist/numbers/{number_uuid}'
+        )
 
 
 class TestUserRelation(TestCase):

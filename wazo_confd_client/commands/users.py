@@ -14,6 +14,7 @@ from wazo_confd_client.relations import (
     UserFuncKeyRelation,
     UserGroupRelation,
     UserLineRelation,
+    UserMeBlocklistRelation,
     UserOutgoingCalleridRelation,
     UserScheduleRelation,
     UserServiceRelation,
@@ -223,3 +224,7 @@ class UsersCommand(MultiTenantCommand):
             return False
         self.session.check_response(response)
         return True
+
+    @property
+    def my_blocklist(self):
+        return UserMeBlocklistRelation(self._client)
