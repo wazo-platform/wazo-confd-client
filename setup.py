@@ -88,7 +88,7 @@ setup(
             'trunks = wazo_confd_client.commands.trunks:TrunksCommand',
             'unallocated_devices = wazo_confd_client.commands.devices:UnallocatedDevicesCommand',
             'users = wazo_confd_client.commands.users:UsersCommand',
-            'user_blocklists = wazo_confd_client.commands.blocklist:UserBlocklistCommand',
+            'user_blocklists = wazo_confd_client.commands.blocklist:UserBlocklistsCommand',
             'voicemails = wazo_confd_client.commands.voicemails:VoicemailsCommand',
             'voicemail_general = wazo_confd_client.commands.voicemail_general:VoicemailGeneralCommand',
             'voicemail_zonemessages = wazo_confd_client.commands.voicemail_zonemessages:VoicemailZoneMessagesCommand',
