@@ -1,13 +1,26 @@
 # Copyright 2025 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+from unittest import TestCase
 from uuid import uuid4
 
 from hamcrest import assert_that, equal_to
+from wazo_lib_rest_client.client import PLUGINS_CACHE
 
+from wazo_confd_client.client import ConfdClient
 from wazo_confd_client.tests import TestCommand
 
 from ..blocklist import UserBlocklistsCommand
+
+
+class TestExtensionUserBlocklist(TestCase):
+    def setUp(self) -> None:
+        self.client = ConfdClient('http://localhost/1.1')
+
+    def test_command_loaded(self):
+        print(PLUGINS_CACHE)
+        assert hasattr(self.client, 'user_blocklists')
+        assert isinstance(self.client.user_blocklists, UserBlocklistsCommand)
 
 
 class TestUserBlocklists(TestCommand):
