@@ -178,6 +178,37 @@ class TestUsers(TestCommand):
             f'/users/me/blocklist/numbers/{number_uuid}'
         )
 
+    def test_lookup_user_blocklist_numbers(self):
+        blocklist_number_uuid = str(uuid4())
+        self.set_response(
+            'head', 200, headers={'Wazo-Blocklist-Number-UUID': blocklist_number_uuid}
+        )
+
+        result = self.command(FAKE_UUID).blocklist.numbers.lookup(
+            number_exact='1234567890'
+        )
+
+        assert_that(result, equal_to(blocklist_number_uuid))
+        self.session.head.assert_called_once_with(
+            f'/users/{FAKE_UUID}/blocklist/numbers',
+            params={'number_exact': '1234567890'},
+            check_response=False,
+        )
+
+    def test_lookup_user_blocklist_numbers_not_found(self):
+        self.set_response('head', 404)
+
+        result = self.command(FAKE_UUID).blocklist.numbers.lookup(
+            number_exact='1234567890'
+        )
+
+        assert_that(result, equal_to(None))
+        self.session.head.assert_called_once_with(
+            f'/users/{FAKE_UUID}/blocklist/numbers',
+            params={'number_exact': '1234567890'},
+            check_response=False,
+        )
+
 
 class TestUserRelation(TestCase):
     def test_get_funckey(self):

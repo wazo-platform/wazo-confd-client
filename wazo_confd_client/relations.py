@@ -1,5 +1,6 @@
 # Copyright 2015-2025 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
+from __future__ import annotations
 
 from wazo_lib_rest_client import HTTPCommand
 from wazo_lib_rest_client.client import BaseClient
@@ -696,3 +697,33 @@ class UserMeBlocklistRelation(HTTPCommand):
     @property
     def numbers(self) -> UserMeBlocklistNumbersRelation:
         return UserMeBlocklistNumbersRelation(self._client)
+
+
+class UserBlocklistNumbersRelation(HTTPCommand):
+    resource = 'users/{user_id}/blocklist/numbers'
+
+    def __init__(self, client: BaseClient, user_id: str | int) -> None:
+        super().__init__(client)
+        self.user_id = user_id
+
+    def lookup(self, **kwargs):
+        url = url_join(self.resource.format(user_id=self.user_id))
+        response = self.session.head(url, params=kwargs, check_response=False)
+        if response.status_code == 404:
+            return None
+        else:
+            self.session.check_response(response)
+            number_uuid = response.headers['Wazo-Blocklist-Number-UUID']
+            return number_uuid
+
+
+class UserBlocklistRelation(HTTPCommand):
+    resource = 'users/{user_id}/blocklist'
+
+    def __init__(self, client: BaseClient, user_id: str | int) -> None:
+        super().__init__(client)
+        self.user_id = user_id
+
+    @property
+    def numbers(self) -> UserBlocklistNumbersRelation:
+        return UserBlocklistNumbersRelation(self._client, self.user_id)
