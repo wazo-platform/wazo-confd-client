@@ -185,13 +185,17 @@ class TestUsers(TestCommand):
         )
 
         result = self.command(FAKE_UUID).blocklist.numbers.lookup(
-            number_exact='1234567890'
+            number_exact='1234567890',
+            tenant_uuid=FAKE_UUID,
         )
 
         assert_that(result, equal_to(blocklist_number_uuid))
         self.session.head.assert_called_once_with(
             f'/users/{FAKE_UUID}/blocklist/numbers',
             params={'number_exact': '1234567890'},
+            headers={
+                'Wazo-Tenant': FAKE_UUID,
+            },
             check_response=False,
         )
 
@@ -199,13 +203,17 @@ class TestUsers(TestCommand):
         self.set_response('head', 404)
 
         result = self.command(FAKE_UUID).blocklist.numbers.lookup(
-            number_exact='1234567890'
+            number_exact='1234567890',
+            tenant_uuid=FAKE_UUID,
         )
 
         assert_that(result, equal_to(None))
         self.session.head.assert_called_once_with(
             f'/users/{FAKE_UUID}/blocklist/numbers',
             params={'number_exact': '1234567890'},
+            headers={
+                'Wazo-Tenant': FAKE_UUID,
+            },
             check_response=False,
         )
 
