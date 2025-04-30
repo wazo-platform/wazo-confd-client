@@ -706,9 +706,14 @@ class UserBlocklistNumbersRelation(HTTPCommand):
         super().__init__(client)
         self.user_id = user_id
 
-    def lookup(self, **kwargs):
+    def lookup(self, tenant_uuid: str | None = None, **kwargs):
         url = url_join(self.resource.format(user_id=self.user_id))
-        response = self.session.head(url, params=kwargs, check_response=False)
+        headers = {}
+        if tenant_uuid:
+            headers['Wazo-Tenant'] = tenant_uuid
+        response = self.session.head(
+            url, headers=headers, params=kwargs, check_response=False
+        )
         if response.status_code == 404:
             return None
         else:
