@@ -1,5 +1,5 @@
 - project:
     templates:
-      - wazo-tox-linters-310
-      - wazo-tox-py39
-      - debian-packaging-bullseye
+      - wazo-tox-linters-py311
+      - wazo-tox-py311
+      - debian-packaging-bookworm
