@@ -5,27 +5,20 @@ from __future__ import annotations
 
 from typing import Any
 
-from wazo_lib_rest_client import HTTPCommand
-
+from wazo_confd_client.crud import TenantConfigCommand
 from wazo_confd_client.util import url_join
 
 
-class VoicemailTranscriptionCommand(HTTPCommand):
+class VoicemailTranscriptionCommand(TenantConfigCommand):
     resource = 'voicemails/transcription'
 
     def get(self, **kwargs: Any) -> dict[str, Any]:
-        tenant_uuid = kwargs.pop('tenant_uuid', None)
-        headers = dict(self.session.READ_HEADERS)
-        if tenant_uuid:
-            headers['Wazo-Tenant'] = tenant_uuid
+        headers, kwargs = self._get_read_headers(**kwargs)
         url = url_join(self.resource)
         response = self.session.get(url, headers=headers, params=kwargs)
         return response.json()
 
     def update(self, body: dict[str, Any], **kwargs: Any) -> None:
-        tenant_uuid = kwargs.pop('tenant_uuid', None)
-        headers = dict(self.session.WRITE_HEADERS)
-        if tenant_uuid:
-            headers['Wazo-Tenant'] = tenant_uuid
+        headers, kwargs = self._get_write_headers(**kwargs)
         url = url_join(self.resource)
         self.session.put(url, json=body, headers=headers, params=kwargs)
