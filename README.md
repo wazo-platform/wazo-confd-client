@@ -603,6 +603,23 @@ c.voicemail_general.update(voicemail_general)
 ```
 
 
+## voicemail transcription
+
+```python
+#Get voicemail transcription configuration for current tenant
+config = c.voicemail_transcription.get()
+
+#Get voicemail transcription configuration for a specific tenant
+config = c.voicemail_transcription.get(tenant_uuid='my-tenant-uuid')
+
+#Enable voicemail transcription for current tenant
+c.voicemail_transcription.update({'enabled': True})
+
+#Disable voicemail transcription for a specific tenant
+c.voicemail_transcription.update({'enabled': False}, tenant_uuid='my-tenant-uuid')
+```
+
+
 ## queues general
 
 ```python

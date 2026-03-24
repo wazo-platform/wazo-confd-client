@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2014-2025 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2026 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from setuptools import find_packages, setup
@@ -91,6 +91,7 @@ setup(
             'user_blocklists = wazo_confd_client.commands.blocklist:UserBlocklistsCommand',
             'voicemails = wazo_confd_client.commands.voicemails:VoicemailsCommand',
             'voicemail_general = wazo_confd_client.commands.voicemail_general:VoicemailGeneralCommand',
+            'voicemail_transcription = wazo_confd_client.commands.voicemail_transcription:VoicemailTranscriptionCommand',
             'voicemail_zonemessages = wazo_confd_client.commands.voicemail_zonemessages:VoicemailZoneMessagesCommand',
             'wait_until_ready = wazo_confd_client.commands.wait_until_ready:WaitUntilReadyCommand',
             'wizard = wazo_confd_client.commands.wizard:WizardCommand',
