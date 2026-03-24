@@ -1,7 +1,10 @@
-# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2026 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+from __future__ import annotations
+
 import abc
+from typing import Any
 
 from wazo_lib_rest_client import HTTPCommand
 
@@ -88,3 +91,27 @@ class MultiTenantCommand(CRUDCommand):
         url = url_join(self.resource)
         response = self.session.post(url, body, headers=headers)
         return response.json()
+
+
+class TenantConfigCommand(HTTPCommand):
+    """Base for tenant-scoped singleton config endpoints (get + update)."""
+
+    def _build_tenant_headers(
+        self, base_headers: dict[str, str], tenant_uuid: str | None
+    ) -> dict[str, str]:
+        headers = dict(base_headers)
+        if tenant_uuid:
+            headers['Wazo-Tenant'] = tenant_uuid
+        return headers
+
+    def _get_read_headers(self, **kwargs: Any) -> tuple[dict[str, str], dict[str, Any]]:
+        tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant_uuid)
+        headers = self._build_tenant_headers(self.session.READ_HEADERS, tenant_uuid)
+        return headers, kwargs
+
+    def _get_write_headers(
+        self, **kwargs: Any
+    ) -> tuple[dict[str, str], dict[str, Any]]:
+        tenant_uuid = kwargs.pop('tenant_uuid', self._client.tenant_uuid)
+        headers = self._build_tenant_headers(self.session.WRITE_HEADERS, tenant_uuid)
+        return headers, kwargs

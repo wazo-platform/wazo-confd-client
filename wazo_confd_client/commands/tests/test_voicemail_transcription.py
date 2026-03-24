@@ -14,6 +14,7 @@ class TestVoicemailTranscription(TestCommand):
     Command = VoicemailTranscriptionCommand
 
     def test_get(self):
+        self.client.tenant_uuid = None
         expected = self.set_response('get', 200, {'enabled': True})
 
         result = self.command.get()
@@ -35,6 +36,7 @@ class TestVoicemailTranscription(TestCommand):
         assert_that(call_kwargs.kwargs['headers']['Wazo-Tenant'], equal_to(tenant_uuid))
 
     def test_update(self):
+        self.client.tenant_uuid = None
         self.set_response('put', 204)
         body = {'enabled': True}
 
@@ -56,3 +58,26 @@ class TestVoicemailTranscription(TestCommand):
 
         call_kwargs = self.session.put.call_args
         assert_that(call_kwargs.kwargs['headers']['Wazo-Tenant'], equal_to(tenant_uuid))
+
+    def test_get_uses_client_tenant_uuid(self):
+        self.client.tenant_uuid = 'client-tenant'
+        self.set_response('get', 200, {'enabled': True})
+
+        self.command.get()
+
+        call_kwargs = self.session.get.call_args
+        assert_that(
+            call_kwargs.kwargs['headers']['Wazo-Tenant'], equal_to('client-tenant')
+        )
+
+    def test_update_uses_client_tenant_uuid(self):
+        self.client.tenant_uuid = 'client-tenant'
+        self.set_response('put', 204)
+        body = {'enabled': True}
+
+        self.command.update(body)
+
+        call_kwargs = self.session.put.call_args
+        assert_that(
+            call_kwargs.kwargs['headers']['Wazo-Tenant'], equal_to('client-tenant')
+        )
