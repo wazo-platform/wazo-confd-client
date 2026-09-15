@@ -1,4 +1,4 @@
-# Copyright 2014-2025 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2026 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import json
@@ -16,6 +16,7 @@ from wazo_confd_client.relations import (
     UserGroupRelation,
     UserLineRelation,
     UserMeBlocklistRelation,
+    UserMeOutgoingCalleridRelation,
     UserOutgoingCalleridRelation,
     UserScheduleRelation,
     UserServiceRelation,
@@ -170,6 +171,12 @@ class UserRelation:
     def list_outgoing_callerids(self):
         return self.user_outgoing_callerid.list(self.user_id)
 
+    def get_outgoing_callerid_default(self):
+        return self.user_outgoing_callerid.get_default(self.user_id)
+
+    def update_outgoing_callerid_default(self, body):
+        return self.user_outgoing_callerid.update_default(self.user_id, body)
+
     @property
     def blocklist(self):
         return UserBlocklistRelation(self.builder, self.user_id)
@@ -234,3 +241,7 @@ class UsersCommand(MultiTenantCommand):
     @property
     def my_blocklist(self):
         return UserMeBlocklistRelation(self._client)
+
+    @property
+    def my_outgoing_callerids(self):
+        return UserMeOutgoingCalleridRelation(self._client)

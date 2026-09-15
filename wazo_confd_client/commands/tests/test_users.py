@@ -1,4 +1,4 @@
-# Copyright 2015-2025 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2026 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from unittest import TestCase
@@ -80,6 +80,63 @@ class TestUsers(TestCommand):
 
         assert_that(result, equal_to(expected_content))
         self.session.get.assert_called_once_with(expected_url, params={})
+
+    def test_list_users_me_outgoing_callerids(self):
+        response = {
+            'total': 2,
+            'items': [
+                {'type': 'main', 'number': '+15555551234', 'caller_id_name': 'Acme'},
+                {'type': 'anonymous'},
+            ],
+        }
+        self.set_response('get', 200, json=response)
+
+        result = self.command.my_outgoing_callerids.list()
+
+        assert_that(result, equal_to(response))
+        self.session.get.assert_called_once_with(
+            '/users/me/callerids/outgoing', params={}
+        )
+
+    def test_get_users_me_outgoing_callerid_default(self):
+        response = {'type': 'main', 'number': '+15555551234', 'caller_id_name': 'Acme'}
+        self.set_response('get', 200, json=response)
+
+        result = self.command.my_outgoing_callerids.get_default()
+
+        assert_that(result, equal_to(response))
+        self.session.get.assert_called_once_with('/users/me/callerids/outgoing/default')
+
+    def test_update_users_me_outgoing_callerid_default(self):
+        body = {'type': 'main', 'number': '+15555551234'}
+        self.set_response('put', 204)
+
+        self.command.my_outgoing_callerids.update_default(body)
+
+        self.session.put.assert_called_once_with(
+            '/users/me/callerids/outgoing/default', body
+        )
+
+    def test_get_user_outgoing_callerid_default(self):
+        response = {'type': 'anonymous'}
+        self.set_response('get', 200, json=response)
+
+        result = self.command(FAKE_UUID).get_outgoing_callerid_default()
+
+        assert_that(result, equal_to(response))
+        self.session.get.assert_called_once_with(
+            f'/users/{FAKE_UUID}/callerids/outgoing/default', headers=ANY
+        )
+
+    def test_update_user_outgoing_callerid_default(self):
+        body = {'type': 'default'}
+        self.set_response('put', 204)
+
+        self.command(FAKE_UUID).update_outgoing_callerid_default(body)
+
+        self.session.put.assert_called_once_with(
+            f'/users/{FAKE_UUID}/callerids/outgoing/default', body, headers=ANY
+        )
 
     def test_list_user_me_blocklist_numbers(self):
         response = {
