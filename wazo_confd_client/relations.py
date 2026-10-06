@@ -1,4 +1,4 @@
-# Copyright 2015-2025 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2026 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 from __future__ import annotations
 
@@ -647,6 +647,41 @@ class UserOutgoingCalleridRelation(HTTPCommand):
         url = url_join('users', user_uuid, 'callerids', 'outgoing')
         response = self.session.get(url, headers=headers, params=kwargs)
         return response.json()
+
+    def get_default(self, user_uuid, tenant_uuid=None):
+        headers = dict(self.session.READ_HEADERS)
+        if tenant_uuid:
+            headers['Wazo-Tenant'] = tenant_uuid
+
+        url = url_join('users', user_uuid, 'callerids', 'outgoing', 'default')
+        response = self.session.get(url, headers=headers)
+        return response.json()
+
+    def update_default(self, user_uuid, body, tenant_uuid=None):
+        headers = dict(self.session.WRITE_HEADERS)
+        if tenant_uuid:
+            headers['Wazo-Tenant'] = tenant_uuid
+
+        url = url_join('users', user_uuid, 'callerids', 'outgoing', 'default')
+        self.session.put(url, body, headers=headers)
+
+
+class UserMeOutgoingCalleridRelation(HTTPCommand):
+    resource = 'users/me/callerids/outgoing'
+
+    def list(self, **kwargs):
+        url = url_join(self.resource)
+        response = self.session.get(url, params=kwargs)
+        return response.json()
+
+    def get_default(self):
+        url = url_join(self.resource, 'default')
+        response = self.session.get(url)
+        return response.json()
+
+    def update_default(self, body):
+        url = url_join(self.resource, 'default')
+        self.session.put(url, body)
 
 
 class UserMeBlocklistNumberRelation(HTTPCommand):
